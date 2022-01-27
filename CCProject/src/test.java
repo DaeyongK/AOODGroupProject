@@ -4,5 +4,6 @@ public class test {
 		System.out.println("hello");
 		System.out.println("WORKS?!!");
 		System.out.println("GitHub has been fully integrated");
+		System.out.println("GitHub test woo!");
 	}
 }
