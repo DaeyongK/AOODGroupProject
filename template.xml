@@ -1,0 +1,15 @@
+<domainName>  
+<question>
+<questionText>How many ounces are in a cup?</questionText>
+<answerText>Eight</answerText>
+<graphic>PATH\OF\File.png</graphic>
+</question>
+.
+.
+.
+<question>
+<questionText>How many ounces are in a cup?</questionText>
+<answerText>Eight</answerText>
+<graphic>PATH\OF\File.png</graphic>
+</question>
+</domainName>
