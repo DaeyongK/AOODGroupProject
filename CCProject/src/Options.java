@@ -13,7 +13,7 @@ public class Options extends QPanel{
 		
 	}
 	
-	Options(boolean allQuesitonsTrue, boolean shuffleQuestionsTrue){
+	Options(boolean allQuestionsTrue, boolean shuffleQuestionsTrue){
 		//sets value of allQuestions
 		if(allQuestionsTrue) {
 			allQuestions = true;
