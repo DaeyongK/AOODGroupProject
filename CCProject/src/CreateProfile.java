@@ -12,5 +12,21 @@ public class CreateProfile extends QPanel{
 	private radioClick() {
 		
 	}
+	
+	public int getScreenID(){
+		return 3;
+	}
+
+	@Override
+	public boolean popup(String text) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void buttonClicked(int buttonID) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

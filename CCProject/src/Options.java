@@ -45,5 +45,21 @@ public class Options extends QPanel{
 	public boolean getAllQuestions() {
 		return allQuestions;
 	}
+	
+	public int getScreenID(){
+		return 4;
+	}
+
+	@Override
+	public boolean popup(String text) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void buttonClicked(int buttonID) {
+		// TODO Auto-generated method stub
+		
+	}
 
 }
