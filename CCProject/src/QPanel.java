@@ -5,8 +5,8 @@ public abstract class QPanel extends JPanel {
 	public final Color BACKGROUND_COLOR = new Color(32,18,77);
 	public final Color TITLE_COLOR = new Color(240,193,67);
 	public final Font font = new Font(Font.SANS_SERIF,Font.PLAIN,20);
-	String title;
-	int id = 0; //id of the current profile?? dunno where that’s stored??
+	private String title;
+	private int id = 0;
 
 	public QPanel(String t){
 		title = t;
