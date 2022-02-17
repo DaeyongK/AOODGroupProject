@@ -1,11 +1,18 @@
+import java.awt.*;
 
 public abstract class DomainScreen extends QPanel{
-	String name;
 	DomainScreen(String input){
-		name = input;
+		super(input);
 	}
 	public String getName() {
-		return name; 
+		return title; 
 	}
-	buttonClicked
+	public abstract void buttonClicked(int buttonID);
+		
+	private void radioClick() {
+		
+	}
+	public void paintComponent(Graphics g) {
+		g.drawString(title, 300, 50);
+	}
 }
