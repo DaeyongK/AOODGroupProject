@@ -1,4 +1,6 @@
 import java.awt.image.*;
+import java.io.*;
+import javax.imageio.*;
 
 public class Question {
 	String questionString;
@@ -16,13 +18,16 @@ public class Question {
 		this.setImage(imagePath);
 	}
 	
-	public void setImage(String imagePath) {
-		//look at Roll.java for how to use file names to pull pictures from the computer
-	}
-	public boolean detachImage() {
-		//detaches previous image
-		//returns true if it works
+	public boolean setImage(String imagePath) {
+		try {
+		graphic= ImageIO.read(new File(imagePath));
+		} catch (IOException e) {
+			return false;
+		}
 		return true;
+	}
+	public void detachImage() {
+		graphic=null;
 	}
 
 	public String getQuestion() {
@@ -38,5 +43,13 @@ public class Question {
 	
 	public int getID() {
 		return ID;
+	}
+	
+	public void setQuestion(String question) {
+		questionString=question;
+	}
+	
+	public void setAnswer(String answer) {
+		answerString=answer;
 	}
 }
