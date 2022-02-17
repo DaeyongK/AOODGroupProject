@@ -34,7 +34,7 @@ public class Options extends QPanel{
 		}
 	}
 	
-	private radioClick() {
+	public void radioClick() {
 		
 	}
 	

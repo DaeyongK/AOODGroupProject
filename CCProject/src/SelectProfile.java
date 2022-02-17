@@ -14,7 +14,7 @@ public class SelectProfile extends QPanel{
 		create = new EstablisherButton(int width, int height, Color color, String text, int screenID, int buttonID);
 	}
 	
-	private radioClick() {
+	public void radioClick() {
 		
 	}
 	
