@@ -1,13 +1,17 @@
 import java.util.ArrayList;
 
 public class SelectProfile extends QPanel{
-	JScrollPane scrollable;
-	ArrayList<Profile> profiles = new ArrayList<Profile>();
-	TransitionButton done;
-	EstablisherButton create;
+	private JScrollPane scrollable;
+	private ArrayList<Profile> profiles;
+	private TransitionButton done;
+	private EstablisherButton create;
 	
 	SelectProfile(String title){
-		scrollable = new 
+		//creating buttons and ui aspects. specify parameters
+		scrollable = new JScrollPane();
+		profiles = new ArrayList<Profile>();
+		done = new TransitionButton(int width, int height, Color color, String text, int screenID, int buttonID);
+		create = new EstablisherButton(int width, int height, Color color, String text, int screenID, int buttonID);
 	}
 	
 	private radioClick() {
