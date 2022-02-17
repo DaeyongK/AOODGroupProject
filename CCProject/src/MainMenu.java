@@ -56,7 +56,6 @@ public class MainMenu extends QPanel{
 	}
 	public boolean popup(String text){
 		//change profile is true, quizzing options is false
-		getPopup(this,changeProfile,top,right);
 	}
 	public void buttonClicked(int buttonID){
 		switch(buttonID){
@@ -78,7 +77,7 @@ public class MainMenu extends QPanel{
 			//exit the application
 			break;
 			case 21:
-			popup("");
+			popup(Profile.getName());
 			break;
 			case 22:
 			//go to change profile (2)
