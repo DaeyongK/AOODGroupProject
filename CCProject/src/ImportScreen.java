@@ -1,18 +1,31 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.io.File;
+//Button IDs: Done = 1, Back = 0, chooseFile = 2
 import javax.swing.*;
-class ImportScreen extends QPanel{
+class ImportScreen extends QPanel implements ActionListener{
   private boolean filePresent = false;
-  private TransitionButton done = new TransitionButton(200, 50, Color.WHITE, "Done", 8, 0);
-  done.setVisible(false);
-  private TransitionButton back = new TransitionButton(200, 50, Color.WHITE, "Back", 8, 1);
+  private TransitionButton done;
+  private TransitionButton back;
   private EstablisherButton chooseFile;
-  private String title;
-  private QPanel importPain = new QPanel("Import Domain");
-  private JLabel fileName;
-  ImportScreen(){
-    importPain.setLayout(new BoxLayout(importPain, BoxLayout.Y_AXIS));
-    importPain.add(new JLabel(title));
+  private JLabel fileName = new JLabel("");
+  ImportScreen(String title){
+    super(title);
+    int width = 80;
+    int height = 40;
+    
+    back = new TransitionButton(width, height, Color.WHITE, "Back", 8, 0);
+    back.setActionCommand("back");
+    back.addActionListener(this);
+    
+    done = new TransitionButton(width, height, Color.WHITE, "Done", 8, 1);
+    done.setActionCommand("done");
+    done.addActionListener(this);
+    done.setVisible(false);
+    
+    chooseFile = new EstablisherButton(width, height, Color.WHITE, "Choose File", 8, 2);
+    chooseFile.setActionCommand("choose");
+    chooseFile.addActionListener(this);
   }
   public int getScreenID(){
     return 8; 
@@ -20,30 +33,44 @@ class ImportScreen extends QPanel{
 	public boolean popup(String text){
     return true;
   }
-  public buttonClicked(int buttonID){
+  public void buttonClicked(int buttonID){
     switch(buttonID){
       case 0:
-        Domain d = new Domain(file);
+        //send to main menu
         break;
       case 1:
         break;
+        //send to main menu
+      case 2:
+    	  break;
     }      
   }
-  public boolean accept(File f) {
-    if (f.isDirectory()) {
-        return true;
-    }
-    private boolean accept(File f){
-      String extension = Utils.getExtension(f);
-      if (extension != null) {
-        if (extension.equals(Utils.xml)) {
-          return true;
-        } else {
-          return false;
-        }
+  private boolean accept(File f){
+      String name = f.toString();
+      fileName = new JLabel(name);
+      int index = name.lastIndexOf('.');
+      if(index > 0) {
+        String extension = name.substring(index + 1);
+        if(extension.equals("xml")) 
+        	return true;
       }
-
       return false;
     }
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		int id = 0;
+		switch(e.getActionCommand()) {
+			case "done":
+				id = 1;
+				break;
+			case "choose":
+				id = 2;
+				break;
+			case "back":
+				id = 0;
+				break;
+		}
+		buttonClicked(id);
+	}
 }
-}
+
