@@ -3,6 +3,7 @@ import javax.xml.*;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.dom.DOMSource;
@@ -81,73 +82,57 @@ public class Domain {
 		return domainName;
 	}
 
+	public static final String xmlFilePath = "C:\\Users\\nikos7\\Desktop\\files\\xmlfile.xml";
+
 	public File export() {
-		DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 
-		DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+		try {
+			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 
-		Document document = documentBuilder.newDocument();
+			DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
 
-		// root element
-		Element root = document.createElement("company");
-		document.appendChild(root);
+			Document document = documentBuilder.newDocument();
 
-		// employee element
-		Element employee = document.createElement("employee");
+			// root element
+			Element root = document.createElement("domain");
+			document.appendChild(root);
 
-		root.appendChild(employee);
+			Attr name = document.createAttribute("name");
+			name.setValue(getDomainName());
+			root.setAttributeNode(name);
 
-		// set an attribute to staff element
-		Attr attr = document.createAttribute("id");
-		attr.setValue("10");
-		employee.setAttributeNode(attr);
+			Element question = document.createElement("question");
+			name.appendChild(question);
 
-		// you can also use staff.setAttribute("id", "1") for this
+			for (int i = 0; i < this.questions.size(); i++) {
+				Attr id = document.createAttribute("id");
+				id.setValue(this.questions.get(0).getID() + "");
+				question.setAttributeNode(name);
+				
+				
+			}
 
-		// firstname element
-		Element firstName = document.createElement("firstname");
-		firstName.appendChild(document.createTextNode("James"));
-		employee.appendChild(firstName);
+			// create the xml file
+			// transform the DOM Object to an XML File
+			TransformerFactory transformerFactory = TransformerFactory.newInstance();
+			Transformer transformer = transformerFactory.newTransformer();
+			DOMSource domSource = new DOMSource(document);
+			StreamResult streamResult = new StreamResult(new File(xmlFilePath));
 
-		// lastname element
-		Element lastname = document.createElement("lastname");
-		lastname.appendChild(document.createTextNode("Harley"));
-		employee.appendChild(lastname);
+			// If you use
+			// StreamResult result = new StreamResult(System.out);
+			// the output will be pushed to the standard output ...
+			// You can use that for debugging
 
-		// email element
-		Element email = document.createElement("email");
-		email.appendChild(document.createTextNode("james@example.org"));
-		employee.appendChild(email);
+			transformer.transform(domSource, streamResult);
+			System.out.println("Done creating XML File");
 
-		// department elements
-		Element department = document.createElement("department");
-		department.appendChild(document.createTextNode("Human Resources"));
-		employee.appendChild(department);
+		} catch (
 
-		// create the xml file
-		// transform the DOM Object to an XML File
-		TransformerFactory transformerFactory = TransformerFactory.newInstance();
-		Transformer transformer = transformerFactory.newTransformer();
-		DOMSource domSource = new DOMSource(document);
-		StreamResult streamResult = new StreamResult(new File(xmlFilePath));
-
-		// If you use
-		// StreamResult result = new StreamResult(System.out);
-		// the output will be pushed to the standard output ...
-		// You can use that for debugging
-
-		transformer.transform(domSource, streamResult);
-
-		System.out.println("Done creating XML File");
-
-	}catch(
-
-	ParserConfigurationException pce)
-	{
-		pce.printStackTrace();
-	}catch(
-	TransformerException tfe)
-	{
-		tfe.printStackTrace();
+		ParserConfigurationException pce) {
+			pce.printStackTrace();
+		} catch (TransformerException tfe) {
+			tfe.printStackTrace();
+		}
 	}
-}}
+}
