@@ -4,10 +4,10 @@ import java.io.File;
 //Button IDs: Done = 1, Back = 0, chooseFile = 2
 import javax.swing.*;
 class ImportScreen extends QPanel implements ActionListener{
-  private boolean filePresent = false;
   private TransitionButton done;
   private TransitionButton back;
   private EstablisherButton chooseFile;
+  private File selectedFile;
   private JLabel fileName = new JLabel("");
   private JFileChooser jfc;
   ImportScreen(String title){
@@ -45,8 +45,9 @@ class ImportScreen extends QPanel implements ActionListener{
         //send to main menu
         break;
       case 1:
-        break;
-        //send to main menu
+        
+    	  break;
+        //send to main menu and parse selectedFile into a domain
       case 2:
     	  jfc = new JFileChooser();
 
@@ -54,10 +55,10 @@ class ImportScreen extends QPanel implements ActionListener{
   		// int returnValue = jfc.showSaveDialog(null);
 
   		if (returnValue == JFileChooser.APPROVE_OPTION) {
-  			File file = jfc.getSelectedFile();
-  			if(accept(file)) {
+  			selectedFile = jfc.getSelectedFile();
+  			if(accept(selectedFile)) {
   				done.setVisible(true);
-  				fileName = new JLabel(file.toString());
+  				fileName = new JLabel(selectedFile.toString());
   			}
   			
   		}
