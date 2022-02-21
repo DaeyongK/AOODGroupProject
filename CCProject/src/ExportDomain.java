@@ -2,33 +2,47 @@ import java.io.File;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-public class ExportDomain extends QPanel {
+import java.util.ArrayList;
+public class ExportDomain extends QPanel implements ActionListener {
 	Domain domainClicked;
 	private JScrollPane domains;
+	private JPanel insideScroll;
+	ArrayList<Domain> dList = new ArrayList<Domain>();
+	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
 	public ExportDomain(String t) {
 		super(t);
 		domains = new JScrollPane();
 		domains.setPreferredSize(new Dimension(900,300));
 		domains.setLayout(new ScrollPaneLayout());
-		// TODO Auto-generated constructor stub
+		
+		insideScroll = new JPanel();
+		insideScroll.setLayout(new BoxLayout(insideScroll,BoxLayout.Y_AXIS));
+		
+		for(int i = 0; i < dList.size(); i++) { //replace 3 with all domains within a profile
+			buttons.add(new EstablisherButton(850, 25, Color.WHITE, dList.get(i).toString(), 10, i+30));
+			insideScroll.add(buttons.get(i));
+			buttons.get(i).setActionCommand(i + "");
+			buttons.get(i).addActionListener(this);
+		}
 	}
 
-	@Override
 	public int getScreenID() {
-		// TODO Auto-generated method stub
-		return 0;
+		return 10;
 	}
 
-	@Override
 	public boolean popup(String text) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
-	@Override
 	public void buttonClicked(int buttonID) {
-		// TODO Auto-generated method stub
-		File exported = domainClicked.export();
+		File exported = dList.get(buttonID).export(); //where do you want the file to be stored?
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String eventName = e.getActionCommand();
+		buttonClicked(Integer.parseInt(eventName));
 	}
 
 }
