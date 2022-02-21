@@ -1,9 +1,10 @@
 //QuestionScreen is front-end class made by Kai C.
 
 import java.awt.*;
+import java.awt.event.*;
 import javax.swing.*;
 
-public class QuestionScreen extends QPanel {
+public class QuestionScreen extends QPanel implements ActionListener {
 	private String title;
 	private int id;
 	private boolean graphicDetected;
