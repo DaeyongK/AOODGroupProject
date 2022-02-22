@@ -32,11 +32,21 @@ public class CreateProfile extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		
+		super(buttonID);
 	}
 	
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.setColor(TITLE_COLOR);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		//when exit is pressed
+		//when create is pressed
+		//when textbox is pressed
+		//when pfp1 is clicked
+		//when pfp2 is cicked
+		//when pfp3 is clicked
 	}
 
 }

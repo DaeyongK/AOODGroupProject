@@ -60,11 +60,21 @@ public class Options extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		
+		super(buttonID);
 	}
 	
 	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
 		g.setColor(TITLE_COLOR);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		//when doneButton is pressed
+		//when numCorrectButton is pressed
+		//when allQuestionsButton is pressed
+		//when shuffleQuestionsButton is pressed
+		//when firstLastButton is pressed
+		//when pfp3 is clicked
 	}
 
 }

@@ -34,12 +34,22 @@ public class SelectProfile extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		
+		super(buttonID);
 	}
 	
 	public void paintComponent(Graphics g) {
+		//draw background
+		super.paintComponent(g);
+		//draw title
 		g.setColor(TITLE_COLOR);
 		
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		//when done button is clicked
+		//when profile is clicked
+		//when create a new profile is clicked
+		//when mouse hovers over buttons/profiles
 	}
 
 }
