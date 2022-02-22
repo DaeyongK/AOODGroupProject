@@ -39,6 +39,28 @@ public abstract class DomainScreen extends QPanel{
 		
 	}
 }
-class DomainTester extends DomainScreen{
+private class DomainTester extends DomainScreen{
+
+	DomainTester(String input, Profile profile) {
+		super(input, profile);
+	}
+
+	@Override
+	public void buttonClicked(int buttonID) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public int getScreenID() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public boolean popup(String text) {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	
 }
