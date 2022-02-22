@@ -20,6 +20,7 @@ public abstract class DomainScreen extends QPanel{
 		}
 		JScrollPane scroll = new JScrollPane(pane);
 		add(scroll);
+		exit.setBounds(50, 50, 50, 50);
 		add(exit);
 
 	}
