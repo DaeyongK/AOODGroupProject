@@ -1,7 +1,8 @@
 import java.awt.*;
 import javax.swing.*;
+import java.awt.event.*;
 
-public class MainMenu extends QPanel{
+public class MainMenu extends QPanel implements ActionListener{
 	private TransitionButton select;
 	private TransitionButton create;
 	private TransitionButton importBtn;
@@ -13,42 +14,42 @@ public class MainMenu extends QPanel{
 	private TransitionButton exit;
 
 	public MainMenu(String title){
-			super(title);
-			//select domain
-			select = new TransitionButton(width, height, Color.WHITE, “Select Domain”, 5, 11);
-			select.addActionListener(this);
-			this.add(select);
-			//create domain
-			create = new TransitionButton(w, h, Color.WHITE, “Create Domain”, 9, 12);
-			create.addActionListener(this);
-			this.add(create);
-			//import domain
-			importBtn = new TransitionButton(w, h, Color.WHITE, “Import Domain”, 8, 13);
-			importBtn.addActionListener(this);
-			this.add(import);
-			//export domain
-			export = new TransitionButton(w, h, Color.WHITE, “Export Domain”, 10, 14);
-			export.addActionListener(this);
-			this.add(export);
-			//detach domain
-			detach = new TransitionButton(w, h, Color.WHITE, “Detach Domain”, 11, 15);
-			detach.addActionListener(this);
-			this.add(detach);
-			//open profile popup
-			profile = new EstablishedButton(w, h, c, “Profile”, 1, 21);
-			profile.addActionListener(this);
-			//change profile (in popup)
-			changeProfile = new TransitionButton(w, h, Color.WHITE, “Change Profile”, 2, 22);
-			changeProfile.addActionListener(this);
-			//quizzing options (in profile)
-			options = new TransitionButton(w, h, Color.WHITE, “Quizzing Options”, 4, 23);
-			options.addActionListener(this);
-			//exit application button
-			exit = new TransitionButton(w, h, c, “Exit”, ID(???), 16); //just full on exit the screen??
-			exit.addActionListener(this);
-			this.add(exit);
+		super(title);
+		//select domain
+		select = new TransitionButton(width, height, Color.WHITE, “Select Domain”, 5, 11);
+		select.addActionListener(this);
+		this.add(select);
+		//create domain
+		create = new TransitionButton(w, h, Color.WHITE, “Create Domain”, 9, 12);
+		create.addActionListener(this);
+		this.add(create);
+		//import domain
+		importBtn = new TransitionButton(w, h, Color.WHITE, “Import Domain”, 8, 13);
+		importBtn.addActionListener(this);
+		this.add(import);
+		//export domain
+		export = new TransitionButton(w, h, Color.WHITE, “Export Domain”, 10, 14);
+		export.addActionListener(this);
+		this.add(export);
+		//detach domain
+		detach = new TransitionButton(w, h, Color.WHITE, “Detach Domain”, 11, 15);
+		detach.addActionListener(this);
+		this.add(detach);
+		//open profile popup
+		profile = new EstablishedButton(w, h, c, “Profile”, 1, 21);
+		profile.addActionListener(this);
+		//change profile (in popup)
+		changeProfile = new TransitionButton(w, h, Color.WHITE, “Change Profile”, 2, 22);
+		changeProfile.addActionListener(this);
+		//quizzing options (in profile)
+		options = new TransitionButton(w, h, Color.WHITE, “Quizzing Options”, 4, 23);
+		options.addActionListener(this);
+		//exit application button
+		exit = new TransitionButton(w, h, c, “Exit”, ID(???), 16); //just full on exit the screen??
+		exit.addActionListener(this);
+		this.add(exit);
 
-			//NOTE: make exit smaller than other buttons (same height, shorter width)
+		//NOTE: make exit smaller than other buttons (same height, shorter width)
 	}
 
 	public int getScreenID(){
@@ -56,7 +57,6 @@ public class MainMenu extends QPanel{
 	}
 	public boolean popup(String text){
 		//change profile is true, quizzing options is false
-		getPopup(this,changeProfile,top,right);
 	}
 	public void buttonClicked(int buttonID){
 		switch(buttonID){
@@ -78,7 +78,7 @@ public class MainMenu extends QPanel{
 			//exit the application
 			break;
 			case 21:
-			popup("");
+			popup(Profile.getName());
 			break;
 			case 22:
 			//go to change profile (2)
@@ -87,5 +87,9 @@ public class MainMenu extends QPanel{
 			//go to quizzing options (4)
 			break;
 		}
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		//empty??
 	}
 }

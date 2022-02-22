@@ -14,7 +14,23 @@ public class SelectProfile extends QPanel{
 		create = new EstablisherButton(int width, int height, Color color, String text, int screenID, int buttonID);
 	}
 	
-	private radioClick() {
+	public void radioClick() {
+		
+	}
+	
+	public int getScreenID(){
+		return 2;
+	}
+
+	@Override
+	public boolean popup(String text) {
+		// TODO Auto-generated method stub
+		return false;
+	}
+
+	@Override
+	public void buttonClicked(int buttonID) {
+		// TODO Auto-generated method stub
 		
 	}
 

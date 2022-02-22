@@ -30,13 +30,14 @@ public class Question {
 		graphic=null;
 	}
 
+	public BufferedImage getImage() {
+		return graphic;
+	}
+	
 	public String getQuestion() {
 		return questionString;
 	}
 	
-	public BufferedImage getImage() {
-		return graphic;
-	}
 	public String getAnswer() {
 		return answerString;
 	}
@@ -52,4 +53,5 @@ public class Question {
 	public void setAnswer(String answer) {
 		answerString=answer;
 	}
+	
 }
