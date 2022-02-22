@@ -20,6 +20,7 @@ public abstract class DomainScreen extends QPanel{
 		}
 		JScrollPane scroll = new JScrollPane(pane);
 		add(scroll);
+		exit.setBounds(50, 50, 50, 50);
 		add(exit);
 
 	}
@@ -34,4 +35,10 @@ public abstract class DomainScreen extends QPanel{
 	public void paintComponent(Graphics g) {
 		g.drawString(title, 300, 50);
 	}
+	public static void main(String[] args) {
+		
+	}
+}
+class DomainTester extends DomainScreen{
+	
 }
