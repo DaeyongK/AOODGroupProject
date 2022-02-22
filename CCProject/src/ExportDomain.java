@@ -4,10 +4,9 @@ import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 public class ExportDomain extends QPanel implements ActionListener {
-	Domain domainClicked;
 	private JScrollPane domains;
 	private JPanel insideScroll;
-	ArrayList<Domain> dList = new ArrayList<Domain>();
+	ArrayList<Domain> dList = new ArrayList<Domain>(); //Daeyong pls give me access to domain arraylist uwu
 	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
 	public ExportDomain(String t) {
 		super(t);
