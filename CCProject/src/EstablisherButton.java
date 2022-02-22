@@ -4,7 +4,7 @@ import java.awt.*;
 public class EstablisherButton extends QButton{
 	EstablisherButton(int width, int height, Color color, String text, int screenID, int buttonID){
 		super(width,height,color,text,buttonID);
-		JButton b=new JButton("text");  
+		JButton b=new JButton(text);  
 		b.setBounds(50,50,width,height);
 		b.setBackground(TITLE_COLOR);
 		

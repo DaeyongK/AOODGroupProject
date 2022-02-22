@@ -1,12 +1,18 @@
 
-public class CreateProfile extends QPanel{
+public class CreateProfile extends QPanel implements ActionListener{
 	private TransitionButton done;
-	private EstablisherButton create;
+	private TransitionButton create;
+	private CircularButton shrek;
+	private CircularButton fiona;
+	private CircularButton donkey;
 	
 	CreateProfile(String title){
 		//create buttons and ui aspects. specify parameters
-		done = new TransitionButton(int width, int height, Color color, String text, int screenID, int buttonID);
-		create = new EstablisherButton(int width, int height, Color color, String text, int screenID, int buttonID);
+		exit = new TransitionButton(int width, int height, TITLE_COLOR, "Exit", int screenID, int buttonID);
+		create = new TransitionButton(int width, int height, Color.WHITE, "Create", 4, int buttonID);
+		shrek = new CircularButton();
+		fiona = new CircularButton();
+		donkey = new CircuarButton();
 	}
 	
 	public void radioClick() {
@@ -26,7 +32,21 @@ public class CreateProfile extends QPanel{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		
+		super(buttonID);
+	}
+	
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(TITLE_COLOR);
+	}
+	
+	public void actionPerformed(ActionEvent e){
+		//when exit is pressed
+		//when create is pressed
+		//when textbox is pressed
+		//when pfp1 is clicked
+		//when pfp2 is cicked
+		//when pfp3 is clicked
 	}
 
 }
