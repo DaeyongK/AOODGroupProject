@@ -41,7 +41,7 @@ public abstract class DomainScreen extends QPanel{
 }
 class DomainScreenTester extends DomainScreen{
 
-	DomainTester(String input, Profile profile) {
+	DomainScreenTester(String input, Profile profile) {
 		super(input, profile);
 	}
 
