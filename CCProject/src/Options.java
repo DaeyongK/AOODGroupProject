@@ -9,15 +9,36 @@ public class Options extends QPanel implements ActionListener{
 	private EstablisherButton shuffleQuestionsButton;
 	private EstablisherButton firstLastButton;
 	private TransitionButton doneButton;
+	private JPanel panel;
 	
 	Options(String title){
-		//creating buttons and ui elements
+		super(title);
+		panel = new JPanel();
+		//create buttons and ui aspects. adds action listeners. then adds to jpanel.\
+		//dropdown menu
 		dropdown =  new JComboBox();
-		numCorrectButton = new EstablisherButton(int width, int height, Color.WHITE, "Questions with number of correct answers", int buttonID);
-		allQuestionsButton = new EstablisherButton(int width, int height, Color.WHITE, "All Questions", int buttonID);
-		shuffleQuestionsButton = new EstablisherButton(int width, int height, Color.WHITE, "Shuffle Questions", int buttonID);
-		firstLastButton = new EstablisherButton(int width, int height, Color.WHITE, "First to Last", int buttonID);
-		TransitionButton doneButton = new TransitionButton(int width, int height, Color color, String text, int screenID, int buttonID);
+		dropdown.addActionListener(this);
+		panel.addComponant(dropdown);
+		//number correct button
+		numCorrectButton = new EstablisherButton(100, 40, Color.WHITE, "Questions with number of correct answers", int buttonID);
+		numCorrecButton.addActionListener(this);
+		panel.addComponant(numCorrectButton);
+		//all questions button
+		allQuestionsButton = new EstablisherButton(100, 40, Color.WHITE, "All Questions", int buttonID);
+		allQuestionsButton.addActionListener(this);
+		panel.addComponant(allQuestionsButton);
+		//shuffle questions button
+		shuffleQuestionsButton = new EstablisherButton(100, 40, Color.WHITE, "Shuffle Questions", int buttonID);
+		shuffleQuestionsButton.addActionListener(this);
+		panel.addComponant(shuffleQuestionsButton);
+		//first last button
+		firstLastButton = new EstablisherButton(100, 40, Color.WHITE, "First to Last", int buttonID);
+		firstLastButton.addActionListener(this);
+		panel.addComponant(firstLastButton);
+		//done button
+		TransitionButton doneButton = new TransitionButton(50, 25, Color.WHITE, "Done" 1, int buttonID);
+		doneButton.addActionListener(this);
+		panel.addComponant(doneButton);
 	}
 	
 	Options(boolean allQuestionsTrue, boolean shuffleQuestionsTrue){

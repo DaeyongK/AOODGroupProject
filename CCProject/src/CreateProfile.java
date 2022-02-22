@@ -5,14 +5,35 @@ public class CreateProfile extends QPanel implements ActionListener{
 	private CircularButton shrek;
 	private CircularButton fiona;
 	private CircularButton donkey;
+	private JPanel panel;
 	
-	CreateProfile(String title){
-		//create buttons and ui aspects. specify parameters
-		exit = new TransitionButton(int width, int height, TITLE_COLOR, "Exit", int screenID, int buttonID);
-		create = new TransitionButton(int width, int height, Color.WHITE, "Create", 4, int buttonID);
+	public CreateProfile(String title){
+		super(title);
+		panel = new JPanel();
+		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
+		//exit button
+		exit = new TransitionButton(50, 25, TITLE_COLOR, "Exit", int screenID, int buttonID);
+		exit.addActionListener(this);
+		panel.addComponant(exit);
+		//create button
+		create = new TransitionButton(50, 25, Color.WHITE, "Create", 4, int buttonID);
+		create.addActionListener(this);
+		panel.addComponant(create);
+		//shrek pfp
 		shrek = new CircularButton();
+		shrek.addActionListener(this);
+		panel.addComponant(shrek);
+		//fiona pfp
 		fiona = new CircularButton();
+		fiona.addActionListener(this);
+		panel.addComponant(fiona);
+		//donkey pfp
 		donkey = new CircuarButton();
+		donkey.addActionListener(this);
+		panel.addComponant(donkey);
+		//setup
+		super(title);
+		this.setLayout(new BorderLayout());
 	}
 	
 	public void radioClick() {
