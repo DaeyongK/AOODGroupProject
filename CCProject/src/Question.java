@@ -11,6 +11,7 @@ public class Question {
 	Question(String question, String answer){
 		questionString=question;
 		answerString=answer;
+		ID = (int) (Math.random()*1000000000);
 	}
 	Question(String question, String answer, String imagePath){
 		questionString=question;
@@ -45,6 +46,10 @@ public class Question {
 	public int getID() {
 		return ID;
 	}
+	
+	//public int setID() {
+		
+	//}
 	
 	public void setQuestion(String question) {
 		questionString=question;

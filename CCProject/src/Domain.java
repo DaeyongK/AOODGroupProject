@@ -28,6 +28,9 @@ public class Domain {
 
 	Domain(String name, ArrayList<Question> quest) {
 		domainName = name;
+		for(int i=0; i<quest.size(); i++) {
+			questions.add(quest.get(i));
+		}
 	}
 
 	public Question getQuestion(int numQ) {
@@ -78,11 +81,15 @@ public class Domain {
 		domainName = newName;
 	}
 
+	public int getDomainSize() {
+		return questions.size();
+	}
+	
 	public String getDomainName() {
 		return domainName;
 	}
 
-	public static final String xmlFilePath = "C:\\Users\\nikos7\\Desktop\\files\\xmlfile.xml";
+	public static final String xmlFilePath = "XMLFiles";
 
 	public File export() {
 
@@ -97,9 +104,8 @@ public class Domain {
 			Element root = document.createElement("domain");
 			document.appendChild(root);
 
-			Attr name = document.createAttribute("name");
-			name.setValue(getDomainName());
-			root.setAttributeNode(name);
+			Element name = document.createElement("ask");
+			root.appendChild(name);
 
 			Element question = document.createElement("question");
 			name.appendChild(question);
@@ -107,9 +113,15 @@ public class Domain {
 			for (int i = 0; i < this.questions.size(); i++) {
 				Attr id = document.createAttribute("id");
 				id.setValue(this.questions.get(0).getID() + "");
-				question.setAttributeNode(name);
+				question.setAttributeNode(id);
 				
+				Attr ques = document.createAttribute("Question" +i);
+				ques.setValue(questions.get(i).getQuestion());
+				question.setAttributeNode(ques);
 				
+				Attr ans = document.createAttribute("Answer" +i);
+				ans.setValue(questions.get(i).getAnswer());
+				question.setAttributeNode(ans);	
 			}
 
 			// create the xml file
@@ -117,6 +129,7 @@ public class Domain {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
+			//StreamResult result = new StreamResult(System.out);
 			StreamResult streamResult = new StreamResult(new File(xmlFilePath));
 
 			// If you use
@@ -126,7 +139,7 @@ public class Domain {
 
 			transformer.transform(domSource, streamResult);
 			System.out.println("Done creating XML File");
-
+			return new File(xmlFilePath);
 		} catch (
 
 		ParserConfigurationException pce) {
@@ -134,5 +147,6 @@ public class Domain {
 		} catch (TransformerException tfe) {
 			tfe.printStackTrace();
 		}
+		return new File(xmlFilePath);
 	}
 }
