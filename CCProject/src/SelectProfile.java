@@ -1,17 +1,20 @@
 import java.util.ArrayList;
+import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
-public class SelectProfile extends QPanel{
+public class SelectProfile extends QPanel implements ActionListener{
 	private JScrollPane scrollable;
 	private ArrayList<Profile> profiles;
 	private TransitionButton done;
-	private EstablisherButton create;
+	private TransitionButton createNewProfileButton;
 	
 	SelectProfile(String title){
 		//creating buttons and ui aspects. specify parameters
 		scrollable = new JScrollPane();
 		profiles = new ArrayList<Profile>();
-		done = new TransitionButton(int width, int height, Color color, String text, int screenID, int buttonID);
-		create = new EstablisherButton(int width, int height, Color color, String text, int screenID, int buttonID);
+		done = new TransitionButton(int width, int height, Color color, "Done", 1, int buttonID);
+		createNewProfileButton = new TransitionButton(int width, int height, Color color, "Create New Profile", 3, int buttonID);
 	}
 	
 	public void radioClick() {
@@ -31,6 +34,11 @@ public class SelectProfile extends QPanel{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
+		
+	}
+	
+	public void paintComponent(Graphics g) {
+		g.setColor(TITLE_COLOR);
 		
 	}
 
