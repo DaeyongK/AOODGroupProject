@@ -35,4 +35,10 @@ public abstract class DomainScreen extends QPanel{
 	public void paintComponent(Graphics g) {
 		g.drawString(title, 300, 50);
 	}
+	public static void main(String[] args) {
+		
+	}
+}
+class DomainTester extends DomainScreen{
+	
 }
