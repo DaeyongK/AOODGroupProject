@@ -11,14 +11,17 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 	private TransitionButton deleteQ;
 	private Domain currentDomain;
 	private JPanel insideScroll;
-	private TransitionButton back;
+	private EstablisherButton back;
 	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
+	private QPanel thisScreen;
 	
 	public EditDomain(Domain d, String t){
 		super(t);
 		currentDomain = d;
+		//for use outside the constructor
+		thisScreen = this;
 		//exit button
-		back = new EstablisherButton(40, 20, Color.WHITE, “Back”, 9, 13)
+		back = new EstablisherButton(40, 20, Color.WHITE, “Back”, 13)
 		//text for name, size 70 height
 		nameEdit = new JTextField(d.getDomainName());
 		nameEdit.addActionListener(new ActionListener(){
@@ -36,12 +39,10 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 		insideScroll = new JPanel();
 		insideScroll.setLayout(new BoxLayout(insideScroll,BoxLayout.Y_AXIS));
 		for(int i=0;i<???;i++){ //how to find the number of questions?
-			buttons.add(new EstablisherButton(850, 25, Color_WHITE, d.getQuestion(i).getQuestion(), 9, i+30);
+			buttons.add(new EstablisherButton(850, 25, Color_WHITE, d.getQuestion(i).getQuestion(),
+				d.getQuestion(i).getID());
 			insideScroll.add(buttons.get(i));
 		}
-		//edit question button, on questions
-		editQ = new TransitionButton(25, 15, QPanel.TITLE_COLOR, “Edit”, 13, 21);
-		//delete question button, on questions
 		deleteQ = new EstablisherButton(25, 15, QPanel.TITLE_COLOR, “Delete”, 9, 22);
 		//mouse listeners
 		for(int i=0;i<buttons.size();i++){
@@ -57,10 +58,14 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			buttons.get(i).addMouseListener(new MouseListener() {
 				public void mouseClicked(MouseEvent e) {
 					if(e.getClickCount()==1) {
+						editQ = new TransitionButton(25, 15, QPanel.TITLE_COLOR, “Edit”, 13, 
+							e.getSource().getID); //i don't know if those are the right methods, i'll check later
 						buttons.get(workaround).add(editQ);
+						deleteQ = new EstablisherButton(25, 15, QPanel.TITLE_COLOR, “Delete”, 9, 21);
 						buttons.get(workaround).add(deleteQ);
 					} else if(e.getClickCount()==2) {
-						// go to the edit screen for the q
+						QPanel goScreen = thisScreen;
+						thisScreen = new QuestionScreen(e.getSource().getID,false);
 					}
 				}
 				public void mousePressed(MouseEvent e) {
@@ -97,29 +102,32 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 		//if/else .include for the text
 	}
 	public void buttonClicked(int buttonID){
+		QPanel nextScreen = thisScreen;
 		switch(buttonID){
 			case 11:
 				//read the screen, finalize changes, go to select domain(5)
 				d.setDomainName(nameEdit.getText());
 				for(int i=0;i<buttons.size();i++){
-					//reorder the questions in the domain??
+					//reorder the questions in the domain based on order in array list??
 				}
-				//^^rework the order based on the order in the array list
 				break;
 			case 12:
 				//go to create question for a blank question(12)
+				nextScreen = QuestionScreen(-1,true);
 				break;
 			case 13:
-				popup(“Are you sure you want to leave?\n(Changes may not be saved)")
-				break;
-			case 21:
-				//go to edit question for the right question(13)
-				break;
-			case 22:
-				//popup for delete question
+				if(popup(“Are you sure you want to leave?\n(Changes may not be saved)")){
+					
+				} else{
+					
+				}
 				break;
 			default:
-				//all the edit and delete buttons
+				if(buttonID==21){
+					
+				} else{
+					nextScreen = QuestionScreen(buttonID,false);
+				}
 		}
 	}
 	public void getName(){
