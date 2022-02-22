@@ -2,10 +2,10 @@ import java.io.File;
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
-import java.util.ArrayList;
+import java.util.ArrayList; //Allows me to use ArrayLists.
 public class ExportDomain extends QPanel implements ActionListener {
 	private JScrollPane domains;
-	private JPanel insideScroll;
+	private JPanel insideScroll; //JPanel to be scrolled
 	ArrayList<Domain> dList = new ArrayList<Domain>(); //Daeyong pls give me access to domain arraylist uwu
 	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
 	public ExportDomain(String t) {
@@ -17,8 +17,8 @@ public class ExportDomain extends QPanel implements ActionListener {
 		insideScroll = new JPanel();
 		insideScroll.setLayout(new BoxLayout(insideScroll,BoxLayout.Y_AXIS));
 		
-		for(int i = 0; i < dList.size(); i++) { //replace 3 with all domains within a profile
-			buttons.add(new EstablisherButton(850, 25, Color.WHITE, dList.get(i).toString(), 10, i+30));
+		for(int i = 0; i < dList.size(); i++) { //Creates all the domain buttons, need domain arraylist
+			buttons.add(new EstablisherButton(850, 25, Color.WHITE, dList.get(i).toString(), 40*i+30));
 			insideScroll.add(buttons.get(i));
 			buttons.get(i).setActionCommand(i + "");
 			buttons.get(i).addActionListener(this);
