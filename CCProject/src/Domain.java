@@ -111,17 +111,19 @@ public class Domain {
 			name.appendChild(question);
 
 			for (int i = 0; i < this.questions.size(); i++) {
-				Attr id = document.createAttribute("id");
-				id.setValue(this.questions.get(0).getID() + "");
-				question.setAttributeNode(id);
+				Element id = document.createElement("id");
+				id.setTextContent(this.questions.get(0).getID() + "");
+				question.appendChild(id);
 				
-				Attr ques = document.createAttribute("Question" +i);
-				ques.setValue(questions.get(i).getQuestion());
-				question.setAttributeNode(ques);
+				Element ques = document.createElement("Question" +i);
+				ques.setTextContent(questions.get(i).getQuestion());
+				question.appendChild(ques);
 				
-				Attr ans = document.createAttribute("Answer" +i);
-				ans.setValue(questions.get(i).getAnswer());
-				question.setAttributeNode(ans);	
+				Element ans = document.createElement("Answer" +i);
+				ans.setTextContent(questions.get(i).getAnswer());
+				question.appendChild(ans);	
+				
+				Element image = document.createElement("QuestionGraphic");
 			}
 
 			// create the xml file
