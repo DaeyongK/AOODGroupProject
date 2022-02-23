@@ -15,11 +15,12 @@ public class MainMenu extends QPanel implements ActionListener{
 	private JLabel titleCard;
 	private JPanel containsButtons;
 	private QPanel menu;
+	private int currentQID = 0;
 
 	public MainMenu(String title){
 		super(title);
 		this.setLayout(new BorderLayout());
-		//the jpanel for the center
+		//the jpanel for the center of the screen
 		containsButtons = new JPanel();
 		//title name/title card
 		titleCard = new JLabel(title);
@@ -53,13 +54,15 @@ public class MainMenu extends QPanel implements ActionListener{
 		this.add(profile, BorderLayout.PAGE_START);
 		//change profile (in popup)
 		changeProfile = new TransitionButton(75, 25, Color.WHITE, “Change Profile”, 2, 22);
-		changeProfile.addActionListener(this);
 		//quizzing options (in popup)
 		options = new TransitionButton(75, 25, Color.WHITE, “Quizzing Options”, 4, 23);
-		options.addActionListener(this);
 		//exit application button
 		exit = new TransitionButton(50, 25, Color.WHITE, “Exit”, 1, 16);
-		exit.addActionListener(this);
+		exit.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				System.exit(0);
+			}
+		});
 		this.add(exit);
 		
 		//for use outside the constructor
@@ -72,13 +75,22 @@ public class MainMenu extends QPanel implements ActionListener{
 	public boolean popup(String text){
 		JPanel pop = new JPanel(new BoxLayout(BoxLayout.Y_AXIS);
 		JLabel profileName = new JLabel(text);
-		//add buttons to the popup
+		pop.add(profileName);
+		//add buttons to the popup; changeProfile is true, options is false
+		changeProfile.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				return true;
+			}
+		});
 		pop.add(changeProfile);
+		options.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				return false;
+			}
+		});
 		pop.add(options);
 		//add the popup to the menu
 		menu.add(pop, BorderLayout.LINE_END);
-		
-		//determining which button has been clicked??
 	}
 	public void buttonClicked(int buttonID){
 		QPanel nextScreen = menu;
@@ -115,15 +127,6 @@ public class MainMenu extends QPanel implements ActionListener{
 					nextScreen = new QuizzingOptions("");
 				}
 				break;
-			/*case 22:
-				//go to change profile (2)
-				nextScreen = new ChangeProfile("");
-				break;
-			case 23:
-				//go to quizzing options (4)
-				nextScreen = new QuizzingOptions("");
-				break;
-			*/
 		}
 	}
 	
