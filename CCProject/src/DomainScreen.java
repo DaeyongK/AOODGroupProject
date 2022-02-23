@@ -4,7 +4,7 @@ import javax.swing.*;
 public abstract class DomainScreen extends QPanel{
 	protected ArrayList<EstablisherButton> domainButtons;
 	protected TransitionButton exit;
-	DomainScreen(String input, Profile profile){
+	DomainScreen(String input){
 		super(input);
 		JPanel pane = new JPanel();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));

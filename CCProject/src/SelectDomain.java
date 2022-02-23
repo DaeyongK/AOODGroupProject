@@ -1,8 +1,8 @@
 
 public class SelectDomain extends DomainScreen{
 
-	SelectDomain(String input, Profile profile) {
-		super(input,profile);
+	SelectDomain(String input) {
+		super(input);
 	}
 
 	@Override
