@@ -40,7 +40,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			changeAsked = new JTextField("Asked: "+getTimesAsked(questionId)+" times");
 		}
 		
-		questionBox.setHorizontalAlignment(JTextField.LEFT);
+		questionBox.setBounds(
 		answerBox.setHorizontalAlignment(JTextField.LEFT);
 		attachGraphic = new EstablisherBtn(161,44,Color.BLACK,"Attach",0);
 		detachGraphic = new EstablisherBtn(161,44,Color.BLACK,"Detach",1);
@@ -84,6 +84,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		g.setColor(TITLE_COLOR);
 		g.setFont(font);
 		g.drawString(title, 300, 50);
+		g.setColor(Color.WHITE);
+		g.drawRect(x,y,width,height);//Go in paint.net
+		g.drawString("No Graphic Preview",);//in middle of preview box
 	}
 	public static void main(String[] arg) {
 		new QuestionScreen();
