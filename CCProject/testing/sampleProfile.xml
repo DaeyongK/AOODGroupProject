@@ -7,27 +7,33 @@
         <order>false</order>
         <allQuestions>true</allQuestions>
         <questions>
-            <question id="1">
+            <question>
+                <id>5</id>
                 <numRight>5</numRight>
                 <numAsked>10</numAsked>
             </question>
-            <question id="2">
+            <question>
+                <id>2</id>
                 <numRight>11</numRight>
                 <numAsked>12</numAsked>
             </question>
-            <question id="10">
+            <question>
+                <id>10</id>
                 <numRight>3</numRight>
                 <numAsked>9</numAsked>
             </question>
-            <question id="7">
+            <question>
+                <id>7</id>
                 <numRight>23</numRight>
                 <numAsked>27</numAsked>
             </question>
-            <question id="6">
+            <question>
+                <id>6</id>
                 <numRight>3</numRight>
                 <numAsked>3</numAsked>
             </question>
-            <question id="13">
+            <question>
+                <id>13</id>
                 <numRight>0</numRight>
                 <numAsked>0</numAsked>
             </question>
