@@ -5,6 +5,7 @@ import javax.imageio.*;
 public class Question {
 	String questionString;
 	String answerString;
+	String graphicString;
 	BufferedImage graphic;
 	int ID;
 	
@@ -21,6 +22,7 @@ public class Question {
 	
 	public boolean setImage(String imagePath) {
 		try {
+		graphicString = imagePath;
 		graphic= ImageIO.read(new File(imagePath));
 		} catch (IOException e) {
 			return false;
@@ -33,6 +35,10 @@ public class Question {
 
 	public BufferedImage getImage() {
 		return graphic;
+	}
+	
+	public String getGraphicPath() {
+		return graphicString;
 	}
 	
 	public String getQuestion() {
