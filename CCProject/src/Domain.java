@@ -28,7 +28,7 @@ public class Domain {
 
 	Domain(String name, ArrayList<Question> quest) {
 		domainName = name;
-		for(int i=0; i<quest.size(); i++) {
+		for (int i = 0; i < quest.size(); i++) {
 			questions.add(quest.get(i));
 		}
 	}
@@ -39,11 +39,26 @@ public class Domain {
 
 	Domain(File file) {
 		// import questions from xml file into each element of the array list questions
+		/*
+		 * 
+		 * DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		 * DocumentBuilder db = dbf.newDocumentBuilder(); Document doc = db.parse(xml);
+		 * doc.getDocumentElement().normalize(); Node profile =
+		 * doc.getElementsByTagName("profile").item(0); Element pf = (Element) profile;
+		 * NodeList qs = doc.getElementsByTagName("question"); for(int i = 0; i <
+		 * qs.getLength(); i++) { Node question = qs.item(i); Element q = (Element)
+		 * question;
+		 * questions.put(Integer.parseInt(q.getElementsByTagName("id").item(0).
+		 * getTextContent()), new int[]
+		 * {Integer.parseInt(q.getElementsByTagName("numRight").item(0).getTextContent()
+		 * ),
+		 * Integer.parseInt(q.getElementsByTagName("numAsked").item(0).getTextContent())
+		 * }); } NodeList ds = doc.getElementsByTagName("domainPath"); for(int i = 0; i
+		 * < ds.getLength(); i++) { String domain = ds.item(i).getTextContent();
+		 * domains.add(new Domain(new File(domain))); } } catch (Exception e) {}
+		 */
 		try {
-			// creating a constructor of file class and parsing an XML file
-			// an instance of factory that gives a document builder
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-			// an instance of builder to parse the specified xml file
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.parse(file);
 			doc.getDocumentElement().normalize();
@@ -69,8 +84,8 @@ public class Domain {
 		}
 	}
 
-	public void deleteQuestion(int questionID) {
-		questions.remove(questionID);
+	public void deleteQuestion(int questionNum) {
+		questions.remove(questionNum);
 	}
 
 	public void addQuestion(Question question) {
@@ -84,9 +99,9 @@ public class Domain {
 	public int getDomainSize() {
 		return questions.size();
 	}
-	
+
 	public String getDomainName() {
-		return domainName;
+		return "Name"+domainName;
 	}
 
 	public static final String xmlFilePath = "Domains/test.xml";
@@ -95,43 +110,38 @@ public class Domain {
 
 		try {
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
-
 			DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
-
 			Document document = documentBuilder.newDocument();
 
 			// root element
 			Element root = document.createElement("domain");
 			document.appendChild(root);
 
-			Element name = document.createElement("ask");
+			Element name = document.createElement(getDomainName());
 			root.appendChild(name);
 
-			Element question = document.createElement("question");
-			name.appendChild(question);
-
 			for (int i = 0; i < this.questions.size(); i++) {
+				Element question = document.createElement("question");
+				name.appendChild(question);
+
 				Element id = document.createElement("id");
 				id.setTextContent(this.questions.get(0).getID() + "");
 				question.appendChild(id);
-				
-				Element ques = document.createElement("Question" +i);
+
+				Element ques = document.createElement("Question" + i);
 				ques.setTextContent(questions.get(i).getQuestion());
 				question.appendChild(ques);
-				
-				Element ans = document.createElement("Answer" +i);
+
+				Element ans = document.createElement("Answer" + i);
 				ans.setTextContent(questions.get(i).getAnswer());
-				question.appendChild(ans);	
-				
+				question.appendChild(ans);
+
 				Element image = document.createElement("QuestionGraphic");
 			}
 
-			// create the xml file
-			// transform the DOM Object to an XML File
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			//StreamResult result = new StreamResult(System.out);
 			StreamResult streamResult = new StreamResult(new File(xmlFilePath));
 
 			// If you use
