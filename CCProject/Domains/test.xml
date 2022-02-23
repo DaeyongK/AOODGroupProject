@@ -1,1 +1,15 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><domain><ask><question Answer0="2" Answer1="3" Answer2="4" Answer3="5" Answer4="6" Answer5="7" Answer6="8" Answer7="9" Answer8="10" Answer9="11" Question0="1+1?" Question1="1+2?" Question2="1+3?" Question3="1+4?" Question4="1+5?" Question5="1+6?" Question6="1+7?" Question7="1+8?" Question8="1+9?" Question9="1+10?" id="422552018"/></ask></domain>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<domain>
+    <ask>
+        <question Answer0="2" Answer1="3" Answer2="4" Answer3="5" Answer4="6" Answer5="7" Answer6="8" Answer7="9" Answer8="10" Answer9="11" Question0="1+1?" Question1="1+2?" Question2="1+3?" Question3="1+4?" Question4="1+5?" Question5="1+6?" Question6="1+7?" Question7="1+8?" Question8="1+9?" Question9="1+10?" id="422552018"/>
+    </ask>
+</domain>
+
+<domains>
+    <nameOfDomain>
+        <question>
+            <prompt>3+5</prompt>
+            <answer>8</answer>
+        </question>
+    </nameOfDomain>
+</domains>

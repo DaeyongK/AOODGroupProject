@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<questions>
+    <profile>
+        <profileName>Chairman Liu</profileName>
+        <threshold>5</threshold>
+        <image>2</image>
+        <order>false</order>
+        <allQuestions>true</allQuestions>
+        <questions>
+            <question id="1">
+                <numRight>5</numRight>
+                <numAsked>10</numAsked>
+            </question>
+            <question id="2">
+                <numRight>11</numRight>
+                <numAsked>12</numAsked>
+            </question>
+            <question id="10">
+                <numRight>3</numRight>
+                <numAsked>9</numAsked>
+            </question>
+            <question id="7">
+                <numRight>23</numRight>
+                <numAsked>27</numAsked>
+            </question>
+            <question id="6">
+                <numRight>3</numRight>
+                <numAsked>3</numAsked>
+            </question>
+            <question id="13">
+                <numRight>0</numRight>
+                <numAsked>0</numAsked>
+            </question>
+        </questions>
+        <domains>
+            <domainPath>CCProject/Domains/test.xml</domainPath>
+            <domainPath>CCProject/Domains/test2.xml</domainPath>
+            <domainPath>CCProject/Domains/test3.xml</domainPath>
+        </domains>
+    </profile>
+</questions>
