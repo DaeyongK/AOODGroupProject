@@ -89,7 +89,7 @@ public class Domain {
 		return domainName;
 	}
 
-	public static final String xmlFilePath = "XMLFiles";
+	public static final String xmlFilePath = "XMLFiles/test.xml";
 
 	public File export() {
 
