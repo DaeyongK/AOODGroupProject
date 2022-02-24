@@ -22,7 +22,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 	private EstablisherButton aboveSpot = new EstablisherButton(this,0,0,Color.WHITE,””,-2);
 	private int draggedIndex = -1;
 	private int droppedIndex = -1;
-	private EstablisherButton currentButton;
+	private EstablisherButton currentButton = new EstablisherButton(this,0,0,Color.WHITE,””,-2);
 	
 	public EditDomain(String t, Quizit q){
 		super(t);
@@ -70,6 +70,8 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			buttons.get(i).addMouseListener(new MouseListener() {
 				public void mouseClicked(MouseEvent e) {
 					if(e.getClickCount()==1) {
+						currentButton.remove(editQ);
+						currentButton.remove(deleteQ);
 						currentButton = (EstablisherButton) e.getSource();
 						editQ = new TransitionButton(thisScreen,25, 15, QPanel.TITLE_COLOR,“Edit”, 12, 22);
 						buttons.get(workaround).add(editQ);
