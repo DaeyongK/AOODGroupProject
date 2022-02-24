@@ -35,10 +35,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		questionBox = new JTextField("Enter a new question here: ");
 		answerBox = new JTextField("Enter its answer here: ");
 		
-		attachGraphic = new EstablisherButton(161,44,Color.BLACK,"Attach",0);
-		detachGraphic = new EstablisherButton(161,44,Color.BLACK,"Detach",1);
-		doneBtn = new TransitionButton(161,69,Color.BLACK,"Done",2);
-		backBtn = new TransitionButton(175,67,Color.BLACK,"Back",3);
+		attachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Attach",0);
+		detachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Detach",1);
+		doneBtn = new TransitionButton(this,161,69,Color.BLACK,"Done",6,2);
+		backBtn = new TransitionButton(this,175,67,Color.BLACK,"Back",6,3);
 		
 		attachGraphic.setBounds(121,327,161,44);
 		detachGraphic.setBounds(398,327,161,44);
@@ -75,10 +75,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		changeRight.setBounds(953,161,283,56);
 		changeAsked.setBounds(953,242,283,56);
 		
-		attachGraphic = new EstablisherButton(161,44,Color.BLACK,"Attach",0);
-		detachGraphic = new EstablisherButton(161,44,Color.BLACK,"Detach",1);
-		doneBtn = new TransitionButton(161,69,Color.BLACK,"Done",2);
-		backBtn = new TransitionButton(175,67,Color.BLACK,"Back",3);
+		attachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Attach",0);
+		detachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Detach",1);
+		doneBtn = new TransitionButton(this,161,69,Color.BLACK,"Done",6,2);
+		backBtn = new TransitionButton(this,175,67,Color.BLACK,"Back",6,3);
 		
 		attachGraphic.setBounds(121,327,161,44);
 		detachGraphic.setBounds(398,327,161,44);
@@ -101,10 +101,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		JPanel pop = new JPanel();
 		JLabel message = new JLabel(text);
 		pop.add(message);
-		pop.setBackGround(TITLE_COLOR);
+		pop.setBackground(TITLE_COLOR);
 		
-		if (message.includes("Select")) {
-			EstablisherButton select = new EstablisherButton(60,25,Color.WHITE,"Select",10);
+		if (message.getText().contains("Select")) {
+			EstablisherButton select = new EstablisherButton(this,60,25,Color.WHITE,"Select",10);
 			select.setBackground(Color.WHITE);
 			select.setForeground(Color.BLACK);
 			select.addActionListener(new ActionListener() {
@@ -120,15 +120,15 @@ public class QuestionScreen extends QPanel implements ActionListener {
 					else {
 						//Selected graphic is picked
 					}
-					
+
 					return true;
 				}
 			});
 			pop.add(select);
 		}
-		else if (message.includes("leave")) {
+		else if (message.getText().contains("leave")) {
 			//Backbtn popup yes/no
-			TransitionButton yes = new EstablisherButton(40,25,Color.WHITE,"Yes",screenID,13);
+			TransitionButton yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",6,13);
 			yes.setBackground(Color.WHITE);
 			yes.setForeground(Color.BLACK);
 			yes.addActionListener(new ActionListener() {
@@ -138,7 +138,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				}
 			});
 			pop.add(yes);
-			TransitionButton no = new EstablisherButton(40,25,Color.WHITE,"No",screenID,14);
+			TransitionButton no = new TransitionButton(this,40,25,Color.WHITE,"No",6,14);
 			no.setBackground(Color.WHITE);
 			no.setForeground(Color.BLACK);
 			no.addActionListener(new ActionListener(){
@@ -151,7 +151,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		}
 		else {
 			//General popup yes/no
-			EstablisherButton yes = new EstablisherButton(40,25,Color.WHITE,"Yes",15);
+			EstablisherButton yes = new EstablisherButton(this,40,25,Color.WHITE,"Yes",15);
 			yes.setBackground(Color.WHITE);
 			yes.setForeground(Color.BLACK);
 			yes.addActionListener(new ActionListener() {
@@ -161,7 +161,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				}
 			});
 			pop.add(yes);
-			EstablisherButton no = new EstablisherButton(40,25,Color.WHITE,"No",16);
+			EstablisherButton no = new EstablisherButton(this,40,25,Color.WHITE,"No",16);
 			no.setBackground(Color.WHITE);
 			no.setForeground(Color.BLACK);
 			no.addActionListener(new ActionListener(){
