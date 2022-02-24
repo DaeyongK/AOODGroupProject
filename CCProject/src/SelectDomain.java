@@ -8,7 +8,7 @@ import javax.swing.JOptionPane;
 public class SelectDomain extends DomainScreen implements MouseListener{
 	boolean dClick = false;
 	EstablisherButton launch, edit,delete;
-	SelectDomain(String input) {
+	SelectDomain(String input, Quizit quizit) {
 		super(input);
 		exit = new TransitionButton(100, 50, TITLE_COLOR, "Exit", -1, 1);
 		launch = new EstablisherButton(100, 50, Color.WHITE, "Launch", -2);
