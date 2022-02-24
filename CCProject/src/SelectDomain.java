@@ -20,7 +20,6 @@ public class SelectDomain extends DomainScreen implements MouseListener{
 		add(launch);
 		add(edit);
 		add(delete);
-
 	}
 
 	@Override
