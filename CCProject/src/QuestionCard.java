@@ -6,18 +6,33 @@ import javax.swing.JPanel;
 
 public class QuestionCard extends QPanel{
 	String question;
+	Profile profile;
+	Question currentQ;
 	String answer;
 	EstablisherButton ansBtn;
 	EstablisherButton knewAnsBtn;
 	EstablisherButton notKnewAnsBtn;
-	EstablisherButton nextQuesBtn;
+	EstablisherButton nextQuestBtn;
 	TransitionButton editQuestBtn;
 	BufferedImage questImage;
 	
-	QuestionCard(String t) {
-		super(t);
-		JPanel pane = new JPanel();
-		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+	QuestionCard(String title, Question currentQuestion, Profile currentProfile) {
+		super(title);
+		currentQ=currentQuestion;
+		profile=currentProfile;
+		JPanel contentPane = new JPanel();
+		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
+		Quizit game = new Quizit();
+		ansBtn = new EstablisherButton(100,50, Color.white, "Answer", 0);
+		knewAnsBtn = new EstablisherButton(90,40, Color.white, "I knew the answer", 1);
+		notKnewAnsBtn = new EstablisherButton(90,40, Color.white, "I didn't know", 2);
+		nextQuestBtn = new EstablisherButton(100,50, Color.white, "Next Question", 3);
+		editQuestBtn = new TransitionButton(100,50, Color.white, "Edit Question", 11/*or 12?*/,4);
+		contentPane.add(ansBtn);
+		contentPane.add(knewAnsBtn);
+		contentPane.add(notKnewAnsBtn);
+		contentPane.add(nextQuestBtn);
+		contentPane.add(editQuestBtn);
 	}
 	
 	public int getScreenID() {

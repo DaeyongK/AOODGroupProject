@@ -130,9 +130,7 @@ public class Domain {
 			transformer.transform(domSource, streamResult);
 			System.out.println("Done creating XML File");
 			return new File(xmlFilePath);
-		} catch (
-
-		ParserConfigurationException pce) {
+		} catch (ParserConfigurationException pce) {
 			pce.printStackTrace();
 		} catch (TransformerException tfe) {
 			tfe.printStackTrace();

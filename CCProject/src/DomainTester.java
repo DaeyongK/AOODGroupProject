@@ -27,9 +27,9 @@ public class DomainTester {
 		questions.add(q10);
 		Domain n = new Domain("Simple Math", questions);
 		for(int i=0; i<n.getDomainSize(); i++) {
+			System.out.println(n.getQuestion(i).getGraphicPath());
 			System.out.println(n.getQuestion(i).getQuestion());
 			System.out.println(n.getQuestion(i).getAnswer()+"\n");
-			System.out.println(n.getQuestion(i).getGraphicPath());
 		}
 		System.out.println(n.export().toString());
 		Domain n1 = new Domain(new File("Domains/test.xml"));
