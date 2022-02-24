@@ -1,8 +1,7 @@
 import java.awt.Color;
 import java.awt.image.*;
 
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 public class QuestionCard extends QPanel{
 	String question;
@@ -10,11 +9,9 @@ public class QuestionCard extends QPanel{
 	Question currentQ;
 	String answer;
 	Quizit quizit;
-	EstablisherButton ansBtn;
-	EstablisherButton knewAnsBtn;
-	EstablisherButton notKnewAnsBtn;
-	EstablisherButton nextQuestBtn;
-	TransitionButton editQuestBtn;
+	EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn, yesDelQuestBtn, noDelQuestBtn;
+	TransitionButton editQuestBtn, backBtn;
+	JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, domainNameText;
 	BufferedImage questImage;
 	
 	QuestionCard(String title, Quizit quiz) {
@@ -24,11 +21,41 @@ public class QuestionCard extends QPanel{
 		profile=quiz.getProfile();
 		JPanel contentPane = new JPanel();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
-		ansBtn = new EstablisherButton(this,100,50, Color.white, "Answer", 0);
-		knewAnsBtn = new EstablisherButton(this, 90,40, Color.white, "I knew the answer", 1);
-		notKnewAnsBtn = new EstablisherButton(this, 90,40, Color.white, "I didn't know", 2);
-		nextQuestBtn = new EstablisherButton(this,100,50, Color.white, "Next Question", 3;
-		editQuestBtn = new TransitionButton(this, 100,50, Color.white, "Edit Question", 11,4);
+		
+		//make text boxes 
+		askedNumTimesText= new JLabel("Asked: "+title+ " times");
+		correctNumTimesText= new JLabel("Correct: "+title+ " times");
+		answerText= new JLabel("Insert answer here");
+		answerText.setEnabled(false);
+		questionText = new JLabel("Insert question here");		
+		domainNameText = new JLabel("Current Domain: "+"insert domain name getter here");
+		
+		//make buttons
+		editQuestBtn = new TransitionButton(this, 100,50, Color.white, "Edit Question", 12,5);
+		
+		backBtn = new TransitionButton(this, 100,50, Color.white, "Edit Question", 5,0);
+		
+		ansBtn = new EstablisherButton(this,100,50, Color.white, "Answer", 1);
+		
+		knewAnsBtn = new EstablisherButton(this, 90,40, Color.white, "I knew the answer", 2);
+		knewAnsBtn.setEnabled(false);
+		
+		notKnewAnsBtn = new EstablisherButton(this, 90,40, Color.white, "I didn't know", 3);
+		notKnewAnsBtn.setEnabled(false);
+		
+		nextQuestBtn = new EstablisherButton(this,100,50, Color.white, "Next Question", 4);
+		nextQuestBtn.setEnabled(false);
+		
+		delQuestBtn = new EstablisherButton(this,100,50, Color.white, "Next Question", 6);
+		delQuestBtn.setEnabled(false);
+		
+		yesDelQuestBtn = new EstablisherButton(this,100,50, Color.white, "Yes", 7);
+		yesDelQuestBtn.setEnabled(false);
+		
+		noDelQuestBtn = new EstablisherButton(this,100,50, Color.white, "No", 8);
+		noDelQuestBtn.setEnabled(false);
+		
+		//add buttons and text to contentPane
 		contentPane.add(ansBtn);
 		contentPane.add(knewAnsBtn);
 		contentPane.add(notKnewAnsBtn);
@@ -51,10 +78,20 @@ public class QuestionCard extends QPanel{
 		// buttID 2 = knew answer button
 		// buttID 3 = didn't know answer button
 		// buttID 4 = next question button
-		// buttID 5 = delete question button
-		// buttID 6 = edit question button
+		// buttID 5 = edit question button
+		// buttID 6 = delete question button
+		// buttID 7 = yes delete question button
+		// buttID 8 = no don't delete question button
+		
 		if(buttonID==0) {
-			qui
+			quizit.changeScreen(12);
+		} else if (buttonID==1) {
+			ansBtn.setEnabled(false);
+			knewAnsBtn.setEnabled(true);
+			notKnewAnsBtn.setEnabled(true);
+			answerText.setEnabled(true);
+			//num asked increment by 1. use profile from quizit.
+			//display the answer to the question at the bottom
 		}
 		
 	}
