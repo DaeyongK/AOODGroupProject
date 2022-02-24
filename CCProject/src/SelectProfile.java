@@ -46,7 +46,14 @@ public class SelectProfile extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		
+		switch(buttonID){
+			case 1:
+				//send to main menu
+				break;
+			case 3:
+				//send to select a profile
+		    	break;
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
