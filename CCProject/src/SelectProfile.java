@@ -9,9 +9,12 @@ public class SelectProfile extends QPanel implements ActionListener{
 	private TransitionButton done;
 	private TransitionButton createNewProfileButton;
 	private JPanel panel;
+	private Profile currentProfile;
+	private Quizit quizitReference;
 	
 	SelectProfile(String title, Quizit q){
 		super(title, q);
+		quizitReference = q;
 		panel = new JPanel();
 		profiles = new ArrayList<Profile>();
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
@@ -49,9 +52,11 @@ public class SelectProfile extends QPanel implements ActionListener{
 		switch(buttonID){
 			case 1:
 				//send to main menu
+				QPanel nextScreen = new MainMenu("");
 				break;
 			case 2:
-				//send to select a profile
+				//send to create a profile
+				nextScreen = new CreateProfile("", quizitReference);
 		    	break;
 		}
 		if(buttonID > 2) {
