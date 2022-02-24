@@ -15,10 +15,12 @@ public class Options extends QPanel implements ActionListener{
 	private EstablisherButton firstLastButton;
 	private TransitionButton doneButton;
 	private JPanel panel;
+	private Quizit quizitReference;
 	
 	Options(String title, Quizit q){
 		super(title, q);
 		panel = new JPanel();
+		quizitReference = q;
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.\
 		//dropdown menu
 		dropdown =  new JComboBox();
@@ -87,22 +89,32 @@ public class Options extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		if(buttonID == 1) {
-			//send to main menu screen
+		switch(buttonID){
+		case 1:
+			//allQuestions is false
+			allQuestions = false;
+			break;
+		case 2:
+			//allQuestions is true
+			allQuestions = true;
+	    	break;
+		case 3:
+			//shuffleQuestions is true
+			shuffleQuestions = true;
+			break;
+		case 4:
+			//shuffleQuestions is false
+			shuffleQuestions = true;
+			break;
+		case 5:
+			//go to main menu
+			QPanel nextScreen = new MainMenu("");
+			break;
 		}
-	}
-	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(TITLE_COLOR);
 	}
 	
 	public void actionPerformed(ActionEvent e){
 		//when doneButton is pressed
-		//when numCorrectButton is pressed
-		//when allQuestionsButton is pressed
-		//when shuffleQuestionsButton is pressed
-		//when firstLastButton is pressed
 		//when pfp3 is clicked
 	}
 
