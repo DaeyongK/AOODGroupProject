@@ -39,15 +39,15 @@ public class CreateProfile extends QPanel implements ActionListener{
 		create.addActionListener(this);
 		panel.add(create);
 		//shrek pfp
-		shrek = new CircularButton();
+		shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, null);
 		shrek.addActionListener(this);
 		panel.add(shrek);
 		//fiona pfp
-		fiona = new CircularButton();
+		fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, null);
 		fiona.addActionListener(this);
 		panel.add(fiona);
 		//donkey pfp
-		donkey = new CircularButton();
+		donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, null);
 		donkey.addActionListener(this);
 		panel.add(donkey);
 		//setup
@@ -91,7 +91,7 @@ public class CreateProfile extends QPanel implements ActionListener{
 			break;
 		case 5:
 			//exit button
-			nextScreen = new MainMenu("");
+			nextScreen = new MainMenu("", quizitReference);
 	    	break;
 		}
 	}

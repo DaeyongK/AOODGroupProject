@@ -23,7 +23,10 @@ public class Options extends QPanel implements ActionListener{
 		quizitReference = q;
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.\
 		//dropdown menu
-		dropdown =  new JComboBox();
+		String[] names = {"<5", "<10", "<15", "<20", "<30"};
+		dropdown = new JComboBox(names);
+		dropdown.setAlignmentX(JComboBox.LEFT_ALIGNMENT);
+		dropdown.setSelectedIndex(0);
 		dropdown.addActionListener(this);
 		panel.add(dropdown);
 		//number correct button
@@ -108,14 +111,13 @@ public class Options extends QPanel implements ActionListener{
 			break;
 		case 5:
 			//go to main menu
-			QPanel nextScreen = new MainMenu("");
+			QPanel nextScreen = new MainMenu("", quizitReference);
 			break;
 		}
 	}
 	
 	public void actionPerformed(ActionEvent e){
-		//when doneButton is pressed
-		//when pfp3 is clicked
+		
 	}
 
 }
