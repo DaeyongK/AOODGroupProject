@@ -9,16 +9,14 @@ public class SelectDomain extends DomainScreen implements MouseListener{
 	boolean dClick = false;
 	EstablisherButton launch, edit,delete;
 	SelectDomain(String input, Quizit quizit) {
-		super(input);
-		exit = new TransitionButton(100, 50, TITLE_COLOR, "Exit", -1, 1);
-		launch = new EstablisherButton(100, 50, Color.WHITE, "Launch", -2);
-		edit = new EstablisherButton(100, 50, Color.WHITE, "Edit", -3);
-		delete = new EstablisherButton(100, 50, Color.WHITE, "Delete", -4);
+		super(input, quizit);
+		exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", -1, 1);
+		launch = new EstablisherButton(this, 100, 50, Color.WHITE, "Launch", -2);
+		edit = new EstablisherButton(this, 100, 50, Color.WHITE, "Edit", -3);
+		delete = new EstablisherButton(this, 100, 50, Color.WHITE, "Delete", -4);
 		launch.setEnabled(false);
 		edit.setEnabled(false);
 		delete.setEnabled(false);
-
-		
 		add(launch);
 		add(edit);
 		add(delete);
@@ -41,9 +39,8 @@ public class SelectDomain extends DomainScreen implements MouseListener{
 			}
 			if(buttonID == -4) {
 				if(popup("Are you sure?")) {
-					Quizit gimmeDomains = new Quizit();
-					ArrayList<Domain> domains = gimmeDomains.getProfile.getDomains();
-					gimmeDomains.getProfile.detachDomain(domains.get(buttonID));
+					quizit.getProfile.getDomains();
+					quizit.getProfile.detachDomain(domains.get(buttonID));
 				}
 			}
 		}

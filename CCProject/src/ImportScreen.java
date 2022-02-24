@@ -10,23 +10,23 @@ class ImportScreen extends QPanel implements ActionListener{
   private File selectedFile;
   private JLabel fileName = new JLabel("");
   private JFileChooser jfc;
-  ImportScreen(String title){
+  ImportScreen(String title, Quizit q){
     super(title);
     int width = 80;
     int height = 40;
     
-    back = new TransitionButton(width, height, Color.WHITE, "Back", 8, 0);
+    back = new TransitionButton(this, width, height, Color.WHITE, "Back", 7, 0);
     back.setBounds(20,20, width, height);
     back.setActionCommand("back");
     back.addActionListener(this);
     
-    done = new TransitionButton(width, height, Color.WHITE, "Done", 8, 1);
+    done = new TransitionButton(this, width, height, Color.WHITE, "Done", 7, 1);
     done.setBounds(600,600, width, height);
     done.setActionCommand("done");
     done.addActionListener(this);
     done.setVisible(false);
     
-    chooseFile = new EstablisherButton(width, height, Color.WHITE, "Choose File", 8, 2);
+    chooseFile = new EstablisherButton(width, height, Color.WHITE, "Choose File", 7, 2);
     chooseFile.setBounds(480,560, width, height);
     chooseFile.setActionCommand("choose");
     chooseFile.addActionListener(this);
@@ -42,14 +42,14 @@ class ImportScreen extends QPanel implements ActionListener{
   public void buttonClicked(int buttonID){
     switch(buttonID){
       case 0:
-        //send to main menu
+        //send to main menu and pls matthew stop being a deadweight leader, useless 
         break;
       case 1:
-        
-    	  break;
+		q.getProfile().addDomain(new Domain(fileName));
+    	break;
         //send to main menu and parse selectedFile into a domain
       case 2:
-    	  jfc = new JFileChooser();
+    	jfc = new JFileChooser();
 
   		int returnValue = jfc.showOpenDialog(null);
   		// int returnValue = jfc.showSaveDialog(null);

@@ -18,7 +18,7 @@ public class ExportDomain extends QPanel implements ActionListener {
 		insideScroll.setLayout(new BoxLayout(insideScroll,BoxLayout.Y_AXIS));
 		
 		for(int i = 0; i < dList.size(); i++) { //replace 3 with all domains within a profile
-			buttons.add(new EstablisherButton(850, 25, Color.WHITE, dList.get(i).toString(), 10, i+30));
+			buttons.add(new EstablisherButton(850, 25, Color.WHITE, dList.get(i).toString(), 9, i+30));
 			insideScroll.add(buttons.get(i));
 			buttons.get(i).setActionCommand(i + "");
 			buttons.get(i).addActionListener(this);

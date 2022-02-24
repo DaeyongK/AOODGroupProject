@@ -7,8 +7,8 @@ import java.awt.*;
 //Abner Ben
 public class EstablisherButton extends QButton{
 	private int buttonId;
-	EstablisherButton(int width, int height, Color color, String text, int buttonID){
-		super(width,height,color,text,buttonID);
+	EstablisherButton(QPanel Panel,int width, int height, Color color, String text, int buttonID){
+		super(Panel,width,height,color,text,buttonID);
 		JButton b = new JButton(text);  
 		b.setBounds(50,50,width,height);
 		b.setBackground(TITLE_COLOR);

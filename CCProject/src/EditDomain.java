@@ -116,7 +116,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 	}
 	
 	public int getScreenID(){
-		return 9;
+		return 8;
 	}
 	public boolean popup(String text){
 		//for the possible delete questions or exiting the screen
