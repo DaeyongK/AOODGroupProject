@@ -34,7 +34,7 @@ class ImportScreen extends QPanel implements ActionListener{
     fileName.setBounds(600, 560, 100, 40);
   }
   public int getScreenID(){
-    return 8; 
+    return 7; 
   }
 	public boolean popup(String text){
     return true;
@@ -42,10 +42,12 @@ class ImportScreen extends QPanel implements ActionListener{
   public void buttonClicked(int buttonID){
     switch(buttonID){
       case 0:
-        //send to main menu and pls matthew stop being a deadweight leader, useless 
-        break;
+        q.changeScreen(1);
+	//send to main menu and pls matthew stop being a deadweight leader, useless 
+        break;	
       case 1:
-		q.getProfile().addDomain(new Domain(fileName));
+	q.getProfile().addDomain(new Domain(fileName));
+	q.changeScreen(1);
     	break;
         //send to main menu and parse selectedFile into a domain
       case 2:
