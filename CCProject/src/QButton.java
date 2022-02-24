@@ -11,10 +11,7 @@ abstract class QButton extends JButton{
 	private int Height;
 	private String Text;
 	QButton(QPanel Panel,int width, int height, Color color, String text, int buttonID){
-<<<<<<< Updated upstream
-=======
 		setText(text);
->>>>>>> Stashed changes
 		setBounds(50,50,width,height);
 		setBackground(color);
 		buttonId = buttonID;
