@@ -22,43 +22,18 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private TransitionButton backBtn;
 	
 	private QPanel thisScreen;
+	private Question question;
+	private Profile profile;
 	
-	QuestionScreen(String t, int id) {
+	QuestionScreen(String t) {
 		super(t);
+		title = "Create a Question";
 		thisScreen = this;
-		prevScreen = pqp;
-		questionId = new Question().getID(); //Find questionID from profile or domain
-		
-		if (id<0) {
-			ScreenId=11;
-			edit = false;
-			graphicDetected = false;
-			questionBox = new JTextField("Enter a new question here: ");
-			answerBox = new JTextField("Enter its answer here: ");
-		}
-		else {
-			title = "Edit Question #" + id;
-			ScreenId=12;
-			edit = true;
-			//Figure out how to access the question by ID
-			if (getImage() != null)
-				graphicDetected = true;
-			else
-				graphicDetected = false;
-			questionBox = new JTextField(getQuestion());
-			answerBox = new JTextField(getAnswer());
-			//Figure out how to access #times asked/right in profile class
-			changeRight = new JTextField("Correct: "+getProfile().getAnsweredRight(questionId)+" times");
-			changeAsked = new JTextField("Asked: "+getProfile().getTimesAsked(questionId)+" times");
-			changeRight.setBounds(953,161,283,56);
-			changeAsked.setBounds(953,242,283,56);
-			this.add(changeRight);
-			this.add(changeAsked);
-		}
-		
-		
-		questionBox.setBounds(121,399,438,124);
-		answerBox.setBounds(720,399,438,124);
+		ScreenId=11;
+		edit = false;
+		graphicDetected = false;
+		questionBox = new JTextField("Enter a new question here: ");
+		answerBox = new JTextField("Enter its answer here: ");
 		
 		attachGraphic = new EstablisherButton(161,44,Color.BLACK,"Attach",0);
 		detachGraphic = new EstablisherButton(161,44,Color.BLACK,"Detach",1);
@@ -77,8 +52,50 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		this.add(doneBtn);
 		this.add(backBtn);
 	}
+	QuestionScreen(String t, QuizIt q) {
+		super(t);
+		question = q.currentQuestion();
+		questionId = question.getID();
+		profile = q.currentProfle();
+		title = "Edit Question #" + questionId;
+		thisScreen = this;
+		ScreenId=12;
+		edit = true;
+		if (question.getImage() != null)
+			graphicDetected = true;
+		else
+			graphicDetected = false;
+		questionBox = new JTextField(question.getQuestion());
+		answerBox = new JTextField(question.getAnswer());
+		questionBox.setBounds(121,399,438,124);
+		answerBox.setBounds(720,399,438,124);
+		
+		changeRight = new JTextField("Correct: "+profile.getAnsweredRight(questionId)+" times");
+		changeAsked = new JTextField("Asked: "+profile.getTimesAsked(questionId)+" times");
+		changeRight.setBounds(953,161,283,56);
+		changeAsked.setBounds(953,242,283,56);
+		
+		attachGraphic = new EstablisherButton(161,44,Color.BLACK,"Attach",0);
+		detachGraphic = new EstablisherButton(161,44,Color.BLACK,"Detach",1);
+		doneBtn = new TransitionButton(161,69,Color.BLACK,"Done",2);
+		backBtn = new TransitionButton(175,67,Color.BLACK,"Back",3);
+		
+		attachGraphic.setBounds(121,327,161,44);
+		detachGraphic.setBounds(398,327,161,44);
+		doneBtn.setBounds(559,570,161,69);
+		backBtn.setBounds(49,42,175,67);
+		
+		this.add(questionBox);
+		this.add(answerBox);
+		this.add(changeRight);
+		this.add(changeAsked);
+		this.add(attachGraphic);
+		this.add(detachGraphic);
+		this.add(doneBtn);
+		this.add(backBtn);
+	}
 	public int getScreenID() {
-		return id;
+		return screenId;
 	}
 	public boolean popup(String text) {
 		JPanel pop = new JPanel();
@@ -134,7 +151,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		}
 		else {
 			//General popup yes/no
-			EstablisherButton yes = new EstablisherButton(40,25,Color.WHITE,"Yes",13);
+			EstablisherButton yes = new EstablisherButton(40,25,Color.WHITE,"Yes",15);
 			yes.setBackground(Color.WHITE);
 			yes.setForeground(Color.BLACK);
 			yes.addActionListener(new ActionListener() {
@@ -144,7 +161,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				}
 			});
 			pop.add(yes);
-			EstablisherButton no = new EstablisherButton(40,25,Color.WHITE,"No",14);
+			EstablisherButton no = new EstablisherButton(40,25,Color.WHITE,"No",16);
 			no.setBackground(Color.WHITE);
 			no.setForeground(Color.BLACK);
 			no.addActionListener(new ActionListener(){
