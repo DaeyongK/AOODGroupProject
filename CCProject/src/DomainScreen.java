@@ -5,8 +5,8 @@ public abstract class DomainScreen extends QPanel{
 	protected ArrayList<EstablisherButton> domainButtons;
 	protected TransitionButton exit;
 	protected ArrayList<Domain> domains;
-	DomainScreen(String input){
-		super(input);
+	DomainScreen(String input, Quizit quizit){
+		super(input, quizit);
 		JPanel pane = new JPanel();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
 		Quizit gimmeDomains = new Quizit();

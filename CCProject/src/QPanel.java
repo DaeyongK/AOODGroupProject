@@ -7,10 +7,12 @@ public abstract class QPanel extends JPanel {
 	public final Font font = new Font(Font.SANS_SERIF,Font.PLAIN,20);
 	protected String title;
 	protected int id = 0;
+	protected Quizit quizit;
 
-	QPanel(String t){
+	QPanel(String t, Quizit quizit){
 		title = t;
 		this.setBackground(BACKGROUND_COLOR);
+		this.quizit = quizit;
 	}
 
 	public abstract int getScreenID();
