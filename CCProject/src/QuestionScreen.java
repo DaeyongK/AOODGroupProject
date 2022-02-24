@@ -37,8 +37,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		
 		attachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Attach",0);
 		detachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Detach",1);
-		doneBtn = new TransitionButton(this,161,69,Color.BLACK,"Done",6,2);
-		backBtn = new TransitionButton(this,175,67,Color.BLACK,"Back",6,3);
+		doneBtn = new TransitionButton(this,161,69,Color.BLACK,"Done",8,2);
+		backBtn = new TransitionButton(this,175,67,Color.BLACK,"Back",8,3);
 		
 		attachGraphic.setBounds(121,327,161,44);
 		detachGraphic.setBounds(398,327,161,44);
@@ -128,6 +128,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		}
 		else if (message.getText().contains("leave")) {
 			//Backbtn popup yes/no
+			//If create, screenId is 8, if edit, figure it out
 			TransitionButton yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",6,13);
 			yes.setBackground(Color.WHITE);
 			yes.setForeground(Color.BLACK);
