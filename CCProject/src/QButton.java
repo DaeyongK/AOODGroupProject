@@ -6,9 +6,8 @@ abstract class QButton extends JButton{
 	final Color TITLE_COLOR = new Color(240,193,67);//yellow
 	private int buttonId;
 	QButton(QPanel Panel,int width, int height, Color color, String text, int buttonID){
-		JButton b = new JButton(text);  
-		b.setBounds(50,50,width,height);
-		b.setBackground(color);
+		setBounds(50,50,width,height);
+		setBackground(color);
 		buttonId = buttonID;
 	}
 	public abstract void mousePressed();	
