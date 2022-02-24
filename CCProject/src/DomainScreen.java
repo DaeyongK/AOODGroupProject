@@ -6,11 +6,16 @@ public abstract class DomainScreen extends QPanel{
 	protected TransitionButton exit;
 	protected ArrayList<Domain> domains;
 	DomainScreen(String input, Quizit quizit){
+		/*
+		button ids:
+		exit = -1
+		domain buttons = index in all domains
+		 */
 		super(input, quizit);
 		JPanel pane = new JPanel();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
 		Quizit gimmeDomains = new Quizit();
-		domains = gimmeDomains.getProfile.getDomains();
+		domains = gimmeDomains.getProfile().getDomains();
 		for(int i = 0; i< domains.size();i++) {
 			domainButtons.add(new EstablisherButton(this, 800, 50,Color.white,domains.get(i).getDomainName(),i));
 		}
@@ -25,6 +30,9 @@ public abstract class DomainScreen extends QPanel{
 		add(exit);
 
 	}
+	
+	
+
 	public String getName() {
 		return title; 
 	}
@@ -42,8 +50,8 @@ public abstract class DomainScreen extends QPanel{
 }
 class DomainScreenTester extends DomainScreen{
 
-	DomainScreenTester(String input, Profile profile) {
-		super(input, profile);
+	DomainScreenTester(String input, Quizit quizit) {
+		super(input,quizit);
 	}
 
 	@Override
