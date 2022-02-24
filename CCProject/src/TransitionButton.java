@@ -4,8 +4,10 @@ import javax.swing.event.MouseInputAdapter;
 import org.w3c.dom.events.MouseEvent;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //Abner Ben
-public class TransitionButton extends QButton{
+public class TransitionButton extends QButton implements ActionListener{
 	private QPanel panel;
 	private Color Color;
 	private int buttonId;
@@ -14,25 +16,14 @@ public class TransitionButton extends QButton{
 	private String Text;
 	private int screenId;
 	TransitionButton(QPanel Panel,int width, int height, Color color, String text, int screenID, int buttonID){
-		super(Panel,width,height,color,text,buttonID);
-		JButton b = new JButton(text);  
-		b.setBounds(50,50,width,height);
-		b.setBackground(color);
+		super(Panel,width,height,color,text,buttonID); 
+		addActionListener(this);
 		screenId = screenID;
-		buttonId=buttonID;
-		Color=color;
-		panel=Panel;
-		Text=text;
-		Width=width;
-		Height=height;
 	}
-	public void mousePressed() {
-		addMouseMotionListener(new MouseInputAdapter() {
-			public void MousePressed(MouseEvent e) {
-				EstablisherButton button = new EstablisherButton(panel,Width,Height,TITLE_COLOR,Text,buttonId);
-				panel.buttonClicked(buttonId);
-			}
-		});
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		panel.buttonClicked(buttonId);
 	}
 	public void mouseOver() {
 		addMouseMotionListener(new MouseInputAdapter() {
