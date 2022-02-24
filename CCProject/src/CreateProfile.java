@@ -74,7 +74,7 @@ public class CreateProfile extends QPanel implements ActionListener{
 		switch(buttonID){
 		case 1:
 			//move to options
-			Profile createdProfile = new Profile("", imageIndex);
+			Profile createdProfile = new Profile(profileName, imageIndex);
 			QPanel nextScreen = new Options("", quizitReference);
 			break;
 		case 2:
