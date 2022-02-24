@@ -38,8 +38,8 @@ public class SelectDomain extends DomainScreen implements MouseListener{
 			}
 			if(buttonID == -4) {
 				if(popup("Are you sure?")) {
-					quizit.getProfile.getDomains();
-					quizit.getProfile.detachDomain(domains.get(buttonID));
+					quizit.getProfile().getDomains();
+					quizit.getProfile().detachDomain(domains.get(buttonID));
 				}
 			}
 		}
