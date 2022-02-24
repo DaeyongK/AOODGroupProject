@@ -52,7 +52,7 @@ public class SelectProfile extends QPanel implements ActionListener{
 		switch(buttonID){
 			case 1:
 				//send to main menu
-				QPanel nextScreen = new MainMenu("");
+				QPanel nextScreen = new MainMenu("", quizitReference);
 				break;
 			case 2:
 				//send to create a profile
