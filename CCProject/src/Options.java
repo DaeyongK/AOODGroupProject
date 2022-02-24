@@ -1,3 +1,8 @@
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.*;
 
 public class Options extends QPanel implements ActionListener{
@@ -21,7 +26,7 @@ public class Options extends QPanel implements ActionListener{
 		panel.addComponant(dropdown);
 		//number correct button
 		numCorrectButton = new EstablisherButton(100, 40, Color.WHITE, "Questions with number of correct answers", int buttonID);
-		numCorrecButton.addActionListener(this);
+		numCorrectButton.addActionListener(this);
 		panel.addComponant(numCorrectButton);
 		//all questions button
 		allQuestionsButton = new EstablisherButton(100, 40, Color.WHITE, "All Questions", int buttonID);
@@ -36,12 +41,13 @@ public class Options extends QPanel implements ActionListener{
 		firstLastButton.addActionListener(this);
 		panel.addComponant(firstLastButton);
 		//done button
-		TransitionButton doneButton = new TransitionButton(50, 25, Color.WHITE, "Done" 1, int buttonID);
+		TransitionButton doneButton = new TransitionButton(50, 25, Color.WHITE, "Done", 1, int buttonID);
 		doneButton.addActionListener(this);
 		panel.addComponant(doneButton);
 	}
 	
-	Options(boolean allQuestionsTrue, boolean shuffleQuestionsTrue){
+	Options(String title, boolean allQuestionsTrue, boolean shuffleQuestionsTrue){
+		super(title);
 		//sets value of allQuestions
 		if(allQuestionsTrue) {
 			allQuestions = true;
@@ -81,7 +87,6 @@ public class Options extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		super(buttonID);
 	}
 	
 	public void paintComponent(Graphics g) {

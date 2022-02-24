@@ -1,7 +1,13 @@
+import java.awt.Graphics;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JPanel;
 
 public class CreateProfile extends QPanel implements ActionListener{
 	private TransitionButton done;
 	private TransitionButton create;
+	private TransitionButton exit;
 	private CircularButton shrek;
 	private CircularButton fiona;
 	private CircularButton donkey;
@@ -12,7 +18,7 @@ public class CreateProfile extends QPanel implements ActionListener{
 		panel = new JPanel();
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
 		//exit button
-		exit = new TransitionButton(50, 25, TITLE_COLOR, "Exit", int screenID, int buttonID);
+		exit = new TransitionButton(50, 25, TITLE_COLOR, "Exit", -1, int buttonID);
 		exit.addActionListener(this);
 		panel.addComponant(exit);
 		//create button
@@ -53,7 +59,6 @@ public class CreateProfile extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		super(buttonID);
 	}
 	
 	public void paintComponent(Graphics g) {

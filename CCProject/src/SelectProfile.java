@@ -46,7 +46,7 @@ public class SelectProfile extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		super(buttonID);
+		
 	}
 	
 	public void paintComponent(Graphics g) {
