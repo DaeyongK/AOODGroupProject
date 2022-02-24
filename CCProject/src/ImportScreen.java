@@ -15,18 +15,18 @@ class ImportScreen extends QPanel implements ActionListener{
     int width = 80;
     int height = 40;
     
-    back = new TransitionButton(this, width, height, Color.WHITE, "Back", 8, 0);
+    back = new TransitionButton(this, width, height, Color.WHITE, "Back", 7, 0);
     back.setBounds(20,20, width, height);
     back.setActionCommand("back");
     back.addActionListener(this);
     
-    done = new TransitionButton(this, width, height, Color.WHITE, "Done", 8, 1);
+    done = new TransitionButton(this, width, height, Color.WHITE, "Done", 7, 1);
     done.setBounds(600,600, width, height);
     done.setActionCommand("done");
     done.addActionListener(this);
     done.setVisible(false);
     
-    chooseFile = new EstablisherButton(width, height, Color.WHITE, "Choose File", 8, 2);
+    chooseFile = new EstablisherButton(width, height, Color.WHITE, "Choose File", 7, 2);
     chooseFile.setBounds(480,560, width, height);
     chooseFile.setActionCommand("choose");
     chooseFile.addActionListener(this);
