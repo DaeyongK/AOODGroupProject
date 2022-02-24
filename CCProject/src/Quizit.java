@@ -30,9 +30,13 @@ public class Quizit {
         screen10 = new DetachDomain("Detach Domain", this);
         screen11 = new QuestionScreen("Create Question");
         screen12 = new QuestionScreen("Edit Question", this);
+        JFrame.setDefaultLookAndFeelDecorated(true);
         frame = new JFrame("Quizit");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        frame.setContentPane(screen1);
+        frame.pack();
+        frame.setSize(1280, 720);
+        frame.setVisible(true);
     }
     public Profile getProfile() {
         return currentProfile;
