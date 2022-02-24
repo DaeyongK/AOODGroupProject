@@ -20,28 +20,28 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private TransitionBtn doneBtn;
 	private TransitionBtn backBtn;
 	
-	QuestionScreen(int id) {
-		questionId = getID();
+	QuestionScreen(String t, int id) {
+		super(t);
+		questionId = new Question().getID(); //Find questionID from profile or domain
 		if (id<0) {
-			super("Create a Question");
 			ScreenId=12;
 			questionBox = new JTextField("Enter a new question here: ");
 			answerBox = new JTextField("Enter its answer here: ");
 		}
 		else {
-			//Will this set the title variable in this class to t?
-			super("Edit Question "+id);
-			ScreenId=13
+			title = "Edit Question #" + id;
+			ScreenId=13;
 			//Figure out how to access the question by ID
 			questionBox = new JTextField(getQuestion());
 			answerBox = new JTextField(getAnswer());
-			//Figure out how to access #times asked/right in profile
-			changeRight = new JTextField("Correct: "+getAnsweredRight(questionId)+" times");
-			changeAsked = new JTextField("Asked: "+getTimesAsked(questionId)+" times");
+			//Figure out how to access #times asked/right in profile class
+			changeRight = new JTextField("Correct: "+getProfile().getAnsweredRight(questionId)+" times");
+			changeAsked = new JTextField("Asked: "+getProfile().getTimesAsked(questionId)+" times");
 		}
-		
-		questionBox.setBounds(
-		answerBox.setHorizontalAlignment(JTextField.LEFT);
+		questionBox.setBounds(121,399,438,124);
+		answerBox.setBounds(720,399,438,124);
+		changeRight.setBounds(953,161,283,56);
+		changeAsked.setBounds(953,242,283,56);
 		attachGraphic = new EstablisherBtn(161,44,Color.BLACK,"Attach",0);
 		detachGraphic = new EstablisherBtn(161,44,Color.BLACK,"Detach",1);
 		doneBtn = new TransitionBtn(175,134,Color.BLACK,"Done",2);
@@ -51,13 +51,14 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		return id;
 	}
 	public boolean popup(String text) {
-		if(text.equals("AttachGraphics")) { 
+		if(text.equals("Attach Graphics")) { 
 			
 		}
+		
 	}
 	public void buttonClicked(int buttonID) {
 		if(buttonID == 0) {
-			popup("Attach Graphics")
+			popup("Attach Graphics");
 		}
 		else if(buttonID == 1) {
 			
@@ -79,14 +80,15 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		
 	}
 	public void paintComponent(Graphics g) {
-		g.setColor(BACKGROUND_COLOR);
-		g.drawRectangle(0,0,1280,720);
 		g.setColor(TITLE_COLOR);
 		g.setFont(font);
-		g.drawString(title, 300, 50);
+		if (title.equals("Create a Question"))
+			g.drawString(title,690,86);
+		else
+			g.drawString(title,465,86);
 		g.setColor(Color.WHITE);
-		g.drawRect(x,y,width,height);//Go in paint.net
-		g.drawString("No Graphic Preview",);//in middle of preview box
+		g.drawRect(121,160,438,166);
+		g.drawString("No Graphic Preview",216,218);
 	}
 	public static void main(String[] arg) {
 		new QuestionScreen();
