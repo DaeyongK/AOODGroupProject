@@ -14,12 +14,13 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 	private EstablisherButton back;
 	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
 	private QPanel thisScreen;
+	private int currentQID = 0;
 
 	//for dragging and dropping.
-	EstablisherButton beingDragged = new EstablisherButton(0,0,Color.WHITE,””,-2);
-	EstablisherButton aboveSpot = new EstablisherButton(0,0,Color.WHITE,””,-2);
-	int draggedIndex = -1;
-	int droppedIndex = -1;
+	private EstablisherButton beingDragged = new EstablisherButton(0,0,Color.WHITE,””,-2);
+	private EstablisherButton aboveSpot = new EstablisherButton(0,0,Color.WHITE,””,-2);
+	private int draggedIndex = -1;
+	private int droppedIndex = -1;
 	
 	public EditDomain(Domain d, String t){
 		super(t);
@@ -54,7 +55,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			final int workaround = i;
 			buttons.get(i).addMouseMotionListener(new MouseMotionListener() {
 				public void mouseDragged(MouseEvent e) {
-					beingDragged = e.getSource();
+					beingDragged = (EstablisherButton) e.getSource();
 					draggedIndex = workaround;
 				}
 				public void mouseMoved(MouseEvent e) {
@@ -69,7 +70,8 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 						buttons.get(workaround).add(editQ);
 						deleteQ = new EstablisherButton(25, 15, QPanel.TITLE_COLOR, “Delete”, 9, 21);
 						buttons.get(workaround).add(deleteQ);
-						currentQID = e.getSource().getID(); //this should return button ID, which is the same as the ID of the question on it
+						EstablisherButton currentB = (EstablisherButton) e.getSource();
+						currentQID = currentB.getID(); //this should return button ID, which is the same as the ID of the question on it
 					} else if(e.getClickCount()==2) {
 						QPanel goScreen = thisScreen;
 						goScreen = new QuestionScreen(e.getSource().getID,false);
@@ -82,12 +84,12 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 					// for when you’re done dragging
 					JButton b = (JButton) e.getSource();
 					if(b.getParent().equals(insideScroll)&&draggedIndex>-1){
-						aboveSpot = (EstablisherButton) e.getSource;
+						aboveSpot = (EstablisherButton) e.getSource();
 						buttons.remove(draggedIndex);
 						buttons.add(droppedIndex,beingDragged);
 						insideScroll.removeAll();
-						for(int i=0;i<butt.size();i++) {
-							insideScroll.add(butt.get(i));
+						for(int i=0;i<buttons.size();i++) {
+							insideScroll.add(buttons.get(i));
 						}
 						insideScroll.revalidate();
 						insideScroll.repaint();
@@ -192,7 +194,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 				break;
 		}
 	}
-	public void getName(){
+	public String getName(){
 		return currentDomain.getDomainName();
 	}
 	
