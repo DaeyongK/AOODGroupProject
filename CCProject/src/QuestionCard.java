@@ -23,12 +23,12 @@ public class QuestionCard extends QPanel{
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 		
 		//make text boxes 
-		askedNumTimesText= new JLabel("Asked: "+title+ " times");
-		correctNumTimesText= new JLabel("Correct: "+title+ " times");
-		answerText= new JLabel("Insert answer here");
+		askedNumTimesText= new JLabel("Asked: "+profile.getTimesAsked(currentQ.getID())+ " times");
+		correctNumTimesText= new JLabel("Correct: "+profile.getAnsweredRight(currentQ.getID())+ " times");
+		answerText= new JLabel(currentQ.getAnswer());
 		answerText.setEnabled(false);
-		questionText = new JLabel("Insert question here");		
-		domainNameText = new JLabel("Current Domain: "+"insert domain name getter here");
+		questionText = new JLabel(currentQ.getQuestion());		
+		domainNameText = new JLabel("Current Domain: "+quizit.getDomain().getDomainName());
 		
 		//make buttons
 		editQuestBtn = new TransitionButton(this, 100,50, Color.white, "Edit Question", 12,5);
@@ -61,6 +61,16 @@ public class QuestionCard extends QPanel{
 		contentPane.add(notKnewAnsBtn);
 		contentPane.add(nextQuestBtn);
 		contentPane.add(editQuestBtn);
+		contentPane.add(delQuestBtn);
+		contentPane.add(yesDelQuestBtn);
+		contentPane.add(noDelQuestBtn);
+		contentPane.add(backBtn);
+		
+		contentPane.add(askedNumTimesText);
+		contentPane.add(correctNumTimesText);
+		contentPane.add(answerText);
+		contentPane.add(questionText);
+		contentPane.add(domainNameText);
 	}
 	
 	public int getScreenID() {

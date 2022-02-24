@@ -39,7 +39,7 @@ public class Domain {
 		return questions.get(numQ);
 	}
 
-	Domain(File file) {
+	Domain(File file, Quizit quiz) {
 		
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -58,7 +58,7 @@ public class Domain {
 			for (int itr = 0; itr < qs.getLength(); itr++) {
 				Node question = qs.item(itr);
 				Element q = (Element) question;
-				questions.add(new Question(q.getElementsByTagName("Question"+(itr+1)).item(0).getTextContent()	,q.getElementsByTagName("Answer"+(itr+1)).item(0).getTextContent()));
+				questions.add(new Question(q.getElementsByTagName("Question"+(itr+1)).item(0).getTextContent()	,q.getElementsByTagName("Answer"+(itr+1)).item(0).getTextContent(), quiz));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
