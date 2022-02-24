@@ -46,6 +46,7 @@ public class Profile {
     public ArrayList<Domain> getDomains() {
         return domains;
     }
+    public LinkedHashMap<Integer, int[]> getHashMap() {return questions;}
     public void detachDomain(Domain domain) {
         boolean notRemoved = true;
         int i = 0;

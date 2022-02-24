@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<profiles>
+    <profile>
+        <profileName>Default Profile</profileName>
+        <threshold>5</threshold>
+        <image>1</image>
+        <order>false</order>
+        <allQuestions>true</allQuestions>
+        <questions>
+        </questions>
+        <domains>
+        </domains>
+    </profile>
+</profiles>

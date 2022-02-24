@@ -1,5 +1,13 @@
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+import org.w3c.dom.Node;
+import org.w3c.dom.NodeList;
+
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 import java.awt.*;
+import java.io.File;
 import java.util.*;
 public class Quizit {
     private Profile currentProfile;
@@ -10,7 +18,7 @@ public class Quizit {
     private SelectProfile screen2;
     private CreateProfile screen3;
     private Options screen4;
-    private SelectDomains screen5;
+    private SelectDomain screen5;
     private QuestionCard screen6;
     private ImportScreen screen7;
     private EditDomain screen8;
@@ -18,6 +26,9 @@ public class Quizit {
     private DetachDomain screen10;
     private QuestionScreen screen11, screen12;
     Quizit() {
+        for(int i = 0; i < )
+
+
         screen1 = new MainMenu("", this);
         screen2 = new SelectProfile("Select Profile", this);
         screen3 = new CreateProfile("Create Profile", this);
