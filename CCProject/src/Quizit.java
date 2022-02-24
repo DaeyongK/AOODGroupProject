@@ -1,12 +1,4 @@
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.*;
 import java.io.File;
 import java.util.*;
 public class Quizit {
@@ -26,9 +18,11 @@ public class Quizit {
     private DetachDomain screen10;
     private QuestionScreen screen11, screen12;
     Quizit() {
-        for(int i = 0; i < )
-
-
+        File[] profilexmls = new File("CCProject/Profiles").listFiles();
+        for(File file : profilexmls) {
+            profiles.add(new Profile(file));
+        }
+        currentProfile = profiles.get(0);
         screen1 = new MainMenu("", this);
         screen2 = new SelectProfile("Select Profile", this);
         screen3 = new CreateProfile("Create Profile", this);
@@ -73,5 +67,7 @@ public class Quizit {
     public void setDomain(Domain domain) {
         currentDomain = domain;
     }
-
+    public void changeScreen(int screenID) {
+        //bunch of switch statements;
+    }
 }
