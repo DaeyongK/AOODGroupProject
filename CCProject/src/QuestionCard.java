@@ -1,29 +1,39 @@
+import java.awt.Color;
 import java.awt.image.*;
 
+import javax.swing.BoxLayout;
+import javax.swing.JPanel;
+
 public class QuestionCard extends QPanel{
-	QuestionCard(String t) {
-		super(t);
-		// TODO Auto-generated constructor stub
-	}
 	String question;
 	String answer;
 	EstablisherButton ansBtn;
 	EstablisherButton knewAnsBtn;
 	EstablisherButton notKnewAnsBtn;
 	EstablisherButton nextQuesBtn;
+	TransitionButton editQuestBtn;
 	BufferedImage questImage;
-	@Override
+	
+	QuestionCard(String t) {
+		super(t);
+		JPanel pane = new JPanel();
+		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+	}
+	
 	public int getScreenID() {
-		// TODO Auto-generated method stub
 		return 6;
 	}
-	@Override
+	
 	public boolean popup(String text) {
 		// TODO Auto-generated method stub
 		return false;
 	}
-	@Override
+
 	public void buttonClicked(int buttonID) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void buttonClicked(int width, int height, Color color, String text, int screenID, int buttonID) {
 		// TODO Auto-generated method stub
 		
 	}

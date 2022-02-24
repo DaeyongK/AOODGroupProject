@@ -13,6 +13,8 @@ import java.util.*;
 import org.w3c.dom.Attr;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
+import org.w3c.dom.NamedNodeMap;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.DocumentBuilder;
 import org.w3c.dom.Document;
@@ -24,7 +26,7 @@ import java.io.File;
 
 public class Domain {
 	ArrayList<Question> questions = new ArrayList<Question>();
-	String domainName;
+	String domainName="";
 
 	Domain(String name, ArrayList<Question> quest) {
 		domainName = name;
@@ -38,46 +40,25 @@ public class Domain {
 	}
 
 	Domain(File file) {
-		// import questions from xml file into each element of the array list questions
-		/*
-		 * 
-		 * DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-		 * DocumentBuilder db = dbf.newDocumentBuilder(); Document doc = db.parse(xml);
-		 * doc.getDocumentElement().normalize(); Node profile =
-		 * doc.getElementsByTagName("profile").item(0); Element pf = (Element) profile;
-		 * NodeList qs = doc.getElementsByTagName("question"); for(int i = 0; i <
-		 * qs.getLength(); i++) { Node question = qs.item(i); Element q = (Element)
-		 * question;
-		 * questions.put(Integer.parseInt(q.getElementsByTagName("id").item(0).
-		 * getTextContent()), new int[]
-		 * {Integer.parseInt(q.getElementsByTagName("numRight").item(0).getTextContent()
-		 * ),
-		 * Integer.parseInt(q.getElementsByTagName("numAsked").item(0).getTextContent())
-		 * }); } NodeList ds = doc.getElementsByTagName("domainPath"); for(int i = 0; i
-		 * < ds.getLength(); i++) { String domain = ds.item(i).getTextContent();
-		 * domains.add(new Domain(new File(domain))); } } catch (Exception e) {}
-		 */
+		
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
 			Document doc = db.parse(file);
 			doc.getDocumentElement().normalize();
-			System.out.println(getDomainName() + doc.getDocumentElement().getNodeName());
-			NodeList nodeList = doc.getElementsByTagName("student");
-			// nodeList is not iterable, so we are using for loop
-			for (int itr = 0; itr < nodeList.getLength(); itr++) {
-				Node node = nodeList.item(itr);
-				System.out.println("\nNode Name :" + node.getNodeName());
-				if (node.getNodeType() == Node.ELEMENT_NODE) {
-					Element eElement = (Element) node;
-					System.out.println("Student id: " + eElement.getElementsByTagName("id").item(0).getTextContent());
-					System.out.println(
-							"First Name: " + eElement.getElementsByTagName("firstname").item(0).getTextContent());
-					System.out.println(
-							"Last Name: " + eElement.getElementsByTagName("lastname").item(0).getTextContent());
-					System.out.println("Subject: " + eElement.getElementsByTagName("subject").item(0).getTextContent());
-					System.out.println("Marks: " + eElement.getElementsByTagName("marks").item(0).getTextContent());
-				}
+			NodeList dN1 = doc.getElementsByTagName("domain");
+			Node domain= dN1.item(0);
+			Element dom = (Element) domain;
+			NamedNodeMap nnm = dom.getAttributes();
+			Node dName = nnm.item(0);
+			String dNameHolder = dName.getTextContent();
+			domainName = dNameHolder.replace('-', ' ');
+			NodeList qs = doc.getElementsByTagName("question");
+			
+			for (int itr = 0; itr < qs.getLength(); itr++) {
+				Node question = qs.item(itr);
+				Element q = (Element) question;
+				questions.add(new Question(q.getElementsByTagName("Question"+(itr+1)).item(0).getTextContent()	,q.getElementsByTagName("Answer"+(itr+1)).item(0).getTextContent()));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -101,54 +82,51 @@ public class Domain {
 	}
 
 	public String getDomainName() {
-		return "Name"+domainName;
+		return domainName;
 	}
 
 	public static final String xmlFilePath = "Domains/test.xml";
 
 	public File export() {
-
 		try {
 			DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
 			Document document = documentBuilder.newDocument();
-
-			// root element
+			
 			Element root = document.createElement("domain");
 			document.appendChild(root);
 
-			Element name = document.createElement(getDomainName());
-			root.appendChild(name);
-
+			String newDomainName=getDomainName().replace(' ', '-');
+			
+			Attr dname = document.createAttribute("DomainName");
+			dname.setTextContent(newDomainName);
+			root.setAttributeNode(dname);
+			
 			for (int i = 0; i < this.questions.size(); i++) {
 				Element question = document.createElement("question");
-				name.appendChild(question);
+				root.appendChild(question);
 
 				Element id = document.createElement("id");
 				id.setTextContent(this.questions.get(0).getID() + "");
 				question.appendChild(id);
 
-				Element ques = document.createElement("Question" + i);
+				Element ques = document.createElement("Question" +(i+1));
 				ques.setTextContent(questions.get(i).getQuestion());
 				question.appendChild(ques);
 
-				Element ans = document.createElement("Answer" + i);
+				Element ans = document.createElement("Answer" + (i+1));
 				ans.setTextContent(questions.get(i).getAnswer());
 				question.appendChild(ans);
 
 				Element image = document.createElement("QuestionGraphic");
+				image.setTextContent(questions.get(i).getGraphicPath());
+				question.appendChild(image);
 			}
 
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
 			StreamResult streamResult = new StreamResult(new File(xmlFilePath));
-
-			// If you use
-			// StreamResult result = new StreamResult(System.out);
-			// the output will be pushed to the standard output ...
-			// You can use that for debugging
-
 			transformer.transform(domSource, streamResult);
 			System.out.println("Done creating XML File");
 			return new File(xmlFilePath);
