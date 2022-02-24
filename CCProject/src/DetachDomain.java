@@ -4,8 +4,8 @@ import javax.swing.JOptionPane;
 
 public class DetachDomain extends DomainScreen{
 
-	DetachDomain(String t) {
-		super(t);
+	DetachDomain(String t, Quizit quizit) {
+		super(t, quizit);
 		exit = new TransitionButton(100, 50, TITLE_COLOR, "Exit", -1, 1);
 		// TODO Auto-generated constructor stub
 	}
@@ -40,9 +40,8 @@ public class DetachDomain extends DomainScreen{
 	public void buttonClicked(int buttonID) {
 		if(buttonID != -1 ) {
 			if(popup("Are you sure?")) {
-				Quizit gimmeDomains = new Quizit();
-				ArrayList<Domain> domains = gimmeDomains.getProfile.getDomains();
-				gimmeDomains.getProfile.detachDomain(domains.get(buttonID));
+				ArrayList<Domain> domains = quizit.getProfile.getDomains();
+				quizit.getProfile.detachDomain(domains.get(buttonID));
 			}
 		}else {
 			quizit.changeScreen(1);
