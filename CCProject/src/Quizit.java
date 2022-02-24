@@ -5,7 +5,7 @@ public class Quizit {
     private Question currentQuestion;
     private Domain currentDomain;
     private Profile[] allProfiles;
-    private
+    
     Quizit() {
         MainMenu screen1 = new MainMenu("Main Menu");
         SelectProfile screen2 = new SelectProfile("Select Profile");
