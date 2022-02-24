@@ -13,28 +13,32 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 	private JPanel insideScroll;
 	private EstablisherButton back;
 	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
+	ArrayList<EstablisherButton> buttonsWorkaround = new ArrayList<EstablisherButton>();
 	private QPanel thisScreen;
 	private int currentQID = 0;
 
 	//for dragging and dropping.
-	private EstablisherButton beingDragged = new EstablisherButton(0,0,Color.WHITE,””,-2);
-	private EstablisherButton aboveSpot = new EstablisherButton(0,0,Color.WHITE,””,-2);
+	private EstablisherButton beingDragged = new EstablisherButton(this,0,0,Color.WHITE,””,-2);
+	private EstablisherButton aboveSpot = new EstablisherButton(this,0,0,Color.WHITE,””,-2);
 	private int draggedIndex = -1;
 	private int droppedIndex = -1;
+	private EstablisherButton currentButton;
 	
-	public EditDomain(Domain d, String t){
+	public EditDomain(String t, Quizit q){
 		super(t);
-		currentDomain = d;
+		currentDomain = q.getDomain();
 		//for use outside the constructor
 		thisScreen = this;
 		//exit button
-		back = new EstablisherButton(40, 20, Color.WHITE, “Back”, 13)
+		back = new EstablisherButton(this,40, 20, Color.WHITE, “Back”, 13);
+		back.addActionListener(this);
+		this.add(back);
 		//text for name, size 70 height
-		nameEdit = new JTextField(d.getDomainName());
+		nameEdit = new JTextField(currentDomain.getDomainName());
 		nameEdit.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				if(nameEdit.getText()==""||nameEdit.getText().length()>64)
-					nameEdit.setText(d.getDomainName());
+				if(nameEdit.getText().equals(“”)||nameEdit.getText().length()>64)
+					nameEdit.setText(currentDomain.getDomainName());
 			}
 		});
 		this.add(nameEdit);
@@ -44,10 +48,11 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 		questions.setLayout(new ScrollPaneLayout());
 		//the jpanel and the questions
 		insideScroll = new JPanel();
+		insideScroll.setBackground(QPanel.TITLE_COLOR);
 		insideScroll.setLayout(new BoxLayout(insideScroll,BoxLayout.Y_AXIS));
-		for(int i=0;i<d.getDomainSize();i++){
-			buttons.add(new EstablisherButton(850, 25, Color.WHITE,
-				d.getQuestion(i).getQuestion(),d.getQuestion(i).getID());
+		for(int i=0;i<currentDomain.getDomainSize();i++){
+			buttons.add(new EstablisherButton(this,850, 25, Color.WHITE,
+				currentDomain.getQuestion(i).getQuestion(),currentDomain.getQuestion(i).getID());
 			insideScroll.add(buttons.get(i));
 		}
 		//mouse listeners
@@ -65,13 +70,13 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			buttons.get(i).addMouseListener(new MouseListener() {
 				public void mouseClicked(MouseEvent e) {
 					if(e.getClickCount()==1) {
-						editQ = new TransitionButton(25, 15, QPanel.TITLE_COLOR,
-							“Edit”, 13, 22);
+						currentButton = (EstablisherButton) e.getSource();
+						editQ = new TransitionButton(thisScreen,25, 15, QPanel.TITLE_COLOR,“Edit”, 12, 22);
 						buttons.get(workaround).add(editQ);
-						deleteQ = new EstablisherButton(25, 15, QPanel.TITLE_COLOR, “Delete”, 9, 21);
+						deleteQ = new EstablisherButton(thisScreen,25, 15, QPanel.TITLE_COLOR, “Delete”, 9, 21);
 						buttons.get(workaround).add(deleteQ);
 						EstablisherButton currentB = (EstablisherButton) e.getSource();
-						currentQID = currentB.getID(); //this should return button ID, which is the same as the ID of the question on it
+						currentQID = currentB.getID();
 					} else if(e.getClickCount()==2) {
 						QPanel goScreen = thisScreen;
 						goScreen = new QuestionScreen(e.getSource().getID,false);
@@ -86,7 +91,21 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 					if(b.getParent().equals(insideScroll)&&draggedIndex>-1){
 						aboveSpot = (EstablisherButton) e.getSource();
 						buttons.remove(draggedIndex);
-						buttons.add(droppedIndex,beingDragged);
+						//needs to be tested; reworking array list
+						for(int i=0;i<=droppedIndex;i++){
+							if(i!=draggedIndex)
+								buttonsWorkaround.add(buttons.get(i));
+						}
+						for(int i=droppedIndex+1;i<buttons.size();i++){
+							if(i==droppedIndex+1)
+								buttonsWorkaround.add(buttons.get(draggedIndex);
+							else
+								buttonsWorkaround.add(buttons.get(i);
+						}
+						for(int i=0;i<buttonsWorkaround.size();i++){
+							buttons.get(i) = buttonsWorkaround.get(i);
+						}
+						//end needs to be tested; reworking array list
 						insideScroll.removeAll();
 						for(int i=0;i<buttons.size();i++) {
 							insideScroll.add(buttons.get(i));
@@ -108,10 +127,12 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 		this.add(questions);
 		
 		//save button
-		save = new TransitionButton(35, 25, Color.WHITE, “Save”, 5, 11);
+		save = new TransitionButton(this,35, 25, Color.WHITE, “Save”, 5, 11);
+		save.addActionListener(this);
 		this.add(save);
 		//create new question button
-		createNewQ = new TransitionButton(100, 25, Color.WHITE, “Create New Question”, 12, 12);
+		createNewQ = new TransitionButton(this,100, 25, Color.WHITE, “Create New Question”, 11, 12);
+		createNewQ.addActionListener(this);
 		this.add(createNewQ);
 	}
 	
@@ -125,14 +146,14 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 		pop.add(message);
 		//determining which popup to display, displaying it
 		if(text.includes(“leave”){
-			TransitionButton yes = new TransitionButton(40,25,Color.WHITE,”Yes”,5,31);
+			TransitionButton yes = new TransitionButton(thisScreen,40,25,Color.WHITE,”Yes”,5,31);
 			yes.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					return true;
 				}
 			});
 			pop.add(yes);
-			EstablisherButton no = new EstablisherButton(40,25,Color.WHITE,”No”,32);
+			EstablisherButton no = new EstablisherButton(thisScreen,40,25,Color.WHITE,”No”,32);
 			no.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
@@ -141,7 +162,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			});
 			pop.add(no);
 		} else{
-			EstablisherButton yes = new EstablisherButton(40,25,Color.WHITE,”Yes”,31);
+			EstablisherButton yes = new EstablisherButton(thisScreen,40,25,Color.WHITE,”Yes”,31);
 			yes.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
@@ -149,7 +170,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 				}
 			});
 			pop.add(yes);
-			EstablisherButton no = new EstablisherButton(40,25,Color.WHITE,”No”,32);
+			EstablisherButton no = new EstablisherButton(thisScreen,40,25,Color.WHITE,”No”,32);
 			no.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
@@ -161,7 +182,6 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 		thisScreen.add(pop);
 	}
 	public void buttonClicked(int buttonID){
-		QPanel nextScreen = thisScreen;
 		switch(buttonID){
 			case 11:
 				//read the screen, finalize changes, go to select domain(5)
@@ -170,27 +190,49 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 				for(int i=0;i<buttons.size();i++)
 					currentDomain.deleteQuestion(buttons.get(i).getID());
 				for(int i=0;i<buttons.size();i++)
-					currentDomain..addQuestion(buttons.get(i));
+					currentDomain.addQuestion(buttons.get(i));
 				//end reordering
-				nextScreen = new SelectDomain(“”);
+				theQuizit.changeScreen(5);
 				break;
 			case 12:
-				//go to create question for a blank question(12)
-				nextScreen = new QuestionScreen(-1,true);
+				//go to create question for a blank question(11)
+				theQuizit.changeScreen(11);
 				break;
 			case 13:
 				if(popup(“Are you sure you want to leave?\n(Changes may not be saved)")){
-					nextScreen = new SelectDomain(“”);
+					theQuizit.changeScreen(5);
 				}
 				break;
 			case 21:
 				if(popup(“Delete Question\n\nAre you sure?”)){
 					currentDomain.deleteQuestion(currentQID);
-					insideScroll.remove(); //figure out how to determine what to remove
+					insideScroll.remove(currentButton);
+					buttons.remove(currentButton);
+					//needs to be tested; reworking array list
+					for(int i=0;i<=droppedIndex;i++){
+					if(i!=draggedIndex)
+						buttonsWorkaround.add(buttons.get(i));
+					}
+					for(int i=droppedIndex+1;i<buttons.size();i++){
+						if(i==droppedIndex+1)
+							buttonsWorkaround.add(buttons.get(draggedIndex);
+						else
+							buttonsWorkaround.add(buttons.get(i);
+					}
+					for(int i=0;i<buttonsWorkaround.size();i++){
+						buttons.get(i) = buttonsWorkaround.get(i);
+					}
+					//end needs to be tested; reworking array list
+					insideScroll.removeAll();
+					for(int i=0;i<buttons.size();i++) {
+						insideScroll.add(buttons.get(i));
+					}
+					insideScroll.revalidate();
+					insideScroll.repaint();
 				}
 				break;
 			case 22:
-				nextScreen = new QuestionScreen(buttonID,false);
+				theQuizit.changeScreen(12);
 				break;
 		}
 	}
