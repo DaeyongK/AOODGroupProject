@@ -6,7 +6,7 @@ public class DetachDomain extends DomainScreen{
 
 	DetachDomain(String t, Quizit quizit) {
 		super(t, quizit);
-		exit = new TransitionButton(100, 50, TITLE_COLOR, "Exit", -1, 1);
+		exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", -1, 1);
 		// TODO Auto-generated constructor stub
 	}
 

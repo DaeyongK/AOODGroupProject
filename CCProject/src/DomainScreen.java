@@ -12,7 +12,7 @@ public abstract class DomainScreen extends QPanel{
 		Quizit gimmeDomains = new Quizit();
 		domains = gimmeDomains.getProfile.getDomains();
 		for(int i = 0; i< domains.size();i++) {
-			domainButtons.add(new EstablisherButton(800, 50,Color.white,domains.get(i).getDomainName(),i));
+			domainButtons.add(new EstablisherButton(this, 800, 50,Color.white,domains.get(i).getDomainName(),i));
 		}
 	
 		for(EstablisherButton button : domainButtons) {

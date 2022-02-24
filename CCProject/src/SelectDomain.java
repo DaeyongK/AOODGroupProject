@@ -10,10 +10,10 @@ public class SelectDomain extends DomainScreen implements MouseListener{
 	EstablisherButton launch, edit,delete;
 	SelectDomain(String input, Quizit quizit) {
 		super(input, quizit);
-		exit = new TransitionButton(100, 50, TITLE_COLOR, "Exit", -1, 1);
-		launch = new EstablisherButton(100, 50, Color.WHITE, "Launch", -2);
-		edit = new EstablisherButton(100, 50, Color.WHITE, "Edit", -3);
-		delete = new EstablisherButton(100, 50, Color.WHITE, "Delete", -4);
+		exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", -1, 1);
+		launch = new EstablisherButton(this, 100, 50, Color.WHITE, "Launch", -2);
+		edit = new EstablisherButton(this, 100, 50, Color.WHITE, "Edit", -3);
+		delete = new EstablisherButton(this, 100, 50, Color.WHITE, "Delete", -4);
 		launch.setEnabled(false);
 		edit.setEnabled(false);
 		delete.setEnabled(false);
