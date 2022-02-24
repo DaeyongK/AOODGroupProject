@@ -87,6 +87,9 @@ public class Options extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
+		if(buttonID == 1) {
+			//send to main menu screen
+		}
 	}
 	
 	public void paintComponent(Graphics g) {

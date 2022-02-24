@@ -59,6 +59,14 @@ public class CreateProfile extends QPanel implements ActionListener{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
+		switch(buttonID){
+		case -1:
+			//exit app
+			break;
+		case 4:
+			//send to options
+	    	break;
+		}
 	}
 	
 	public void paintComponent(Graphics g) {
