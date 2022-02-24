@@ -40,8 +40,8 @@ public class DetachDomain extends DomainScreen{
 	public void buttonClicked(int buttonID) {
 		if(buttonID != -1 ) {
 			if(popup("Are you sure?")) {
-				ArrayList<Domain> domains = quizit.getProfile.getDomains();
-				quizit.getProfile.detachDomain(domains.get(buttonID));
+				ArrayList<Domain> domains = quizit.getProfile().getDomains();
+				quizit.getProfile().detachDomain(domains.get(buttonID));
 			}
 		}else {
 			quizit.changeScreen(1);

@@ -184,32 +184,34 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				break;
 			case 1:
 				if(popup("DetachGraphic\n\nAre you sure?")) {
-					questionID.detachImage();
+					question.detachImage();
 				}
 				else
-					setImage
+					question.setImage();
 				break;
 			case 2:
 				//DoneBtn
 				//Checks if all textfields are entered
 				if (edit) {
-					if (questionBox.getText()!=null &&
-						answerBox.getText()!=null &&
-						(((changeRight.getText()!=null&&((int)changeRight.getText()>=0)) &&
-						(changeAsked.getText()!=null&&((int)changeAsked.getText()>=0))) &&
-						(int)changeRight.getText()<=(int)changeAsked.getText()) {
-						//Accesses the question ID
-						setQuestion(questionBox.getText());
-						setAnswer(answerBox.getText());
-						setNumCorrect(questionID,(int)changeRight.getText());
-						setNumAsked(quetionID,(int)changeAsked.getText());
+					if (!questionBox.getText().equals("") && 
+					    !answerBox.getText().equals("") &&
+					    !changeRight.getText().equals("") &&
+					    ((int)changeRight.getText()>=0)) &&
+						changeAsked.getText().equals("") &&
+						((int)changeAsked.getText()>=0)) &&
+						(((int)changeRight.getText())<=((int)changeAsked.getText()))) {
+						
+						question.setQuestion(questionBox.getText());
+						question.setAnswer(answerBox.getText());
+						profile.setNumCorrect(questionId,(int)changeRight.getText());
+						profile.setNumAsked(quetionId,(int)changeAsked.getText());
 					}
 				}
 				else
-					if (questionBox!=null && answerBox!=null) {
-						//Accesses the question ID
-						questionID.setQuestion(questionBox.getText());
-						questionID.setAnswer(answerBox.getText());
+					if (!questionBox.getText().equals("") && 
+					    !answerBox.getText().equals("")) {
+						question.setQuestion(questionBox.getText());
+						question.setAnswer(answerBox.getText());
 					}
 				break;
 			case 3:

@@ -16,9 +16,13 @@ public class CreateProfile extends QPanel implements ActionListener{
 	private CircularButton donkey;
 	private JTextField textField;
 	private JPanel panel;
+	private Quizit quizitReference;
+	private int imageIndex;
+	private String profileName;
 	
 	public CreateProfile(String title, Quizit q){
 		super(title, q);
+		quizitReference = q;
 		panel = new JPanel();
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
 		//exit button
@@ -27,6 +31,7 @@ public class CreateProfile extends QPanel implements ActionListener{
 		panel.add(exit);
 		//text field
 		textField = new JTextField();
+		textField.setSize(70, 5);
 		textField.addActionListener(this);
 		panel.add(textField);
 		//create button
@@ -68,26 +73,32 @@ public class CreateProfile extends QPanel implements ActionListener{
 		// TODO Auto-generated method stub
 		switch(buttonID){
 		case 1:
-			//exit app
+			//move to options
+			Profile createdProfile = new Profile("", imageIndex);
+			QPanel nextScreen = new Options("", quizitReference);
+			break;
+		case 2:
+			//selects shrek
+			imageIndex = 1;
+			break;
+		case 3:
+			//selects fiona
+			imageIndex = 2;
+			break;
+		case 4:
+			//selects donkey
+			imageIndex = 3;
 			break;
 		case 5:
-			//send to options
+			//exit button
+			nextScreen = new MainMenu("");
 	    	break;
 		}
 	}
 	
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(TITLE_COLOR);
-	}
-	
 	public void actionPerformed(ActionEvent e){
-		//when exit is pressed
-		//when create is pressed
-		//when textbox is pressed
-		//when pfp1 is clicked
-		//when pfp2 is clicked
-		//when pfp3 is clicked
+		String string1 = textField.getText();
+		profileName = string1;
 	}
 
 }
