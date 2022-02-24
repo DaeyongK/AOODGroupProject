@@ -10,23 +10,23 @@ public class SelectProfile extends QPanel implements ActionListener{
 	private TransitionButton createNewProfileButton;
 	private JPanel panel;
 	
-	SelectProfile(String title){
-		super(title);
+	SelectProfile(String title, Quizit q){
+		super(title, q);
 		panel = new JPanel();
 		profiles = new ArrayList<Profile>();
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
 		//scroll pane
 		scrollable = new JScrollPane();
-		scrollable.addActionListener(this);
-		panel.addComponant(scrollable);
+		scrollable.addMouseListener(this);
+		panel.add(scrollable);
 		//done button
-		done = new TransitionButton(50, 25, Color.WHITE, "Done", 1, int buttonID);
+		done = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 1);
 		done.addActionListener(this);
-		panel.addComponant(done);
+		panel.add(done);
 		//create profile button
-		createNewProfileButton = new TransitionButton(75, 35, Color.WHITE, "Create New Profile", 3, int buttonID);
+		createNewProfileButton = new TransitionButton(this, 75, 35, Color.WHITE, "Create New Profile", 3, 2);
 		createNewProfileButton.addActionListener(this);
-		panel.addComponant(createNewProfile);
+		panel.add(createNewProfileButton);
 	}
 	
 	public void radioClick() {
@@ -50,9 +50,12 @@ public class SelectProfile extends QPanel implements ActionListener{
 			case 1:
 				//send to main menu
 				break;
-			case 3:
+			case 2:
 				//send to select a profile
 		    	break;
+		}
+		if(buttonID > 2) {
+			
 		}
 	}
 	

@@ -1,8 +1,11 @@
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class CreateProfile extends QPanel implements ActionListener{
 	private TransitionButton done;
@@ -11,34 +14,38 @@ public class CreateProfile extends QPanel implements ActionListener{
 	private CircularButton shrek;
 	private CircularButton fiona;
 	private CircularButton donkey;
+	private JTextField textField;
 	private JPanel panel;
 	
-	public CreateProfile(String title){
-		super(title);
+	public CreateProfile(String title, Quizit q){
+		super(title, q);
 		panel = new JPanel();
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
 		//exit button
-		exit = new TransitionButton(50, 25, TITLE_COLOR, "Exit", -1, int buttonID);
+		exit = new TransitionButton(this, 50, 25, TITLE_COLOR, "Exit", -1, 5);
 		exit.addActionListener(this);
-		panel.addComponant(exit);
+		panel.add(exit);
+		//text field
+		textField = new JTextField();
+		textField.addActionListener(this);
+		panel.add(textField);
 		//create button
-		create = new TransitionButton(50, 25, Color.WHITE, "Create", 4, int buttonID);
+		create = new TransitionButton(this, 50, 25, Color.WHITE, "Create", 4, 1);
 		create.addActionListener(this);
-		panel.addComponant(create);
+		panel.add(create);
 		//shrek pfp
 		shrek = new CircularButton();
 		shrek.addActionListener(this);
-		panel.addComponant(shrek);
+		panel.add(shrek);
 		//fiona pfp
 		fiona = new CircularButton();
 		fiona.addActionListener(this);
-		panel.addComponant(fiona);
+		panel.add(fiona);
 		//donkey pfp
-		donkey = new CircuarButton();
+		donkey = new CircularButton();
 		donkey.addActionListener(this);
-		panel.addComponant(donkey);
+		panel.add(donkey);
 		//setup
-		super(title);
 		this.setLayout(new BorderLayout());
 	}
 	
@@ -60,10 +67,10 @@ public class CreateProfile extends QPanel implements ActionListener{
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
 		switch(buttonID){
-		case -1:
+		case 1:
 			//exit app
 			break;
-		case 4:
+		case 5:
 			//send to options
 	    	break;
 		}
@@ -79,7 +86,7 @@ public class CreateProfile extends QPanel implements ActionListener{
 		//when create is pressed
 		//when textbox is pressed
 		//when pfp1 is clicked
-		//when pfp2 is cicked
+		//when pfp2 is clicked
 		//when pfp3 is clicked
 	}
 
