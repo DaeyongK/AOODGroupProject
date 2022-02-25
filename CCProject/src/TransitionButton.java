@@ -20,6 +20,12 @@ public class TransitionButton extends QButton implements ActionListener{
 		addActionListener(this);
 		screenId = screenID;
 	}
+	public int getButtonID(){
+		return buttonId;
+	}
+	public int getScreenID(){
+		return screenId;
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub

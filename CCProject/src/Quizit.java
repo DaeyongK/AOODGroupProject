@@ -1,12 +1,4 @@
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
-
 import javax.swing.*;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.awt.*;
 import java.io.File;
 import java.util.*;
 public class Quizit {
@@ -26,9 +18,11 @@ public class Quizit {
     private DetachDomain screen10;
     private QuestionScreen screen11, screen12;
     Quizit() {
-        for(int i = 0; i < )
-
-
+        File[] profilexmls = new File("CCProject/Profiles").listFiles();
+        for(File file : profilexmls) {
+            profiles.add(new Profile(file));
+        }
+        currentProfile = profiles.get(0);
         screen1 = new MainMenu("", this);
         screen2 = new SelectProfile("Select Profile", this);
         screen3 = new CreateProfile("Create Profile", this);
@@ -73,5 +67,44 @@ public class Quizit {
     public void setDomain(Domain domain) {
         currentDomain = domain;
     }
-
+    public void changeScreen(int screenID) {
+        switch(screenID) {
+            case 1:
+                screen1.repaint();
+                frame.setContentPane(screen1);
+            case 2:
+                screen2.repaint();
+                frame.setContentPane(screen2);
+            case 3:
+                screen3.repaint();
+                frame.setContentPane(screen3);
+            case 4:
+                screen4.repaint();
+                frame.setContentPane(screen4);
+            case 5:
+                screen5.repaint();
+                frame.setContentPane(screen5);
+            case 6:
+                screen6.repaint();
+                frame.setContentPane(screen6);
+            case 7:
+                screen7.repaint();
+                frame.setContentPane(screen7);
+            case 8:
+                screen8.repaint();
+                frame.setContentPane(screen8);
+            case 9:
+                screen9.repaint();
+                frame.setContentPane(screen9);
+            case 10:
+                screen10.repaint();
+                frame.setContentPane(screen10);
+            case 11:
+                screen11.repaint();
+                frame.setContentPane(screen11);
+            case 12:
+                screen12.repaint();
+                frame.setContentPane(screen12);
+        }
+    }
 }

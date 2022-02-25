@@ -8,14 +8,15 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 	private TransitionButton save;
 	private TransitionButton createNewQ;
 	private TransitionButton editQ;
-	private TransitionButton deleteQ;
+	private EstablisherButton deleteQ;
 	private Domain currentDomain;
 	private JPanel insideScroll;
 	private EstablisherButton back;
-	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
-	ArrayList<EstablisherButton> buttonsWorkaround = new ArrayList<EstablisherButton>();
+	private ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
+	private ArrayList<EstablisherButton> buttonsWorkaround = new ArrayList<EstablisherButton>();
 	private QPanel thisScreen;
 	private int currentQID = 0;
+	private boolean popResult;
 
 	//for dragging and dropping.
 	private EstablisherButton beingDragged = new EstablisherButton(this,0,0,Color.WHITE,””,-2);
@@ -151,7 +152,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			TransitionButton yes = new TransitionButton(thisScreen,40,25,Color.WHITE,”Yes”,5,31);
 			yes.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
-					return true;
+					popResult = true;
 				}
 			});
 			pop.add(yes);
@@ -159,7 +160,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			no.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
-					return false;
+					popResult = false;
 				}
 			});
 			pop.add(no);
@@ -168,7 +169,7 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			yes.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
-					return true;
+					popResult = true;
 				}
 			});
 			pop.add(yes);
@@ -176,12 +177,13 @@ public class EditDomain extends DomainScreen impliments MouseListener, MouseMoti
 			no.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
-					return false;
+					popResult = false;
 				}
 			});
 			pop.add(no);
 		}
 		thisScreen.add(pop);
+		return popResult;
 	}
 	public void buttonClicked(int buttonID){
 		switch(buttonID){
