@@ -64,7 +64,6 @@ public class Question {
 		return ID;
 	}
 
-
 	public void setQuestion(String question) {
 		questionString = question;
 	}

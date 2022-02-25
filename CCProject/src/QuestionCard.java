@@ -33,7 +33,7 @@ public class QuestionCard extends QPanel{
 		//make buttons
 		editQuestBtn = new TransitionButton(this, 100,50, Color.white, "Edit Question", 12,5);
 		
-		backBtn = new TransitionButton(this, 100,50, Color.white, "Edit Question", 5,0);
+		backBtn = new TransitionButton(this, 100,50, Color.white, "Exit", 5,0);
 		
 		ansBtn = new EstablisherButton(this,100,50, Color.white, "Answer", 1);
 		
@@ -46,7 +46,7 @@ public class QuestionCard extends QPanel{
 		nextQuestBtn = new EstablisherButton(this,100,50, Color.white, "Next Question", 4);
 		nextQuestBtn.setEnabled(false);
 		
-		delQuestBtn = new EstablisherButton(this,100,50, Color.white, "Next Question", 6);
+		delQuestBtn = new EstablisherButton(this,100,50, Color.white, "Delete Question", 6);
 		delQuestBtn.setEnabled(false);
 		
 		yesDelQuestBtn = new EstablisherButton(this,100,50, Color.white, "Yes", 7);
@@ -100,8 +100,20 @@ public class QuestionCard extends QPanel{
 			knewAnsBtn.setEnabled(true);
 			notKnewAnsBtn.setEnabled(true);
 			answerText.setEnabled(true);
-			//num asked increment by 1. use profile from quizit.
-			//display the answer to the question at the bottom
+			profile.asked(currentQ.getID());
+			askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID())+"");
+		} else if(buttonID==2) {
+			knewAnsBtn.setEnabled(false);
+			notKnewAnsBtn.setEnabled(false);
+			nextQuestBtn.setEnabled(true);
+			profile.answeredCorrectly(currentQ.getID());
+			correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID())+"");
+		} else if(buttonID==3) {
+			knewAnsBtn.setEnabled(false);
+			notKnewAnsBtn.setEnabled(false);
+			nextQuestBtn.setEnabled(true);
+		} else if(buttonID==4) {
+			
 		}
 		
 	}
