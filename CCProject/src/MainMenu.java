@@ -1,6 +1,7 @@
-import java.awt.*;
 import javax.swing.*;
-import java.awt.event.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MainMenu extends QPanel implements ActionListener{
 	private TransitionButton select;
@@ -19,7 +20,7 @@ public class MainMenu extends QPanel implements ActionListener{
 	private Quizit theQuizit;
 
 	public MainMenu(String title, Quizit q){
-		super(title);
+		super(title, q);
 		theQuizit = q;
 		this.setLayout(new BorderLayout());
 		//the jpanel for the center of the screen
@@ -29,40 +30,40 @@ public class MainMenu extends QPanel implements ActionListener{
 		titleCard = new JLabel(title);
 		containsButtons.add(titleCard);
 		//select domain
-		select = new TransitionButton(this,75, 25, Color.WHITE, “Select Domain”, 5, 11);
+		select = new TransitionButton(this, 75, 25, Color.WHITE, "Select Domain", 5, 11);
 		select.addActionListener(this);
 		containsButtons.add(select);
 		//create domain
-		create = new TransitionButton(this,75, 25, Color.WHITE, “Create Domain”, 8, 12);
+		create = new TransitionButton(this, 75, 25, Color.WHITE, "Create Domain", 8, 12);
 		create.addActionListener(this);
 		containsButtons.add(create);
 		//import domain
-		importBtn = new TransitionButton(this,75, 25, Color.WHITE, “Import Domain”, 7, 13);
+		importBtn = new TransitionButton(this, 75, 25, Color.WHITE, "Import Domain", 7, 13);
 		importBtn.addActionListener(this);
-		containsButtons.add(import);
+		containsButtons.add(importBtn);
 		//export domain
-		export = new TransitionButton(this,75, 25, Color.WHITE, “Export Domain”, 9, 14);
+		export = new TransitionButton(this, 75, 25, Color.WHITE, "Export Domain", 9, 14);
 		export.addActionListener(this);
 		containsButtons.add(export);
 		//detach domain
-		detach = new TransitionButton(this,75, 25, Color.WHITE, “Detach Domain”, 10, 15);
+		detach = new TransitionButton(this, 75, 25, Color.WHITE, "Detach Domain", 10, 15);
 		detach.addActionListener(this);
 		containsButtons.add(detach);
 		//add everything to the center panel
 		this.add(containsButtons, BorderLayout.CENTER);
 		
 		//open profile popup button
-		profile = new EstablishedButton(this,75, 25, Color.WHITE, Profile.getName(), 21);
+		profile = new EstablisherButton(this,75, 25, Color.WHITE, profile.getName(), 21);
 		profile.addActionListener(this);
 		this.add(profile, BorderLayout.PAGE_START);
 		//change profile (in popup)
-		changeProfile = new TransitionButton(this,75, 25, Color.WHITE, “Change Profile”, 2, 22);
+		changeProfile = new TransitionButton(this, 75, 25, Color.WHITE, "Change Profile", 2, 22);
 		//quizzing options (in popup)
-		options = new TransitionButton(this,75, 25, Color.WHITE, “Quizzing Options”, 4, 23);
+		options = new TransitionButton(this, 75, 25, Color.WHITE, "Quizzing Options", 4, 23);
 		//exit application button
-		exit = new TransitionButton(this,50, 25, Color.WHITE, “Exit”, 1, 16);
-		exit.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
+		exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16);
+		exit.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				System.exit(0);
 			}
 		});
@@ -76,7 +77,8 @@ public class MainMenu extends QPanel implements ActionListener{
 		return 1;
 	}
 	public boolean popup(String text){
-		JPanel pop = new JPanel(new BoxLayout(BoxLayout.Y_AXIS);
+		JPanel pop = new JPanel();
+		pop.setLayout(new BoxLayout(pop, BoxLayout.Y_AXIS));
 		pop.setBackground(QPanel.TITLE_COLOR);
 		JLabel profileName = new JLabel(text);
 		pop.add(profileName);
@@ -122,7 +124,7 @@ public class MainMenu extends QPanel implements ActionListener{
 				//exit the application
 				break;
 			case 21:
-				if(popup(Profile.getName())){
+				if(popup(profile.getName())){
 					//go to change profile (2)
 					theQuizit.changeScreen(2);
 				} else{
