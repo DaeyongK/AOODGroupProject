@@ -1,8 +1,9 @@
 //QuestionScreen is front-end class made by Kai C.
 
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class QuestionScreen extends QPanel implements ActionListener {
 	private String title;
@@ -26,10 +27,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private Profile profile;
 	
 	QuestionScreen(String t) {
-		super(t);
+		super(t,null);
 		title = "Create a Question";
 		thisScreen = this;
-		ScreenId=11;
+		screenId=11;
 		edit = false;
 		graphicDetected = false;
 		questionBox = new JTextField("Enter a new question here: ");
@@ -53,13 +54,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		this.add(backBtn);
 	}
 	QuestionScreen(String t, Quizit q) {
-		super(t);
-		question = q.currentQuestion();
+		super(t,q);
+		question = q.getQuestion();
 		questionId = question.getID();
-		profile = q.currentProfle();
+		profile = q.getProfile();
 		title = "Edit Question #" + questionId;
 		thisScreen = this;
-		ScreenId=12;
+		screenId=12;
 		edit = true;
 		if (question.getImage() != null)
 			graphicDetected = true;
@@ -102,7 +103,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		JLabel message = new JLabel(text);
 		pop.add(message);
 		pop.setBackground(TITLE_COLOR);
-		
+
 		if (message.getText().contains("Select")) {
 			EstablisherButton select = new EstablisherButton(this,60,25,Color.WHITE,"Select",10);
 			select.setBackground(Color.WHITE);
@@ -113,7 +114,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 					thisScreen.remove(pop);
 					if(!graphicDetected) {
 						if(popup("Attach Graphic\n\nAre you sure?"));
-							//Replaces graphic with selected graphic
+
 						else;
 							//Keeps the previous graphic
 					}
@@ -125,6 +126,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				}
 			});
 			pop.add(select);
+
 		}
 		else if (message.getText().contains("leave")) {
 			//Backbtn popup yes/no
@@ -195,18 +197,23 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				//Checks if all textfields are entered
 				//need if statement for changeAsked and changeRight to check if they're ints
 				if (edit) {
-					if (!questionBox.getText().equals("") && 
-					    !answerBox.getText().equals("") &&
-					    !changeRight.getText().equals("") &&
-					    (parseInt(changeRight.getText())>=0)) &&
-						changeAsked.getText().equals("") &&
-						(parseInt(changeAsked.getText())>=0)) &&
-						((parseInt(changeRight.getText()))<=(parseInt(changeAsked.getText()) ))) {
-						
-						question.setQuestion(questionBox.getText());
-						question.setAnswer(answerBox.getText());
-						profile.setNumCorrect(questionId,parseInt(changeRight.getText()));
-						profile.setNumAsked(quetionId,parseInt(changeAsked.getText()));
+					try {
+						if (!questionBox.getText().equals("") &&
+								!answerBox.getText().equals("") &&
+								!changeRight.getText().equals("") &&
+								Integer.parseInt(changeRight.getText()) >= 0 &&
+								changeAsked.getText().equals("") &&
+								Integer.parseInt(changeAsked.getText()) >= 0 &&
+								Integer.parseInt(changeRight.getText()) <= (Integer.parseInt(changeAsked.getText()))) {
+
+
+							question.setQuestion(questionBox.getText());
+							question.setAnswer(answerBox.getText());
+							profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
+							profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
+						}
+					} catch (NumberFormatException e) {
+						//do nothing
 					}
 				}
 				else
@@ -237,5 +244,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		g.setColor(Color.WHITE);
 		g.drawRect(121,160,438,166);
 		g.drawString("No Graphic Preview",216,218);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+
 	}
 }
