@@ -3,7 +3,7 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 
-public class SelectProfile extends QPanel implements ActionListener{
+public class SelectProfile extends QPanel implements MouseListener{
 	private JScrollPane scrollable;
 	private ArrayList<Profile> profiles;
 	private TransitionButton done;
@@ -18,18 +18,17 @@ public class SelectProfile extends QPanel implements ActionListener{
 		panel = new JPanel();
 		profiles = new ArrayList<Profile>();
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
-		//scroll pane
+		//scroll pane???
 		scrollable = new JScrollPane();
 		scrollable.addMouseListener(this);
 		panel.add(scrollable);
 		//done button
 		done = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 1);
-		done.addActionListener(this);
 		panel.add(done);
 		//create profile button
 		createNewProfileButton = new TransitionButton(this, 75, 35, Color.WHITE, "Create New Profile", 3, 2);
-		createNewProfileButton.addActionListener(this);
 		panel.add(createNewProfileButton);
+		panel.addMouseListener(this);
 	}
 	
 	public void radioClick() {
@@ -71,12 +70,35 @@ public class SelectProfile extends QPanel implements ActionListener{
 		g.setColor(TITLE_COLOR);
 		
 	}
-	
-	public void actionPerformed(ActionEvent e){
-		//when done button is clicked
-		//when profile is clicked
-		//when create a new profile is clicked
-		//when mouse hovers over buttons/profiles
+
+	@Override
+	public void mouseClicked(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent arg0) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

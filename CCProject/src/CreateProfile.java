@@ -4,6 +4,8 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -12,7 +14,7 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class CreateProfile extends QPanel implements ActionListener{
+public class CreateProfile extends QPanel implements MouseListener{
 	private TransitionButton done;
 	private TransitionButton create;
 	private TransitionButton exit;
@@ -32,16 +34,13 @@ public class CreateProfile extends QPanel implements ActionListener{
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
 		//exit button
 		exit = new TransitionButton(this, 50, 25, TITLE_COLOR, "Exit", -1, 5);
-		exit.addActionListener(this);
 		panel.add(exit);
 		//text field
 		textField = new JTextField();
 		textField.setSize(70, 5);
-		textField.addActionListener(this);
 		panel.add(textField);
 		//create button
 		create = new TransitionButton(this, 50, 25, Color.WHITE, "Create", 4, 1);
-		create.addActionListener(this);
 		panel.add(create);
 		//shrek pfp
 		File shrekFile = new File("shrek.pfp");
@@ -54,7 +53,6 @@ public class CreateProfile extends QPanel implements ActionListener{
 		}
 		BufferedImage shrekPFP = (BufferedImage) shrekImage;
 		shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, shrekPFP);
-		shrek.addActionListener(this);
 		panel.add(shrek);
 		//fiona pfp
 		File fionaFile = new File("fiona.pfp");
@@ -67,7 +65,6 @@ public class CreateProfile extends QPanel implements ActionListener{
 		}
 		BufferedImage fionaPFP = (BufferedImage) fionaImage;
 		fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, fionaPFP);
-		fiona.addActionListener(this);
 		panel.add(fiona);
 		//donkey pfp
 		File donkeyFile = new File("donkey.pfp");
@@ -80,8 +77,8 @@ public class CreateProfile extends QPanel implements ActionListener{
 		}
 		BufferedImage donkeyPFP = (BufferedImage) donkeyImage;
 		donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, donkeyPFP);
-		donkey.addActionListener(this);
 		panel.add(donkey);
+		panel.addMouseListener(this);
 		//setup
 		this.setLayout(new BorderLayout());
 	}
@@ -131,6 +128,36 @@ public class CreateProfile extends QPanel implements ActionListener{
 	public void actionPerformed(ActionEvent e){
 		String string1 = textField.getText();
 		profileName = string1;
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

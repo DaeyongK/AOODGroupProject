@@ -2,10 +2,12 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.swing.*;
 
-public class Options extends QPanel implements ActionListener{
+public class Options extends QPanel implements MouseListener{
 	private boolean allQuestions;
 	private boolean shuffleQuestions;
 	private JComboBox dropdown;
@@ -27,28 +29,23 @@ public class Options extends QPanel implements ActionListener{
 		dropdown = new JComboBox(names);
 		dropdown.setAlignmentX(JComboBox.LEFT_ALIGNMENT);
 		dropdown.setSelectedIndex(0);
-		dropdown.addActionListener(this);
 		panel.add(dropdown);
 		//number correct button
 		numCorrectButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Questions with number of correct answers", 1);
-		numCorrectButton.addActionListener(this);
 		panel.add(numCorrectButton);
 		//all questions button
 		allQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "All Questions", 2);
-		allQuestionsButton.addActionListener(this);
 		panel.add(allQuestionsButton);
 		//shuffle questions button
 		shuffleQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Shuffle Questions", 3);
-		shuffleQuestionsButton.addActionListener(this);
 		panel.add(shuffleQuestionsButton);
 		//first last button
 		firstLastButton = new EstablisherButton(this, 100, 40, Color.WHITE, "First to Last", 4);
-		firstLastButton.addActionListener(this);
 		panel.add(firstLastButton);
 		//done button
 		TransitionButton doneButton = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 5);
-		doneButton.addActionListener(this);
 		panel.add(doneButton);
+		panel.addMouseListener(this);
 	}
 	
 	Options(String title, Quizit q, boolean allQuestionsTrue, boolean shuffleQuestionsTrue){
@@ -117,6 +114,36 @@ public class Options extends QPanel implements ActionListener{
 	}
 	
 	public void actionPerformed(ActionEvent e){
+		
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
 		
 	}
 
