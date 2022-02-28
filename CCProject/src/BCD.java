@@ -1,6 +1,6 @@
 public class BCD {
 	public static void main(String[] args) {
-		System.out.println(BCD.factorial(12));
+		System.out.println(BCD.factorial(52));
 	}
 	private int[] digits;
 	  BCD(int bcdDigits) {
