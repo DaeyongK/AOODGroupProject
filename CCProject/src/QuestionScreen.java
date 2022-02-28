@@ -103,7 +103,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		JLabel message = new JLabel(text);
 		pop.add(message);
 		pop.setBackground(TITLE_COLOR);
-
+		boolean popResult;
+		
 		if (message.getText().contains("Select")) {
 			EstablisherButton select = new EstablisherButton(this,60,25,Color.WHITE,"Select",10);
 			select.setBackground(Color.WHITE);
@@ -137,7 +138,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			yes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					thisScreen.remove(pop);
-					return true;
+					popResult = true;
 				}
 			});
 			pop.add(yes);
@@ -147,7 +148,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			no.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
-					return false;
+					popResult = false;
 				}
 			});
 			pop.add(no);
@@ -160,7 +161,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			yes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					thisScreen.remove(pop);
-					return true;
+					popResult = true;
 				}
 			});
 			pop.add(yes);
@@ -170,11 +171,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			no.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
-					return false;
+					popResult = false;
 				}
 			});
 			pop.add(no);
 		}
+		thisScreen.add(pop);
+		return popResult;
 	}
 	public void buttonClicked(int buttonID) {
 		QPanel nextScreen = thisScreen;
@@ -199,12 +202,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				if (edit) {
 					try {
 						if (!questionBox.getText().equals("") &&
-								!answerBox.getText().equals("") &&
-								!changeRight.getText().equals("") &&
-								Integer.parseInt(changeRight.getText()) >= 0 &&
-								changeAsked.getText().equals("") &&
-								Integer.parseInt(changeAsked.getText()) >= 0 &&
-								Integer.parseInt(changeRight.getText()) <= (Integer.parseInt(changeAsked.getText()))) {
+							!answerBox.getText().equals("") &&
+							!changeRight.getText().equals("") &&
+							Integer.parseInt(changeRight.getText()) >= 0 &&
+							changeAsked.getText().equals("") &&
+							Integer.parseInt(changeAsked.getText()) >= 0 &&
+							Integer.parseInt(changeRight.getText()) <= (Integer.parseInt(changeAsked.getText()))) {
 
 
 							question.setQuestion(questionBox.getText());
