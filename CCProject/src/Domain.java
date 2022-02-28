@@ -25,8 +25,8 @@ import org.w3c.dom.Element;
 import java.io.File;
 
 public class Domain {
-	ArrayList<Question> questions = new ArrayList<Question>();
-	String domainName="";
+	private ArrayList<Question> questions = new ArrayList<Question>();
+	private String domainName="";
 
 	Domain(String name, ArrayList<Question> quest) {
 		domainName = name;
