@@ -17,6 +17,7 @@ public class Quizit {
     private ExportDomain screen9;
     private DetachDomain screen10;
     private QuestionScreen screen11, screen12;
+    private JFrame frame;
     Quizit() {
         File[] profilexmls = new File("CCProject/Profiles").listFiles();
         for(File file : profilexmls) {
