@@ -47,7 +47,8 @@ public abstract class DomainScreen extends QPanel{
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setContentPane(screen1);
+		DomainScreenTester test= new DomainScreenTester("Test Domain", new Quizit());
+		frame.setContentPane(test);
 		frame.pack();
 		frame.setSize(1280, 720);
 		frame.setVisible(true);
