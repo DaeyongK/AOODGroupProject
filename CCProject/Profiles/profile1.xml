@@ -8,7 +8,6 @@
         <allQuestions>true</allQuestions>
         <questions>
         </questions>
-        <domains>
-        </domains>
+        <domains></domains>
     </profile>
 </profiles>
