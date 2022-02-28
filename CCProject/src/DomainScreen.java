@@ -19,13 +19,17 @@ public abstract class DomainScreen extends QPanel{
 		for(int i = 0; i< domains.size();i++) {
 			domainButtons.add(new EstablisherButton(this, 800, 50,Color.white,domains.get(i).getDomainName(),i));
 		}
-
-		for(EstablisherButton button : domainButtons) {
-			pane.add(button);
-			button.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		if(domainButtons!=null) {
+			for(EstablisherButton button : domainButtons) {
+				pane.add(button);
+				button.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+			}
 		}
+		
 		JScrollPane scroll = new JScrollPane(pane);
 		add(scroll);
+		exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", 1, -1);
+
 		exit.setBounds(50, 50, 50, 50);
 		add(exit);
 
