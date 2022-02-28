@@ -52,7 +52,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		this.add(doneBtn);
 		this.add(backBtn);
 	}
-	QuestionScreen(String t, QuizIt q) {
+	QuestionScreen(String t, quizit q) {
 		super(t);
 		question = q.currentQuestion();
 		questionId = question.getID();
@@ -193,19 +193,20 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			case 2:
 				//DoneBtn
 				//Checks if all textfields are entered
+				//need if statement for changeAsked and changeRight to check if they're ints
 				if (edit) {
 					if (!questionBox.getText().equals("") && 
 					    !answerBox.getText().equals("") &&
 					    !changeRight.getText().equals("") &&
-					    ((int)changeRight.getText()>=0)) &&
+					    (parseInt(changeRight.getText())>=0)) &&
 						changeAsked.getText().equals("") &&
-						((int)changeAsked.getText()>=0)) &&
-						(((int)changeRight.getText())<=((int)changeAsked.getText()))) {
+						(parseInt(changeAsked.getText())>=0)) &&
+						((parseInt(changeRight.getText()))<=(parseInt(changeAsked.getText()) ))) {
 						
 						question.setQuestion(questionBox.getText());
 						question.setAnswer(answerBox.getText());
-						profile.setNumCorrect(questionId,(int)changeRight.getText());
-						profile.setNumAsked(quetionId,(int)changeAsked.getText());
+						profile.setNumCorrect(questionId,parseInt(changeRight.getText()));
+						profile.setNumAsked(quetionId,parseInt(changeAsked.getText()));
 					}
 				}
 				else
