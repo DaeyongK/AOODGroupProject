@@ -8,8 +8,8 @@ public class ExportDomain extends QPanel implements ActionListener {
 	private JPanel insideScroll;
 	ArrayList<Domain> dList = new ArrayList<Domain>(); //Daeyong pls give me access to domain arraylist uwu
 	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
-	public ExportDomain(String t) {
-		super(t);
+	public ExportDomain(String t, Quizit q) {
+		super(t, q);
 		domains = new JScrollPane();
 		domains.setPreferredSize(new Dimension(900,300));
 		domains.setLayout(new ScrollPaneLayout());
@@ -18,7 +18,7 @@ public class ExportDomain extends QPanel implements ActionListener {
 		insideScroll.setLayout(new BoxLayout(insideScroll,BoxLayout.Y_AXIS));
 		
 		for(int i = 0; i < dList.size(); i++) { //replace 3 with all domains within a profile
-			buttons.add(new EstablisherButton(850, 25, Color.WHITE, dList.get(i).toString(), 9, i+30));
+			buttons.add(new EstablisherButton(this, 850, 25, Color.WHITE, dList.get(i).toString(), 9));
 			insideScroll.add(buttons.get(i));
 			buttons.get(i).setActionCommand(i + "");
 			buttons.get(i).addActionListener(this);
