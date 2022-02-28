@@ -17,6 +17,7 @@ public class Quizit {
     private ExportDomain screen9;
     private DetachDomain screen10;
     private QuestionScreen screen11, screen12;
+    private JFrame frame;
     Quizit() {
         File[] profilexmls = new File("CCProject/Profiles").listFiles();
         for(File file : profilexmls) {
@@ -70,40 +71,40 @@ public class Quizit {
     public void changeScreen(int screenID) {
         switch(screenID) {
             case 1:
-                screen1.repaint();
+                screen1 = new MainMenu("", this);
                 frame.setContentPane(screen1);
             case 2:
-                screen2.repaint();
+                screen2 = new SelectProfile("Select Profile", this);
                 frame.setContentPane(screen2);
             case 3:
-                screen3.repaint();
+                screen3 = new CreateProfile("Create Profile", this);
                 frame.setContentPane(screen3);
             case 4:
-                screen4.repaint();
+                screen4 = new Options("Quizzing Options", this);
                 frame.setContentPane(screen4);
             case 5:
-                screen5.repaint();
+                screen5 = new SelectDomain("Select Domain", this);
                 frame.setContentPane(screen5);
             case 6:
-                screen6.repaint();
+                screen6 = new QuestionCard("", this);
                 frame.setContentPane(screen6);
             case 7:
-                screen7.repaint();
+                screen7 = new ImportScreen("Import Domain", this);
                 frame.setContentPane(screen7);
             case 8:
-                screen8.repaint();
+                screen8 = new EditDomain("Edit Domain", this);
                 frame.setContentPane(screen8);
             case 9:
-                screen9.repaint();
+                screen9 = new ExportDomain("Export Domain", this);
                 frame.setContentPane(screen9);
             case 10:
-                screen10.repaint();
+                screen10 = new DetachDomain("Detach Domain", this);
                 frame.setContentPane(screen10);
             case 11:
-                screen11.repaint();
+                screen11 = new QuestionScreen("Create Question");
                 frame.setContentPane(screen11);
             case 12:
-                screen12.repaint();
+                screen12 = new QuestionScreen("Edit Question", this);
                 frame.setContentPane(screen12);
         }
     }
