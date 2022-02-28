@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridBagConstraints;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
@@ -21,31 +22,46 @@ public class Options extends QPanel implements MouseListener{
 	
 	Options(String title, Quizit q){
 		super(title, q);
-		panel = new JPanel();
 		quizitReference = q;
-		//create buttons and ui aspects. adds action listeners. then adds to jpanel.\
+		//panel setup
+		panel = new JPanel();
+		panel.addMouseListener(this);
+		
+		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
+		GridBagConstraints c = new GridBagConstraints();
+		
+		//number correct button
+		numCorrectButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Questions with number of correct answers", 1);
+		c.anchor = GridBagConstraints.FIRST_LINE_START;
+		panel.add(numCorrectButton, c);
+		
 		//dropdown menu
 		String[] names = {"<5", "<10", "<15", "<20", "<30"};
 		dropdown = new JComboBox(names);
 		dropdown.setAlignmentX(JComboBox.LEFT_ALIGNMENT);
 		dropdown.setSelectedIndex(0);
-		panel.add(dropdown);
-		//number correct button
-		numCorrectButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Questions with number of correct answers", 1);
-		panel.add(numCorrectButton);
+		c.anchor = GridBagConstraints.PAGE_START;
+		panel.add(dropdown, c);
+		
 		//all questions button
 		allQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "All Questions", 2);
-		panel.add(allQuestionsButton);
+		c.anchor = GridBagConstraints.FIRST_LINE_END;
+		panel.add(allQuestionsButton, c);
+		
 		//shuffle questions button
 		shuffleQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Shuffle Questions", 3);
-		panel.add(shuffleQuestionsButton);
+		c.anchor = GridBagConstraints.LINE_START;
+		panel.add(shuffleQuestionsButton, c);
+		
 		//first last button
 		firstLastButton = new EstablisherButton(this, 100, 40, Color.WHITE, "First to Last", 4);
-		panel.add(firstLastButton);
+		c.anchor = GridBagConstraints.LINE_END;
+		panel.add(firstLastButton, c);
+		
 		//done button
 		TransitionButton doneButton = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 5);
-		panel.add(doneButton);
-		panel.addMouseListener(this);
+		c.anchor = GridBagConstraints.PAGE_END;
+		panel.add(doneButton, c);
 	}
 	
 	Options(String title, Quizit q, boolean allQuestionsTrue, boolean shuffleQuestionsTrue){

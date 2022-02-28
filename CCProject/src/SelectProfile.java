@@ -15,11 +15,14 @@ public class SelectProfile extends QPanel implements MouseListener{
 	SelectProfile(String title, Quizit q){
 		super(title, q);
 		quizitReference = q;
+		profiles = q.getAllProfiles();
+		//panel setup
 		panel = new JPanel();
-		profiles = new ArrayList<Profile>();
+		
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
 		//scroll pane???
 		scrollable = new JScrollPane();
+		
 		scrollable.addMouseListener(this);
 		panel.add(scrollable);
 		//done button
