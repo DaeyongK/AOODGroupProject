@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.image.*;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -7,18 +8,29 @@ public class QuestionCard extends QPanel{
 	String question;
 	Profile profile;
 	Question currentQ;
+	Domain currentDomain;
+	ArrayList<Question> questions = new ArrayList<Question>();
 	String answer;
 	Quizit quizit;
 	EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn, yesDelQuestBtn, noDelQuestBtn;
 	TransitionButton editQuestBtn, backBtn;
 	JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, domainNameText;
 	BufferedImage questImage;
+	boolean delQuest;
 	
 	QuestionCard(String title, Quizit quiz) {
 		super(title,quiz);
 		quizit=quiz;
-		currentQ=quiz.getQuestion();
+		currentDomain= quiz.getDomain()
+		currentQ=currentDomain.get
 		profile=quiz.getProfile();
+		if (profile.getPossible()) {
+			for(int i =0; i<quiz.getDomain().getDomainSize(); i++) {
+				questions.add(currentDomain);
+			}
+		}
+		
+		
 		JPanel contentPane = new JPanel();
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 		
@@ -113,7 +125,21 @@ public class QuestionCard extends QPanel{
 			notKnewAnsBtn.setEnabled(false);
 			nextQuestBtn.setEnabled(true);
 		} else if(buttonID==4) {
-			
+			ansBtn.setEnabled(true);
+			knewAnsBtn.setEnabled(false);
+			notKnewAnsBtn.setEnabled(false);
+			answerText.setEnabled(false);
+			currentQ =quizit.getQuestion();
+			questionText.setText(currentQ.getQuestion());
+			askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID())+"");
+			correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID())+"");
+		} else if(buttonID == 5) {
+			quizit.changeScreen(12);
+		} else if(buttonID==6) {
+			delQuest=popup("Are you sure?");
+			if(delQuest) {
+				quizit.getDomain().deleteQuestion(currentQ.getID());
+			}
 		}
 		
 	}

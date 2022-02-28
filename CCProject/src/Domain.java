@@ -38,9 +38,12 @@ public class Domain {
 	public Question getQuestion(int numQ) {
 		return questions.get(numQ);
 	}
+	
+	public ArrayList<Question> getQuestions(){
+		return questions;
+	}
 
 	Domain(File file, Quizit quiz) {
-		
 		try {
 			DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			DocumentBuilder db = dbf.newDocumentBuilder();
