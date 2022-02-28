@@ -19,7 +19,7 @@ public abstract class DomainScreen extends QPanel{
 		for(int i = 0; i< domains.size();i++) {
 			domainButtons.add(new EstablisherButton(this, 800, 50,Color.white,domains.get(i).getDomainName(),i));
 		}
-	
+
 		for(EstablisherButton button : domainButtons) {
 			pane.add(button);
 			button.setAlignmentX(JLabel.CENTER_ALIGNMENT);
@@ -30,22 +30,27 @@ public abstract class DomainScreen extends QPanel{
 		add(exit);
 
 	}
-	
-	
+
+
 
 	public String getName() {
 		return title; 
 	}
 	public abstract void buttonClicked(int buttonID);
-		
+
 	private void radioClick() {
-		
+
 	}
 	public void paintComponent(Graphics g) {
 		g.drawString(title, 300, 50);
 	}
 	public static void main(String[] args) {
-		
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setContentPane(screen1);
+		frame.pack();
+		frame.setSize(1280, 720);
+		frame.setVisible(true);
 	}
 }
 class DomainScreenTester extends DomainScreen{
@@ -57,7 +62,7 @@ class DomainScreenTester extends DomainScreen{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -71,5 +76,5 @@ class DomainScreenTester extends DomainScreen{
 		// TODO Auto-generated method stub
 		return false;
 	}
-	
+
 }
