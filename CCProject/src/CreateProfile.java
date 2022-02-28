@@ -25,7 +25,7 @@ public class CreateProfile extends QPanel implements ActionListener{
 	private int imageIndex;
 	private String profileName;
 	
-	public CreateProfile(String title, Quizit q) throws IOException{
+	public CreateProfile(String title, Quizit q){
 		super(title, q);
 		quizitReference = q;
 		panel = new JPanel();
@@ -45,21 +45,39 @@ public class CreateProfile extends QPanel implements ActionListener{
 		panel.add(create);
 		//shrek pfp
 		File shrekFile = new File("shrek.pfp");
-		Image shrekImage = ImageIO.read(shrekFile);
+		Image shrekImage = null;
+		try {
+			shrekImage = ImageIO.read(shrekFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		BufferedImage shrekPFP = (BufferedImage) shrekImage;
 		shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, shrekPFP);
 		shrek.addActionListener(this);
 		panel.add(shrek);
 		//fiona pfp
 		File fionaFile = new File("fiona.pfp");
-		Image fionaImage = ImageIO.read(fionaFile);
+		Image fionaImage = null;
+		try {
+			fionaImage = ImageIO.read(fionaFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		BufferedImage fionaPFP = (BufferedImage) fionaImage;
 		fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, fionaPFP);
 		fiona.addActionListener(this);
 		panel.add(fiona);
 		//donkey pfp
 		File donkeyFile = new File("donkey.pfp");
-		Image donkeyImage = ImageIO.read(donkeyFile);
+		Image donkeyImage = null;
+		try {
+			donkeyImage = ImageIO.read(donkeyFile);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		BufferedImage donkeyPFP = (BufferedImage) donkeyImage;
 		donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, donkeyPFP);
 		donkey.addActionListener(this);
