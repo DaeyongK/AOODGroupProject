@@ -19,7 +19,7 @@ public class Quizit {
     private QuestionScreen screen11, screen12;
     private JFrame frame;
     Quizit() {
-        File[] profilexmls = new File("CCProject/Profiles").listFiles();
+        File[] profilexmls = new File("Profiles").listFiles();
         for(File file : profilexmls) {
             profiles.add(new Profile(file, this));
         }
