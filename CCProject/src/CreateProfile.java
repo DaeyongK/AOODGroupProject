@@ -35,6 +35,7 @@ public class CreateProfile extends QPanel implements MouseListener{
 		
 		//panel setup
 		panel = new JPanel();
+		panel.setBackground(QPanel.TITLE_COLOR);
 		panel.addMouseListener(this);
 		GridBagConstraints c = new GridBagConstraints();
 		
@@ -119,7 +120,9 @@ public class CreateProfile extends QPanel implements MouseListener{
 		case 1:
 			//move to options
 			Profile createdProfile = new Profile(profileName, imageIndex);
-			QPanel nextScreen = new Options("", quizitReference);
+			quizitReference.addProfile(createdProfile);
+			//QPanel nextScreen = new Options("", quizitReference);
+			quizitReference.changeScreen(4);
 			break;
 		case 2:
 			//selects shrek
@@ -135,7 +138,8 @@ public class CreateProfile extends QPanel implements MouseListener{
 			break;
 		case 5:
 			//exit button
-			nextScreen = new MainMenu("", quizitReference);
+			//nextScreen = new MainMenu("", quizitReference);
+			quizitReference.changeScreen(1);
 	    	break;
 		}
 	}

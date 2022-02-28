@@ -18,6 +18,7 @@ public class SelectProfile extends QPanel implements MouseListener{
 		profiles = q.getAllProfiles();
 		//panel setup
 		panel = new JPanel();
+		panel.setBackground(QPanel.TITLE_COLOR);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
@@ -55,15 +56,17 @@ public class SelectProfile extends QPanel implements MouseListener{
 		switch(buttonID){
 			case 1:
 				//send to main menu
-				QPanel nextScreen = new MainMenu("", quizitReference);
+				//QPanel nextScreen = new MainMenu("", quizitReference);
+				quizitReference.changeScreen(1);
 				break;
 			case 2:
 				//send to create a profile
-				nextScreen = new CreateProfile("", quizitReference);
+				//nextScreen = new CreateProfile("", quizitReference);
+				quizitReference.changeScreen(3);
 		    	break;
 		}
 		if(buttonID > 2) {
-			
+			quizitReference.setProfile(currentProfile);
 		}
 	}
 	

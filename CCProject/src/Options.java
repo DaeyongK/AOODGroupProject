@@ -25,6 +25,7 @@ public class Options extends QPanel implements MouseListener{
 		quizitReference = q;
 		//panel setup
 		panel = new JPanel();
+		panel.setBackground(QPanel.TITLE_COLOR);
 		panel.addMouseListener(this);
 		
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
@@ -124,7 +125,8 @@ public class Options extends QPanel implements MouseListener{
 			break;
 		case 5:
 			//go to main menu
-			QPanel nextScreen = new MainMenu("", quizitReference);
+			//QPanel nextScreen = new MainMenu("", quizitReference);
+			quizitReference.changeScreen(1);
 			break;
 		}
 	}
