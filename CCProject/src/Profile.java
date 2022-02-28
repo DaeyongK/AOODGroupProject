@@ -17,7 +17,7 @@ public class Profile {
         this.profileName = profileName;
         image = imageIndex;
     }
-    Profile(File xml) {
+    Profile(File xml, Quizit quizit) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
             DocumentBuilder db = dbf.newDocumentBuilder();
@@ -36,7 +36,7 @@ public class Profile {
             NodeList ds = doc.getElementsByTagName("domainPath");
             for(int i = 0; i < ds.getLength(); i++) {
                 String domain = ds.item(i).getTextContent();
-                domains.add(new Domain(new File(domain)));
+                domains.add(new Domain(new File(domain), quizit));
             }
         } catch (Exception e) {}
     }

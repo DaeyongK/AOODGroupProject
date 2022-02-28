@@ -21,7 +21,7 @@ public class Quizit {
     Quizit() {
         File[] profilexmls = new File("CCProject/Profiles").listFiles();
         for(File file : profilexmls) {
-            profiles.add(new Profile(file));
+            profiles.add(new Profile(file, this));
         }
         currentProfile = profiles.get(0);
         screen1 = new MainMenu("", this);
