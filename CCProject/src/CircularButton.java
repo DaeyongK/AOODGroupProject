@@ -6,12 +6,8 @@ import java.awt.image.BufferedImage;
 public class CircularButton extends EstablisherButton{
     CircularButton(QPanel Panel, int width, int height, Color color, String text, int buttonID, BufferedImage img) {
         super(Panel, width, height, color, text, buttonID);
-
-        JButton b = new JButton(text);
-        b.setBounds(50,50,width,height);
-        b.setBackground(color);
-        b.setBorder(new RoundedBorder(10)); //how big to make it?
-        b.setIcon(new ImageIcon(img));
+        setBorder(new RoundedBorder(10)); //how big to make it?
+        setIcon(new ImageIcon(img));
     }
 
     private static class RoundedBorder implements Border {

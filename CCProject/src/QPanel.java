@@ -16,6 +16,23 @@ public abstract class QPanel extends JPanel {
 	}
 
 	public abstract int getScreenID();
-	public abstract boolean popup(String text);
+	public boolean popup(String text) {
+		int result = JOptionPane.showConfirmDialog(this, text);
+		switch (result) {
+		case JOptionPane.YES_OPTION:
+			return true;
+			
+		case JOptionPane.NO_OPTION:
+			return false;
+			
+		case JOptionPane.CANCEL_OPTION:
+			System.out.println("Cancel");
+			break;
+		case JOptionPane.CLOSED_OPTION:
+			System.out.println("Closed");
+			break;
+		}
+		return false;
+	}
 	public abstract void buttonClicked(int buttonID);
 }
