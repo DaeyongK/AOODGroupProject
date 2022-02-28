@@ -30,7 +30,10 @@ public class CreateProfile extends QPanel implements MouseListener{
 	public CreateProfile(String title, Quizit q){
 		super(title, q);
 		quizitReference = q;
+		
+		//panel setup
 		panel = new JPanel();
+		panel.addMouseListener(this);
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
 		//exit button
 		exit = new TransitionButton(this, 50, 25, TITLE_COLOR, "Exit", -1, 5);
@@ -39,9 +42,11 @@ public class CreateProfile extends QPanel implements MouseListener{
 		textField = new JTextField();
 		textField.setSize(70, 5);
 		panel.add(textField);
+		
 		//create button
 		create = new TransitionButton(this, 50, 25, Color.WHITE, "Create", 4, 1);
 		panel.add(create);
+		
 		//shrek pfp
 		File shrekFile = new File("shrek.pfp");
 		Image shrekImage = null;
@@ -54,6 +59,7 @@ public class CreateProfile extends QPanel implements MouseListener{
 		BufferedImage shrekPFP = (BufferedImage) shrekImage;
 		shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, shrekPFP);
 		panel.add(shrek);
+		
 		//fiona pfp
 		File fionaFile = new File("fiona.pfp");
 		Image fionaImage = null;
@@ -66,6 +72,7 @@ public class CreateProfile extends QPanel implements MouseListener{
 		BufferedImage fionaPFP = (BufferedImage) fionaImage;
 		fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, fionaPFP);
 		panel.add(fiona);
+		
 		//donkey pfp
 		File donkeyFile = new File("donkey.pfp");
 		Image donkeyImage = null;
@@ -78,9 +85,6 @@ public class CreateProfile extends QPanel implements MouseListener{
 		BufferedImage donkeyPFP = (BufferedImage) donkeyImage;
 		donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, donkeyPFP);
 		panel.add(donkey);
-		panel.addMouseListener(this);
-		//setup
-		this.setLayout(new BorderLayout());
 	}
 	
 	public void radioClick() {
