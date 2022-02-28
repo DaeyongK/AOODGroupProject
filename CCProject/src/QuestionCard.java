@@ -1,33 +1,42 @@
 import java.awt.Color;
 import java.awt.image.*;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import javax.swing.*;
 
 public class QuestionCard extends QPanel{
-	String question;
-	Profile profile;
-	Question currentQ;
-	Domain currentDomain;
-	ArrayList<Question> questions = new ArrayList<Question>();
-	String answer;
-	Quizit quizit;
-	EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn, yesDelQuestBtn, noDelQuestBtn;
-	TransitionButton editQuestBtn, backBtn;
-	JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, domainNameText;
-	BufferedImage questImage;
-	boolean delQuest;
+	private String question;
+	private Profile profile;
+	private Question currentQ;
+	private Domain currentDomain;
+	private ArrayList<Question> questions = new ArrayList<Question>(),intermediateDomain;
+	private String answer;
+	private Quizit quizit;
+	private EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn, yesDelQuestBtn, noDelQuestBtn;
+	private TransitionButton editQuestBtn, backBtn;
+	private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, domainNameText;
+	private BufferedImage questImage;
+	private boolean delQuest;
 	
 	QuestionCard(String title, Quizit quiz) {
 		super(title,quiz);
 		quizit=quiz;
-		currentDomain= quiz.getDomain()
-		currentQ=currentDomain.get
+		currentDomain= quiz.getDomain();
 		profile=quiz.getProfile();
-		if (profile.getPossible()) {
-			for(int i =0; i<quiz.getDomain().getDomainSize(); i++) {
-				questions.add(currentDomain);
+		
+		if (profile.getPossible()&&profile.getOrder()) {
+			for(int i =0; i<currentDomain.getDomainSize(); i++) {
+				questions.add(currentDomain.getQuestions().get(i));
 			}
+		} else if(profile.getPossible() && !profile.getOrder()) {
+			intermediateDomain= (ArrayList)currentDomain.getQuestions().clone();
+			Collections.shuffle(intermediateDomain);
+			for(int i =0; i<currentDomain.getDomainSize(); i++) {
+				questions.add(intermediateDomain.get(i));
+			}
+		} else if(!profile.getPossible()&&profile.getOrder()) {
+			
 		}
 		
 		

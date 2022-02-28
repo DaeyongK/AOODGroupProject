@@ -3,11 +3,11 @@ import java.io.*;
 import javax.imageio.*;
 
 public class Question {
-	String questionString;
-	String answerString;
-	String graphicString;
-	BufferedImage graphic;
-	int ID;
+	private String questionString;
+	private String answerString;
+	private String graphicString;
+	private BufferedImage graphic;
+	private int ID;
 
 	Question(String question, String answer, Quizit quiz) {
 		questionString = question;

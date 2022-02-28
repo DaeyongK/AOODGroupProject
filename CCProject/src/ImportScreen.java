@@ -13,6 +13,7 @@ class ImportScreen extends QPanel implements ActionListener {
     private Quizit q;
     ImportScreen(String title, Quizit q) {
         super(title, q);
+        this.q = q;
         int width = 80;
         int height = 40;
 
@@ -44,7 +45,6 @@ class ImportScreen extends QPanel implements ActionListener {
         switch (buttonID) {
         case 0:
             q.changeScreen(1);
-            //send to main menu and pls matthew stop being a deadweight leader, useless 
             break;
         case 1:
             q.getProfile().addDomain(new Domain(selectedFile, q));
