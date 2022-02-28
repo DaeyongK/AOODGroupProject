@@ -38,6 +38,9 @@ public class Profile {
                 String domain = ds.item(i).getTextContent();
                 domains.add(new Domain(new File(domain), quizit));
             }
+            profileName = doc.getElementsByTagName("profileName").item(0).getTextContent();
+            threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent());
+            image = Integer.parseInt(doc.getElementsByTagName("image").item(0).getTextContent());
         } catch (Exception e) {}
     }
     public String getName() {

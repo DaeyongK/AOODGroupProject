@@ -8,6 +8,8 @@
         <allQuestions>true</allQuestions>
         <questions>
         </questions>
-        <domains></domains>
+        <domains>
+            <domainPath>Domains/test.xml</domainPath>
+        </domains>
     </profile>
 </profiles>
