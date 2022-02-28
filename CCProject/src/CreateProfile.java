@@ -1,10 +1,14 @@
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
+import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -21,7 +25,7 @@ public class CreateProfile extends QPanel implements ActionListener{
 	private int imageIndex;
 	private String profileName;
 	
-	public CreateProfile(String title, Quizit q){
+	public CreateProfile(String title, Quizit q) throws IOException{
 		super(title, q);
 		quizitReference = q;
 		panel = new JPanel();
@@ -40,16 +44,24 @@ public class CreateProfile extends QPanel implements ActionListener{
 		create.addActionListener(this);
 		panel.add(create);
 		//shrek pfp
-		BufferedImage shrekPFP = new BufferedImage("shrek.png");
-		shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, );
+		File shrekFile = new File("shrek.pfp");
+		Image shrekImage = ImageIO.read(shrekFile);
+		BufferedImage shrekPFP = (BufferedImage) shrekImage;
+		shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, shrekPFP);
 		shrek.addActionListener(this);
 		panel.add(shrek);
 		//fiona pfp
-		fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, null);
+		File fionaFile = new File("fiona.pfp");
+		Image fionaImage = ImageIO.read(fionaFile);
+		BufferedImage fionaPFP = (BufferedImage) fionaImage;
+		fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, fionaPFP);
 		fiona.addActionListener(this);
 		panel.add(fiona);
 		//donkey pfp
-		donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, null);
+		File donkeyFile = new File("donkey.pfp");
+		Image donkeyImage = ImageIO.read(donkeyFile);
+		BufferedImage donkeyPFP = (BufferedImage) donkeyImage;
+		donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, donkeyPFP);
 		donkey.addActionListener(this);
 		panel.add(donkey);
 		//setup
