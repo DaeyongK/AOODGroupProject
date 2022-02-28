@@ -52,7 +52,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		this.add(doneBtn);
 		this.add(backBtn);
 	}
-	QuestionScreen(String t, quizit q) {
+	QuestionScreen(String t, Quizit q) {
 		super(t);
 		question = q.currentQuestion();
 		questionId = question.getID();
