@@ -56,9 +56,7 @@ public class QuestionCard extends QPanel {
 		}
 		currentQIndex = 0;
 		currentQ = questions.get(currentQIndex);
-
-		JPanel contentPane = new JPanel();
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
+		this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
 		// make text boxes
 		askedNumTimesText = new JLabel("Asked: " + profile.getTimesAsked(currentQ.getID()) + " times");
@@ -87,19 +85,19 @@ public class QuestionCard extends QPanel {
 		delQuestBtn = new EstablisherButton(this, 100, 50, Color.white, "Delete Question", 6);
 
 		// add buttons and text to contentPane
-		contentPane.add(ansBtn);
-		contentPane.add(knewAnsBtn);
-		contentPane.add(notKnewAnsBtn);
-		contentPane.add(nextQuestBtn);
-		contentPane.add(editQuestBtn);
-		contentPane.add(delQuestBtn);
-		contentPane.add(backBtn);
+		this.add(ansBtn);
+		this.add(knewAnsBtn);
+		this.add(notKnewAnsBtn);
+		this.add(nextQuestBtn);
+		this.add(editQuestBtn);
+		this.add(delQuestBtn);
+		this.add(backBtn);
 
-		contentPane.add(askedNumTimesText);
-		contentPane.add(correctNumTimesText);
-		contentPane.add(answerText);
-		contentPane.add(questionText);
-		contentPane.add(domainNameText);
+		this.add(askedNumTimesText);
+		this.add(correctNumTimesText);
+		this.add(answerText);
+		this.add(questionText);
+		this.add(domainNameText);
 	}
 
 	public int getScreenID() {
@@ -179,5 +177,15 @@ public class QuestionCard extends QPanel {
 	public void nextQ() {
 		currentQIndex++;
 		currentQ = questions.get(currentQIndex);
+	}
+	
+	public static void main(String[] args) {
+		JFrame frame = new JFrame();
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		QuestionCard test= new QuestionCard("", new Quizit());
+		frame.setContentPane(test);
+		frame.pack();
+		frame.setSize(1280, 720);
+		frame.setVisible(true);
 	}
 }
