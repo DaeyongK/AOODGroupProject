@@ -12,8 +12,7 @@ public abstract class DomainScreen extends QPanel{
 		domain buttons = index in all domains
 		 */
 		super(input, quizit);
-		JPanel pane = new JPanel();
-		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		domains = quizit.getProfile().getDomains();
 		domainButtons = new ArrayList<EstablisherButton>();
 		for(int i = 0; i< domains.size();i++) {
@@ -21,15 +20,15 @@ public abstract class DomainScreen extends QPanel{
 		}
 		if(domainButtons!=null) {
 			for(EstablisherButton button : domainButtons) {
-				pane.add(button);
+				add(button);
 				button.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 			}
 		}
 		
-		JScrollPane scroll = new JScrollPane(pane);
-		add(scroll);
+		JScrollPane scroll = new JScrollPane(this);
+		scroll.setSize(500,500);
 		exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", 1, -1);
-
+		
 		exit.setBounds(50, 50, 50, 50);
 		add(exit);
 
@@ -64,6 +63,32 @@ class Testit extends Quizit{
 		setProfile(new Profile(null, this));
 		addProfile(getProfile());
 		getProfile().addDomain(new Domain("yes", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+		getProfile().addDomain(new Domain("no", thing));
+
+
 
 	}
 }
