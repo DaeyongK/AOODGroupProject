@@ -35,6 +35,7 @@ public class SelectProfile extends QPanel implements MouseListener{
 			increment++;
 		}
 		scrollablePane.add(createNewProfileButton);
+		
 		//insert code needed to add in profiles
 		panel.add(createNewProfileButton);
 		panel.addMouseListener(this);
