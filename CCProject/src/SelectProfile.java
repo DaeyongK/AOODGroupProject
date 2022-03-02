@@ -22,11 +22,21 @@ public class SelectProfile extends QPanel implements MouseListener{
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		
 		//create buttons and ui aspects. adds action listeners. then adds to jpanel.
-		//scroll pane???
-		scrollable = new JScrollPane();
-		//insert code needed to add in profiles
 		//create profile button inside the jscrollpane somehow???
 		createNewProfileButton = new TransitionButton(this, 75, 35, Color.WHITE, "Create New Profile", 3, 2);
+		
+		//scroll pane???
+		scrollable = new JScrollPane();
+		JPanel scrollablePane = new JPanel();
+		int increment = 3;
+		for(Profile p: profiles) {
+			EstablisherButton holder = new EstablisherButton(this, 75, 35, Color.WHITE, p.getName(), increment);
+			scrollablePane.add(holder);
+			increment++;
+		}
+		scrollablePane.add(createNewProfileButton);
+		
+		//insert code needed to add in profiles
 		panel.add(createNewProfileButton);
 		panel.addMouseListener(this);
 		scrollable.addMouseListener(this);

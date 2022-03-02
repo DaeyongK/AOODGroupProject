@@ -52,7 +52,7 @@ public class CreateProfile extends QPanel implements MouseListener{
 		panel.add(textField, c);
 		
 		//shrek pfp
-		File shrekFile = new File("shrek.jpeg");
+		File shrekFile = new File("ProfilePictures/shrek.png");
 		Image shrekImage = null;
 		try {
 			shrekImage = ImageIO.read(shrekFile);
@@ -66,7 +66,7 @@ public class CreateProfile extends QPanel implements MouseListener{
 		panel.add(shrek, c);
 		
 		//fiona pfp
-		File fionaFile = new File("fiona.jpeg");
+		File fionaFile = new File("ProfilePictures/fiona.jpeg");
 		Image fionaImage = null;
 		try {
 			fionaImage = ImageIO.read(fionaFile);
@@ -80,7 +80,7 @@ public class CreateProfile extends QPanel implements MouseListener{
 		panel.add(fiona, c);
 		
 		//donkey pfp
-		File donkeyFile = new File("donkey.jpeg");
+		File donkeyFile = new File("ProfilePictures/donkey.jpeg");
 		Image donkeyImage = null;
 		try {
 			donkeyImage = ImageIO.read(donkeyFile);
@@ -121,7 +121,6 @@ public class CreateProfile extends QPanel implements MouseListener{
 			//move to options
 			Profile createdProfile = new Profile(profileName, imageIndex);
 			quizitReference.addProfile(createdProfile);
-			//QPanel nextScreen = new Options("", quizitReference);
 			quizitReference.changeScreen(4);
 			break;
 		case 2:
@@ -138,7 +137,6 @@ public class CreateProfile extends QPanel implements MouseListener{
 			break;
 		case 5:
 			//exit button
-			//nextScreen = new MainMenu("", quizitReference);
 			quizitReference.changeScreen(1);
 	    	break;
 		}
