@@ -110,6 +110,25 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		return screenId;
 	}
 	public boolean popup(String text) {
+		int result = JOptionPane.showConfirmDialog(this, text);
+		switch (result) {
+		case JOptionPane.YES_OPTION:
+			return true;
+			
+		case JOptionPane.NO_OPTION:
+			return false;
+			
+		case JOptionPane.CANCEL_OPTION:
+			System.out.println("Cancel");
+			break;
+		case JOptionPane.CLOSED_OPTION:
+			System.out.println("Closed");
+			break;
+		}
+		return false;
+	}
+	/*
+	public boolean popup(String text) {
 		JPanel pop = new JPanel();
 		pop.setBounds(219,139,841,441);
 		JLabel message = new JLabel(text);
@@ -199,6 +218,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 //		return popResult;
 		return true;
 	}
+	*/
 	public void buttonClicked(int buttonID) {
 		QPanel nextScreen = thisScreen;
 		switch(buttonID){
