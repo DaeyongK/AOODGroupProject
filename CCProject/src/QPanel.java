@@ -8,9 +8,13 @@ public abstract class QPanel extends JPanel {
 	protected String title;
 	protected int id = 0;
 	protected Quizit quizit;
+	protected titleLabel;
 
 	QPanel(String t, Quizit quizit){
 		title = t;
+		titleLabel = new JLabel(title);
+		titleLabel.setForeground(TITLE_COLOR);
+		this.add(titleLabel);
 		this.setBackground(BACKGROUND_COLOR);
 		this.quizit = quizit;
 	}
