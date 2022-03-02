@@ -72,6 +72,9 @@ public class Quizit {
     public void setDomain(Domain domain) {
         currentDomain = domain;
     }
+    public JFrame getFrame() {
+    	return  frame;
+    }
     public void changeScreen(int screenID) {
         switch(screenID) {
             case 1:
