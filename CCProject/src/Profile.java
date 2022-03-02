@@ -19,6 +19,8 @@ public class Profile {
         ArrayList<Question> emptyQuestions= new ArrayList<Question>();
         emptyQuestions.add(new Question());
         domains.add(new Domain("Default Domain",emptyQuestions));
+        int[] emptyArray= {0,0};
+        questions.put(-1, emptyArray);
     }
     Profile(File xml, Quizit quizit) {
         try {
