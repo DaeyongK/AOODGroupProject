@@ -73,7 +73,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		else
 			graphicDetected = false;
 		titleLabel = new JLabel(title);
-		titleLabel.setbounds(464,86,360,32);
+		titleLabel.setBounds(464,86,360,32);
 		questionBox = new JTextField(question.getQuestion());
 		answerBox = new JTextField(question.getAnswer());
 		questionBox.setBounds(121,399,438,124);
@@ -111,12 +111,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	}
 	public boolean popup(String text) {
 		JPanel pop = new JPanel();
-		pop.setBorders(219,139,841,441);
+		pop.setBounds(219,139,841,441);
 		JLabel message = new JLabel(text);
-		message.setBorders(509,160,259,32);
+		message.setBounds(509,160,259,32);
 		pop.add(message);
 		pop.setBackground(TITLE_COLOR);
-		boolean popResult;
+//		boolean popResult;
 		
 		if (message.getText().contains("Attach")) {
 			EstablisherButton select = new EstablisherButton(this,60,25,Color.WHITE,"Select",10);
@@ -136,7 +136,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 						//Selected graphic is picked
 					}
 
-					return true;
+//					return true;
 				}
 			});
 			pop.add(select);
@@ -145,28 +145,29 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		else if (message.getText().contains("leave")) {
 			//Backbtn popup yes/no
 			//If create, screenId is 8, if edit, figure it out
+			TransitionButton yes;
 			if (!edit)
-				TransitionButton yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",8,13);
+				yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",8,13);
 			else
 				//Figure out whether to go back to questionCard or editDomain
-				TransitionButton yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",6,13);
+				yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",6,13);
 			yes.setBackground(Color.WHITE);
 			yes.setForeground(Color.BLACK);
 			yes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					thisScreen.remove(pop);
-					popResult = true;
+//					popResult = true;
 				}
 			});
 			pop.add(yes);
 			//Figure out whether to go back to questionCard or editDomain
-			EstablisherButton no = new EstablisherButton(this,40,25,Color.WHITE,"No",6,14);
+			EstablisherButton no = new EstablisherButton(this,40,25,Color.WHITE,"No",14);
 			no.setBackground(Color.WHITE);
 			no.setForeground(Color.BLACK);
 			no.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
-					popResult = false;
+//					popResult = false;
 				}
 			});
 			pop.add(no);
@@ -179,7 +180,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			yes.addActionListener(new ActionListener() {
 				public void actionPerformed(ActionEvent e) {
 					thisScreen.remove(pop);
-					popResult = true;
+//					popResult = true;
 				}
 			});
 			pop.add(yes);
@@ -189,13 +190,14 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			no.addActionListener(new ActionListener(){
 				public void actionPerformed(ActionEvent e){
 					thisScreen.remove(pop);
-					popResult = false;
+//					popResult = false;
 				}
 			});
 			pop.add(no);
 		}
 		thisScreen.add(pop);
-		return popResult;
+//		return popResult;
+		return true;
 	}
 	public void buttonClicked(int buttonID) {
 		QPanel nextScreen = thisScreen;
@@ -210,8 +212,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				if(popup("DetachGraphic\n\nAre you sure?")) {
 					question.detachImage();
 				}
-				else
-					question.setImage();
+//				else
+//					question.setImage();
 				break;
 			case 2:
 				//DoneBtn
@@ -231,7 +233,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
 							profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
 							//Figure out whether to go back to questionCard or editDomain
-							changeScreen(6)
+							quizit.changeScreen(6);
 						}
 					} catch (NumberFormatException e) {
 						//do nothing
@@ -248,7 +250,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				//BackBtn
 				if(popup("Are you sure you want to leave?")) {
 					//Figure out whether to go back to questionCard or editDomain
-					changeScreen(6);
+					quizit.changeScreen(	6);
 				}
 				break;
 		}
