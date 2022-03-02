@@ -17,7 +17,7 @@ public class Profile {
         this.profileName = profileName;
         image = imageIndex;
         ArrayList<Question> emptyQuestions= new ArrayList<Question>();
-        emptyQuestions.add(new Question(null, null, null));
+        emptyQuestions.add(new Question());
         domains.add(new Domain("Default Domain",emptyQuestions));
     }
     Profile(File xml, Quizit quizit) {
