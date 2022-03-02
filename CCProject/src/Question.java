@@ -31,6 +31,13 @@ public class Question {
 	// ^^^^^^
 	// FOR TESTING PURPOSES ONLY ||||||
 
+	Question() {
+		questionString = "";
+		answerString = "";
+		graphicString = "";
+		ID = -1;
+	}
+
 	Question(String question, String answer, Quizit quiz) {
 		questionString = question;
 		answerString = answer;
