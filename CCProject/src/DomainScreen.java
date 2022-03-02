@@ -13,7 +13,7 @@ public abstract class DomainScreen extends QPanel{
 		domain buttons = index in allDomains
 		 */
 		super(input, quizit);
-		System.out.print(popup("yeah"));
+//		System.out.print(popup("yeah"));
 
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		domains = quizit.getProfile().getDomains();
@@ -58,22 +58,7 @@ public abstract class DomainScreen extends QPanel{
 		frame.pack();
 		frame.setSize(1280, 720);
 		frame.setVisible(true);
-		int result = JOptionPane.showConfirmDialog(frame, "hi");
-		switch (result) {
-		case JOptionPane.YES_OPTION:
-			System.out.print("hi");
-			
-		case JOptionPane.NO_OPTION:
-			System.out.print("hi");
-			
-		case JOptionPane.CANCEL_OPTION:
-			System.out.println("Cancel");
-			break;
-		case JOptionPane.CLOSED_OPTION:
-			System.out.println("Closed");
-			break;
-		}
-		System.out.print("hi");
+		
 	}
 }
 class Testit extends Quizit{

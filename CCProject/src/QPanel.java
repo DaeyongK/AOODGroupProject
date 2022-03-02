@@ -21,7 +21,7 @@ public abstract class QPanel extends JPanel {
 
 	public abstract int getScreenID();
 	public boolean popup(String text) {
-		int result = JOptionPane.showConfirmDialog(this, text);
+		int result = JOptionPane.showConfirmDialog(quizit.getFrame(), text);
 		switch (result) {
 		case JOptionPane.YES_OPTION:
 			return true;
