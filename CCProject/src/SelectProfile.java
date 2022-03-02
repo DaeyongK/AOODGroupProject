@@ -11,6 +11,7 @@ public class SelectProfile extends QPanel implements MouseListener{
 	private JPanel panel;
 	private Profile currentProfile;
 	private Quizit quizitReference;
+	private JScrollBar verticalBar;
 	
 	SelectProfile(String title, Quizit q){
 		super(title, q);
@@ -35,7 +36,9 @@ public class SelectProfile extends QPanel implements MouseListener{
 			increment++;
 		}
 		scrollablePane.add(createNewProfileButton);
-		
+		verticalBar = new JScrollBar(JScrollBar.VERTICAL);
+		scrollable.add(scrollablePane);
+		scrollable.add(verticalBar);
 		//insert code needed to add in profiles
 		panel.add(createNewProfileButton);
 		panel.addMouseListener(this);
