@@ -121,7 +121,6 @@ public class CreateProfile extends QPanel implements MouseListener{
 			//move to options
 			Profile createdProfile = new Profile(profileName, imageIndex);
 			quizitReference.addProfile(createdProfile);
-			//QPanel nextScreen = new Options("", quizitReference);
 			quizitReference.changeScreen(4);
 			break;
 		case 2:
@@ -138,7 +137,6 @@ public class CreateProfile extends QPanel implements MouseListener{
 			break;
 		case 5:
 			//exit button
-			//nextScreen = new MainMenu("", quizitReference);
 			quizitReference.changeScreen(1);
 	    	break;
 		}
