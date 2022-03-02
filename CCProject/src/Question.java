@@ -9,14 +9,37 @@ public class Question {
 	private BufferedImage graphic;
 	private int ID;
 
+	// FOR TESTING PURPOSES ONLY |||||
+	// VVVVV
+	//
+	// Question(String question, String answer) {
+	// questionString = question;
+	// // answerString = answer;
+	// graphicString=null;
+	// int tempID = (int) (Math.random() * 1000000000);
+	// ID= tempID;
+	// }
+
+	// Question(String question, String answer, String imagePath) {
+	// questionString = question;
+	// answerString = answer;
+	// this.setImage(imagePath);
+	// int tempID = (int) (Math.random() * 1000000000);
+	// ID= tempID;
+	// }
+
+	// ^^^^^^
+	// FOR TESTING PURPOSES ONLY ||||||
+
 	Question(String question, String answer, Quizit quiz) {
 		questionString = question;
 		answerString = answer;
+		graphicString = null;
 		int tempID = (int) (Math.random() * 1000000000);
 		while (quiz.getProfile().getHashMap().containsKey(tempID)) {
-			tempID=(int) (Math.random() * 1000000000);
+			tempID = (int) (Math.random() * 1000000000);
 		}
-		ID= tempID;
+		ID = tempID;
 	}
 
 	Question(String question, String answer, String imagePath, Quizit quiz) {
@@ -25,9 +48,9 @@ public class Question {
 		this.setImage(imagePath);
 		int tempID = (int) (Math.random() * 1000000000);
 		while (quiz.getProfile().getHashMap().containsKey(tempID)) {
-			tempID=(int) (Math.random() * 1000000000);
+			tempID = (int) (Math.random() * 1000000000);
 		}
-		ID= tempID;
+		ID = tempID;
 	}
 
 	public boolean setImage(String imagePath) {

@@ -38,6 +38,8 @@ public class DomainTester {
 		System.out.println(n1.getDomainSize());
 		for(int i=0; i<n1.getDomainSize(); i++) {
 			System.out.println(n1.getQuestion(i).getQuestion());
+			System.out.println(n1.getQuestion(i).getAnswer());
+			System.out.println(n1.getQuestion(i).getGraphicPath());
 		}
 	}
 }

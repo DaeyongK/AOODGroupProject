@@ -60,7 +60,9 @@ public class QuestionCard extends QPanel {
 
 		// make text boxes
 		askedNumTimesText = new JLabel("Asked: " + profile.getTimesAsked(currentQ.getID()) + " times");
+		askedNumTimesText.setBackground(new Color(255,244,150));
 		correctNumTimesText = new JLabel("Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
+		correctNumTimesText.setBackground(new Color(255,244,150));
 		answerText = new JLabel(currentQ.getAnswer());
 		answerText.setEnabled(false);
 		questionText = new JLabel(currentQ.getQuestion());
