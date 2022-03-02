@@ -26,6 +26,7 @@ public class Quizit {
             profiles.add(new Profile(file, this));
         }
         setDomain(currentProfile.getDomains().get(0));
+        setQuestion(currentDomain.getQuestion(0));
         System.out.println("yee");
         screen1 = new MainMenu("", this);
         screen2 = new SelectProfile("Select Profile", this);
