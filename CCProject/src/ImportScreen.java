@@ -14,23 +14,26 @@ class ImportScreen extends QPanel implements ActionListener {
     ImportScreen(String title, Quizit q) {
         super(title, q);
         this.q = q;
-        int width = 80;
-        int height = 40;
+        int width = 240;
+        int height = 80;
 
         back = new TransitionButton(this, width, height, Color.WHITE, "Back", 7, 0);
         back.setBounds(20, 20, width, height);
         back.setActionCommand("back");
+        add(back);
         back.addActionListener(this);
 
         done = new TransitionButton(this, width, height, Color.WHITE, "Done", 7, 1);
         done.setBounds(600, 600, width, height);
         done.setActionCommand("done");
         done.addActionListener(this);
+        add(done);
         done.setVisible(false);
 
         chooseFile = new EstablisherButton(this, width, height, Color.WHITE, "Choose File", 2);
         chooseFile.setBounds(480, 560, width, height);
         chooseFile.setActionCommand("choose");
+        add(chooseFile);
         chooseFile.addActionListener(this);
 
         fileName.setBounds(600, 560, 100, 40);
@@ -42,7 +45,8 @@ class ImportScreen extends QPanel implements ActionListener {
         return true;
     }
     public void buttonClicked(int buttonID) {
-        switch (buttonID) {
+        System.out.println(buttonID);
+    	switch (buttonID) {
         case 0:
             q.changeScreen(1);
             break;
@@ -83,9 +87,8 @@ class ImportScreen extends QPanel implements ActionListener {
     public Quizit getQuizit() {
         return q;
     }
-    @Override
     public void actionPerformed(ActionEvent e) {
-        int id = 0;
+    	int id = 0;
         switch (e.getActionCommand()) {
         case "done":
             id = 1;

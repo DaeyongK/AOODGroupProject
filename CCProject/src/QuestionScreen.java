@@ -35,7 +35,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		edit = false;
 		graphicDetected = false;
 		titleLabel = new JLabel(title);
-		//setbounds for titleLabel
+		titleLabel.setBounds(464,86,351,32);
 		questionBox = new JTextField("Enter a new question here: ");
 		answerBox = new JTextField("Enter its answer here: ");
 		questionBox.setBounds(121,399,438,124);
@@ -73,7 +73,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		else
 			graphicDetected = false;
 		titleLabel = new JLabel(title);
-		//setbounds for titleLabel
+		titleLabel.setbounds(464,86,360,32);
 		questionBox = new JTextField(question.getQuestion());
 		answerBox = new JTextField(question.getAnswer());
 		questionBox.setBounds(121,399,438,124);
@@ -86,6 +86,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		
 		attachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Attach",0);
 		detachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Detach",1);
+		
+		//Figure out whether to go back to questionCard or editDomain
 		doneBtn = new TransitionButton(this,161,69,Color.BLACK,"Done",6,2);
 		backBtn = new TransitionButton(this,175,67,Color.BLACK,"Back",6,3);
 		
@@ -109,12 +111,14 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	}
 	public boolean popup(String text) {
 		JPanel pop = new JPanel();
+		pop.setBorders(219,139,841,441);
 		JLabel message = new JLabel(text);
+		message.setBorders(509,160,259,32);
 		pop.add(message);
 		pop.setBackground(TITLE_COLOR);
 		boolean popResult;
 		
-		if (message.getText().contains("Select")) {
+		if (message.getText().contains("Attach")) {
 			EstablisherButton select = new EstablisherButton(this,60,25,Color.WHITE,"Select",10);
 			select.setBackground(Color.WHITE);
 			select.setForeground(Color.BLACK);
@@ -141,7 +145,11 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		else if (message.getText().contains("leave")) {
 			//Backbtn popup yes/no
 			//If create, screenId is 8, if edit, figure it out
-			TransitionButton yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",6,13);
+			if (!edit)
+				TransitionButton yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",8,13);
+			else
+				//Figure out whether to go back to questionCard or editDomain
+				TransitionButton yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",6,13);
 			yes.setBackground(Color.WHITE);
 			yes.setForeground(Color.BLACK);
 			yes.addActionListener(new ActionListener() {
@@ -151,7 +159,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				}
 			});
 			pop.add(yes);
-			TransitionButton no = new TransitionButton(this,40,25,Color.WHITE,"No",6,14);
+			//Figure out whether to go back to questionCard or editDomain
+			EstablisherButton no = new EstablisherButton(this,40,25,Color.WHITE,"No",6,14);
 			no.setBackground(Color.WHITE);
 			no.setForeground(Color.BLACK);
 			no.addActionListener(new ActionListener(){
@@ -217,11 +226,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							Integer.parseInt(changeAsked.getText()) >= 0 &&
 							Integer.parseInt(changeRight.getText()) <= (Integer.parseInt(changeAsked.getText()))) {
 
-
 							question.setQuestion(questionBox.getText());
 							question.setAnswer(answerBox.getText());
 							profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
 							profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
+							//Figure out whether to go back to questionCard or editDomain
+							changeScreen(6)
 						}
 					} catch (NumberFormatException e) {
 						//do nothing
@@ -237,7 +247,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			case 3:
 				//BackBtn
 				if(popup("Are you sure you want to leave?")) {
-					//Transitions to domain
+					//Figure out whether to go back to questionCard or editDomain
+					changeScreen(6);
 				}
 				break;
 		}
@@ -245,6 +256,11 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private void radioClick() {
 		//empty for now
 	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		//empty for now
+	}
+	/*
 	public void paintComponent(Graphics g) {
 		g.setColor(TITLE_COLOR);
 		g.setFont(font);
@@ -256,9 +272,5 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		g.drawRect(121,160,438,166);
 		g.drawString("No Graphic Preview",216,218);
 	}
-
-	@Override
-	public void actionPerformed(ActionEvent e) {
-
-	}
+	*/
 }

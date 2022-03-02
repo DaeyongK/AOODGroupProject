@@ -3,11 +3,11 @@ import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-public class ExportDomain extends QPanel implements ActionListener {
+public class ExportDomain extends DomainScreen implements ActionListener {
 	private JScrollPane domains;
 	private JPanel insideScroll;
 	private Quizit q;
-	ArrayList<Domain> dList = new ArrayList<Domain>(); //Daeyong pls give me access to domain arraylist uwu
+	ArrayList<Domain> dList = new ArrayList<Domain>();
 	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
 	public ExportDomain(String t, Quizit q) {
 		super(t, q);
