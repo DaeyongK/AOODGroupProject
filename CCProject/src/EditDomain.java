@@ -26,6 +26,8 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 	private int draggedIndex = -1;
 	private int droppedIndex = -1;
 	private EstablisherButton currentButton = new EstablisherButton(this,0,0,Color.WHITE,"",-2);
+	private ArrayList<Question> domainQuestions = new ArrayList<Question>();
+	private ArrayList<Question> questionsWorkaround = new ArrayList<Question>();
 	
 	public EditDomain(String t, Quizit q){
 		super(t,q);
@@ -55,6 +57,7 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 		insideScroll.setBackground(QPanel.TITLE_COLOR);
 		insideScroll.setLayout(new BoxLayout(insideScroll,BoxLayout.Y_AXIS));
 		for(int i=0;i<currentDomain.getDomainSize();i++){
+			domainQuestions.add(currentDomain.getQuestion(i));
 			buttons.add(new EstablisherButton(this,850, 25, Color.WHITE,
 				currentDomain.getQuestion(i).getQuestion(),currentDomain.getQuestion(i).getID()));
 			insideScroll.add(buttons.get(i));
@@ -95,22 +98,34 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 					JButton b = (JButton) e.getSource();
 					if(b.getParent().equals(insideScroll)&&draggedIndex>-1){
 						aboveSpot = (EstablisherButton) e.getSource();
-						buttons.remove(draggedIndex);
-						//needs to be tested; reworking array list
-						for(int i=0;i<=droppedIndex;i++){
-							if(i!=draggedIndex)
-								buttonsWorkaround.add(buttons.get(i));
+						//reworking array lists
+						for(int i=0;i<buttons.size();i++) {
+							if(i<=droppedIndex) {
+								if(i!=draggedIndex) {
+									buttonsWorkaround.add(buttons.get(i));
+									questionsWorkaround.add(domainQuestions.get(i));
+								}
+							} else {
+								if(i==droppedIndex+1) {
+									buttonsWorkaround.add(buttons.get(draggedIndex));
+									buttonsWorkaround.add(buttons.get(droppedIndex+1));
+									questionsWorkaround.add(domainQuestions.get(draggedIndex));
+									questionsWorkaround.add(domainQuestions.get(draggedIndex+1));
+								} else {
+									buttonsWorkaround.add(buttons.get(i));
+									questionsWorkaround.add(domainQuestions.get(i));
+								}
+							}
 						}
-						for(int i=droppedIndex+1;i<buttons.size();i++){
-							if(i==droppedIndex+1)
-								buttonsWorkaround.add(buttons.get(draggedIndex));
-							else
-								buttonsWorkaround.add(buttons.get(i));
-						}
+						buttons.clear();
+						domainQuestions.clear();
 						for(int i=0;i<buttonsWorkaround.size();i++){
-							buttons.set(i, buttonsWorkaround.get(i));
+							buttons.add(buttonsWorkaround.get(i));
+							questionsWorkaround.add(questionsWorkaround.get(i));
 						}
-						//end needs to be tested; reworking array list
+						buttonsWorkaround.clear();
+						questionsWorkaround.clear();
+						//end reworking array lists
 						insideScroll.removeAll();
 						for(int i=0;i<buttons.size();i++) {
 							insideScroll.add(buttons.get(i));
@@ -193,13 +208,11 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 				//read the screen, finalize changes, go to select domain(5)
 				currentDomain.setDomainName(nameEdit.getText());
 				//reorder the questions based on the screen
-				/*
 				for(int i=0;i<buttons.size();i++)
-					currentDomain.deleteQuestion(buttons.get(i).getID());
+					currentDomain.deleteQuestion(buttons.get(i).getButtonID());
 				for(int i=0;i<buttons.size();i++)
-					currentDomain.addQuestion(buttons.get(i));
-				*/
-				//end reordering, but I’m now realizing that this probably won’t work
+					currentDomain.addQuestion(domainQuestions.get(i));
+				//end reordering
 				theQuizit.changeScreen(5);
 				break;
 			case 12:
