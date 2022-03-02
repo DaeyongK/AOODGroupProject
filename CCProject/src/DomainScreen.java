@@ -14,8 +14,8 @@ public abstract class DomainScreen extends QPanel{
 		super(input, quizit);
 		JPanel pane = new JPanel();
 		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
-		Quizit gimmeDomains = new Quizit();
-		domains = gimmeDomains.getProfile().getDomains();
+		domains = quizit.getProfile().getDomains();
+		domainButtons = new ArrayList<EstablisherButton>();
 		for(int i = 0; i< domains.size();i++) {
 			domainButtons.add(new EstablisherButton(this, 800, 50,Color.white,domains.get(i).getDomainName(),i));
 		}
@@ -51,11 +51,20 @@ public abstract class DomainScreen extends QPanel{
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		DomainScreenTester test= new DomainScreenTester("Test Domain", new Quizit());
+		DomainScreenTester test= new DomainScreenTester("Test Domain", new Testit());
 		frame.setContentPane(test);
 		frame.pack();
 		frame.setSize(1280, 720);
 		frame.setVisible(true);
+	}
+}
+class Testit extends Quizit{
+	Testit(){
+		ArrayList<Question> thing = new ArrayList<Question>();
+		setProfile(new Profile(null, this));
+		addProfile(getProfile());
+		getProfile().addDomain(new Domain("yes", thing));
+
 	}
 }
 class DomainScreenTester extends DomainScreen{
@@ -63,6 +72,7 @@ class DomainScreenTester extends DomainScreen{
 	DomainScreenTester(String input, Quizit quizit) {
 		super(input,quizit);
 	}
+	
 
 	@Override
 	public void buttonClicked(int buttonID) {
