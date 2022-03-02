@@ -12,6 +12,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private boolean edit;
 	private boolean graphicDetected;
 	
+	private JLabel titleLabel;
 	private JTextField questionBox;
 	private JTextField answerBox;
 	private JTextField changeRight;
@@ -33,8 +34,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		screenId=11;
 		edit = false;
 		graphicDetected = false;
+		titleLabel = new JLabel(title);
+		//setbounds for titleLabel
 		questionBox = new JTextField("Enter a new question here: ");
 		answerBox = new JTextField("Enter its answer here: ");
+		questionBox.setBounds(121,399,438,124);
+		answerBox.setBounds(720,399,438,124);
 		
 		attachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Attach",0);
 		detachGraphic = new EstablisherButton(this,161,44,Color.BLACK,"Detach",1);
@@ -46,6 +51,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		doneBtn.setBounds(559,570,161,69);
 		backBtn.setBounds(49,42,175,67);
 		
+		this.add(titleLabel);
 		this.add(questionBox);
 		this.add(answerBox);
 		this.add(attachGraphic);
@@ -66,6 +72,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			graphicDetected = true;
 		else
 			graphicDetected = false;
+		titleLabel = new JLabel(title);
+		//setbounds for titleLabel
 		questionBox = new JTextField(question.getQuestion());
 		answerBox = new JTextField(question.getAnswer());
 		questionBox.setBounds(121,399,438,124);
@@ -86,6 +94,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		doneBtn.setBounds(559,570,161,69);
 		backBtn.setBounds(49,42,175,67);
 		
+		this.add(titleLabel);
 		this.add(questionBox);
 		this.add(answerBox);
 		this.add(changeRight);
@@ -198,7 +207,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			case 2:
 				//DoneBtn
 				//Checks if all textfields are entered
-				//need if statement for changeAsked and changeRight to check if they're ints
 				if (edit) {
 					try {
 						if (!questionBox.getText().equals("") &&
