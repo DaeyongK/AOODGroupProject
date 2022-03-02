@@ -109,6 +109,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	public int getScreenID() {
 		return screenId;
 	}
+	//https://www.tutorialspoint.com/what-are-the-different-types-of-joptionpane-dialogs-in-java#:~:text=The%20JOptionPane%20is%20a%20subclass,the%20complexity%20of%20the%20code.
 	public boolean popup(String text) {
 		int result = JOptionPane.showConfirmDialog(this, text);
 		switch (result) {
