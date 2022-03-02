@@ -15,39 +15,3 @@ public class test {
 		frame.setVisible(true);
 	}
 }
-class Testit extends Quizit{
-	Testit(){
-		ArrayList<Question> thing = new ArrayList<Question>();
-		setProfile(new Profile(null, this));
-		addProfile(getProfile());
-		setDomain(new Domain("uwu", thing));
-		getProfile().addDomain(new Domain("yes", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-		getProfile().addDomain(new Domain("no", thing));
-
-
-
-	}
-}
