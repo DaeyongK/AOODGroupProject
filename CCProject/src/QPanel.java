@@ -8,7 +8,7 @@ public abstract class QPanel extends JPanel {
 	protected String title;
 	protected int id = 0;
 	protected Quizit quizit;
-	protected titleLabel;
+	protected JLabel titleLabel;
 
 	QPanel(String t, Quizit quizit){
 		title = t;
