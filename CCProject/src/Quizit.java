@@ -19,11 +19,14 @@ public class Quizit {
     private QuestionScreen screen11, screen12;
     private JFrame frame;
     Quizit() {
+    	currentProfile = new Profile("Default", 1);
+    	profiles.add(currentProfile);
         File[] profilexmls = new File("Profiles").listFiles();
         for(File file : profilexmls) {
             profiles.add(new Profile(file, this));
         }
-        currentProfile = profiles.get(0);
+        setDomain(currentProfile.getDomains().get(0));
+        System.out.println("yee");
         screen1 = new MainMenu("", this);
         screen2 = new SelectProfile("Select Profile", this);
         screen3 = new CreateProfile("Create Profile", this);

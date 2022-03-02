@@ -5,6 +5,7 @@ import java.util.*;
 public class DomainTester {
 	public static void main(String args[]) {
 		Quizit quiz= new Quizit();
+		System.out.println(quiz.getAllProfiles().size());
 		Question q1= new Question("1+1?", "2", "QuestionGraphics/mathPic.jpg",quiz);
 		Question q2= new Question("1+2?", "3",quiz);
 		Question q3= new Question("1+3?", "4",quiz);
