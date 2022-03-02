@@ -12,7 +12,6 @@ public class TransitionButton extends QButton {
 	private int screenId;
 	TransitionButton(QPanel Panel,int width, int height, Color color, String text, int screenID, int buttonID){
 		super(Panel,width,height,color,text,buttonID); 
-		addActionListener(this);
 		screenId = screenID;
 	}
 	public int getButtonID(){
