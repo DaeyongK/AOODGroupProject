@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.util.*;
 import javax.swing.*;
+
 public abstract class DomainScreen extends QPanel{
 	protected ArrayList<EstablisherButton> domainButtons;
 	protected TransitionButton exit;
@@ -9,9 +10,11 @@ public abstract class DomainScreen extends QPanel{
 		/*
 		button ids:
 		exit = -1
-		domain buttons = index in all domains
+		domain buttons = index in allDomains
 		 */
 		super(input, quizit);
+		System.out.print(popup("yeah"));
+
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		domains = quizit.getProfile().getDomains();
 		domainButtons = new ArrayList<EstablisherButton>();
@@ -47,14 +50,30 @@ public abstract class DomainScreen extends QPanel{
 	public void paintComponent(Graphics g) {
 	}
 	public static void main(String[] args) {
+		Testit t = new Testit();
 		JFrame frame = new JFrame();
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		DomainScreenTester test= new DomainScreenTester("Test Domain", new Testit());
+		DomainScreenTester test= new DomainScreenTester("Test Domain", t);
 		frame.setContentPane(test);
 		frame.pack();
 		frame.setSize(1280, 720);
-		frame.repaint();
 		frame.setVisible(true);
+		int result = JOptionPane.showConfirmDialog(frame, "hi");
+		switch (result) {
+		case JOptionPane.YES_OPTION:
+			System.out.print("hi");
+			
+		case JOptionPane.NO_OPTION:
+			System.out.print("hi");
+			
+		case JOptionPane.CANCEL_OPTION:
+			System.out.println("Cancel");
+			break;
+		case JOptionPane.CLOSED_OPTION:
+			System.out.println("Closed");
+			break;
+		}
+		System.out.print("hi");
 	}
 }
 class Testit extends Quizit{
