@@ -45,7 +45,6 @@ public abstract class DomainScreen extends QPanel{
 
 	}
 	public void paintComponent(Graphics g) {
-		g.drawString(title, 300, 50);
 	}
 	public static void main(String[] args) {
 		JFrame frame = new JFrame();
@@ -54,6 +53,7 @@ public abstract class DomainScreen extends QPanel{
 		frame.setContentPane(test);
 		frame.pack();
 		frame.setSize(1280, 720);
+		frame.repaint();
 		frame.setVisible(true);
 	}
 }
@@ -102,7 +102,7 @@ class DomainScreenTester extends DomainScreen{
 	@Override
 	public void buttonClicked(int buttonID) {
 		// TODO Auto-generated method stub
-
+		System.out.println(buttonID);
 	}
 
 	@Override
