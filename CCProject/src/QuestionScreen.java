@@ -109,132 +109,49 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	public int getScreenID() {
 		return screenId;
 	}
-	//https://www.tutorialspoint.com/what-are-the-different-types-of-joptionpane-dialogs-in-java#:~:text=The%20JOptionPane%20is%20a%20subclass,the%20complexity%20of%20the%20code.
-	public boolean popup(String text) {
+	public boolean popup(String text, boolean select) {
 		int result = JOptionPane.showConfirmDialog(this, text);
-		switch (result) {
-		case JOptionPane.YES_OPTION:
-			return true;
-			
-		case JOptionPane.NO_OPTION:
+		if (select) {
+			JOptionPane.showMessageDialog(thisScreen, "Select a Graphic");
+			switch (result) {
+			case JOptionPane.OK_OPTION:
+				//Fancy bufferedImage code here
+				if (popup("Attach a Graphic",false))
+					return true;
+				break;
+			case JOptionPane.CLOSED_OPTION:
+				break;
+			}
 			return false;
-			
-		case JOptionPane.CANCEL_OPTION:
-			System.out.println("Cancel");
-			break;
-		case JOptionPane.CLOSED_OPTION:
-			System.out.println("Closed");
-			break;
-		}
-		return false;
-	}
-	/*
-	public boolean popup(String text) {
-		JPanel pop = new JPanel();
-		pop.setBounds(219,139,841,441);
-		JLabel message = new JLabel(text);
-		message.setBounds(509,160,259,32);
-		pop.add(message);
-		pop.setBackground(TITLE_COLOR);
-//		boolean popResult;
-		
-		if (message.getText().contains("Attach")) {
-			EstablisherButton select = new EstablisherButton(this,60,25,Color.WHITE,"Select",10);
-			select.setBackground(Color.WHITE);
-			select.setForeground(Color.BLACK);
-			select.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					//Somehow prompt to get image
-					thisScreen.remove(pop);
-					if(!graphicDetected) {
-						if(popup("Attach Graphic\n\nAre you sure?"));
-
-						else;
-							//Keeps the previous graphic
-					}
-					else {
-						//Selected graphic is picked
-					}
-
-//					return true;
-				}
-			});
-			pop.add(select);
-
-		}
-		else if (message.getText().contains("leave")) {
-			//Backbtn popup yes/no
-			//If create, screenId is 8, if edit, figure it out
-			TransitionButton yes;
-			if (!edit)
-				yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",8,13);
-			else
-				//Figure out whether to go back to questionCard or editDomain
-				yes = new TransitionButton(this,40,25,Color.WHITE,"Yes",6,13);
-			yes.setBackground(Color.WHITE);
-			yes.setForeground(Color.BLACK);
-			yes.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					thisScreen.remove(pop);
-//					popResult = true;
-				}
-			});
-			pop.add(yes);
-			//Figure out whether to go back to questionCard or editDomain
-			EstablisherButton no = new EstablisherButton(this,40,25,Color.WHITE,"No",14);
-			no.setBackground(Color.WHITE);
-			no.setForeground(Color.BLACK);
-			no.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					thisScreen.remove(pop);
-//					popResult = false;
-				}
-			});
-			pop.add(no);
 		}
 		else {
-			//General popup yes/no
-			EstablisherButton yes = new EstablisherButton(this,40,25,Color.WHITE,"Yes",15);
-			yes.setBackground(Color.WHITE);
-			yes.setForeground(Color.BLACK);
-			yes.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					thisScreen.remove(pop);
-//					popResult = true;
-				}
-			});
-			pop.add(yes);
-			EstablisherButton no = new EstablisherButton(this,40,25,Color.WHITE,"No",16);
-			no.setBackground(Color.WHITE);
-			no.setForeground(Color.BLACK);
-			no.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					thisScreen.remove(pop);
-//					popResult = false;
-				}
-			});
-			pop.add(no);
+			switch (result) {
+			case JOptionPane.YES_OPTION:
+				return true;
+				break;
+			case JOptionPane.NO_OPTION:
+				break;
+			case JOptionPane.CANCEL_OPTION:
+				break;
+			case JOptionPane.CLOSED_OPTION:
+				break;
+			}
+			return false;
 		}
-		thisScreen.add(pop);
-//		return popResult;
-		return true;
 	}
-	*/
 	public void buttonClicked(int buttonID) {
 		QPanel nextScreen = thisScreen;
 		switch(buttonID){
 			case 0:
-				if(popup("Attach Graphic\n\nSelect File")) {
-					//Attach Graphic Select File popup
-					//Leads to being prompted to get image
+				if(popup("Attach Graphic",true)) {
+					question.setImage();
 				}
 				break;
 			case 1:
-				if(popup("DetachGraphic\n\nAre you sure?")) {
-					question.detachImage();
+				if(graphicDetected) {
+					if(popup("Detach Graphic",false))
+						question.detachImage();
 				}
-//				else
-//					question.setImage();
 				break;
 			case 2:
 				//DoneBtn
@@ -256,22 +173,26 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							//Figure out whether to go back to questionCard or editDomain
 							quizit.changeScreen(6);
 						}
-					} catch (NumberFormatException e) {
-						//do nothing
-					}
+					} catch (NumberFormatException e) {}
 				}
 				else
-					if (!questionBox.getText().equals("") && 
-					    !answerBox.getText().equals("")) {
-						question.setQuestion(questionBox.getText());
-						question.setAnswer(answerBox.getText());
-					}
+					try {
+						if (!questionBox.getText().equals("") && 
+					    		!answerBox.getText().equals("")) {
+							question.setQuestion(questionBox.getText());
+							question.setAnswer(answerBox.getText());
+							quizit.changeScreen(6);
+						}
+					} catch (NullPointerException e) {}
 				break;
 			case 3:
 				//BackBtn
-				if(popup("Are you sure you want to leave?")) {
-					//Figure out whether to go back to questionCard or editDomain
-					quizit.changeScreen(	6);
+				if(popup("Are you sure you want to leave?",false)) {
+					if(edit)
+						//Figure out whether to go back to questionCard or editDomain
+						Quizit.changeScreen(6);
+					else
+						Quizit.changeScreen(8);
 				}
 				break;
 		}
