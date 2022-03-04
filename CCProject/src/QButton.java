@@ -1,11 +1,9 @@
 import javax.swing.*;
-import javax.swing.event.MouseInputAdapter;
-
-import org.w3c.dom.events.MouseEvent;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 //Abner Ben
 abstract class QButton extends JButton implements ActionListener {
@@ -16,16 +14,35 @@ abstract class QButton extends JButton implements ActionListener {
     private int Width;
     private int Height;
     private String Text;
+
     QButton(QPanel Panel, int width, int height, Color color, String text, int buttonID) {
         setText(text);
         setBackground(color);
         addActionListener(this);
-        addMouseListener(new MouseInputAdapter() {
-            public void mouseEntered(MouseEvent e) {
-            	setBackground(TITLE_COLOR);
+        addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+
             }
-            public void mouseExited(MouseEvent e){
-               setBackground(null);
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+
+            }
+
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                setBackground(TITLE_COLOR);
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                setBackground(null);
             }
         });
         buttonId = buttonID;
@@ -34,10 +51,12 @@ abstract class QButton extends JButton implements ActionListener {
         Width = width;
         Height = height;
     }
+
     public void actionPerformed(ActionEvent event) {
         panel.buttonClicked(buttonId);
         EstablisherButton button = new EstablisherButton(panel, Width, Height, TITLE_COLOR, Text, buttonId);
     }
+
     public int getButtonID() {
         return buttonId;
     }
