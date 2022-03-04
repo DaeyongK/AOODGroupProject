@@ -15,7 +15,6 @@ abstract class QButton extends JButton implements ActionListener {
 
     QButton(QPanel Panel, int width, int height, Color color, String text, int buttonID) {
         setText(text);
-        setBounds(50, 50, width, height);
         setBackground(color);
         addActionListener(this);
         buttonId = buttonID;
@@ -29,9 +28,6 @@ abstract class QButton extends JButton implements ActionListener {
         panel.buttonClicked(buttonId);
         EstablisherButton button = new EstablisherButton(panel, Width, Height, TITLE_COLOR, Text, buttonId);
     }
-
-    public abstract void mouseOver();
-
     public int getButtonID() {
         return buttonId;
     }

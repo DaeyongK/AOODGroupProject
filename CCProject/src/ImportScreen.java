@@ -12,13 +12,11 @@ class ImportScreen extends QPanel implements ActionListener {
     private File selectedFile;
     private JLabel fileName = new JLabel("");
     private JFileChooser jfc;
-    private Quizit q;
 
     ImportScreen(String title, Quizit q) {
-        super(title, q);
-        this.q = q;
-        int width = 240;
-        int height = 80;
+    	super(title, q);
+        int width = 150;
+        int height = 50;
 
         back = new TransitionButton(this, width, height, Color.WHITE, "Back", 7, 0);
         back.setBounds(20, 20, width, height);
@@ -51,11 +49,11 @@ class ImportScreen extends QPanel implements ActionListener {
         System.out.println(buttonID);
         switch (buttonID) {
             case 0:
-                q.changeScreen(1);
+                quizit.changeScreen(1);
                 break;
             case 1:
-                q.getProfile().addDomain(new Domain(selectedFile, q));
-                q.changeScreen(1);
+                quizit.getProfile().addDomain(new Domain(selectedFile, quizit));
+                quizit.changeScreen(1);
                 break;
             //send to main menu and parse selectedFile into a domain
             case 2:
@@ -90,10 +88,6 @@ class ImportScreen extends QPanel implements ActionListener {
             return extension.equals("xml");
         }
         return false;
-    }
-
-    public Quizit getQuizit() {
-        return q;
     }
 
     public void actionPerformed(ActionEvent e) {
