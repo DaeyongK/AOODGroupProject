@@ -1,4 +1,8 @@
 import javax.swing.*;
+import javax.swing.event.MouseInputAdapter;
+
+import org.w3c.dom.events.MouseEvent;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,6 +20,14 @@ abstract class QButton extends JButton implements ActionListener {
         setText(text);
         setBackground(color);
         addActionListener(this);
+        addMouseListener(new MouseInputAdapter() {
+            public void mouseEntered(MouseEvent e) {
+            	setBackground(TITLE_COLOR);
+            }
+            public void mouseExited(MouseEvent e){
+               setBackground(null);
+            }
+        });
         buttonId = buttonID;
         panel = Panel;
         Text = text;

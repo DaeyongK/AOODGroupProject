@@ -10,18 +10,7 @@ public class TransitionButton extends QButton {
         super(Panel, width, height, color, text, buttonID);
         screenId = screenID;
     }
-
     public int getScreenID() {
         return screenId;
-    }
-    public void mouseOver(TransitionButton b) {
-        addMouseMotionListener(new MouseInputAdapter() {
-            public void MouseEntered(MouseEvent e) {
-            	b.setBackground(TITLE_COLOR);
-            }
-            public void mouseExited(MouseEvent e){
-               b.setBackground(null);
-            }
-        });
     }
 }
