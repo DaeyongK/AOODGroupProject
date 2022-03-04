@@ -8,7 +8,7 @@ public class SelectDomain extends DomainScreen implements MouseListener {
     private EstablisherButton launch;
     private EstablisherButton edit;
     private EstablisherButton delete;
-
+    private int domainSelected;
     SelectDomain(String input, Quizit quizit) {
         super(input, quizit);
         exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", 1, -1);
@@ -28,7 +28,7 @@ public class SelectDomain extends DomainScreen implements MouseListener {
         if (buttonID == -1) {
             return;
         }
-        if (buttonID < 0) {
+        else if (buttonID < 0) {
             if (buttonID == -2) {
                 quizit.setDomain(domains.get(buttonID));
                 quizit.changeScreen(6);
@@ -39,15 +39,17 @@ public class SelectDomain extends DomainScreen implements MouseListener {
             }
             if (buttonID == -4) {
                 if (popup("Are you sure?")) {
-                    quizit.getProfile().getDomains();
-                    quizit.getProfile().detachDomain(domains.get(buttonID));
+                    quizit.getProfile().detachDomain(domains.get(domainSelected));
+                    domainButtons.remove(domainSelected);
+                    
                 }
             }
         }
-        if (dClick) {
+        else if (dClick) {
             quizit.setDomain(domains.get(buttonID));
             quizit.changeScreen(6);
         } else {
+        	domainSelected = buttonID;
             launch.setEnabled(true);
             edit.setEnabled(true);
             delete.setEnabled(true);
