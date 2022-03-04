@@ -114,37 +114,32 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		if (select) {
 			JOptionPane.showMessageDialog(thisScreen, "Select a Graphic");
 			switch (result) {
-			case JOptionPane.OK_OPTION:
-				//Fancy bufferedImage code here
-				if (popup("Attach a Graphic",false))
-					return true;
-				break;
-			case JOptionPane.CLOSED_OPTION:
-				break;
+				case JOptionPane.OK_OPTION:
+					//Fancy bufferedImage code here
+					if (popup("Attach a Graphic", false))
+						return true;
+					//will this case ever be used? if not then remove it
+				case JOptionPane.CLOSED_OPTION:
 			}
-			return false;
-		}
-		else {
+		} else {
 			switch (result) {
-			case JOptionPane.YES_OPTION:
-				return true;
-				break;
-			case JOptionPane.NO_OPTION:
-				break;
-			case JOptionPane.CANCEL_OPTION:
-				break;
-			case JOptionPane.CLOSED_OPTION:
-				break;
+				case JOptionPane.YES_OPTION:
+					return true;
+				//will these cases ever be used?
+				//cus if not then theres no point in having them
+				case JOptionPane.NO_OPTION:
+				case JOptionPane.CANCEL_OPTION:
+				case JOptionPane.CLOSED_OPTION:
 			}
-			return false;
 		}
+		return false;
 	}
 	public void buttonClicked(int buttonID) {
 		QPanel nextScreen = thisScreen;
 		switch(buttonID){
 			case 0:
 				if(popup("Attach Graphic",true)) {
-					question.setImage();
+//					question.setImage();
 				}
 				break;
 			case 1:
@@ -190,9 +185,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				if(popup("Are you sure you want to leave?",false)) {
 					if(edit)
 						//Figure out whether to go back to questionCard or editDomain
-						Quizit.changeScreen(6);
+						quizit.changeScreen(6);
 					else
-						Quizit.changeScreen(8);
+						quizit.changeScreen(8);
 				}
 				break;
 		}
