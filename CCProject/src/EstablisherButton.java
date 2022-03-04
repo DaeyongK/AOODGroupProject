@@ -10,7 +10,7 @@ public class EstablisherButton extends QButton {
     }
     public void mouseOver(EstablisherButton b) {
         addMouseMotionListener(new MouseInputAdapter() {
-            public void MouseEnter(MouseEvent e) {
+            public void MouseEntered(MouseEvent e) {
             	b.setBackground(TITLE_COLOR);
             }
             public void mouseExited(MouseEvent e){

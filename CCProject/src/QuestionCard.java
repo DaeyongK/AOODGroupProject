@@ -17,13 +17,15 @@ public class QuestionCard extends QPanel {
     private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, domainNameText;
     private BufferedImage questImage;
     private LinkedHashMap<Integer, int[]> questionHash;
+    private Graphics g=this.getGraphics();
 
     QuestionCard(String title, Quizit quiz) {
         super(title, quiz);
         quizit = quiz;
         currentDomain = quiz.getDomain();
         profile = quiz.getProfile();
-
+       
+        
         // different profile settings ||||
         //                            VVVV
         if (profile.getPossible() && profile.getOrder()) {
@@ -73,26 +75,31 @@ public class QuestionCard extends QPanel {
         backBtn = new TransitionButton(this, 100, 50, Color.white, "Exit", 5, 0);
 
         ansBtn = new EstablisherButton(this, 100, 50, Color.white, "Answer", 1);
-        ansBtn.setBounds(1000, 350, 200, 50);
+        ansBtn.setBounds(1000, 350, 250, 50);
 
         knewAnsBtn = new EstablisherButton(this, 90, 40, Color.white, "I knew the answer", 2);
-        knewAnsBtn.setBounds(1000, 325, 200, 50);
+        knewAnsBtn.setBounds(1000, 325, 250, 50);
         knewAnsBtn.setEnabled(false);
         knewAnsBtn.hide();
 
         notKnewAnsBtn = new EstablisherButton(this, 90, 40, Color.white, "I didn't know", 3);
-        notKnewAnsBtn.setBounds(1000, 380, 200, 50);
+        notKnewAnsBtn.setBounds(1000, 380, 250, 50);
         notKnewAnsBtn.setEnabled(false);
         notKnewAnsBtn.hide();
 
         nextQuestBtn = new EstablisherButton(this, 100, 50, Color.white, "Next Question", 4);
+        nextQuestBtn.setBounds(1000, 350, 250, 50);
         nextQuestBtn.setEnabled(false);
         nextQuestBtn.hide();
 
         delQuestBtn = new EstablisherButton(this, 100, 50, Color.white, "Delete Question", 6);
+        delQuestBtn.setBounds(currentQIndex, currentQIndex, currentQIndex, currentQIndex);;
 
         // add buttons and text to contentPane
+        ansBtn.mouseOver(ansBtn);
         this.add(ansBtn);
+        
+        
         this.add(knewAnsBtn);
         this.add(notKnewAnsBtn);
         this.add(nextQuestBtn);
@@ -105,6 +112,10 @@ public class QuestionCard extends QPanel {
         this.add(answerText);
         this.add(questionText);
         this.add(domainNameText);
+        
+        //Draw background stuff
+        this.revalidate();
+        this.repaint();
     }
 
     public int getScreenID() {
@@ -198,6 +209,14 @@ public class QuestionCard extends QPanel {
     public void nextQ() {
         currentQIndex++;
         currentQ = questions.get(currentQIndex);
+    }
+    
+    public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
+    	g.setColor(new Color (230,220,0));
+    	g.fillRect(50, 230, 800, 380);
+    	g.setColor(Color.gray);
+    	g.fillRect(0, 0, 1280, 100);
     }
 
     public static void main(String[] args) {
