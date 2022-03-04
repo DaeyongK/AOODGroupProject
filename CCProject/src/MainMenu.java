@@ -21,7 +21,9 @@ public class MainMenu extends QPanel implements ActionListener {
 
     public MainMenu(String title, Quizit q) {
         super(title, q);
-        this.setLayout(new BorderLayout());
+        this.setLayout(new BorderLayout(60,40));
+        //for use outside the constructor
+        menu = this;
         //the jpanel for the center of the screen
         containsButtons = new JPanel();
         containsButtons.setBackground(QPanel.TITLE_COLOR);
@@ -49,7 +51,13 @@ public class MainMenu extends QPanel implements ActionListener {
         detach = new TransitionButton(this, 75, 25, Color.WHITE, "Detach Domain", 10, 15);
         detach.addActionListener(this);
         containsButtons.add(detach);
-        //add everything to the center panel
+        //resize, and add everything to the center panel
+        JPanel filler = new JPanel();
+        filler.setBackground(this.BACKGROUND_COLOR);
+        JPanel filler2 = new JPanel();
+        filler2.setBackground(this.BACKGROUND_COLOR);
+        this.add(filler, BorderLayout.LINE_START);
+        this.add(filler2, BorderLayout.LINE_END);
         this.add(containsButtons, BorderLayout.CENTER);
 
         //open profile popup button
@@ -64,9 +72,7 @@ public class MainMenu extends QPanel implements ActionListener {
         exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16);
         exit.addActionListener(e -> System.exit(0));
         this.add(exit,BorderLayout.PAGE_END);
-
-        //for use outside the constructor
-        menu = this;
+        
     }
 
     public int getScreenID() {
@@ -86,6 +92,8 @@ public class MainMenu extends QPanel implements ActionListener {
         pop.add(options);
         //add the popup to the menu
         menu.add(pop, BorderLayout.LINE_END);
+        menu.revalidate();
+        menu.repaint();
         return popupBool;
     }
 
