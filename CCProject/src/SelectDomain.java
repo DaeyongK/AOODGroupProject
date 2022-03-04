@@ -11,6 +11,8 @@ public class SelectDomain extends DomainScreen implements MouseListener {
     private int domainSelected;
     SelectDomain(String input, Quizit quizit) {
         super(input, quizit);
+        repaint();
+
         exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", 1, -1);
         launch = new EstablisherButton(this, 100, 50, Color.WHITE, "Launch", -2);
         edit = new EstablisherButton(this, 100, 50, Color.WHITE, "Edit", -3);
@@ -26,22 +28,25 @@ public class SelectDomain extends DomainScreen implements MouseListener {
     @Override
     public void buttonClicked(int buttonID) {
         if (buttonID == -1) {
+        	quizit.changeScreen(1);
             return;
         }
         else if (buttonID < 0) {
             if (buttonID == -2) {
-                quizit.setDomain(domains.get(buttonID));
+                quizit.setDomain(domains.get(domainSelected));
                 quizit.changeScreen(6);
             }
             if (buttonID == -3) {
-                quizit.setDomain(domains.get(buttonID));
+                quizit.setDomain(domains.get(domainSelected));
                 quizit.changeScreen(8);
             }
             if (buttonID == -4) {
                 if (popup("Are you sure?")) {
                     quizit.getProfile().detachDomain(domains.get(domainSelected));
+                    pane.remove(domainButtons.get(domainSelected));
+
                     domainButtons.remove(domainSelected);
-                    
+                    repaint();
                 }
             }
         }

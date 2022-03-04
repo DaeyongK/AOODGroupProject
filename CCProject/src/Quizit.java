@@ -92,39 +92,62 @@ public class Quizit {
             case 1:
                 screen1 = new MainMenu("", this);
                 frame.setContentPane(screen1);
+                break;
             case 2:
                 screen2 = new SelectProfile("Select Profile", this);
                 frame.setContentPane(screen2);
+                break;
+
             case 3:
                 screen3 = new CreateProfile("Create Profile", this);
                 frame.setContentPane(screen3);
+                break;
+
             case 4:
                 screen4 = new Options("Quizzing Options", this);
                 frame.setContentPane(screen4);
+                break;
+
             case 5:
                 screen5 = new SelectDomain("Select Domain", this);
                 frame.setContentPane(screen5);
+                break;
+
             case 6:
                 screen6 = new QuestionCard("", this);
                 frame.setContentPane(screen6);
+                break;
+
             case 7:
                 screen7 = new ImportScreen("Import Domain", this);
                 frame.setContentPane(screen7);
+                break;
+
             case 8:
                 screen8 = new EditDomain("Edit Domain", this);
                 frame.setContentPane(screen8);
+                break;
+
             case 9:
                 screen9 = new ExportDomain("Export Domain", this);
                 frame.setContentPane(screen9);
+                break;
+
             case 10:
                 screen10 = new DetachDomain("Detach Domain", this);
                 frame.setContentPane(screen10);
+                break;
+
             case 11:
                 screen11 = new QuestionScreen("Create Question");
                 frame.setContentPane(screen11);
+                break;
+
             case 12:
                 screen12 = new QuestionScreen("Edit Question", this);
                 frame.setContentPane(screen12);
+                break;
+
         }
     }
 }
