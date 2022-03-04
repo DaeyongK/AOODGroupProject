@@ -63,11 +63,13 @@ public class QuestionCard extends QPanel {
         // make text boxes
         askedNumTimesText = new JLabel("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times");
         askedNumTimesText.setFont(new Font("SanSerif",Font.PLAIN,20));
-        askedNumTimesText.setBackground(Color.yellow);
         askedNumTimesText.setOpaque(true);
-        askedNumTimesText.setBounds(50, 150, 200, 40);
+        askedNumTimesText.setBounds(50, 150, 350, 40);
         askedNumTimesText.setBackground(new Color(255, 244, 150));
-        correctNumTimesText = new JLabel("Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
+        correctNumTimesText = new JLabel("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
+        correctNumTimesText.setFont(new Font("SanSerif",Font.PLAIN,20));
+        correctNumTimesText.setOpaque(true);
+        correctNumTimesText.setBounds(450, 150, 400, 40);
         correctNumTimesText.setBackground(new Color(255, 244, 150));
         answerText = new JLabel(currentQ.getAnswer());
         answerText.setVisible(false);
@@ -154,7 +156,7 @@ public class QuestionCard extends QPanel {
             answerText.setEnabled(true);
             answerText.setVisible(true);
             profile.asked(currentQ.getID());
-            askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID()) + "");
+            askedNumTimesText.setText("   Asked: " +profile.getTimesAsked(currentQ.getID()) + "");
         } else if (buttonID == 2) {
             knewAnsBtn.setEnabled(false);
             knewAnsBtn.setVisible(false);

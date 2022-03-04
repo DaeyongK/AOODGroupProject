@@ -15,6 +15,7 @@ class ImportScreen extends QPanel implements ActionListener {
 
     ImportScreen(String title, Quizit q) {
     	super(title, q);
+
         int width = 150;
         int height = 50;
 

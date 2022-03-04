@@ -3,6 +3,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 
 public class ExportDomain extends DomainScreen implements ActionListener {
@@ -25,6 +27,7 @@ public class ExportDomain extends DomainScreen implements ActionListener {
             insideScroll.add(buttons.get(i));
             buttons.get(i).setActionCommand(i + "");
             buttons.get(i).addActionListener(this);
+            System.out.println("working");
         }
     }
 
@@ -39,6 +42,13 @@ public class ExportDomain extends DomainScreen implements ActionListener {
 
     public void buttonClicked(int buttonID) {
         File exported = dList.get(buttonID).export(); //where do you want the file to be stored?
+        String path = test.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+        String decodedPath;
+		try {
+			decodedPath = URLDecoder.decode(path, "UTF-8");
+	        decodedPath =decodedPath.substring(0, decodedPath.substring(0,decodedPath.lastIndexOf("/")).lastIndexOf("/"));
+	        File f = new File(exported, decodedPath + "/Domains");
+		} catch (UnsupportedEncodingException e) {}
         quizit.changeScreen(1);
     }
 
