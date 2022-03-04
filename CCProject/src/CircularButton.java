@@ -38,7 +38,7 @@ public class CircularButton extends EstablisherButton {
             public void MouseEnter(MouseEvent e) {
             	b.setBackground(TITLE_COLOR);
             }
-            public void mouseExited(MouseEvent evt){
+            public void mouseExited(MouseEvent e){
                b.setBackground(null);
             }
         });
