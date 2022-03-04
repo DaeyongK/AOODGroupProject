@@ -55,6 +55,7 @@ public class QuestionCard extends QPanel {
         }
         currentQIndex = 0;
         currentQ = questions.get(currentQIndex);
+        this.setLayout(null);
 
         // make text boxes
         askedNumTimesText = new JLabel("Asked: " + profile.getTimesAsked(currentQ.getID()) + " times");
@@ -72,13 +73,15 @@ public class QuestionCard extends QPanel {
         backBtn = new TransitionButton(this, 100, 50, Color.white, "Exit", 5, 0);
 
         ansBtn = new EstablisherButton(this, 100, 50, Color.white, "Answer", 1);
-        ansBtn.setBounds(400, currentQIndex, 100, 50);
+        ansBtn.setBounds(1000, 350, 200, 50);
 
         knewAnsBtn = new EstablisherButton(this, 90, 40, Color.white, "I knew the answer", 2);
+        knewAnsBtn.setBounds(1000, 325, 200, 50);
         knewAnsBtn.setEnabled(false);
         knewAnsBtn.hide();
 
         notKnewAnsBtn = new EstablisherButton(this, 90, 40, Color.white, "I didn't know", 3);
+        notKnewAnsBtn.setBounds(1000, 380, 200, 50);
         notKnewAnsBtn.setEnabled(false);
         notKnewAnsBtn.hide();
 
