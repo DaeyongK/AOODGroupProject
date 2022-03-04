@@ -1,4 +1,4 @@
-//QuestionScreen is front-end class made by Kai C.
+//QuestionScreen is front-end class made by Kai C
 
 import javax.swing.*;
 import java.awt.*;
