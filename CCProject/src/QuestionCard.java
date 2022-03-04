@@ -11,7 +11,7 @@ public class QuestionCard extends QPanel {
 	private Question currentQ;
 	private int currentQIndex;
 	private Domain currentDomain;
-	private ArrayList<Question> questions = new ArrayList<Question>(), intermediateDomain;
+	private ArrayList<Question> questions = new ArrayList<>(), intermediateDomain;
 	private Quizit quizit;
 	private EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn;
 	private TransitionButton editQuestBtn, backBtn;
@@ -32,21 +32,21 @@ public class QuestionCard extends QPanel {
 				questions.add(currentDomain.getQuestions().get(i));
 			}
 		} else if (profile.getPossible() && !profile.getOrder()) {
-			intermediateDomain = (ArrayList) currentDomain.getQuestions().clone();
+			intermediateDomain = new ArrayList<Question>(currentDomain.getQuestions());
 			Collections.shuffle(intermediateDomain);
 			for (int i = 0; i < currentDomain.getDomainSize(); i++) {
 				questions.add(intermediateDomain.get(i));
 			}
 		} else if (!profile.getPossible() && profile.getOrder()) {
-			questionHash = (LinkedHashMap) profile.getHashMap().clone();
+			questionHash = new LinkedHashMap<>(profile.getHashMap());
 			for (Question q : currentDomain.getQuestions()) {
 				if (questionHash.get(q.getID())[0] < profile.getThreshold()) {
 					questions.add(q);
 				}
 			}
 		} else if (!profile.getPossible() && !profile.getOrder()) {
-			questionHash = (LinkedHashMap) profile.getHashMap().clone();
-			intermediateDomain = (ArrayList) currentDomain.getQuestions().clone();
+			questionHash = new LinkedHashMap<>(profile.getHashMap());
+			intermediateDomain = new ArrayList<>(currentDomain.getQuestions());
 			Collections.shuffle(intermediateDomain);
 			for (Question q : intermediateDomain) {
 				if (questionHash.get(q.getID())[0] < profile.getThreshold()) {

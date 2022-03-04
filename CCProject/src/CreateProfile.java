@@ -1,11 +1,7 @@
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.GridBagConstraints;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.image.BufferedImage;
@@ -53,42 +49,42 @@ public class CreateProfile extends QPanel implements MouseListener{
 		
 		//shrek pfp
 		File shrekFile = new File("ProfilePictures/shrek.png");
-		Image shrekImage = null;
+		BufferedImage shrekImage = null;
 		try {
 			shrekImage = ImageIO.read(shrekFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		BufferedImage shrekPFP = (BufferedImage) shrekImage;
+		BufferedImage shrekPFP = shrekImage;
 		shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, shrekPFP);
 		c.anchor = GridBagConstraints.LINE_START;
 		panel.add(shrek, c);
 		
 		//fiona pfp
 		File fionaFile = new File("ProfilePictures/fiona.jpeg");
-		Image fionaImage = null;
+		BufferedImage fionaImage = null;
 		try {
 			fionaImage = ImageIO.read(fionaFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		BufferedImage fionaPFP = (BufferedImage) fionaImage;
+		BufferedImage fionaPFP = fionaImage;
 		fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, fionaPFP);
 		c.anchor = GridBagConstraints.CENTER;
 		panel.add(fiona, c);
 		
 		//donkey pfp
 		File donkeyFile = new File("ProfilePictures/donkey.jpeg");
-		Image donkeyImage = null;
+		BufferedImage donkeyImage = null;
 		try {
 			donkeyImage = ImageIO.read(donkeyFile);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		BufferedImage donkeyPFP = (BufferedImage) donkeyImage;
+		BufferedImage donkeyPFP = donkeyImage;
 		donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, donkeyPFP);
 		c.anchor = GridBagConstraints.LINE_END;
 		panel.add(donkey, c);
@@ -143,8 +139,7 @@ public class CreateProfile extends QPanel implements MouseListener{
 	}
 	
 	public void actionPerformed(ActionEvent e){
-		String string1 = textField.getText();
-		profileName = string1;
+		profileName = textField.getText();
 	}
 
 	@Override

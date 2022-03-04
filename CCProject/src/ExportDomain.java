@@ -7,8 +7,8 @@ public class ExportDomain extends DomainScreen implements ActionListener {
 	private JScrollPane domains;
 	private JPanel insideScroll;
 	private Quizit q;
-	ArrayList<Domain> dList = new ArrayList<Domain>();
-	ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
+	ArrayList<Domain> dList = new ArrayList<>();
+	ArrayList<EstablisherButton> buttons = new ArrayList<>();
 	public ExportDomain(String t, Quizit q) {
 		super(t, q);
 		this.q = q;

@@ -5,7 +5,7 @@ public class Quizit {
     private Profile currentProfile;
     private Question currentQuestion;
     private Domain currentDomain;
-    private ArrayList<Profile> profiles = new ArrayList<Profile>();
+    private ArrayList<Profile> profiles = new ArrayList<>();
     private MainMenu screen1;
     private SelectProfile screen2;
     private CreateProfile screen3;

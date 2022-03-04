@@ -3,7 +3,7 @@ import java.util.*;
 
 
 public class DomainTester {
-	public static void main(String args[]) {
+	public static void main(String[] args) {
 		Quizit quiz= new Quizit();
 		System.out.println(quiz.getAllProfiles().size());
 		Question q1= new Question("1+1?", "2", "QuestionGraphics/mathPic.jpg",quiz);
@@ -16,7 +16,7 @@ public class DomainTester {
 		Question q8= new Question("1+8?", "9",quiz);
 		Question q9= new Question("1+9?", "10",quiz);
 		Question q10= new Question("1+10?", "11",quiz);
-		ArrayList<Question> questions = new ArrayList<Question>();
+		ArrayList<Question> questions = new ArrayList<>();
 		questions.add(q1);
 		questions.add(q2);
 		questions.add(q3);

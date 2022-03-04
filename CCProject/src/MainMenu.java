@@ -62,11 +62,7 @@ public class MainMenu extends QPanel implements ActionListener{
 		options = new TransitionButton(this,75, 25, Color.WHITE, "Quizzing Options", 4, 23);
 		//exit application button
 		exit = new TransitionButton(this,50, 25, Color.WHITE, "Exit", 1, 16);
-		exit.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				System.exit(0);
-			}
-		});
+		exit.addActionListener(e -> System.exit(0));
 		this.add(exit);
 		
 		//for use outside the constructor
@@ -83,17 +79,9 @@ public class MainMenu extends QPanel implements ActionListener{
 		JLabel profileName = new JLabel(text);
 		pop.add(profileName);
 		//add buttons to the popup; changeProfile is true, options is false
-		changeProfile.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				popupBool = true;
-			}
-		});
+		changeProfile.addActionListener(e -> popupBool = true);
 		pop.add(changeProfile);
-		options.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				popupBool = false;
-			}
-		});
+		options.addActionListener(e -> popupBool = false);
 		pop.add(options);
 		//add the popup to the menu
 		menu.add(pop, BorderLayout.LINE_END);

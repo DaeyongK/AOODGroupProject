@@ -1,7 +1,6 @@
 import java.awt.Color;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
@@ -86,11 +85,7 @@ public class SelectDomain extends DomainScreen implements MouseListener{
 	@Override
 	public void mouseClicked(MouseEvent event)
 	{
-		if (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1) {
-			dClick = true;
-		}else {
-			dClick = false;
-		}
+		dClick = event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1;
 	}
 
 	@Override

@@ -13,8 +13,8 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 	private Domain currentDomain;
 	private JPanel insideScroll;
 	private EstablisherButton back;
-	private ArrayList<EstablisherButton> buttons = new ArrayList<EstablisherButton>();
-	private ArrayList<EstablisherButton> buttonsWorkaround = new ArrayList<EstablisherButton>();
+	private ArrayList<EstablisherButton> buttons = new ArrayList<>();
+	private ArrayList<EstablisherButton> buttonsWorkaround = new ArrayList<>();
 	private QPanel thisScreen;
 	private int currentQID = 0;
 	private boolean popResult;
@@ -26,8 +26,8 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 	private int draggedIndex = -1;
 	private int droppedIndex = -1;
 	private EstablisherButton currentButton = new EstablisherButton(this,0,0,Color.WHITE,"",-2);
-	private ArrayList<Question> domainQuestions = new ArrayList<Question>();
-	private ArrayList<Question> questionsWorkaround = new ArrayList<Question>();
+	private ArrayList<Question> domainQuestions = new ArrayList<>();
+	private ArrayList<Question> questionsWorkaround = new ArrayList<>();
 	
 	public EditDomain(String t, Quizit q){
 		super(t,q);
@@ -41,11 +41,9 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 		this.add(back);
 		//text for name, size 70 height
 		nameEdit = new JTextField(currentDomain.getDomainName());
-		nameEdit.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				if(nameEdit.getText().equals("")||nameEdit.getText().length()>64)
-					nameEdit.setText(currentDomain.getDomainName());
-			}
+		nameEdit.addActionListener(e -> {
+			if(nameEdit.getText().equals("")||nameEdit.getText().length()>64)
+				nameEdit.setText(currentDomain.getDomainName());
 		});
 		this.add(nameEdit);
 		//scroll pane for questions, and the jpanel of buttons
@@ -127,8 +125,8 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 						questionsWorkaround.clear();
 						//end reworking array lists
 						insideScroll.removeAll();
-						for(int i=0;i<buttons.size();i++) {
-							insideScroll.add(buttons.get(i));
+						for (EstablisherButton button : buttons) {
+							insideScroll.add(button);
 						}
 						insideScroll.revalidate();
 						insideScroll.repaint();
@@ -167,35 +165,25 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 		//determining which popup to display, displaying it
 		if(text.contains("leave")){
 			TransitionButton yes = new TransitionButton(thisScreen,40,25,Color.WHITE,"Yes",5,31);
-			yes.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					popResult = true;
-				}
-			});
+			yes.addActionListener(e -> popResult = true);
 			pop.add(yes);
 			EstablisherButton no = new EstablisherButton(thisScreen,40,25,Color.WHITE,"No",32);
-			no.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					thisScreen.remove(pop);
-					popResult = false;
-				}
+			no.addActionListener(e -> {
+				thisScreen.remove(pop);
+				popResult = false;
 			});
 			pop.add(no);
 		} else{
 			EstablisherButton yes = new EstablisherButton(thisScreen,40,25,Color.WHITE,"Yes",31);
-			yes.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					thisScreen.remove(pop);
-					popResult = true;
-				}
+			yes.addActionListener(e -> {
+				thisScreen.remove(pop);
+				popResult = true;
 			});
 			pop.add(yes);
 			EstablisherButton no = new EstablisherButton(thisScreen,40,25,Color.WHITE,"No",32);
-			no.addActionListener(new ActionListener(){
-				public void actionPerformed(ActionEvent e){
-					thisScreen.remove(pop);
-					popResult = false;
-				}
+			no.addActionListener(e -> {
+				thisScreen.remove(pop);
+				popResult = false;
 			});
 			pop.add(no);
 		}
@@ -208,8 +196,8 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 				//read the screen, finalize changes, go to select domain(5)
 				currentDomain.setDomainName(nameEdit.getText());
 				//reorder the questions based on the screen
-				for(int i=0;i<buttons.size();i++)
-					currentDomain.deleteQuestion(buttons.get(i).getButtonID());
+				for (EstablisherButton establisherButton : buttons)
+					currentDomain.deleteQuestion(establisherButton.getButtonID());
 				for(int i=0;i<buttons.size();i++)
 					currentDomain.addQuestion(domainQuestions.get(i));
 				//end reordering
@@ -245,8 +233,8 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
 					}
 					//end needs to be tested; reworking array list
 					insideScroll.removeAll();
-					for(int i=0;i<buttons.size();i++) {
-						insideScroll.add(buttons.get(i));
+					for (EstablisherButton button : buttons) {
+						insideScroll.add(button);
 					}
 					insideScroll.revalidate();
 					insideScroll.repaint();

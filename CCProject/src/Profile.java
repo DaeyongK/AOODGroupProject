@@ -11,12 +11,12 @@ public class Profile {
     private int threshold, image;
     private boolean order = false;
     private boolean allQuestions = true;
-    private LinkedHashMap<Integer, int[]> questions = new LinkedHashMap<Integer, int[]>();
-    private ArrayList<Domain> domains = new ArrayList<Domain>();
+    private LinkedHashMap<Integer, int[]> questions = new LinkedHashMap<>();
+    private ArrayList<Domain> domains = new ArrayList<>();
     Profile(String profileName, int imageIndex) {
         this.profileName = profileName;
         image = imageIndex;
-        ArrayList<Question> emptyQuestions= new ArrayList<Question>();
+        ArrayList<Question> emptyQuestions= new ArrayList<>();
         emptyQuestions.add(new Question());
         domains.add(new Domain("Default Domain",emptyQuestions));
         int[] emptyArray= {0,0};
@@ -46,7 +46,7 @@ public class Profile {
             profileName = doc.getElementsByTagName("profileName").item(0).getTextContent();
             threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent());
             image = Integer.parseInt(doc.getElementsByTagName("image").item(0).getTextContent());
-        } catch (Exception e) {}
+        } catch (Exception ignored) {}
     }
     public String getName() {
         return profileName;

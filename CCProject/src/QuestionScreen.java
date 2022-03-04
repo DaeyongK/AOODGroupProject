@@ -68,10 +68,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		thisScreen = this;
 		screenId=12;
 		edit = true;
-		if (question.getImage() != null)
-			graphicDetected = true;
-		else
-			graphicDetected = false;
+		graphicDetected = question.getImage() != null;
 		titleLabel = new JLabel(title);
 		titleLabel.setBounds(464,86,360,32);
 		questionBox = new JTextField(question.getQuestion());
@@ -168,7 +165,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							//Figure out whether to go back to questionCard or editDomain
 							quizit.changeScreen(6);
 						}
-					} catch (NumberFormatException e) {}
+					} catch (NumberFormatException ignored) {}
 				}
 				else
 					try {
@@ -178,7 +175,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							question.setAnswer(answerBox.getText());
 							quizit.changeScreen(6);
 						}
-					} catch (NullPointerException e) {}
+					} catch (NullPointerException ignored) {}
 				break;
 			case 3:
 				//BackBtn

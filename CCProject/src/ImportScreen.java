@@ -86,9 +86,7 @@ class ImportScreen extends QPanel implements ActionListener {
         int index = name.lastIndexOf('.');
         if (index > 0) {
             String extension = name.substring(index + 1);
-            if (extension.equals("xml")) {
-                return true;
-            }
+            return extension.equals("xml");
         }
         return false;
     }
@@ -98,7 +96,7 @@ class ImportScreen extends QPanel implements ActionListener {
     }
 
     public void actionPerformed(ActionEvent e) {
-        int id = 0;
+        int id;
         switch (e.getActionCommand()) {
             case "done":
                 id = 1;
@@ -106,7 +104,7 @@ class ImportScreen extends QPanel implements ActionListener {
             case "choose":
                 id = 2;
                 break;
-            case "back":
+            default:
                 id = 0;
                 break;
         }

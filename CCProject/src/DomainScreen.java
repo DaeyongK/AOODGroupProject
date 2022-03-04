@@ -17,7 +17,7 @@ public abstract class DomainScreen extends QPanel{
 
 		setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 		domains = quizit.getProfile().getDomains();
-		domainButtons = new ArrayList<EstablisherButton>();
+		domainButtons = new ArrayList<>();
 		for(int i = 0; i< domains.size();i++) {
 			domainButtons.add(new EstablisherButton(this, 800, 50,Color.white,domains.get(i).getDomainName(),i));
 		}
@@ -63,7 +63,7 @@ public abstract class DomainScreen extends QPanel{
 }
 class Testit extends Quizit{
 	Testit(){
-		ArrayList<Question> thing = new ArrayList<Question>();
+		ArrayList<Question> thing = new ArrayList<>();
 		setProfile(new Profile(null, this));
 		addProfile(getProfile());
 		getProfile().addDomain(new Domain("yes", thing));
