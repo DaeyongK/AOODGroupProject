@@ -5,14 +5,9 @@ import java.awt.*;
 
 //Abner Ben
 public class EstablisherButton extends QButton {
-    private int buttonId;
 
     EstablisherButton(QPanel Panel, int width, int height, Color color, String text, int buttonID) {
         super(Panel, width, height, color, text, buttonID);
-    }
-
-    public int getButtonID() {
-        return buttonId;
     }
 
     public void mouseOver() {

@@ -32,5 +32,7 @@ abstract class QButton extends JButton implements ActionListener {
 
     public abstract void mouseOver();
 
-    public abstract int getButtonID();
+    public int getButtonID() {
+        return buttonId;
+    }
 }
