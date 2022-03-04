@@ -98,7 +98,7 @@ public class MainMenu extends QPanel implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
-        switch (buttonID) {
+    	switch (buttonID) {
             case 11:
                 //go to select domain (5)
                 quizit.changeScreen(5);
@@ -121,6 +121,7 @@ public class MainMenu extends QPanel implements ActionListener {
                 break;
             case 16:
                 //exit the application
+            	System.exit(0);
                 break;
             case 21:
                 if (popup(quizit.getProfile().getName())) {

@@ -11,7 +11,7 @@ public class test {
         ExportDomain test1 = new ExportDomain("Import Screen", t);
         ImportScreen test2 = new ImportScreen("Import Screen", t);
 
-        frame.setContentPane(test1);
+        frame.setContentPane(new MainMenu("Main Menu", new Quizit()));
         frame.pack();
         frame.setSize(1280, 720);
         frame.setVisible(true);
