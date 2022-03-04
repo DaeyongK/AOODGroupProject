@@ -6,7 +6,7 @@ public abstract class DomainScreen extends QPanel {
     protected ArrayList<EstablisherButton> domainButtons;
     protected TransitionButton exit;
     protected ArrayList<Domain> domains;
-
+    protected JPanel pane;
     DomainScreen(String input, Quizit quizit) {
 		/*
 		button ids:
@@ -23,7 +23,7 @@ public abstract class DomainScreen extends QPanel {
             domainButtons.add(new EstablisherButton(this, 800, 50, Color.white, domains.get(i).getDomainName(), i));
         }
        
-        JPanel pane = new JPanel();
+        pane = new JPanel();
         JScrollPane scroll = new JScrollPane(pane);
 //        scroll.setSize(500, 500);
         add(scroll);
