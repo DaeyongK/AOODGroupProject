@@ -17,13 +17,11 @@ public class CreateProfile extends QPanel implements MouseListener {
     private CircularButton donkey;
     private JTextField textField;
     private JPanel panel;
-    private Quizit quizitReference;
     private int imageIndex;
     private String profileName;
 
     public CreateProfile(String title, Quizit q) {
         super(title, q);
-        quizitReference = q;
 
         //panel setup
         panel = new JPanel();
@@ -112,8 +110,8 @@ public class CreateProfile extends QPanel implements MouseListener {
             case 1:
                 //move to options
                 Profile createdProfile = new Profile(profileName, imageIndex);
-                quizitReference.addProfile(createdProfile);
-                quizitReference.changeScreen(4);
+                quizit.addProfile(createdProfile);
+                quizit.changeScreen(4);
                 break;
             case 2:
                 //selects shrek
@@ -129,7 +127,7 @@ public class CreateProfile extends QPanel implements MouseListener {
                 break;
             case 5:
                 //exit button
-                quizitReference.changeScreen(1);
+                quizit.changeScreen(1);
                 break;
         }
     }
