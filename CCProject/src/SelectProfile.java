@@ -9,7 +9,6 @@ public class SelectProfile extends QPanel implements MouseListener {
     private ArrayList<Profile> profiles;
     private TransitionButton done;
     private TransitionButton createNewProfileButton;
-    private JPanel panel;
     private Profile currentProfile;
     private Quizit quizitReference;
     private JScrollBar verticalBar;
@@ -19,9 +18,8 @@ public class SelectProfile extends QPanel implements MouseListener {
         quizitReference = q;
         profiles = q.getAllProfiles();
         //panel setup
-        panel = new JPanel();
-        panel.setBackground(QPanel.TITLE_COLOR);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        this.setBackground(QPanel.TITLE_COLOR);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //create buttons and ui aspects. adds action listeners. then adds to jpanel.
         //create profile button inside the jscrollpane somehow???
@@ -42,14 +40,14 @@ public class SelectProfile extends QPanel implements MouseListener {
         scrollable.add(verticalBar);
 
         //insert code needed to add in profiles
-        panel.add(createNewProfileButton);
-        panel.addMouseListener(this);
+        this.add(createNewProfileButton);
+        this.addMouseListener(this);
         scrollable.addMouseListener(this);
-        panel.add(scrollable);
+        this.add(scrollable);
 
         //done button
         done = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 1);
-        panel.add(done);
+        this.add(done);
     }
 
     public void radioClick() {
