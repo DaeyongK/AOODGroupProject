@@ -34,7 +34,7 @@ public class CircularButton extends EstablisherButton {
     }
     public void mouseOver(CircularButton b) {
         addMouseMotionListener(new MouseInputAdapter() {
-            public void MouseEnter(MouseEvent e) {
+            public void MouseEntered(MouseEvent e) {
             	b.setBackground(TITLE_COLOR);
             }
             public void mouseExited(MouseEvent e){

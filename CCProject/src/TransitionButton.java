@@ -16,7 +16,7 @@ public class TransitionButton extends QButton {
     }
     public void mouseOver(TransitionButton b) {
         addMouseMotionListener(new MouseInputAdapter() {
-            public void MouseEnter(MouseEvent e) {
+            public void MouseEntered(MouseEvent e) {
             	b.setBackground(TITLE_COLOR);
             }
             public void mouseExited(MouseEvent e){
