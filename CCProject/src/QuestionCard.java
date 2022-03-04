@@ -88,13 +88,18 @@ public class QuestionCard extends QPanel {
         notKnewAnsBtn.hide();
 
         nextQuestBtn = new EstablisherButton(this, 100, 50, Color.white, "Next Question", 4);
+        nextQuestBtn.setBounds(1000, 350, 250, 50);
         nextQuestBtn.setEnabled(false);
         nextQuestBtn.hide();
 
         delQuestBtn = new EstablisherButton(this, 100, 50, Color.white, "Delete Question", 6);
+        delQuestBtn.setBounds(currentQIndex, currentQIndex, currentQIndex, currentQIndex);;
 
         // add buttons and text to contentPane
+        ansBtn.mouseOver(ansBtn);
         this.add(ansBtn);
+        
+        
         this.add(knewAnsBtn);
         this.add(notKnewAnsBtn);
         this.add(nextQuestBtn);
@@ -209,7 +214,9 @@ public class QuestionCard extends QPanel {
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
     	g.setColor(new Color (230,220,0));
-    	g.fillRect(50, 230, 800, 350);
+    	g.fillRect(50, 230, 800, 380);
+    	g.setColor(Color.gray);
+    	g.fillRect(0, 0, 1280, 100);
     }
 
     public static void main(String[] args) {
