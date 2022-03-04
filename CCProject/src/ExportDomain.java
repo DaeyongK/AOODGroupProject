@@ -8,13 +8,11 @@ import java.util.ArrayList;
 public class ExportDomain extends DomainScreen implements ActionListener {
     private JScrollPane domains;
     private JPanel insideScroll;
-    private Quizit q;
     ArrayList<Domain> dList = new ArrayList<>();
     ArrayList<EstablisherButton> buttons = new ArrayList<>();
 
     public ExportDomain(String t, Quizit q) {
         super(t, q);
-        this.q = q;
         domains = new JScrollPane();
         domains.setPreferredSize(new Dimension(900, 300));
         domains.setLayout(new ScrollPaneLayout());
@@ -41,7 +39,7 @@ public class ExportDomain extends DomainScreen implements ActionListener {
 
     public void buttonClicked(int buttonID) {
         File exported = dList.get(buttonID).export(); //where do you want the file to be stored?
-        q.changeScreen(1);
+        quizit.changeScreen(1);
     }
 
     @Override
