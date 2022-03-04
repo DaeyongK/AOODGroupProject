@@ -16,10 +16,13 @@ public class TransitionButton extends QButton {
         return screenId;
     }
 
-    public void mouseOver() {
+    public void mouseOver(TransitionButton b) {
         addMouseMotionListener(new MouseInputAdapter() {
             public void MouseEnter(MouseEvent e) {
-
+            	b.setBackground(TITLE_COLOR);
+            }
+            public void mouseExited(MouseEvent evt){
+               b.setBackground(null);
             }
         });
     }
