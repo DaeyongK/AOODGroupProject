@@ -130,8 +130,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
         switch (buttonID) {
             case 0:
                 if (popup("Attach Graphic", true)) {
-					//Figure out bufferedImage stuff
-                    //question.setImage();
+                    //Figure out bufferedImage stuff
+//					question.setImage();
                 }
                 break;
             case 1:
@@ -142,16 +142,16 @@ public class QuestionScreen extends QPanel implements ActionListener {
                 break;
             case 2:
                 //DoneBtn
-                //Checks if all textFields are entered
+                //Checks if all textfields are entered
                 if (edit) {
                     try {
                         if (!questionBox.getText().equals("") &&
-                            !answerBox.getText().equals("") &&
-                            !changeRight.getText().equals("") &&
-                            Integer.parseInt(changeRight.getText()) >= 0 &&
-                            changeAsked.getText().equals("") &&
-                            Integer.parseInt(changeAsked.getText()) >= 0 &&
-                            Integer.parseInt(changeRight.getText()) <= (Integer.parseInt(changeAsked.getText()))) {
+                                !answerBox.getText().equals("") &&
+                                !changeRight.getText().equals("") &&
+                                Integer.parseInt(changeRight.getText()) >= 0 &&
+                                changeAsked.getText().equals("") &&
+                                Integer.parseInt(changeAsked.getText()) >= 0 &&
+                                Integer.parseInt(changeRight.getText()) <= (Integer.parseInt(changeAsked.getText()))) {
 
                             question.setQuestion(questionBox.getText());
                             question.setAnswer(answerBox.getText());

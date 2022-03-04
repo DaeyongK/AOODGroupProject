@@ -7,7 +7,7 @@ import java.awt.event.MouseListener;
 public class Options extends QPanel implements MouseListener {
     private boolean allQuestions;
     private boolean shuffleQuestions;
-    private JComboBox dropdown;
+    private JComboBox<String> dropdown;
     private EstablisherButton numCorrectButton;
     private EstablisherButton allQuestionsButton;
     private EstablisherButton shuffleQuestionsButton;
@@ -34,7 +34,7 @@ public class Options extends QPanel implements MouseListener {
 
         //dropdown menu
         String[] names = {"<5", "<10", "<15", "<20", "<30"};
-        dropdown = new JComboBox(names);
+        dropdown = new JComboBox<>(names);
         dropdown.setAlignmentX(JComboBox.LEFT_ALIGNMENT);
         dropdown.setSelectedIndex(0);
         c.anchor = GridBagConstraints.PAGE_START;
@@ -64,17 +64,9 @@ public class Options extends QPanel implements MouseListener {
     Options(String title, Quizit q, boolean allQuestionsTrue, boolean shuffleQuestionsTrue) {
         super(title, q);
         //sets value of allQuestions
-        if (allQuestionsTrue) {
-            allQuestions = true;
-        } else {
-            allQuestions = false;
-        }
+        allQuestions = allQuestionsTrue;
         //sets value of shuffleQuestions
-        if (shuffleQuestionsTrue) {
-            shuffleQuestions = true;
-        } else {
-            shuffleQuestions = false;
-        }
+        shuffleQuestions = shuffleQuestionsTrue;
     }
 
     public void radioClick() {

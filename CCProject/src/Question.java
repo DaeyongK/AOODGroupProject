@@ -1,105 +1,106 @@
-import java.awt.image.*;
-import java.io.*;
-import javax.imageio.*;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 public class Question {
-	private String questionString;
-	private String answerString;
-	private String graphicString;
-	private BufferedImage graphic;
-	private int ID;
+    private String questionString;
+    private String answerString;
+    private String graphicString;
+    private BufferedImage graphic;
+    private int ID;
 
-	// FOR TESTING PURPOSES ONLY |||||
-	// VVVVV
-	//
-	// Question(String question, String answer) {
-	// questionString = question;
-	// // answerString = answer;
-	// graphicString=null;
-	// int tempID = (int) (Math.random() * 1000000000);
-	// ID= tempID;
-	// }
+    // FOR TESTING PURPOSES ONLY |||||
+    // VVVVV
+    //
+    // Question(String question, String answer) {
+    // questionString = question;
+    // // answerString = answer;
+    // graphicString=null;
+    // int tempID = (int) (Math.random() * 1000000000);
+    // ID= tempID;
+    // }
 
-	// Question(String question, String answer, String imagePath) {
-	// questionString = question;
-	// answerString = answer;
-	// this.setImage(imagePath);
-	// int tempID = (int) (Math.random() * 1000000000);
-	// ID= tempID;
-	// }
+    // Question(String question, String answer, String imagePath) {
+    // questionString = question;
+    // answerString = answer;
+    // this.setImage(imagePath);
+    // int tempID = (int) (Math.random() * 1000000000);
+    // ID= tempID;
+    // }
 
-	// ^^^^^^
-	// FOR TESTING PURPOSES ONLY ||||||
+    // ^^^^^^
+    // FOR TESTING PURPOSES ONLY ||||||
 
-	Question() {
-		questionString = "";
-		answerString = "";
-		graphicString = "";
-		ID = -1;
-	}
+    Question() {
+        questionString = "";
+        answerString = "";
+        graphicString = "";
+        ID = -1;
+    }
 
-	Question(String question, String answer, Quizit quiz) {
-		questionString = question;
-		answerString = answer;
-		graphicString = null;
-		int tempID = (int) (Math.random() * 1000000000);
-		while (quiz.getProfile().getHashMap().containsKey(tempID)) {
-			tempID = (int) (Math.random() * 1000000000);
-		}
-		ID = tempID;
-	}
+    Question(String question, String answer, Quizit quiz) {
+        questionString = question;
+        answerString = answer;
+        graphicString = null;
+        int tempID = (int) (Math.random() * 1000000000);
+        while (quiz.getProfile().getHashMap().containsKey(tempID)) {
+            tempID = (int) (Math.random() * 1000000000);
+        }
+        ID = tempID;
+    }
 
-	Question(String question, String answer, String imagePath, Quizit quiz) {
-		questionString = question;
-		answerString = answer;
-		this.setImage(imagePath);
-		int tempID = (int) (Math.random() * 1000000000);
-		while (quiz.getProfile().getHashMap().containsKey(tempID)) {
-			tempID = (int) (Math.random() * 1000000000);
-		}
-		ID = tempID;
-	}
+    Question(String question, String answer, String imagePath, Quizit quiz) {
+        questionString = question;
+        answerString = answer;
+        this.setImage(imagePath);
+        int tempID = (int) (Math.random() * 1000000000);
+        while (quiz.getProfile().getHashMap().containsKey(tempID)) {
+            tempID = (int) (Math.random() * 1000000000);
+        }
+        ID = tempID;
+    }
 
-	public boolean setImage(String imagePath) {
-		try {
-			graphicString = imagePath;
-			graphic = ImageIO.read(new File(imagePath));
-		} catch (IOException e) {
-			return false;
-		}
-		return true;
-	}
+    public boolean setImage(String imagePath) {
+        try {
+            graphicString = imagePath;
+            graphic = ImageIO.read(new File(imagePath));
+        } catch (IOException e) {
+            return false;
+        }
+        return true;
+    }
 
-	public void detachImage() {
-		graphic = null;
-	}
+    public void detachImage() {
+        graphic = null;
+    }
 
-	public BufferedImage getImage() {
-		return graphic;
-	}
+    public BufferedImage getImage() {
+        return graphic;
+    }
 
-	public String getGraphicPath() {
-		return graphicString;
-	}
+    public String getGraphicPath() {
+        return graphicString;
+    }
 
-	public String getQuestion() {
-		return questionString;
-	}
+    public String getQuestion() {
+        return questionString;
+    }
 
-	public String getAnswer() {
-		return answerString;
-	}
+    public String getAnswer() {
+        return answerString;
+    }
 
-	public int getID() {
-		return ID;
-	}
+    public int getID() {
+        return ID;
+    }
 
-	public void setQuestion(String question) {
-		questionString = question;
-	}
+    public void setQuestion(String question) {
+        questionString = question;
+    }
 
-	public void setAnswer(String answer) {
-		answerString = answer;
-	}
+    public void setAnswer(String answer) {
+        answerString = answer;
+    }
 
 }
