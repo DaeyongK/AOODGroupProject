@@ -1,5 +1,9 @@
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.event.MouseInputAdapter;
+
+import org.w3c.dom.events.MouseEvent;
+
 import java.awt.*;
 import java.awt.image.BufferedImage;
 
@@ -28,5 +32,15 @@ public class CircularButton extends EstablisherButton {
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
+    }
+    public void mouseOver(CircularButton b) {
+        addMouseMotionListener(new MouseInputAdapter() {
+            public void MouseEnter(MouseEvent e) {
+            	b.setBackground(TITLE_COLOR);
+            }
+            public void mouseExited(MouseEvent evt){
+               b.setBackground(null);
+            }
+        });
     }
 }
