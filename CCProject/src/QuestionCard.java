@@ -58,9 +58,12 @@ public class QuestionCard extends QPanel {
         currentQIndex = 0;
         currentQ = questions.get(currentQIndex);
         this.setLayout(null);
+        
 
         // make text boxes
         askedNumTimesText = new JLabel("Asked: " + profile.getTimesAsked(currentQ.getID()) + " times");
+        askedNumTimesText.setBackground(Color.yellow);
+        askedNumTimesText.setBounds(50, 150, 200, 40);
         askedNumTimesText.setBackground(new Color(255, 244, 150));
         correctNumTimesText = new JLabel("Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
         correctNumTimesText.setBackground(new Color(255, 244, 150));
@@ -71,8 +74,10 @@ public class QuestionCard extends QPanel {
 
         // make buttons
         editQuestBtn = new TransitionButton(this, 100, 50, Color.white, "Edit Question", 12, 5);
+        editQuestBtn.setBounds(850, 25, 200, 50);
 
         backBtn = new TransitionButton(this, 100, 50, Color.white, "Exit", 5, 0);
+        backBtn.setBounds(25,25,200,50);
 
         ansBtn = new EstablisherButton(this, 100, 50, Color.white, "Answer", 1);
         ansBtn.setBounds(1000, 350, 250, 50);
@@ -93,10 +98,9 @@ public class QuestionCard extends QPanel {
         nextQuestBtn.setVisible(false);
 
         delQuestBtn = new EstablisherButton(this, 100, 50, Color.white, "Delete Question", 6);
-        delQuestBtn.setBounds(currentQIndex, currentQIndex, currentQIndex, currentQIndex);;
+        delQuestBtn.setBounds(1060, 25, 200, 50);
 
         // add buttons and text to contentPane
-        ansBtn.mouseOver(ansBtn);
         this.add(ansBtn);
         
         
