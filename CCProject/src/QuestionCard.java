@@ -55,7 +55,6 @@ public class QuestionCard extends QPanel {
         }
         currentQIndex = 0;
         currentQ = questions.get(currentQIndex);
-        this.setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
 
         // make text boxes
         askedNumTimesText = new JLabel("Asked: " + profile.getTimesAsked(currentQ.getID()) + " times");
@@ -63,7 +62,7 @@ public class QuestionCard extends QPanel {
         correctNumTimesText = new JLabel("Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
         correctNumTimesText.setBackground(new Color(255, 244, 150));
         answerText = new JLabel(currentQ.getAnswer());
-        answerText.setEnabled(false);
+        answerText.hide();
         questionText = new JLabel(currentQ.getQuestion());
         domainNameText = new JLabel("Current Domain: " + quizit.getDomain().getDomainName());
 
@@ -73,15 +72,19 @@ public class QuestionCard extends QPanel {
         backBtn = new TransitionButton(this, 100, 50, Color.white, "Exit", 5, 0);
 
         ansBtn = new EstablisherButton(this, 100, 50, Color.white, "Answer", 1);
+        ansBtn.setBounds(400, currentQIndex, 100, 50);
 
         knewAnsBtn = new EstablisherButton(this, 90, 40, Color.white, "I knew the answer", 2);
         knewAnsBtn.setEnabled(false);
+        knewAnsBtn.hide();
 
         notKnewAnsBtn = new EstablisherButton(this, 90, 40, Color.white, "I didn't know", 3);
         notKnewAnsBtn.setEnabled(false);
+        notKnewAnsBtn.hide();
 
         nextQuestBtn = new EstablisherButton(this, 100, 50, Color.white, "Next Question", 4);
         nextQuestBtn.setEnabled(false);
+        nextQuestBtn.hide();
 
         delQuestBtn = new EstablisherButton(this, 100, 50, Color.white, "Delete Question", 6);
 
@@ -123,27 +126,41 @@ public class QuestionCard extends QPanel {
             quizit.changeScreen(12);
         } else if (buttonID == 1) {
             ansBtn.setEnabled(false);
+            ansBtn.hide();
             knewAnsBtn.setEnabled(true);
+            knewAnsBtn.show();
             notKnewAnsBtn.setEnabled(true);
+            notKnewAnsBtn.show();
             answerText.setEnabled(true);
+            answerText.show();
             profile.asked(currentQ.getID());
             askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID()) + "");
         } else if (buttonID == 2) {
             knewAnsBtn.setEnabled(false);
+            knewAnsBtn.hide();
             notKnewAnsBtn.setEnabled(false);
+            notKnewAnsBtn.hide();
             nextQuestBtn.setEnabled(true);
+            nextQuestBtn.show();
             profile.answeredCorrectly(currentQ.getID());
             correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID()) + "");
         } else if (buttonID == 3) {
             knewAnsBtn.setEnabled(false);
+            knewAnsBtn.hide();
             notKnewAnsBtn.setEnabled(false);
+            notKnewAnsBtn.hide();
             nextQuestBtn.setEnabled(true);
+            nextQuestBtn.show();
         } else if (buttonID == 4) {
             if (currentQIndex <= (questions.size() - 2)) {
                 ansBtn.setEnabled(true);
+                ansBtn.show();
                 knewAnsBtn.setEnabled(false);
+                knewAnsBtn.show();
                 notKnewAnsBtn.setEnabled(false);
+                notKnewAnsBtn.hide();
                 answerText.setEnabled(false);
+                answerText.hide();
                 nextQ();
                 questionText.setText(currentQ.getQuestion());
                 askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID()) + "");
