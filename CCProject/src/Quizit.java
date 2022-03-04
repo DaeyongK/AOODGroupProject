@@ -1,11 +1,12 @@
 import javax.swing.*;
 import java.io.File;
-import java.util.*;
+import java.util.ArrayList;
+
 public class Quizit {
     private Profile currentProfile;
     private Question currentQuestion;
     private Domain currentDomain;
-    private ArrayList<Profile> profiles = new ArrayList<Profile>();
+    private ArrayList<Profile> profiles = new ArrayList<>();
     private MainMenu screen1;
     private SelectProfile screen2;
     private CreateProfile screen3;
@@ -18,11 +19,12 @@ public class Quizit {
     private DetachDomain screen10;
     private QuestionScreen screen11, screen12;
     private JFrame frame;
+
     Quizit() {
-    	currentProfile = new Profile("Default", 1);
-    	profiles.add(currentProfile);
+        currentProfile = new Profile("Default", 1);
+        profiles.add(currentProfile);
         File[] profilexmls = new File("Profiles").listFiles();
-        for(File file : profilexmls) {
+        for (File file : profilexmls) {
             profiles.add(new Profile(file, this));
         }
         setDomain(currentProfile.getDomains().get(0));
@@ -48,35 +50,45 @@ public class Quizit {
         frame.setSize(1280, 720);
         frame.setVisible(true);
     }
+
     public Profile getProfile() {
         return currentProfile;
     }
+
     public void setProfile(Profile profile) {
         currentProfile = profile;
     }
+
     public ArrayList<Profile> getAllProfiles() {
         return profiles;
     }
+
     public void addProfile(Profile profile) {
         profiles.add(profile);
     }
+
     public Question getQuestion() {
         return currentQuestion;
     }
+
     public void setQuestion(Question question) {
         currentQuestion = question;
     }
+
     public Domain getDomain() {
         return currentDomain;
     }
+
     public void setDomain(Domain domain) {
         currentDomain = domain;
     }
+
     public JFrame getFrame() {
-    	return  frame;
+        return frame;
     }
+
     public void changeScreen(int screenID) {
-        switch(screenID) {
+        switch (screenID) {
             case 1:
                 screen1 = new MainMenu("", this);
                 frame.setContentPane(screen1);
