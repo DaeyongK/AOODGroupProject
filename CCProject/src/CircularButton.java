@@ -13,7 +13,6 @@ public class CircularButton extends EstablisherButton {
         setBorder(new RoundedBorder(10)); //how big to make it?
         setIcon(new ImageIcon(img));
     }
-
     private static class RoundedBorder implements Border {
         private int radius;
 
