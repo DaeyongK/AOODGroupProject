@@ -11,13 +11,12 @@ public abstract class QPanel extends JPanel {
     protected JLabel titleLabel;
 
     QPanel(String t, Quizit quizit) {
-    	setLayout(null);
     	title = t;
         titleLabel = new JLabel(title);
         titleLabel.setLocation(600, 30);
         titleLabel.setForeground(TITLE_COLOR);
-        add(titleLabel);
         setBackground(BACKGROUND_COLOR);
+        add(titleLabel);
         this.quizit = quizit;
     }
 

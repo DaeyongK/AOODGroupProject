@@ -19,22 +19,21 @@ class ImportScreen extends QPanel implements ActionListener {
         int height = 50;
 
         back = new TransitionButton(this, width, height, Color.WHITE, "Back", 7, 0);
-        back.setBounds(20, 20, width, height);
+        back.setLocation(20, 20);
         back.setActionCommand("back");
         add(back);
 
         done = new TransitionButton(this, width, height, Color.WHITE, "Done", 7, 1);
-        done.setBounds(600, 600, width, height);
+        done.setLocation(650, 560);
         done.setActionCommand("done");
         add(done);
         done.setVisible(false);
 
         chooseFile = new EstablisherButton(this, width, height, Color.WHITE, "Choose File", 2);
-        chooseFile.setBounds(480, 560, width, height);
+        chooseFile.setLocation(480, 560);
         chooseFile.setActionCommand("choose");
         add(chooseFile);
-
-        fileName.setBounds(600, 560, 100, 40);
+        repaint();
     }
 
     public int getScreenID() {
@@ -72,6 +71,9 @@ class ImportScreen extends QPanel implements ActionListener {
                     if (accept(selectedFile)) {
                         done.setVisible(true);
                         fileName = new JLabel(selectedFile.toString());
+                        fileName.setBounds(300, 300, 100, 40);
+                        add(fileName);
+                    
                     }
 
                 }
@@ -81,7 +83,6 @@ class ImportScreen extends QPanel implements ActionListener {
 
     private boolean accept(File f) {
         String name = f.toString();
-        fileName = new JLabel(name);
         int index = name.lastIndexOf('.');
         if (index > 0) {
             String extension = name.substring(index + 1);
