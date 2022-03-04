@@ -139,7 +139,7 @@ public class Quizit {
                 break;
 
             case 11:
-                screen11 = new QuestionScreen("Create Question");
+                screen11 = new QuestionScreen("Create Question", this);
                 frame.setContentPane(screen11);
                 break;
 
