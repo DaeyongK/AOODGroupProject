@@ -17,16 +17,15 @@ public class MainMenu extends QPanel implements ActionListener {
     private JPanel containsButtons;
     private QPanel menu;
     private int currentQID = 0;
-    private Quizit theQuizit;
     private boolean popupBool;
 
     public MainMenu(String title, Quizit q) {
         super(title, q);
-        theQuizit = q;
         this.setLayout(new BorderLayout());
         //the jpanel for the center of the screen
         containsButtons = new JPanel();
         containsButtons.setBackground(QPanel.TITLE_COLOR);
+        containsButtons.setLayout(new BoxLayout(containsButtons,BoxLayout.Y_AXIS));
         //title name/title card
         titleCard = new JLabel(title);
         containsButtons.add(titleCard);
@@ -64,7 +63,7 @@ public class MainMenu extends QPanel implements ActionListener {
         //exit application button
         exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16);
         exit.addActionListener(e -> System.exit(0));
-        this.add(exit);
+        this.add(exit,BorderLayout.PAGE_END);
 
         //for use outside the constructor
         menu = this;
@@ -94,34 +93,34 @@ public class MainMenu extends QPanel implements ActionListener {
         switch (buttonID) {
             case 11:
                 //go to select domain (5)
-                theQuizit.changeScreen(5);
+                quizit.changeScreen(5);
                 break;
             case 12:
                 //go to create domain (8)
-                theQuizit.changeScreen(8);
+                quizit.changeScreen(8);
                 break;
             case 13:
                 //go to import domain (7)
-                theQuizit.changeScreen(7);
+                quizit.changeScreen(7);
                 break;
             case 14:
                 //go to export domain (9)
-                theQuizit.changeScreen(9);
+                quizit.changeScreen(9);
                 break;
             case 15:
                 //go to detach domain (10)
-                theQuizit.changeScreen(10);
+                quizit.changeScreen(10);
                 break;
             case 16:
                 //exit the application
                 break;
             case 21:
-                if (popup(theQuizit.getProfile().getName())) {
+                if (popup(quizit.getProfile().getName())) {
                     //go to change profile (2)
-                    theQuizit.changeScreen(2);
+                    quizit.changeScreen(2);
                 } else {
                     //go to quizzing options (4)
-                    theQuizit.changeScreen(4);
+                    quizit.changeScreen(4);
                 }
                 break;
         }

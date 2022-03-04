@@ -5,7 +5,7 @@ public class test {
         Testit t = new Testit();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        ImportScreen test = new ImportScreen("Test Domain", t);
+        ImportScreen test = new ImportScreen("Import Scree sdfkasdfhaso;ihaw;ouabe;", t);
         frame.setContentPane(test);
         frame.pack();
         frame.setSize(1280, 720);
