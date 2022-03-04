@@ -27,6 +27,7 @@ public class MainMenu extends QPanel implements ActionListener {
         //the jpanel for the center of the screen
         containsButtons = new JPanel();
         containsButtons.setBackground(QPanel.TITLE_COLOR);
+        containsButtons.setLayout(new BoxLayout(containsButtons,BoxLayout.Y_AXIS));
         //title name/title card
         titleCard = new JLabel(title);
         containsButtons.add(titleCard);
@@ -64,7 +65,7 @@ public class MainMenu extends QPanel implements ActionListener {
         //exit application button
         exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16);
         exit.addActionListener(e -> System.exit(0));
-        this.add(exit);
+        this.add(exit,BorderLayout.PAGE_END);
 
         //for use outside the constructor
         menu = this;
