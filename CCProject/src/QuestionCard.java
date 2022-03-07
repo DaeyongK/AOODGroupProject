@@ -14,7 +14,7 @@ public class QuestionCard extends QPanel {
     private Quizit quizit;
     private EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn;
     private TransitionButton editQuestBtn, backBtn;
-    private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, domainNameText;
+    private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText;
     private BufferedImage questImage;
     private LinkedHashMap<Integer, int[]> questionHash;
     private Graphics g=this.getGraphics();
@@ -71,10 +71,15 @@ public class QuestionCard extends QPanel {
         correctNumTimesText.setOpaque(true);
         correctNumTimesText.setBounds(450, 150, 400, 40);
         correctNumTimesText.setBackground(new Color(255, 244, 150));
-        answerText = new JLabel(currentQ.getAnswer());
+        answerText = new JLabel(" Answer: "+currentQ.getAnswer());
+        answerText.setFont(new Font("SanSerif",Font.PLAIN,17));
+        answerText.setOpaque(true);
+        answerText.setBounds(50, 630, 800, 40);
         answerText.setVisible(false);
         questionText = new JLabel(currentQ.getQuestion());
-        domainNameText = new JLabel("Current Domain: " + quizit.getDomain().getDomainName());
+        questionText.setFont(new Font("SanSerif",Font.PLAIN,17));
+        questionText.setOpaque(true);
+        questionText.setBounds(70, 240, 760, 40);
 
         // make buttons
         editQuestBtn = new TransitionButton(this, 100, 50, Color.white, "Edit Question", 12, 5);
@@ -119,7 +124,6 @@ public class QuestionCard extends QPanel {
         this.add(correctNumTimesText);
         this.add(answerText);
         this.add(questionText);
-        this.add(domainNameText);
         
         //Draw background stuff
         this.revalidate();
@@ -165,7 +169,7 @@ public class QuestionCard extends QPanel {
             nextQuestBtn.setEnabled(true);
             nextQuestBtn.setVisible(true);
             profile.answeredCorrectly(currentQ.getID());
-            correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID()) + "");
+            correctNumTimesText.setText("   Correct: " +profile.getAnsweredRight(currentQ.getID()) + " times");
         } else if (buttonID == 3) {
             knewAnsBtn.setEnabled(false);
             knewAnsBtn.setVisible(false);
@@ -225,6 +229,9 @@ public class QuestionCard extends QPanel {
     	g.fillRect(50, 230, 800, 380);
     	g.setColor(Color.gray);
     	g.fillRect(0, 0, 1280, 100);
+    	g.setColor(Color.white);
+    	g.setFont(new Font("SanSerif",Font.BOLD, 17));
+    	g.drawString("Current Domain: "+currentDomain.getDomainName(), 275, 55);
     }
 
     public static void main(String[] args) {
