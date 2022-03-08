@@ -35,7 +35,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		thisQuizit = q;
 		thisFrame = q.getFrame();
 		thisScreen = this;
-        domain = q.getDomain();
+        	domain = q.getDomain();
+	    	setLayout(null);
 
 		if (t.contains("Create")) {
 			question = new Question();
