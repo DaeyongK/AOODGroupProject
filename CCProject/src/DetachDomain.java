@@ -37,9 +37,11 @@ public class DetachDomain extends DomainScreen {
 
     @Override
     public void buttonClicked(int buttonID) {
+    	repaint();
         if (buttonID != -1) {
             if (popup("Are you sure?")) {
                 ArrayList<Domain> domains = quizit.getProfile().getDomains();
+                pane.remove(titleLabel);
                 quizit.getProfile().detachDomain(domains.get(buttonID));
             }
         } else {

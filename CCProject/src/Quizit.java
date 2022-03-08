@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Quizit {
     private Profile currentProfile;
@@ -49,6 +51,7 @@ public class Quizit {
         frame.pack();
         frame.setSize(1280, 720);
         frame.setVisible(true);
+        
     }
 
     public Profile getProfile() {
@@ -147,7 +150,11 @@ public class Quizit {
                 screen12 = new QuestionScreen("Edit Question", this);
                 frame.setContentPane(screen12);
                 break;
-
+                
         }
+        JPanel pane = (JPanel) frame.getContentPane();
+        pane.revalidate();
+        pane.repaint();
+        frame.repaint();
     }
 }

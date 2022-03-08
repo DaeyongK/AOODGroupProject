@@ -68,7 +68,7 @@ public abstract class DomainScreen extends QPanel {
         Testit t = new Testit();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        SelectDomain test = new SelectDomain("SelectDomain", t);
+        DetachDomain test = new DetachDomain("Detach Domain", t);
         frame.setContentPane(test);
         frame.pack();
         frame.setSize(1280, 720);
