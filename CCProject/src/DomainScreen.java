@@ -23,7 +23,6 @@ public abstract class DomainScreen extends QPanel {
         for (int i = 0; i < domains.size(); i++) {
             domainButtons.add(new EstablisherButton(this, 800, 50, Color.white, domains.get(i).getDomainName(), i));
         }
-       
         pane = new JLayeredPane();
         JScrollPane scroll = new JScrollPane(pane);
 //        scroll.setSize(500, 500);
@@ -44,7 +43,11 @@ public abstract class DomainScreen extends QPanel {
         }
         scroll.setBounds(150,150,900,400);
         exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", 1, -1);
-        exit.setBounds(50,50,50,50);
+        exit.setBounds(50,50,80,50);
+       	EstablisherButton button = new EstablisherButton(this, 1280, 720, BACKGROUND_COLOR, "", -99);
+       	button.setBounds(0, 0, 1280, 720);
+       	add(button);
+       	button.setVisible(false);
         titleLabel.setBounds(600,50,100,100);
         add(exit);
 
@@ -68,7 +71,7 @@ public abstract class DomainScreen extends QPanel {
         Testit t = new Testit();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        SelectDomain test = new SelectDomain("SelectDomain", t);
+        DetachDomain test = new DetachDomain("Detach Domain", t);
         frame.setContentPane(test);
         frame.pack();
         frame.setSize(1280, 720);
