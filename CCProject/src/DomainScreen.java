@@ -7,6 +7,7 @@ public abstract class DomainScreen extends QPanel {
     protected TransitionButton exit;
     protected ArrayList<Domain> domains;
     protected JLayeredPane pane;
+    protected JScrollPane scroll;
     DomainScreen(String input, Quizit quizit) {
 		/*
 		button ids:
@@ -24,7 +25,7 @@ public abstract class DomainScreen extends QPanel {
             domainButtons.add(new EstablisherButton(this, 800, 50, Color.white, domains.get(i).getDomainName(), i));
         }
         pane = new JLayeredPane();
-        JScrollPane scroll = new JScrollPane(pane);
+        scroll = new JScrollPane(pane);
 //        scroll.setSize(500, 500);
         add(scroll);
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
@@ -50,7 +51,7 @@ public abstract class DomainScreen extends QPanel {
        	button.setVisible(false);
         titleLabel.setBounds(600,50,100,100);
         add(exit);
-
+        repaint();
     }
 
 
@@ -65,17 +66,18 @@ public abstract class DomainScreen extends QPanel {
     }
 
     public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
     }
 
     public static void main(String[] args) {
         Testit t = new Testit();
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        DetachDomain test = new DetachDomain("Detach Domain", t);
-        frame.setContentPane(test);
-        frame.pack();
-        frame.setSize(1280, 720);
-        frame.setVisible(true);
+//        JFrame frame = new JFrame();
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        DetachDomain test = new DetachDomain("Detach Domain", t);
+//        frame.setContentPane(test);
+//        frame.pack();
+//        frame.setSize(1280, 720);
+//        frame.setVisible(true);
 
     }
 }
