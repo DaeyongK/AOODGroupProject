@@ -4,10 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.imageio.ImageIO;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class QuestionScreen extends QPanel implements ActionListener {
     private String title;
@@ -32,15 +28,18 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private QPanel thisScreen;
     private Question question;
     private Profile profile;
+    private Domain domain;
 
     QuestionScreen(String t, Quizit q) {
         super(t,q);
 		thisQuizit = q;
-		thisFrame = thisQuizit.getFrame();
+		thisFrame = q.getFrame();
 		thisScreen = this;
-		
+        domain = q.getDomain();
+
 		if (t.contains("Create")) {
 			question = new Question();
+            questionId = question.getID();
 			title = "Create a Question";
 			screenId = 11;
 			edit = false;
@@ -101,11 +100,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
             JOptionPane.showMessageDialog(thisScreen, "Select a Graphic");
             if (result == JOptionPane.OK_OPTION) {
                 //Fancy bufferedImage code here
+                graphicDetected = true;
                 return popup("Attach a Graphic", false);
             }
         } else {
             JOptionPane.showMessageDialog(thisScreen, "Are you sure?");
-			result == JOptionPane.YES_OPTION;
+			result = JOptionPane.YES_OPTION;
         }
         return false;
     }
@@ -115,7 +115,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             case 0:
                 if (popup("Attach Graphic", true)) {
                     //Figure out bufferedImage stuff
-					//question.setImage();
+                    question.setImage(question.getGraphicPath());
                 }
                 break;
             case 1:
@@ -126,34 +126,37 @@ public class QuestionScreen extends QPanel implements ActionListener {
                 break;
             case 2:
                 //DoneBtn
-                //Checks if all textfields are entered
+                //Checks if all textFields are entered
                 if (edit) {
                     try {
                         if (!questionBox.getText().equals("") &&
                                 !answerBox.getText().equals("") &&
                                 !changeRight.getText().equals("") &&
+                                !changeAsked.getText().equals("") &&
                                 Integer.parseInt(changeRight.getText()) >= 0 &&
-                                changeAsked.getText().equals("") &&
                                 Integer.parseInt(changeAsked.getText()) >= 0 &&
                                 Integer.parseInt(changeRight.getText()) <= 
 								Integer.parseInt(changeAsked.getText())) {
-							
-							//Set code to use setQuestion();
                             question.setQuestion(questionBox.getText());
                             question.setAnswer(answerBox.getText());
                             profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
                             profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
                             quizit.changeScreen(6);
                         }
-                    } catch (NumberFormatException ignored) {
+                    } catch (NullPointerException | NumberFormatException ignored) {
                     }
                 } else
                     try {
                         if (!questionBox.getText().equals("") &&
                                 !answerBox.getText().equals("")) {
-                            //Change code to use setQuestion();
 							question.setQuestion(questionBox.getText());
                             question.setAnswer(answerBox.getText());
+                            if (graphicDetected)
+                                domain.addQuestion(new Question(question.getQuestion(),
+                                        question.getAnswer(), question.getGraphicPath(),thisQuizit));
+                            else
+                                domain.addQuestion(new Question(question.getQuestion(),
+                                        question.getAnswer(),thisQuizit));
                             quizit.changeScreen(6);
                         }
                     } catch (NullPointerException ignored) {
@@ -167,17 +170,14 @@ public class QuestionScreen extends QPanel implements ActionListener {
                 break;
         }
     }
-
     private void radioClick() {
         //empty for now
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         //empty for now
     }
 	public void paintComponent(Graphics g) {
-			
 			g.setColor(Color.WHITE);
 			g.drawRect(121,160,438,166);
 			g.drawString("No Graphic Preview",216,218);

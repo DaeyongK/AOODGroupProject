@@ -40,7 +40,7 @@ public class Quizit {
         screen8 = new EditDomain("Edit Domain", this);
         screen9 = new ExportDomain("Export Domain", this);
         screen10 = new DetachDomain("Detach Domain", this);
-        screen11 = new QuestionScreen("Create Question");
+        screen11 = new QuestionScreen("Create Question", this);
         screen12 = new QuestionScreen("Edit Question", this);
         JFrame.setDefaultLookAndFeelDecorated(true);
         frame = new JFrame("Quizit");

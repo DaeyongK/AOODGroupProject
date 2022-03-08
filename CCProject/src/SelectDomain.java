@@ -20,9 +20,9 @@ public class SelectDomain extends DomainScreen implements MouseListener {
         launch.setEnabled(false);
         edit.setEnabled(false);
         delete.setEnabled(false);
-        add(launch);
-        add(edit);
-        add(delete);
+        pane.add(launch,2);
+        pane.add(edit,2);
+        pane.add(delete,2);
     }
 
     @Override
