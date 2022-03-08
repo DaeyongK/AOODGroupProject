@@ -9,24 +9,28 @@ public class SelectDomain extends DomainScreen implements MouseListener {
     private EstablisherButton edit;
     private EstablisherButton delete;
     private int domainSelected;
+    private boolean first;
     SelectDomain(String input, Quizit quizit) {
         super(input, quizit);
         repaint();
-
+        first = true;
         exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", 1, -1);
         launch = new EstablisherButton(this, 100, 50, Color.WHITE, "Launch", -2);
         edit = new EstablisherButton(this, 100, 50, Color.WHITE, "Edit", -3);
         delete = new EstablisherButton(this, 100, 50, Color.WHITE, "Delete", -4);
-        launch.setEnabled(false);
-        edit.setEnabled(false);
-        delete.setEnabled(false);
-        pane.add(launch,2);
-        pane.add(edit,2);
-        pane.add(delete,2);
+        
     }
 
     @Override
     public void buttonClicked(int buttonID) {
+    	 
+        if(first) {
+        	add(launch);
+            add(edit);
+            add(delete);
+            first = false;
+        }
+         
         if (buttonID == -1) {
         	quizit.changeScreen(1);
             return;
@@ -58,11 +62,18 @@ public class SelectDomain extends DomainScreen implements MouseListener {
             launch.setEnabled(true);
             edit.setEnabled(true);
             delete.setEnabled(true);
-            launch.setBounds(700, domainButtons.get(buttonID).getY(), 100, 50);
-            edit.setBounds(825, domainButtons.get(buttonID).getY(), 100, 50);
-            delete.setBounds(950, domainButtons.get(buttonID).getY(), 100, 50);
+            
+            //int y =(int)SwingUtilities.convertPoint(domainButtons.get(buttonID), domainButtons.get(buttonID).getX(), domainButtons.get(buttonID).getY(), this).getY();
+            int y = domainButtons.get(buttonID).getY()+152;
+            System.out.println(y);
+            
+
+            launch.setBounds(700, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+            edit.setBounds(825, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+            delete.setBounds(1050, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
 
         }
+        repaint();
 
     }
 
