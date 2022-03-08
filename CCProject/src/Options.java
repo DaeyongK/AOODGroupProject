@@ -40,16 +40,19 @@ public class Options extends QPanel implements MouseListener {
         //all questions button
         allQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "All Questions", 2);
         allQuestionsButton.setBounds(800, 170, 320, 90);
+        allQuestionsButton.setFont(new Font("Arial",Font.BOLD,20));
         this.add(allQuestionsButton);
 
         //shuffle questions button
         shuffleQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Shuffle Questions", 3);
         shuffleQuestionsButton.setBounds(150, 425, 320, 90);
+        shuffleQuestionsButton.setFont(new Font("Arial",Font.BOLD,20));
         this.add(shuffleQuestionsButton);
 
         //first last button
         firstLastButton = new EstablisherButton(this, 100, 40, Color.WHITE, "First to Last", 4);
         firstLastButton.setBounds(800, 425, 320, 90);
+        firstLastButton.setFont(new Font("Arial",Font.BOLD,20));
         this.add(firstLastButton);
 
         //done button
@@ -117,8 +120,10 @@ public class Options extends QPanel implements MouseListener {
     }
     
 	public void paintComponent(Graphics g) {
-//		g.setColor(this.TITLE_COLOR);
-//		g.drawString("Quizzing Options", id, id);
+		super.paintComponent(g);
+		g.setColor(this.TITLE_COLOR);
+		g.drawString("Quizzing Options", 580, 100);
+		g.setFont(new Font("Arial",Font.BOLD,18));
 	}
 
     public void actionPerformed(ActionEvent e) {

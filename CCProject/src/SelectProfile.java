@@ -19,7 +19,7 @@ public class SelectProfile extends QPanel implements MouseListener {
         profiles = q.getAllProfiles();
         //panel setup
         this.setBackground(this.BACKGROUND_COLOR);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(null);
 
         //create buttons and ui aspects. adds action listeners. then adds to jpanel.
         //create profile button inside the jscrollpane somehow???
@@ -40,13 +40,14 @@ public class SelectProfile extends QPanel implements MouseListener {
         scrollable.add(verticalBar);
 
         //insert code needed to add in profiles
-        this.add(createNewProfileButton);
         this.addMouseListener(this);
         scrollable.addMouseListener(this);
+        scrollable.setBounds(475, 200, 300, 300);
         this.add(scrollable);
 
         //done button
         done = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 1);
+        done.setBounds(560, 550, 150, 50);
         this.add(done);
     }
 
@@ -117,10 +118,6 @@ public class SelectProfile extends QPanel implements MouseListener {
     public void mouseReleased(MouseEvent arg0) {
         // TODO Auto-generated method stub
 
-    }
-
-    public static void main(String[] args) {
-        Quizit test = new Quizit();
     }
 
 }
