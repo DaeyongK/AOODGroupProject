@@ -14,6 +14,8 @@ public class Options extends QPanel implements MouseListener {
     private EstablisherButton firstLastButton;
     private TransitionButton doneButton;
     private Quizit quizitReference;
+    private int numCorrectNumber;
+    
     Options(String title, Quizit q) {
         super(title, q);
         this.setLayout(null);
@@ -127,7 +129,11 @@ public class Options extends QPanel implements MouseListener {
 	}
 
     public void actionPerformed(ActionEvent e) {
-
+		JComboBox comboBox = (JComboBox)e.getSource();
+	    String input = (String)comboBox.getSelectedItem();
+	    if (input.contentEquals("<5")) {
+	    	
+	    }
     }
 
     @Override

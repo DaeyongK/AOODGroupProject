@@ -21,13 +21,14 @@ public class SelectProfile extends QPanel implements MouseListener {
         this.setBackground(this.BACKGROUND_COLOR);
         this.setLayout(null);
 
-        //create buttons and ui aspects. adds action listeners. then adds to jpanel.
+        //create buttons and ui aspects. adds action listeners. then adds to qpanel.
         //create profile button inside the jscrollpane somehow???
         createNewProfileButton = new TransitionButton(this, 75, 35, Color.WHITE, "Create New Profile", 3, 2);
 
         //scroll pane???
         scrollable = new JScrollPane();
         JPanel scrollablePane = new JPanel();
+        scrollablePane.setLayout(new BoxLayout(scrollablePane, BoxLayout.PAGE_AXIS));
         int increment = 3;
         for (Profile p : profiles) {
             EstablisherButton holder = new EstablisherButton(this, 75, 35, Color.WHITE, p.getName(), increment);
@@ -47,7 +48,7 @@ public class SelectProfile extends QPanel implements MouseListener {
 
         //done button
         done = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 1);
-        done.setBounds(560, 550, 150, 50);
+        done.setBounds(550, 550, 150, 50);
         this.add(done);
     }
 
@@ -85,10 +86,12 @@ public class SelectProfile extends QPanel implements MouseListener {
         }
     }
 
-    public void paintComponent(Graphics g) {
-        //draw background
-        super.paintComponent(g);
-    }
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(this.TITLE_COLOR);
+		g.drawString("Select Profile", 580, 100);
+		g.setFont(new Font("Arial",Font.BOLD,18));
+	}
 
     @Override
     public void mouseClicked(MouseEvent arg0) {

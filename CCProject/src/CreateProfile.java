@@ -26,7 +26,7 @@ public class CreateProfile extends QPanel implements MouseListener {
         this.setBackground(this.BACKGROUND_COLOR);
         this.addMouseListener(this);
 
-        //create buttons and ui aspects. adds action listeners. then adds to jpanel.
+        //create buttons and ui aspects. adds action listeners. then adds to qpanel
         //exit button
         exit = new TransitionButton(this, 50, 25, TITLE_COLOR, "Exit", -1, 5);
         exit.setBounds(30, 30, 100, 30);
