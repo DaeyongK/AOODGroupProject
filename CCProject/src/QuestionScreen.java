@@ -1,9 +1,11 @@
 //QuestionScreen is front-end class made by Kai C
 
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 public class QuestionScreen extends QPanel implements ActionListener {
     private String title;
@@ -29,6 +31,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private Question question;
     private Profile profile;
     private Domain domain;
+    
 
     QuestionScreen(String t, Quizit q) {
         super(t, q);
@@ -77,7 +80,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         doneBtn = new TransitionButton(this, 161, 69, Color.WHITE, "Done", 8, 2);
         backBtn = new TransitionButton(this, 175, 67, Color.WHITE, "Back", 8, 3);
 
-        titleLabel.setFont(new Font("Arial",Font.BOLD,25));
+        titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         titleLabel.setForeground(TITLE_COLOR);
         questionBox.setBounds(121, 399, 438, 124);
         answerBox.setBounds(720, 399, 438, 124);
@@ -85,7 +88,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         detachGraphic.setBounds(398, 327, 161, 44);
         doneBtn.setBounds(559, 570, 161, 69);
         backBtn.setBounds(49, 42, 175, 67);
-        
+
         add(titleLabel);
         add(questionBox);
         add(answerBox);
@@ -97,30 +100,87 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
     //FOR TESTING PURPOSES!!
     public static void main(String[] arg) {
-        JFrame testFrame = new JFrame("QuestionScreen Test");
-        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        testFrame.pack();
-        testFrame.setSize(1280, 720);
-        testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
-        testFrame.setVisible(true);
+//        JFrame testFrame = new JFrame("QuestionScreen Test");
+//        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        testFrame.pack();
+//        testFrame.setSize(1280, 720);
+//        testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
+//        testFrame.setVisible(true);
+
+        Quizit q = new Quizit();
+        q.changeScreen(11);
     }
 
     public int getScreenID() {
         return screenId;
     }
 
-    public boolean popup(String text, boolean select) {
-        int result = JOptionPane.showConfirmDialog(this, text);
-        if (select) {
-            JOptionPane.showMessageDialog(thisScreen, "Select a Graphic");
+    public boolean popup(String text) {
+//        switch (result) {
+//            case JOptionPane.YES_OPTION:
+//                return true;
+//
+//            case JOptionPane.NO_OPTION:
+//                return false;
+//
+//            case JOptionPane.CANCEL_OPTION:
+//                System.out.println("Cancel");
+//                break;
+//            case JOptionPane.CLOSED_OPTION:
+//                System.out.println("Closed");
+//                break;
+//        }
+//        return false;
+        int result;
+
+        if (text.toLowerCase().contains("select")) {
+            result = JOptionPane.showConfirmDialog(quizit.getFrame(), text, text, JOptionPane.OK_CANCEL_OPTION);
+
             if (result == JOptionPane.OK_OPTION) {
-                //Fancy bufferedImage code here
-                graphicDetected = true;
-                return popup("Attach a Graphic", false);
+                JFileChooser jfc = new JFileChooser();
+
+                //only show xml files by default
+                //wont stop user from just changing it to be all files so accept() is still needed
+                FileNameExtensionFilter filter = new FileNameExtensionFilter("img files", "png", "jpg", "jpeg", "gif");
+                jfc.setFileFilter(filter);
+
+                int returnValue = jfc.showOpenDialog(null);
+
+                if (returnValue == JFileChooser.APPROVE_OPTION) {
+                    File img = jfc.getSelectedFile();
+                    if (accept(img)) {
+                        if (popup("Are you sure you want to attach the image?")) {
+                            question.setImage(img.getPath());
+                            graphicDetected = true;
+                        }
+                    }
+
+                }
             }
-        } else {
-            JOptionPane.showMessageDialog(thisScreen, "Are you sure?");
-            result = JOptionPane.YES_OPTION;
+
+        } else if(text.toLowerCase().contains("detach")) {
+            if(graphicDetected) {
+                if(popup("Are you sure you want to remove the image?")) {
+                    question.detachImage();
+                    graphicDetected = false;
+                }
+            }
+
+        } else if (text.toLowerCase().contains("are you sure")) {
+            result = JOptionPane.showConfirmDialog(quizit.getFrame(), text, text, JOptionPane.YES_NO_OPTION);
+            return result == JOptionPane.YES_OPTION;
+        }
+
+        return false;
+
+    }
+
+    private boolean accept(File f) {
+        String name = f.toString();
+        int index = name.lastIndexOf('.');
+        if (index > 0) {
+            String extension = name.substring(index + 1);
+            return extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg") || extension.equals("gif");
         }
         return false;
     }
@@ -129,14 +189,14 @@ public class QuestionScreen extends QPanel implements ActionListener {
         QPanel nextScreen = thisScreen;
         switch (buttonID) {
             case 0:
-                if (popup("Attach Graphic", true)) {
+                if (popup("Select File")) {
                     //Figure out bufferedImage stuff
                     question.setImage(question.getGraphicPath());
                 }
                 break;
             case 1:
                 if (graphicDetected) {
-                    if (popup("Detach Graphic", false))
+                    if (popup("Detach Graphic"))
                         question.detachImage();
                 }
                 break;
@@ -180,7 +240,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
                 break;
             case 3:
                 //BackBtn
-                if (popup("Are you sure you want to leave?", false)) {
+                if (popup("Are you sure you want to leave?")) {
                     thisQuizit.changeScreen(8);
                 }
                 break;
@@ -215,9 +275,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 
     public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
         g.setColor(Color.WHITE);
         g.drawRect(121, 160, 438, 166);
-        g.setFont(new Font("Arial",Font.BOLD,18));
+        g.setFont(new Font("Arial", Font.BOLD, 18));
         g.drawString("No Graphic Preview", 216, 218);
     }
 
