@@ -187,10 +187,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	public static void main(String[] arg) {
 		JFrame testFrame = new JFrame("QuestionScreen Test");
 		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        testFrame.setContentPane(screen1);
         testFrame.pack();
         testFrame.setSize(1280, 720);
-		testFrame.add(new QuestionScreen("Create a Question",new Quizit());
+		testFrame.add(new QuestionScreen("Create a Question",new Quizit()));
         testFrame.setVisible(true);
 	}
 }
