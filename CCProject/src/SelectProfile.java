@@ -18,7 +18,7 @@ public class SelectProfile extends QPanel implements MouseListener {
         quizitReference = q;
         profiles = q.getAllProfiles();
         //panel setup
-        this.setBackground(QPanel.TITLE_COLOR);
+        this.setBackground(this.BACKGROUND_COLOR);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         //create buttons and ui aspects. adds action listeners. then adds to jpanel.
@@ -87,9 +87,6 @@ public class SelectProfile extends QPanel implements MouseListener {
     public void paintComponent(Graphics g) {
         //draw background
         super.paintComponent(g);
-        //draw title
-        g.setColor(TITLE_COLOR);
-
     }
 
     @Override

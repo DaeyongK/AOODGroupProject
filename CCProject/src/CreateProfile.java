@@ -21,9 +21,9 @@ public class CreateProfile extends QPanel implements MouseListener {
 
     public CreateProfile(String title, Quizit q) {
         super(title, q);
-
+        this.setLayout(new GridBagLayout());
         //panel setup
-        this.setBackground(QPanel.TITLE_COLOR);
+        this.setBackground(this.BACKGROUND_COLOR);
         this.addMouseListener(this);
         GridBagConstraints c = new GridBagConstraints();
 
@@ -34,7 +34,7 @@ public class CreateProfile extends QPanel implements MouseListener {
         this.add(exit, c);
 
         //text field
-        textField = new JTextField();
+        textField = new JTextField("Enter profile name: ");
         textField.setSize(70, 5);
         c.anchor = GridBagConstraints.PAGE_START;
         this.add(textField, c);

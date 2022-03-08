@@ -190,7 +190,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         testFrame.setContentPane(screen1);
         testFrame.pack();
         testFrame.setSize(1280, 720);
-		testFrame.add(new QuestionScreen("Create a Question",new Quizit());
+		testFrame.add(new QuestionScreen("Create a Question",new Quizit()));
         testFrame.setVisible(true);
 	}
 }
