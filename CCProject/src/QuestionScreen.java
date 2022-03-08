@@ -182,4 +182,15 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			g.drawRect(121,160,438,166);
 			g.drawString("No Graphic Preview",216,218);
 	}
+	
+	//FOR TESTING PURPOSES!!
+	public static void main(String[] arg) {
+		JFrame testFrame = new JFrame("QuestionScreen Test");
+		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        testFrame.setContentPane(screen1);
+        testFrame.pack();
+        testFrame.setSize(1280, 720);
+		testFrame.add(new QuestionScreen("Create a Question",new Quizit());
+        testFrame.setVisible(true);
+	}
 }
