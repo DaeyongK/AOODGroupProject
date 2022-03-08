@@ -6,35 +6,46 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 class ImportScreen extends QPanel implements ActionListener {
-    private TransitionButton done;
-    private TransitionButton back;
+    public static void main(String[] args) {
+        Quizit q = new Quizit();
+    }
+	
+	private TransitionButton done;
+	private TransitionButton back;
     private EstablisherButton chooseFile;
     private File selectedFile;
     private JLabel fileName = new JLabel("");
     private JFileChooser jfc;
-
+    private Quizit thisQuizit;
+    private JFrame thisFrame;
     ImportScreen(String title, Quizit q) {
     	super(title, q);
-
+        thisQuizit = q;
+        thisFrame = q.getFrame();
+    	setLayout(null);
+    	setBackground(BACKGROUND_COLOR);
         int width = 150;
-        int height = 50;
+        int height = 40;
+        
+        titleLabel = new JLabel(title);
+        titleLabel.setBounds(550, 86, 700, 32);
+        
+        chooseFile = new EstablisherButton(this, width, height, Color.WHITE, "Choose File", 2);
+        done = new TransitionButton(this, width, height, Color.WHITE, "Done", 8, 1);
+        back = new TransitionButton(this, width, height, Color.WHITE, "Back", 8, -1);
 
-        back = new TransitionButton(this, width, height, Color.WHITE, "Back", 7, 0);
-        back.setLocation(20, 20);
-        back.setActionCommand("back");
-        add(back);
-
-        done = new TransitionButton(this, width, height, Color.WHITE, "Done", 7, 1);
-        done.setLocation(650, 560);
-        done.setActionCommand("done");
-        add(done);
+        titleLabel.setFont(new Font("Arial",Font.BOLD,25));
+        titleLabel.setForeground(TITLE_COLOR);
+        chooseFile.setBounds(360, 500, width, height);
+        back.setBounds(86, 80, width, height);
+        done.setBounds(500, 580, width, height);
         done.setVisible(false);
 
-        chooseFile = new EstablisherButton(this, width, height, Color.WHITE, "Choose File", 2);
-        chooseFile.setLocation(480, 560);
-        chooseFile.setActionCommand("choose");
+        
+        add(titleLabel);
         add(chooseFile);
-        repaint();
+        add(done);
+        add(back);
     }
 
     public int getScreenID() {
@@ -48,7 +59,7 @@ class ImportScreen extends QPanel implements ActionListener {
     public void buttonClicked(int buttonID) {
         System.out.println(buttonID);
         switch (buttonID) {
-            case 0:
+            case -1:
                 quizit.changeScreen(1);
                 break;
             case 1:
@@ -102,7 +113,7 @@ class ImportScreen extends QPanel implements ActionListener {
                 id = 2;
                 break;
             default:
-                id = 0;
+                id = -1;
                 break;
         }
         buttonClicked(id);

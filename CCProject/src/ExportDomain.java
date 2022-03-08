@@ -43,6 +43,7 @@ public class ExportDomain extends DomainScreen implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
+<<<<<<< Updated upstream
         File exported = quizit.getProfile().getDomains().get(buttonID).export(); //where do you want the file to be stored?
         String path = test.class.getProtectionDomain().getCodeSource().getLocation().getPath();
         String updatedPath = path.substring(0, path.length()-5);
@@ -61,6 +62,18 @@ public class ExportDomain extends DomainScreen implements ActionListener {
 //	        f.createNewFile();
 		} catch (Exception e) {
             System.out.println("BAD");
+=======
+        if(buttonID != -1) {
+        	File exported = quizit.getProfile().getDomains().get(buttonID).export(); //where do you want the file to be stored?
+            String path = test.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+            String decodedPath;
+    		try {
+    			decodedPath = URLDecoder.decode(path, "UTF-8");
+    	        decodedPath =decodedPath.substring(0, decodedPath.substring(0,decodedPath.lastIndexOf("/")).lastIndexOf("/"));
+//    	        File f = new File(decodedPath + "/Domains");
+//    	        f.createNewFile();
+    		} catch (Exception e) {}
+>>>>>>> Stashed changes
         }
         quizit.changeScreen(1);
     }
