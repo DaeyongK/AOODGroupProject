@@ -29,6 +29,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private Question question;
     private Profile profile;
     private Domain domain;
+    
 
     QuestionScreen(String t, Quizit q) {
         super(t, q);
@@ -197,6 +198,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
     }
 
     public void paintComponent(Graphics g) {
+    	super.paintComponent(g);
         g.setColor(Color.WHITE);
         g.drawRect(121, 160, 438, 166);
         g.setFont(new Font("Arial",Font.BOLD,18));
