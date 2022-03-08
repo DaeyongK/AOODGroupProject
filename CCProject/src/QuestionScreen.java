@@ -37,6 +37,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         thisScreen = this;
         domain = q.getDomain();
         setLayout(null);
+        setBackground(BACKGROUND_COLOR);
 
         if (t.contains("Create")) {
             question = new Question();
@@ -71,25 +72,27 @@ public class QuestionScreen extends QPanel implements ActionListener {
             this.add(changeRight);
             this.add(changeAsked);
         }
-        attachGraphic = new EstablisherButton(this, 161, 44, Color.BLACK, "Attach", 0);
-        detachGraphic = new EstablisherButton(this, 161, 44, Color.BLACK, "Detach", 1);
-        doneBtn = new TransitionButton(this, 161, 69, Color.BLACK, "Done", 8, 2);
-        backBtn = new TransitionButton(this, 175, 67, Color.BLACK, "Back", 8, 3);
+        attachGraphic = new EstablisherButton(this, 161, 44, Color.WHITE, "Attach", 0);
+        detachGraphic = new EstablisherButton(this, 161, 44, Color.WHITE, "Detach", 1);
+        doneBtn = new TransitionButton(this, 161, 69, Color.WHITE, "Done", 8, 2);
+        backBtn = new TransitionButton(this, 175, 67, Color.WHITE, "Back", 8, 3);
 
+        titleLabel.setFont(new Font("Arial",Font.BOLD,25));
+        titleLabel.setForeground(TITLE_COLOR);
         questionBox.setBounds(121, 399, 438, 124);
         answerBox.setBounds(720, 399, 438, 124);
         attachGraphic.setBounds(121, 327, 161, 44);
         detachGraphic.setBounds(398, 327, 161, 44);
         doneBtn.setBounds(559, 570, 161, 69);
         backBtn.setBounds(49, 42, 175, 67);
-
-        this.add(titleLabel);
-        this.add(questionBox);
-        this.add(answerBox);
-        this.add(attachGraphic);
-        this.add(detachGraphic);
-        this.add(doneBtn);
-        this.add(backBtn);
+        
+        add(titleLabel);
+        add(questionBox);
+        add(answerBox);
+        add(attachGraphic);
+        add(detachGraphic);
+        add(doneBtn);
+        add(backBtn);
     }
 
     //FOR TESTING PURPOSES!!
@@ -196,6 +199,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
     public void paintComponent(Graphics g) {
         g.setColor(Color.WHITE);
         g.drawRect(121, 160, 438, 166);
+        g.setFont(new Font("Arial",Font.BOLD,18));
         g.drawString("No Graphic Preview", 216, 218);
     }
 }
