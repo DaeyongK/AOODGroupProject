@@ -22,78 +22,90 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private EstablisherButton detachGraphic;
     private TransitionButton doneBtn;
     private TransitionButton backBtn;
-	
-	private Quizit thisQuizit;
-	private JFrame thisFrame;
+
+    private Quizit thisQuizit;
+    private JFrame thisFrame;
     private QPanel thisScreen;
     private Question question;
     private Profile profile;
     private Domain domain;
 
     QuestionScreen(String t, Quizit q) {
-        super(t,q);
-		thisQuizit = q;
-		thisFrame = q.getFrame();
-		thisScreen = this;
+        super(t, q);
+        thisQuizit = q;
+        thisFrame = q.getFrame();
+        thisScreen = this;
         domain = q.getDomain();
+        setLayout(null);
 
-		if (t.contains("Create")) {
-			question = new Question();
+        if (t.contains("Create")) {
+            question = new Question();
             questionId = question.getID();
-			title = "Create a Question";
-			screenId = 11;
-			edit = false;
-			graphicDetected = false;
-			titleLabel = new JLabel(title);
-			titleLabel.setBounds(464, 86, 351, 32);
-			questionBox = new JTextField("Enter a new question here: ");
-			answerBox = new JTextField("Enter its answer here: ");
-		}
-		else {
-			question = q.getQuestion();
-			questionId = question.getID();
-			profile = q.getProfile();
-			title = "Edit Question #" + questionId;
-			thisScreen = this;
-			screenId = 12;
-			edit = true;
-			graphicDetected = question.getImage() != null;
-			
-			titleLabel = new JLabel(title);
-			titleLabel.setBounds(464, 86, 360, 32);
-			questionBox = new JTextField(question.getQuestion());
-			answerBox = new JTextField(question.getAnswer());
+            title = "Create a Question";
+            screenId = 11;
+            edit = false;
+            graphicDetected = false;
+            titleLabel = new JLabel(title);
+            titleLabel.setBounds(464, 86, 351, 32);
+            questionBox = new JTextField("Enter a new question here: ");
+            answerBox = new JTextField("Enter its answer here: ");
+        } else {
+            question = q.getQuestion();
+            questionId = question.getID();
+            profile = q.getProfile();
+            title = "Edit Question #" + questionId;
+            thisScreen = this;
+            screenId = 12;
+            edit = true;
+            graphicDetected = question.getImage() != null;
 
-			changeRight = new JTextField("Correct: " + profile.getAnsweredRight(questionId) + " times");
-			changeAsked = new JTextField("Asked: " + profile.getTimesAsked(questionId) + " times");
-			changeRight.setBounds(953, 161, 283, 56);
-			changeAsked.setBounds(953, 242, 283, 56);
-			this.add(changeRight);
-			this.add(changeAsked);
-		}
-		attachGraphic = new EstablisherButton(this, 161, 44, Color.BLACK, "Attach", 0);
-		detachGraphic = new EstablisherButton(this, 161, 44, Color.BLACK, "Detach", 1);
-		doneBtn = new TransitionButton(this, 161, 69, Color.BLACK, "Done", 8, 2);
-		backBtn = new TransitionButton(this, 175, 67, Color.BLACK, "Back", 8, 3);
+            titleLabel = new JLabel(title);
+            titleLabel.setBounds(464, 86, 360, 32);
+            questionBox = new JTextField(question.getQuestion());
+            answerBox = new JTextField(question.getAnswer());
 
-		questionBox.setBounds(121, 399, 438, 124);
-		answerBox.setBounds(720, 399, 438, 124);
-		attachGraphic.setBounds(121, 327, 161, 44);
-		detachGraphic.setBounds(398, 327, 161, 44);
-		doneBtn.setBounds(559, 570, 161, 69);
-		backBtn.setBounds(49, 42, 175, 67);
-		
-		this.add(titleLabel);
-		this.add(questionBox);
-		this.add(answerBox);
-		this.add(attachGraphic);
-		this.add(detachGraphic);
-		this.add(doneBtn);
-		this.add(backBtn);
+            changeRight = new JTextField("Correct: " + profile.getAnsweredRight(questionId) + " times");
+            changeAsked = new JTextField("Asked: " + profile.getTimesAsked(questionId) + " times");
+            changeRight.setBounds(953, 161, 283, 56);
+            changeAsked.setBounds(953, 242, 283, 56);
+            this.add(changeRight);
+            this.add(changeAsked);
+        }
+        attachGraphic = new EstablisherButton(this, 161, 44, Color.BLACK, "Attach", 0);
+        detachGraphic = new EstablisherButton(this, 161, 44, Color.BLACK, "Detach", 1);
+        doneBtn = new TransitionButton(this, 161, 69, Color.BLACK, "Done", 8, 2);
+        backBtn = new TransitionButton(this, 175, 67, Color.BLACK, "Back", 8, 3);
+
+        questionBox.setBounds(121, 399, 438, 124);
+        answerBox.setBounds(720, 399, 438, 124);
+        attachGraphic.setBounds(121, 327, 161, 44);
+        detachGraphic.setBounds(398, 327, 161, 44);
+        doneBtn.setBounds(559, 570, 161, 69);
+        backBtn.setBounds(49, 42, 175, 67);
+
+        this.add(titleLabel);
+        this.add(questionBox);
+        this.add(answerBox);
+        this.add(attachGraphic);
+        this.add(detachGraphic);
+        this.add(doneBtn);
+        this.add(backBtn);
     }
+
+    //FOR TESTING PURPOSES!!
+    public static void main(String[] arg) {
+        JFrame testFrame = new JFrame("QuestionScreen Test");
+        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        testFrame.pack();
+        testFrame.setSize(1280, 720);
+        testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
+        testFrame.setVisible(true);
+    }
+
     public int getScreenID() {
         return screenId;
     }
+
     public boolean popup(String text, boolean select) {
         int result = JOptionPane.showConfirmDialog(this, text);
         if (select) {
@@ -105,10 +117,11 @@ public class QuestionScreen extends QPanel implements ActionListener {
             }
         } else {
             JOptionPane.showMessageDialog(thisScreen, "Are you sure?");
-			result = JOptionPane.YES_OPTION;
+            result = JOptionPane.YES_OPTION;
         }
         return false;
     }
+
     public void buttonClicked(int buttonID) {
         QPanel nextScreen = thisScreen;
         switch (buttonID) {
@@ -135,8 +148,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
                                 !changeAsked.getText().equals("") &&
                                 Integer.parseInt(changeRight.getText()) >= 0 &&
                                 Integer.parseInt(changeAsked.getText()) >= 0 &&
-                                Integer.parseInt(changeRight.getText()) <= 
-								Integer.parseInt(changeAsked.getText())) {
+                                Integer.parseInt(changeRight.getText()) <=
+                                        Integer.parseInt(changeAsked.getText())) {
                             question.setQuestion(questionBox.getText());
                             question.setAnswer(answerBox.getText());
                             profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
@@ -149,14 +162,14 @@ public class QuestionScreen extends QPanel implements ActionListener {
                     try {
                         if (!questionBox.getText().equals("") &&
                                 !answerBox.getText().equals("")) {
-							question.setQuestion(questionBox.getText());
+                            question.setQuestion(questionBox.getText());
                             question.setAnswer(answerBox.getText());
                             if (graphicDetected)
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), question.getGraphicPath(),thisQuizit));
+                                        question.getAnswer(), question.getGraphicPath(), thisQuizit));
                             else
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(),thisQuizit));
+                                        question.getAnswer(), thisQuizit));
                             quizit.changeScreen(6);
                         }
                     } catch (NullPointerException ignored) {
@@ -165,21 +178,24 @@ public class QuestionScreen extends QPanel implements ActionListener {
             case 3:
                 //BackBtn
                 if (popup("Are you sure you want to leave?", false)) {
-					thisQuizit.changeScreen(8);
-				}
+                    thisQuizit.changeScreen(8);
+                }
                 break;
         }
     }
+
     private void radioClick() {
         //empty for now
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //empty for now
     }
-	public void paintComponent(Graphics g) {
-			g.setColor(Color.WHITE);
-			g.drawRect(121,160,438,166);
-			g.drawString("No Graphic Preview",216,218);
-	}
+
+    public void paintComponent(Graphics g) {
+        g.setColor(Color.WHITE);
+        g.drawRect(121, 160, 438, 166);
+        g.drawString("No Graphic Preview", 216, 218);
+    }
 }
