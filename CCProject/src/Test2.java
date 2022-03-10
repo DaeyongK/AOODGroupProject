@@ -9,7 +9,7 @@ public class Test2 {
         Testit t = new Testit();
         JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        Options test = new Options("Options Test Screen", t);
+        CreateProfile test = new CreateProfile("Options Test Screen", t);
         frame.setContentPane(test);
         frame.pack();
         frame.setSize(1280, 720);

@@ -30,7 +30,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private Profile profile;
     private Domain domain;
 
-
     QuestionScreen(String t, Quizit q) {
         super(t, q);
         domain = q.getDomain();
@@ -60,9 +59,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
             titleLabel = new JLabel(title);
             titleLabel.setBounds(464, 86, 360, 32);
-            questionBox = new JTextField(question.getQuestion());
-            answerBox = new JTextField(question.getAnswer());
-
             if (graphicDetected)
                 imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
             else
@@ -70,7 +66,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
             questionBox = new JTextField(question.getQuestion());
             answerBox = new JTextField(question.getAnswer());
-
             changeRight = new JTextField("Correct: " + profile.getAnsweredRight(questionId) + " times");
             changeAsked = new JTextField("Asked: " + profile.getTimesAsked(questionId) + " times");
             changeRight.setBounds(953, 161, 283, 56);
@@ -85,9 +80,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
         titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
         titleLabel.setForeground(TITLE_COLOR);
+        imageLabel.setBounds(121, 160, 438, 166);
         questionBox.setBounds(121, 399, 438, 124);
         answerBox.setBounds(720, 399, 438, 124);
-        imageLabel.setBounds(121, 160, 438, 166);
         attachGraphic.setBounds(121, 327, 161, 44);
         detachGraphic.setBounds(398, 327, 161, 44);
         doneBtn.setBounds(559, 570, 161, 69);

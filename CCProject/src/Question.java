@@ -8,7 +8,7 @@ public class Question {
     private String answerString;
     private String graphicString;
     private BufferedImage graphic;
-    private int ID;
+    private int ID,tempID ;
 
     // FOR TESTING PURPOSES ONLY |||||
     // VVVVV
@@ -43,12 +43,15 @@ public class Question {
         questionString = question;
         answerString = answer;
         graphicString = null;
-        int tempID = (int) (Math.random() * 1000000000);
+        tempID = (int) (Math.random() * 1000000000);
+         
+        System.out.println(quiz.getProfile().getHashMap().containsKey(tempID));
         while (quiz.getProfile().getHashMap().containsKey(tempID)) {
+        	System.out.println("this ran");
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
-        quiz.getProfile().getHashMap().put(ID, new int[]{0,0});
+        quiz.getProfile().addQuestion(ID, new int[] {0,0});
     }
 
     Question(String question, String answer, String imagePath, Quizit quiz) {
@@ -56,12 +59,14 @@ public class Question {
         answerString = answer;
         graphicString=imagePath;
         this.setImage(imagePath);
-        int tempID = (int) (Math.random() * 1000000000);
+        tempID = (int) (Math.random() * 1000000000);
+        System.out.println(quiz.getProfile().getHashMap().containsKey(tempID));
         while (quiz.getProfile().getHashMap().containsKey(tempID)) {
+        	System.out.println("this ran2");
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
-        quiz.getProfile().getHashMap().put(ID, new int[]{0,0});
+        quiz.getProfile().addQuestion(ID, new int[] {0,0});
     }
 
     public boolean setImage(String imagePath) {
