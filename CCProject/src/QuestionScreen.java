@@ -1,10 +1,12 @@
 //QuestionScreen is front-end class made by Kai C
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class QuestionScreen extends QPanel implements ActionListener {
@@ -15,6 +17,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private boolean graphicDetected;
 
     private JLabel titleLabel;
+    private JLabel imageLabel;
     private JTextField questionBox;
     private JTextField answerBox;
     private JTextField changeRight;
@@ -42,7 +45,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         setLayout(null);
         setBackground(BACKGROUND_COLOR);
 
-        if (t.contains("Create")) {
+        if (t.toLowerCase().contains("create")) {
             question = new Question();
             questionId = question.getID();
             title = "Create a Question";
@@ -53,6 +56,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             titleLabel.setBounds(464, 86, 351, 32);
             questionBox = new JTextField("Enter a new question here: ");
             answerBox = new JTextField("Enter its answer here: ");
+            imageLabel = new JLabel();
         } else {
             question = q.getQuestion();
             questionId = question.getID();
@@ -68,12 +72,17 @@ public class QuestionScreen extends QPanel implements ActionListener {
             questionBox = new JTextField(question.getQuestion());
             answerBox = new JTextField(question.getAnswer());
 
+            if(graphicDetected)
+                imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
+            else
+                imageLabel = new JLabel();
+
             changeRight = new JTextField("Correct: " + profile.getAnsweredRight(questionId) + " times");
             changeAsked = new JTextField("Asked: " + profile.getTimesAsked(questionId) + " times");
             changeRight.setBounds(953, 161, 283, 56);
             changeAsked.setBounds(953, 242, 283, 56);
-            this.add(changeRight);
-            this.add(changeAsked);
+            add(changeRight);
+            add(changeAsked);
         }
         attachGraphic = new EstablisherButton(this, 161, 44, Color.WHITE, "Attach", 0);
         detachGraphic = new EstablisherButton(this, 161, 44, Color.WHITE, "Detach", 1);
@@ -84,6 +93,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         titleLabel.setForeground(TITLE_COLOR);
         questionBox.setBounds(121, 399, 438, 124);
         answerBox.setBounds(720, 399, 438, 124);
+        imageLabel.setBounds(121, 160, 438, 166);
         attachGraphic.setBounds(121, 327, 161, 44);
         detachGraphic.setBounds(398, 327, 161, 44);
         doneBtn.setBounds(559, 570, 161, 69);
@@ -92,6 +102,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         add(titleLabel);
         add(questionBox);
         add(answerBox);
+        add(imageLabel);
         add(attachGraphic);
         add(detachGraphic);
         add(doneBtn);
@@ -137,27 +148,25 @@ public class QuestionScreen extends QPanel implements ActionListener {
                         if (popup("Are you sure you want to attach the image?")) {
                             question.setImage(img.getPath());
                             graphicDetected = true;
+                            imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
                         }
                     }
-
                 }
             }
-
         } else if(text.toLowerCase().contains("detach")) {
             if(graphicDetected) {
                 if(popup("Are you sure you want to remove the image?")) {
                     question.detachImage();
                     graphicDetected = false;
+                    imageLabel = new JLabel();
                 }
             }
-
         } else if (text.toLowerCase().contains("are you sure")) {
             result = JOptionPane.showConfirmDialog(quizit.getFrame(), text, text, JOptionPane.YES_NO_OPTION);
             return result == JOptionPane.YES_OPTION;
         }
 
         return false;
-
     }
 
     private boolean accept(File f) {
@@ -232,7 +241,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             case 3:
                 //BackBtn
                 if (popup("Are you sure you want to leave?")) {
-                    thisQuizit.changeScreen(8);
+                    thisQuizit.changeScreen(6);
                 }
                 break;
         }
