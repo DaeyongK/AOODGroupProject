@@ -15,6 +15,7 @@ public abstract class DomainScreen extends QPanel {
 		domain buttons = index in allDomains
 		 */
         super(input, quizit);
+        
 //		System.out.print(popup("yeah"));
         setOpaque(true);
         setLayout(null);
@@ -32,11 +33,18 @@ public abstract class DomainScreen extends QPanel {
         if (domainButtons != null) {
             for (int i =0; i<domainButtons.size(); i++) {
 //        		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
-        		pane.setLayout(new GridLayout(domainButtons.size(), 1));
+            	if(domainButtons.size()<7) {
+            		pane.setLayout(new GridLayout(7, 1));
+
+            	}else {
+            		pane.setLayout(new GridLayout(domainButtons.size(), 1));
+
+            	}
             	EstablisherButton button = domainButtons.get(i);
 
-        		button.setPreferredSize(new Dimension(800, 50));
             	pane.add(button, 1,0);
+        		button.setPreferredSize(new Dimension(800, 50));
+
             	//pane.setLayout(null);
 //        		button.setBounds(20,80*i+20,360,50);
 //            	pane.add(button);
