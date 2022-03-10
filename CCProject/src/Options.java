@@ -14,54 +14,53 @@ public class Options extends QPanel implements MouseListener {
     private EstablisherButton firstLastButton;
     private TransitionButton doneButton;
     private Quizit quizitReference;
-    private QPanel holder;
-
+    private int numCorrectNumber;
+    
     Options(String title, Quizit q) {
         super(title, q);
         this.setLayout(null);
         quizitReference = q;
         //panel setup
-        this.setBackground(QPanel.TITLE_COLOR);
+        this.setBackground(this.BACKGROUND_COLOR);
         this.addMouseListener(this);
 
-        //create buttons and ui aspects. adds action listeners. then adds to jpanel.
-        GridBagConstraints c = new GridBagConstraints();
+        //create buttons and ui aspects. adds action listeners. then adds to qpanel
 
         //number correct button
-        numCorrectButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Questions with number of correct answers", 1);
-        c.anchor = GridBagConstraints.FIRST_LINE_START;
-        this.add(numCorrectButton, c);
+        numCorrectButton = new EstablisherButton(this, 300, 40, Color.WHITE, "Questions with number of correct answers", 1);
+        numCorrectButton.setBounds(150, 170, 320, 90);
+        this.add(numCorrectButton);
 
         //dropdown menu
         String[] names = {"<5", "<10", "<15", "<20", "<30"};
         dropdown = new JComboBox<>(names);
         dropdown.setAlignmentX(JComboBox.LEFT_ALIGNMENT);
         dropdown.setSelectedIndex(0);
-        c.anchor = GridBagConstraints.PAGE_START;
-        this.add(dropdown, c);
+        dropdown.setBounds(500, 200, 50, 25);
+        this.add(dropdown);
 
         //all questions button
         allQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "All Questions", 2);
-        c.anchor = GridBagConstraints.FIRST_LINE_END;
-        this.add(allQuestionsButton, c);
+        allQuestionsButton.setBounds(800, 170, 320, 90);
+        allQuestionsButton.setFont(new Font("Arial",Font.BOLD,20));
+        this.add(allQuestionsButton);
 
         //shuffle questions button
         shuffleQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Shuffle Questions", 3);
-        c.anchor = GridBagConstraints.LINE_START;
-        this.add(shuffleQuestionsButton, c);
+        shuffleQuestionsButton.setBounds(150, 425, 320, 90);
+        shuffleQuestionsButton.setFont(new Font("Arial",Font.BOLD,20));
+        this.add(shuffleQuestionsButton);
 
         //first last button
         firstLastButton = new EstablisherButton(this, 100, 40, Color.WHITE, "First to Last", 4);
-        c.anchor = GridBagConstraints.LINE_END;
-        this.add(firstLastButton, c);
+        firstLastButton.setBounds(800, 425, 320, 90);
+        firstLastButton.setFont(new Font("Arial",Font.BOLD,20));
+        this.add(firstLastButton);
 
         //done button
         TransitionButton doneButton = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 5);
-        c.anchor = GridBagConstraints.PAGE_END;
-        this.add(doneButton, c);
-        
-        //
-        System.out.println("asjkdfhkajsdfhj");
+        doneButton.setBounds(560, 550, 150, 50);
+        this.add(doneButton);
     }
 
     Options(String title, Quizit q, boolean allQuestionsTrue, boolean shuffleQuestionsTrue) {
@@ -121,9 +120,20 @@ public class Options extends QPanel implements MouseListener {
                 break;
         }
     }
+    
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(this.TITLE_COLOR);
+		g.drawString("Quizzing Options", 580, 100);
+		g.setFont(new Font("Arial",Font.BOLD,18));
+	}
 
     public void actionPerformed(ActionEvent e) {
-
+		JComboBox comboBox = (JComboBox)e.getSource();
+	    String input = (String)comboBox.getSelectedItem();
+	    if (input.contentEquals("<5")) {
+	    	
+	    }
     }
 
     @Override

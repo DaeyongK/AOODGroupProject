@@ -18,16 +18,17 @@ public class SelectProfile extends QPanel implements MouseListener {
         quizitReference = q;
         profiles = q.getAllProfiles();
         //panel setup
-        this.setBackground(QPanel.TITLE_COLOR);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setBackground(this.BACKGROUND_COLOR);
+        this.setLayout(null);
 
-        //create buttons and ui aspects. adds action listeners. then adds to jpanel.
+        //create buttons and ui aspects. adds action listeners. then adds to qpanel.
         //create profile button inside the jscrollpane somehow???
         createNewProfileButton = new TransitionButton(this, 75, 35, Color.WHITE, "Create New Profile", 3, 2);
 
         //scroll pane???
         scrollable = new JScrollPane();
         JPanel scrollablePane = new JPanel();
+        scrollablePane.setLayout(new BoxLayout(scrollablePane, BoxLayout.PAGE_AXIS));
         int increment = 3;
         for (Profile p : profiles) {
             EstablisherButton holder = new EstablisherButton(this, 75, 35, Color.WHITE, p.getName(), increment);
@@ -40,13 +41,14 @@ public class SelectProfile extends QPanel implements MouseListener {
         scrollable.add(verticalBar);
 
         //insert code needed to add in profiles
-        this.add(createNewProfileButton);
         this.addMouseListener(this);
         scrollable.addMouseListener(this);
+        scrollable.setBounds(475, 200, 300, 300);
         this.add(scrollable);
 
         //done button
         done = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 1);
+        done.setBounds(550, 550, 150, 50);
         this.add(done);
     }
 
@@ -84,13 +86,12 @@ public class SelectProfile extends QPanel implements MouseListener {
         }
     }
 
-    public void paintComponent(Graphics g) {
-        //draw background
-        super.paintComponent(g);
-        //draw title
-        g.setColor(TITLE_COLOR);
-
-    }
+	public void paintComponent(Graphics g) {
+		super.paintComponent(g);
+		g.setColor(this.TITLE_COLOR);
+		g.drawString("Select Profile", 580, 100);
+		g.setFont(new Font("Arial",Font.BOLD,18));
+	}
 
     @Override
     public void mouseClicked(MouseEvent arg0) {
@@ -120,10 +121,6 @@ public class SelectProfile extends QPanel implements MouseListener {
     public void mouseReleased(MouseEvent arg0) {
         // TODO Auto-generated method stub
 
-    }
-
-    public static void main(String[] args) {
-        Quizit test = new Quizit();
     }
 
 }

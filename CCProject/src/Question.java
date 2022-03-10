@@ -48,17 +48,20 @@ public class Question {
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
+        quiz.getProfile().getHashMap().put(ID, new int[]{0,0});
     }
 
     Question(String question, String answer, String imagePath, Quizit quiz) {
         questionString = question;
         answerString = answer;
+        graphicString=imagePath;
         this.setImage(imagePath);
         int tempID = (int) (Math.random() * 1000000000);
         while (quiz.getProfile().getHashMap().containsKey(tempID)) {
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
+        quiz.getProfile().getHashMap().put(ID, new int[]{0,0});
     }
 
     public boolean setImage(String imagePath) {

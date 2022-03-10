@@ -6,15 +6,17 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 
 public class QuestionCard extends QPanel {
-    private Profile profile;
+	private Profile profile;
     private Question currentQ;
+    private String currentQStr;
     private int currentQIndex;
+    private int nextLine;
     private Domain currentDomain;
     private ArrayList<Question> questions = new ArrayList<>(), intermediateDomain;
     private Quizit quizit;
     private EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn;
     private TransitionButton editQuestBtn, backBtn;
-    private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText;
+    private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText,questionText2,questionText3;
     private BufferedImage questImage;
     private LinkedHashMap<Integer, int[]> questionHash;
     private Graphics g=this.getGraphics();
@@ -57,6 +59,7 @@ public class QuestionCard extends QPanel {
         }
         currentQIndex = 0;
         currentQ = questions.get(currentQIndex);
+        currentQStr=currentQ.getQuestion();
         this.setLayout(null);
         
 
@@ -76,10 +79,23 @@ public class QuestionCard extends QPanel {
         answerText.setOpaque(true);
         answerText.setBounds(50, 630, 800, 40);
         answerText.setVisible(false);
-        questionText = new JLabel(currentQ.getQuestion());
+        
+        //currentQStr="  "; //<-- For testing purposes 
+        questionText = new JLabel(currentQStr);
         questionText.setFont(new Font("SanSerif",Font.PLAIN,17));
         questionText.setOpaque(true);
         questionText.setBounds(70, 240, 760, 40);
+       if(currentQStr.length()>85) {
+    	   nextLine=currentQStr.substring(75, 84).indexOf(' ')+75;
+    	   questionText2 = new JLabel(" "+currentQStr.substring(nextLine));
+           questionText2.setFont(new Font("SanSerif",Font.PLAIN,17));
+           questionText2.getText().length();
+           questionText2.setOpaque(true);
+           questionText2.setBounds(70, 279, 760, 40);
+           questionText.setText(currentQStr.substring(0, nextLine));
+           this.add(questionText2);
+        }
+        
 
         // make buttons
         editQuestBtn = new TransitionButton(this, 100, 50, Color.white, "Edit Question", 12, 5);
@@ -124,6 +140,7 @@ public class QuestionCard extends QPanel {
         this.add(correctNumTimesText);
         this.add(answerText);
         this.add(questionText);
+        
         
         //Draw background stuff
         this.revalidate();

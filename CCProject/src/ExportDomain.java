@@ -3,8 +3,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class ExportDomain extends DomainScreen implements ActionListener {
@@ -40,15 +43,20 @@ public class ExportDomain extends DomainScreen implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
-        File exported = quizit.getProfile().getDomains().get(buttonID).export(); //where do you want the file to be stored?
-        String path = test.class.getProtectionDomain().getCodeSource().getLocation().getPath();
-        String decodedPath;
-		try {
-			decodedPath = URLDecoder.decode(path, "UTF-8");
-	        decodedPath =decodedPath.substring(0, decodedPath.substring(0,decodedPath.lastIndexOf("/")).lastIndexOf("/"));
-//	        File f = new File(decodedPath + "/Domains");
-//	        f.createNewFile();
-		} catch (Exception e) {}
+        if(buttonID != -1) {
+	    	File exported = quizit.getProfile().getDomains().get(buttonID).export(); //where do you want the file to be stored?
+	        String path = test.class.getProtectionDomain().getCodeSource().getLocation().getPath();
+	        String decodedPath;
+	    	try {
+	    			decodedPath = URLDecoder.decode(path, "UTF-8");
+	    	        decodedPath =decodedPath.substring(0, decodedPath.substring(0,decodedPath.lastIndexOf("/")).lastIndexOf("/"));
+	    	        File f = new File(decodedPath + "/" + quizit.getProfile().getName());
+	    	        f.createNewFile();
+	    		} catch (Exception e) {
+	    			System.out.println("bad");
+	    		}
+	        
+        }
         quizit.changeScreen(1);
     }
 
