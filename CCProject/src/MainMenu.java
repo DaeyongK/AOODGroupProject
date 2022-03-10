@@ -18,12 +18,14 @@ public class MainMenu extends QPanel implements ActionListener {
     private QPanel menu;
     private int currentQID = 0;
     private boolean popupBool;
+    private Quizit theQuizit;
 
     public MainMenu(String title, Quizit q) {
         super(title, q);
         this.setLayout(new BorderLayout(60,40));
         //for use outside the constructor
         menu = this;
+        theQuizit = q;
         //the jpanel for the center of the screen
         containsButtons = new JPanel();
         containsButtons.setBackground(QPanel.TITLE_COLOR);
@@ -32,25 +34,55 @@ public class MainMenu extends QPanel implements ActionListener {
         titleCard = new JLabel(title);
         containsButtons.add(titleCard);
         //select domain
-        select = new TransitionButton(this, 75, 25, Color.WHITE, "Select Domain", 5, 11);
+        select = new TransitionButton(this, 75, 25, Color.WHITE, "Select Domain", 5, 11){
+            {
+                setSize(500,100);
+                setMaximumSize(getSize());
+            }
+        };
         select.addActionListener(this);
         containsButtons.add(select);
+        select.setAlignmentX(CENTER_ALIGNMENT);
         //create domain
-        create = new TransitionButton(this, 75, 25, Color.WHITE, "Create Domain", 8, 12);
+        create = new TransitionButton(this, 75, 25, Color.WHITE, "Create Domain", 8, 12){
+            {
+                setSize(500,100);
+                setMaximumSize(getSize());
+            }
+        };
         create.addActionListener(this);
         containsButtons.add(create);
+        create.setAlignmentX(CENTER_ALIGNMENT);
         //import domain
-        importBtn = new TransitionButton(this, 75, 25, Color.WHITE, "Import Domain", 7, 13);
+        importBtn = new TransitionButton(this, 75, 25, Color.WHITE, "Import Domain", 7, 13){
+            {
+                setSize(500,100);
+                setMaximumSize(getSize());
+            }
+        };
         importBtn.addActionListener(this);
         containsButtons.add(importBtn);
+        importBtn.setAlignmentX(CENTER_ALIGNMENT);
         //export domain
-        export = new TransitionButton(this, 75, 25, Color.WHITE, "Export Domain", 9, 14);
+        export = new TransitionButton(this, 75, 25, Color.WHITE, "Export Domain", 9, 14){
+            {
+                setSize(500,100);
+                setMaximumSize(getSize());
+            }
+        };
         export.addActionListener(this);
         containsButtons.add(export);
+        export.setAlignmentX(CENTER_ALIGNMENT);
         //detach domain
-        detach = new TransitionButton(this, 75, 25, Color.WHITE, "Detach Domain", 10, 15);
+        detach = new TransitionButton(this, 75, 25, Color.WHITE, "Detach Domain", 10, 15){
+            {
+                setSize(500,100);
+                setMaximumSize(getSize());
+            }
+        };
         detach.addActionListener(this);
         containsButtons.add(detach);
+        detach.setAlignmentX(CENTER_ALIGNMENT);
         //resize, and add everything to the center panel
         JPanel filler = new JPanel();
         filler.setBackground(this.BACKGROUND_COLOR);
@@ -101,7 +133,10 @@ public class MainMenu extends QPanel implements ActionListener {
     	switch (buttonID) {
             case 11:
                 //go to select domain (5)
-                quizit.changeScreen(5);
+                if(theQuizit.getProfile().getDomains().size()==0)
+                    quizit.changeScreen(8);
+                else
+                    quizit.changeScreen(5);
                 break;
             case 12:
                 //go to create domain (8)
@@ -124,13 +159,15 @@ public class MainMenu extends QPanel implements ActionListener {
             	System.exit(0);
                 break;
             case 21:
-                if (popup(quizit.getProfile().getName())) {
-                    //go to change profile (2)
-                    quizit.changeScreen(2);
-                } else {
-                    //go to quizzing options (4)
-                    quizit.changeScreen(4);
-                }
+                popup(quizit.getProfile().getName())
+                break;
+            case 22:
+                //go to change profile (2)
+                quizit.changeScreen(2);
+                break;
+            case 23:
+                //go to quizzing options (4)
+                quizit.changeScreen(4);
                 break;
         }
     }
