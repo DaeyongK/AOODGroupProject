@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 public class CircularButton extends EstablisherButton {
     CircularButton(QPanel Panel, int width, int height, Color color, String text, int buttonID, BufferedImage img) {
         super(Panel, width, height, color, text, buttonID);
-        setBorder(new RoundedBorder(10)); //how big to make it?
+        setBorder(new RoundedBorder(100)); //how big to make it?
         setIcon(new ImageIcon(img));
     }
     private static class RoundedBorder implements Border {
@@ -32,4 +32,5 @@ public class CircularButton extends EstablisherButton {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
     }
+    
 }
