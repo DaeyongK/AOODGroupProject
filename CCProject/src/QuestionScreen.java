@@ -52,9 +52,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
             graphicDetected = false;
             titleLabel = new JLabel(title);
             titleLabel.setBounds(464, 86, 351, 32);
+            imageLabel = new JLabel();
             questionBox = new JTextField("Enter a new question here: ");
             answerBox = new JTextField("Enter its answer here: ");
-            imageLabel = new JLabel();
         } else {
             question = q.getQuestion();
             questionId = question.getID();
@@ -67,13 +67,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
             titleLabel = new JLabel(title);
             titleLabel.setBounds(464, 86, 360, 32);
-            questionBox = new JTextField(question.getQuestion());
-            answerBox = new JTextField(question.getAnswer());
-
             if(graphicDetected)
                 imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
             else
                 imageLabel = new JLabel();
+            
+            questionBox = new JTextField(question.getQuestion());
+            answerBox = new JTextField(question.getAnswer());
 
             changeRight = new JTextField("Correct: " + profile.getAnsweredRight(questionId) + " times");
             changeAsked = new JTextField("Asked: " + profile.getTimesAsked(questionId) + " times");
@@ -98,9 +98,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
         backBtn.setBounds(49, 42, 175, 67);
 
         add(titleLabel);
+        add(imageLabel);
         add(questionBox);
         add(answerBox);
-        add(imageLabel);
         add(attachGraphic);
         add(detachGraphic);
         add(doneBtn);
