@@ -60,7 +60,6 @@ class ImportScreen extends QPanel implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
-        System.out.println(buttonID);
         switch (buttonID) {
             case -1:
                 quizit.changeScreen(1);
