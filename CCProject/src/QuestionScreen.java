@@ -1,12 +1,10 @@
 //QuestionScreen is front-end class made by Kai C
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class QuestionScreen extends QPanel implements ActionListener {
@@ -28,19 +26,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private TransitionButton doneBtn;
     private TransitionButton backBtn;
 
-    private Quizit thisQuizit;
-    private JFrame thisFrame;
-    private QPanel thisScreen;
     private Question question;
     private Profile profile;
     private Domain domain;
-    
+
 
     QuestionScreen(String t, Quizit q) {
         super(t, q);
-        thisQuizit = q;
-        thisFrame = q.getFrame();
-        thisScreen = this;
         domain = q.getDomain();
         setLayout(null);
         setBackground(BACKGROUND_COLOR);
@@ -62,7 +54,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
             questionId = question.getID();
             profile = q.getProfile();
             title = "Edit Question #" + questionId;
-            thisScreen = this;
             screenId = 12;
             edit = true;
             graphicDetected = question.getImage() != null;
@@ -72,7 +63,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             questionBox = new JTextField(question.getQuestion());
             answerBox = new JTextField(question.getAnswer());
 
-            if(graphicDetected)
+            if (graphicDetected)
                 imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
             else
                 imageLabel = new JLabel();
@@ -153,9 +144,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
                     }
                 }
             }
-        } else if(text.toLowerCase().contains("detach")) {
-            if(graphicDetected) {
-                if(popup("Are you sure you want to remove the image?")) {
+        } else if (text.toLowerCase().contains("detach")) {
+            if (graphicDetected) {
+                if (popup("Are you sure you want to remove the image?")) {
                     question.detachImage();
                     graphicDetected = false;
                     imageLabel = new JLabel();
@@ -180,7 +171,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
-        QPanel nextScreen = thisScreen;
         switch (buttonID) {
             case 0:
                 if (popup("Select File")) {
@@ -213,10 +203,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
                             profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
                             if (graphicDetected)
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), question.getGraphicPath(), thisQuizit));
+                                        question.getAnswer(), question.getGraphicPath(), quizit));
                             else
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), thisQuizit));
+                                        question.getAnswer(), quizit));
                             quizit.changeScreen(6);
                         }
                     } catch (NullPointerException | NumberFormatException ignored) {
@@ -229,10 +219,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
                             question.setAnswer(answerBox.getText());
                             if (graphicDetected)
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), question.getGraphicPath(), thisQuizit));
+                                        question.getAnswer(), question.getGraphicPath(), quizit));
                             else
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), thisQuizit));
+                                        question.getAnswer(), quizit));
                             quizit.changeScreen(6);
                         }
                     } catch (NullPointerException ignored) {
@@ -241,20 +231,23 @@ public class QuestionScreen extends QPanel implements ActionListener {
             case 3:
                 //BackBtn
                 if (popup("Are you sure you want to leave?")) {
-                    thisQuizit.changeScreen(6);
+                    quizit.changeScreen(6);
                 }
                 break;
         }
     }
+
     private void radioClick() {
         //empty for now
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //empty for now
     }
+
     public void paintComponent(Graphics g) {
-    	super.paintComponent(g);
+        super.paintComponent(g);
         g.setColor(Color.WHITE);
         g.drawRect(121, 160, 438, 166);
         g.setFont(new Font("Arial", Font.BOLD, 18));
