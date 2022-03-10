@@ -66,6 +66,10 @@ public class Profile {
     public LinkedHashMap<Integer, int[]> getHashMap() {
         return questions;
     }
+    
+    public void addQuestion(int ID, int[]info) {
+    	questions.put(ID, info);
+    }
 
     public void detachDomain(Domain domain) {
         boolean notRemoved = true;
