@@ -116,21 +116,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
     }
 
     public boolean popup(String text) {
-//        switch (result) {
-//            case JOptionPane.YES_OPTION:
-//                return true;
-//
-//            case JOptionPane.NO_OPTION:
-//                return false;
-//
-//            case JOptionPane.CANCEL_OPTION:
-//                System.out.println("Cancel");
-//                break;
-//            case JOptionPane.CLOSED_OPTION:
-//                System.out.println("Closed");
-//                break;
-//        }
-//        return false;
         int result;
 
         if (text.toLowerCase().contains("select")) {
@@ -139,7 +124,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             if (result == JOptionPane.OK_OPTION) {
                 JFileChooser jfc = new JFileChooser();
 
-                //only show xml files by default
+                //only show img files by default
                 //wont stop user from just changing it to be all files so accept() is still needed
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("img files", "png", "jpg", "jpeg", "gif");
                 jfc.setFileFilter(filter);
@@ -217,6 +202,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
                             question.setAnswer(answerBox.getText());
                             profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
                             profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
+                            if (graphicDetected)
+                                domain.addQuestion(new Question(question.getQuestion(),
+                                        question.getAnswer(), question.getGraphicPath(), thisQuizit));
+                            else
+                                domain.addQuestion(new Question(question.getQuestion(),
+                                        question.getAnswer(), thisQuizit));
                             quizit.changeScreen(6);
                         }
                     } catch (NullPointerException | NumberFormatException ignored) {
@@ -246,34 +237,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
                 break;
         }
     }
-
     private void radioClick() {
         //empty for now
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         //empty for now
     }
-
-	public void paintComponent(Graphics g) {
-			g.setColor(Color.WHITE);
-			g.drawRect(121,160,438,166);
-			g.drawString("No Graphic Preview",216,218);
-	}
-	
-	//FOR TESTING PURPOSES!!
-	public static void main(String[] arg) {
-		JFrame testFrame = new JFrame("QuestionScreen Test");
-		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        testFrame.setContentPane(screen1);
-        testFrame.pack();
-        testFrame.setSize(1280, 720);
-		testFrame.add(new QuestionScreen("Create a Question",new Quizit()));
-        testFrame.setVisible(true);
-	}
-
-
     public void paintComponent(Graphics g) {
     	super.paintComponent(g);
         g.setColor(Color.WHITE);
@@ -281,5 +251,4 @@ public class QuestionScreen extends QPanel implements ActionListener {
         g.setFont(new Font("Arial", Font.BOLD, 18));
         g.drawString("No Graphic Preview", 216, 218);
     }
-
 }
