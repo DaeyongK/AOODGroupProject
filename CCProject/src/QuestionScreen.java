@@ -1,12 +1,10 @@
 //QuestionScreen is front-end class made by Kai C
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class QuestionScreen extends QPanel implements ActionListener {
@@ -31,7 +29,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private Question question;
     private Profile profile;
     private Domain domain;
-    
+
 
     QuestionScreen(String t, Quizit q) {
         super(t, q);
@@ -55,18 +53,21 @@ public class QuestionScreen extends QPanel implements ActionListener {
             question = q.getQuestion();
             questionId = question.getID();
             profile = q.getProfile();
-            title = "";
+            title = "Edit Question #" + questionId;
             screenId = 12;
             edit = true;
             graphicDetected = question.getImage() != null;
 
             titleLabel = new JLabel(title);
             titleLabel.setBounds(464, 86, 360, 32);
-            if(graphicDetected)
+            questionBox = new JTextField(question.getQuestion());
+            answerBox = new JTextField(question.getAnswer());
+
+            if (graphicDetected)
                 imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
             else
                 imageLabel = new JLabel();
-            
+
             questionBox = new JTextField(question.getQuestion());
             answerBox = new JTextField(question.getAnswer());
 
@@ -146,9 +147,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
                     }
                 }
             }
-        } else if(text.toLowerCase().contains("detach")) {
-            if(graphicDetected) {
-                if(popup("Are you sure you want to remove the image?")) {
+        } else if (text.toLowerCase().contains("detach")) {
+            if (graphicDetected) {
+                if (popup("Are you sure you want to remove the image?")) {
                     question.detachImage();
                     graphicDetected = false;
                     imageLabel = new JLabel();
@@ -238,18 +239,21 @@ public class QuestionScreen extends QPanel implements ActionListener {
                 break;
         }
     }
+
     private void radioClick() {
         //empty for now
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         //empty for now
     }
-//    public void paintComponent(Graphics g) {
-//    	super.paintComponent(g);
-//        g.setColor(Color.WHITE);
-//        g.drawRect(121, 160, 438, 166);
-//        g.setFont(new Font("Arial", Font.BOLD, 18));
-//        g.drawString("No Graphic Preview", 216, 218);
-//    }
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(Color.WHITE);
+        g.drawRect(121, 160, 438, 166);
+        g.setFont(new Font("Arial", Font.BOLD, 18));
+        g.drawString("No Graphic Preview", 216, 218);
+    }
 }
