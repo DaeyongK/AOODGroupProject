@@ -28,8 +28,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private TransitionButton doneBtn;
     private TransitionButton backBtn;
 
-    private Quizit thisQuizit;
-    private QPanel thisScreen;
     private Question question;
     private Profile profile;
     private Domain domain;
@@ -37,8 +35,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
     QuestionScreen(String t, Quizit q) {
         super(t, q);
-        thisQuizit = q;
-        thisScreen = this;
         domain = q.getDomain();
         setLayout(null);
         setBackground(BACKGROUND_COLOR);
@@ -59,8 +55,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             question = q.getQuestion();
             questionId = question.getID();
             profile = q.getProfile();
-            title = "Edit Question #" + questionId;
-            thisScreen = this;
+            title = "
             screenId = 12;
             edit = true;
             graphicDetected = question.getImage() != null;
@@ -128,7 +123,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         int result;
 
         if (text.toLowerCase().contains("select")) {
-            result = JOptionPane.showConfirmDialog(thisQuizit.getFrame(), text, text, JOptionPane.OK_CANCEL_OPTION);
+            result = JOptionPane.showConfirmDialog(quizit.getFrame(), text, text, JOptionPane.OK_CANCEL_OPTION);
 
             if (result == JOptionPane.OK_OPTION) {
                 JFileChooser jfc = new JFileChooser();
@@ -160,7 +155,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
                 }
             }
         } else if (text.toLowerCase().contains("are you sure")) {
-            result = JOptionPane.showConfirmDialog(thisQuizit.getFrame(), text, text, JOptionPane.YES_NO_OPTION);
+            result = JOptionPane.showConfirmDialog(quizit.getFrame(), text, text, JOptionPane.YES_NO_OPTION);
             return result == JOptionPane.YES_OPTION;
         }
 
