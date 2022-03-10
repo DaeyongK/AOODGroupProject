@@ -166,7 +166,7 @@ public class QuestionCard extends QPanel {
         // buttID 6 = delete question button
 
         if (buttonID == 0) {
-            quizit.changeScreen(12);
+            quizit.changeScreen(5);
         } else if (buttonID == 1) {
             ansBtn.setEnabled(false);
             ansBtn.setVisible(false);

@@ -129,7 +129,7 @@ public class Domain {
                 root.appendChild(question);
 
                 Element id = document.createElement("id");
-                id.setTextContent(this.questions.get(0).getID() + "");
+                id.setTextContent(this.questions.get(i).getID() + "");
                 question.appendChild(id);
 
                 Element ques = document.createElement("Question" + (i + 1));
