@@ -149,9 +149,9 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 		// TODO Auto-generated method stub
         int y = domainButtons.get(currentButton).getY()+152;
 
-		launch.setBounds(700, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
-        edit.setBounds(825, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
-        delete.setBounds(950, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+		launch.setBounds(700, y-((int) scroll.getViewport().getViewPosition().getY())+2, 100, 50);
+        edit.setBounds(825, y-((int) scroll.getViewport().getViewPosition().getY())+2, 100, 50);
+        delete.setBounds(950, y-((int) scroll.getViewport().getViewPosition().getY()+2), 100, 50);
 	}
 
 }
