@@ -106,7 +106,7 @@ public class Domain {
         return domainName;
     }
 
-    public static final String xmlFilePath = "Domains/test.xml";
+    private String xmlFilePath2="";
 
     public File export() {
         try {
@@ -118,7 +118,8 @@ public class Domain {
             document.appendChild(root);
 
             String newDomainName = getDomainName().replace(' ', '-');
-
+            xmlFilePath2="Domains/"+newDomainName+".xml";
+            
             Attr dname = document.createAttribute("DomainName");
             dname.setTextContent(newDomainName);
             root.setAttributeNode(dname);
@@ -147,13 +148,13 @@ public class Domain {
             TransformerFactory transformerFactory = TransformerFactory.newInstance();
             Transformer transformer = transformerFactory.newTransformer();
             DOMSource domSource = new DOMSource(document);
-            StreamResult streamResult = new StreamResult(new File(xmlFilePath));
+            StreamResult streamResult = new StreamResult(new File(xmlFilePath2));
             transformer.transform(domSource, streamResult);
             System.out.println("Done creating XML File");
-            return new File(xmlFilePath);
+            return new File(xmlFilePath2);
         } catch (ParserConfigurationException | TransformerException pce) {
             pce.printStackTrace();
         }
-        return new File(xmlFilePath);
+        return new File(xmlFilePath2);
     }
 }
