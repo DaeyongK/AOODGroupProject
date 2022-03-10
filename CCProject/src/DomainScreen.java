@@ -36,7 +36,7 @@ public abstract class DomainScreen extends QPanel {
             	EstablisherButton button = domainButtons.get(i);
 
         		button.setPreferredSize(new Dimension(800, 50));
-            	pane.add(button, 1);
+            	pane.add(button, 1,0);
             	//pane.setLayout(null);
 //        		button.setBounds(20,80*i+20,360,50);
 //            	pane.add(button);
@@ -70,7 +70,7 @@ public abstract class DomainScreen extends QPanel {
     }
 
     public static void main(String[] args) {
-        Testit t = new Testit();
+        Quizit t = new Quizit();
 //        JFrame frame = new JFrame();
 //        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 //        DetachDomain test = new DetachDomain("Detach Domain", t);
