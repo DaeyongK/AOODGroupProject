@@ -1,10 +1,11 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class Options extends QPanel implements MouseListener {
+public class Options extends QPanel implements ActionListener {
     private boolean allQuestions;
     private boolean shuffleQuestions;
     private JComboBox<String> dropdown;
@@ -22,13 +23,14 @@ public class Options extends QPanel implements MouseListener {
         quizitReference = q;
         //panel setup
         this.setBackground(this.BACKGROUND_COLOR);
-        this.addMouseListener(this);
+//        this.addMouseListener(this);
 
         //create buttons and ui aspects. adds action listeners. then adds to qpanel
 
         //number correct button
         numCorrectButton = new EstablisherButton(this, 300, 40, Color.WHITE, "Questions with number of correct answers", 1);
         numCorrectButton.setBounds(150, 170, 320, 90);
+        numCorrectButton.addActionListener(this);
         this.add(numCorrectButton);
 
         //dropdown menu
@@ -37,29 +39,34 @@ public class Options extends QPanel implements MouseListener {
         dropdown.setAlignmentX(JComboBox.LEFT_ALIGNMENT);
         dropdown.setSelectedIndex(0);
         dropdown.setBounds(500, 200, 50, 25);
+        dropdown.addActionListener(this);
         this.add(dropdown);
 
         //all questions button
         allQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "All Questions", 2);
         allQuestionsButton.setBounds(800, 170, 320, 90);
         allQuestionsButton.setFont(new Font("Arial",Font.BOLD,20));
+        allQuestionsButton.addActionListener(this);
         this.add(allQuestionsButton);
 
         //shuffle questions button
         shuffleQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Shuffle Questions", 3);
         shuffleQuestionsButton.setBounds(150, 425, 320, 90);
         shuffleQuestionsButton.setFont(new Font("Arial",Font.BOLD,20));
+        shuffleQuestionsButton.addActionListener(this);
         this.add(shuffleQuestionsButton);
 
         //first last button
         firstLastButton = new EstablisherButton(this, 100, 40, Color.WHITE, "First to Last", 4);
         firstLastButton.setBounds(800, 425, 320, 90);
         firstLastButton.setFont(new Font("Arial",Font.BOLD,20));
+        firstLastButton.addActionListener(this);
         this.add(firstLastButton);
 
         //done button
         TransitionButton doneButton = new TransitionButton(this, 50, 25, Color.WHITE, "Done", 1, 5);
         doneButton.setBounds(560, 550, 150, 50);
+        doneButton.addActionListener(this);
         this.add(doneButton);
     }
 
@@ -81,6 +88,11 @@ public class Options extends QPanel implements MouseListener {
 
     public boolean getAllQuestions() {
         return allQuestions;
+    }
+    
+    //if user selects number correct option, this is the accessor for the actual number of questions correct
+    public int getNumCorrectNumber() {
+    	return numCorrectNumber;
     }
 
     public int getScreenID() {
@@ -116,6 +128,23 @@ public class Options extends QPanel implements MouseListener {
             case 5:
                 //go to main menu
                 //QPanel nextScreen = new MainMenu("", quizitReference);
+            	String holder = (String) dropdown.getSelectedItem();
+            	if (holder.contentEquals("<5")) {
+        	    	numCorrectNumber = 5;
+        	    	System.out.println("this work 1");
+        	    } else if (holder.contentEquals("<10")) {
+        	    	numCorrectNumber = 10;
+        	    	System.out.println("this work 2");
+        	    } else if (holder.contentEquals("<15")) {
+        	    	numCorrectNumber = 15;
+        	    	System.out.println("this work 3");
+        	    } else if (holder.contentEquals("<20")) {
+        	    	numCorrectNumber = 20;
+        	    	System.out.println("this work 4");
+        	    } else if (holder.contentEquals("<30")) {
+        	    	numCorrectNumber = 30;
+        	    	System.out.println("this work 5");
+        	    }
                 quizitReference.changeScreen(1);
                 break;
         }
@@ -124,46 +153,13 @@ public class Options extends QPanel implements MouseListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(this.TITLE_COLOR);
-		g.drawString("Quizzing Options", 580, 100);
-		g.setFont(new Font("Arial",Font.BOLD,18));
+		//font bigger???
+		g.setFont(new Font("Arial",Font.BOLD,30));
+		g.drawString("Quizzing Options", 530, 100);
 	}
 
     public void actionPerformed(ActionEvent e) {
-		JComboBox comboBox = (JComboBox)e.getSource();
-	    String input = (String)comboBox.getSelectedItem();
-	    if (input.contentEquals("<5")) {
-	    	
-	    }
-    }
-
-    @Override
-    public void mouseClicked(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent e) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent e) {
-        // TODO Auto-generated method stub
-
+    	
     }
 
 }
