@@ -21,22 +21,25 @@ public class CreateProfile extends QPanel implements MouseListener {
 
     public CreateProfile(String title, Quizit q) {
         super(title, q);
-        this.setLayout(new GridBagLayout());
-        //panel setup
-        this.setBackground(this.BACKGROUND_COLOR);
-        this.addMouseListener(this);
+        this.setLayout(null);
 
-        //create buttons and ui aspects. adds action listeners. then adds to qpanel
+        //panel setup
+        this.setBackground(QPanel.TITLE_COLOR);
+        this.addMouseListener(this);
+        GridBagConstraints c = new GridBagConstraints();
+
+        //create buttons and ui aspects. adds action listeners. then adds to jpanel.
         //exit button
         exit = new TransitionButton(this, 50, 25, TITLE_COLOR, "Exit", -1, 5);
-        exit.setBounds(30, 30, 100, 30);
-        this.add(exit);
+        c.anchor = GridBagConstraints.FIRST_LINE_START;
+        exit.setBounds(0,50,50,50);
+        this.add(exit, c);
 
         //text field
-        textField = new JTextField("Enter profile name: ");
+        textField = new JTextField();
         textField.setSize(70, 5);
-        
-        this.add(textField);
+        c.anchor = GridBagConstraints.PAGE_START;
+        this.add(textField, c);
 
         //shrek pfp
         File shrekFile = new File("ProfilePictures/shrek.png");
@@ -48,9 +51,10 @@ public class CreateProfile extends QPanel implements MouseListener {
             e.printStackTrace();
         }
         BufferedImage shrekPFP = shrekImage;
-        shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, shrekPFP);
-        
-        this.add(shrek);
+        shrek = new CircularButton(this, 100, 100, Color.WHITE, title, 2, shrekPFP);
+        shrek.setBounds(200,200,100,100);
+        c.anchor = GridBagConstraints.LINE_START;
+        this.add(shrek, c);
 
         //fiona pfp
         File fionaFile = new File("ProfilePictures/fiona.jpeg");
@@ -63,8 +67,8 @@ public class CreateProfile extends QPanel implements MouseListener {
         }
         BufferedImage fionaPFP = fionaImage;
         fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, fionaPFP);
-        
-        this.add(fiona);
+        c.anchor = GridBagConstraints.CENTER;
+        this.add(fiona, c);
 
         //donkey pfp
         File donkeyFile = new File("ProfilePictures/donkey.jpeg");
@@ -78,13 +82,13 @@ public class CreateProfile extends QPanel implements MouseListener {
         
         BufferedImage donkeyPFP = donkeyImage;
         donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, donkeyPFP);
-        
-        this.add(donkey);
+        c.anchor = GridBagConstraints.LINE_END;
+        this.add(donkey, c);
 
         //create button
         create = new TransitionButton(this, 50, 25, Color.WHITE, "Create", 4, 1);
-        
-        this.add(create);
+        c.anchor = GridBagConstraints.PAGE_END;
+        this.add(create, c);
     }
 
     public void radioClick() {

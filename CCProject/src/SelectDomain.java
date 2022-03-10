@@ -1,15 +1,20 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class SelectDomain extends DomainScreen implements MouseListener {
+public class SelectDomain extends DomainScreen implements MouseListener, ChangeListener {
     private boolean dClick = false;
     private EstablisherButton launch;
     private EstablisherButton edit;
     private EstablisherButton delete;
     private int domainSelected;
     private boolean first;
+    private int currentButton;
+    private JLayeredPane anotherLayeredPane;
     SelectDomain(String input, Quizit quizit) {
         super(input, quizit);
         repaint();
@@ -18,16 +23,24 @@ public class SelectDomain extends DomainScreen implements MouseListener {
         launch = new EstablisherButton(this, 100, 50, Color.WHITE, "Launch", -2);
         edit = new EstablisherButton(this, 100, 50, Color.WHITE, "Edit", -3);
         delete = new EstablisherButton(this, 100, 50, Color.WHITE, "Delete", -4);
+        anotherLayeredPane = new JLayeredPane();
+        anotherLayeredPane.setLayout(null);
+        anotherLayeredPane.add(scroll,1);
+        pane.setBounds(150,150,900,400);
+        
+        add(anotherLayeredPane);
+        anotherLayeredPane.setBounds(0,0,1280,720);
+        scroll.getViewport().addChangeListener(this);
         
     }
 
     @Override
     public void buttonClicked(int buttonID) {
-    	 
+    	currentButton = buttonID;
         if(first) {
-        	add(launch);
-            add(edit);
-            add(delete);
+        	anotherLayeredPane.add(launch,20,0);
+        	anotherLayeredPane.add(edit,20,0);
+        	anotherLayeredPane.add(delete,20,0);
             first = false;
         }
          
@@ -70,7 +83,7 @@ public class SelectDomain extends DomainScreen implements MouseListener {
 
             launch.setBounds(700, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
             edit.setBounds(825, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
-            delete.setBounds(1050, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+            delete.setBounds(950, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
 
         }
         repaint();
@@ -130,5 +143,15 @@ public class SelectDomain extends DomainScreen implements MouseListener {
         // TODO Auto-generated method stub
 
     }
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		// TODO Auto-generated method stub
+        int y = domainButtons.get(currentButton).getY()+152;
+
+		launch.setBounds(700, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+        edit.setBounds(825, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+        delete.setBounds(950, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+	}
 
 }
