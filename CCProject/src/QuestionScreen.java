@@ -29,7 +29,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
     private TransitionButton backBtn;
 
     private Quizit thisQuizit;
-    private JFrame thisFrame;
     private QPanel thisScreen;
     private Question question;
     private Profile profile;
@@ -39,7 +38,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
     QuestionScreen(String t, Quizit q) {
         super(t, q);
         thisQuizit = q;
-        thisFrame = q.getFrame();
         thisScreen = this;
         domain = q.getDomain();
         setLayout(null);
@@ -130,7 +128,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
         int result;
 
         if (text.toLowerCase().contains("select")) {
-            result = JOptionPane.showConfirmDialog(quizit.getFrame(), text, text, JOptionPane.OK_CANCEL_OPTION);
+            result = JOptionPane.showConfirmDialog(thisQuizit.getFrame(), text, text, JOptionPane.OK_CANCEL_OPTION);
 
             if (result == JOptionPane.OK_OPTION) {
                 JFileChooser jfc = new JFileChooser();
@@ -162,7 +160,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
                 }
             }
         } else if (text.toLowerCase().contains("are you sure")) {
-            result = JOptionPane.showConfirmDialog(quizit.getFrame(), text, text, JOptionPane.YES_NO_OPTION);
+            result = JOptionPane.showConfirmDialog(thisQuizit.getFrame(), text, text, JOptionPane.YES_NO_OPTION);
             return result == JOptionPane.YES_OPTION;
         }
 
