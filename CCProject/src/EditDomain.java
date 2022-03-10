@@ -250,6 +250,9 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
             case 22:
                 theQuizit.changeScreen(12);
                 break;
+            default:
+            	theQuizit.changeScreen(1);
+            	break;
         }
     }
 
