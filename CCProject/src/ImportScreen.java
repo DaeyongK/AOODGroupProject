@@ -14,7 +14,7 @@ class ImportScreen extends QPanel implements ActionListener {
 	private TransitionButton back;
     private EstablisherButton chooseFile;
     private File selectedFile;
-    private JLabel fileName = new JLabel("");
+    private JLabel fileName;
     private JFileChooser jfc;
     private Quizit thisQuizit;
     private JFrame thisFrame;
@@ -30,6 +30,9 @@ class ImportScreen extends QPanel implements ActionListener {
         titleLabel = new JLabel(title);
         titleLabel.setBounds(550, 86, 700, 32);
         
+        fileName = new JLabel("this is some text");
+        fileName.setBounds(300, 300, 100, 40);
+        
         chooseFile = new EstablisherButton(this, width, height, Color.WHITE, "Choose File", 2);
         done = new TransitionButton(this, width, height, Color.WHITE, "Done", 8, 1);
         back = new TransitionButton(this, width, height, Color.WHITE, "Back", 8, -1);
@@ -40,8 +43,8 @@ class ImportScreen extends QPanel implements ActionListener {
         back.setBounds(86, 80, width, height);
         done.setBounds(500, 580, width, height);
         done.setVisible(false);
-
         
+        add(fileName);
         add(titleLabel);
         add(chooseFile);
         add(done);
@@ -63,7 +66,7 @@ class ImportScreen extends QPanel implements ActionListener {
                 quizit.changeScreen(1);
                 break;
             case 1:
-                quizit.getProfile().addDomain(new Domain(selectedFile, quizit));
+                quizit.getProfile().addDomain(new Domain(selectedFile, quizit)); //domain not adding, premature end of file error
                 quizit.changeScreen(1);
                 break;
             //send to main menu and parse selectedFile into a domain
@@ -77,15 +80,13 @@ class ImportScreen extends QPanel implements ActionListener {
 
                 int returnValue = jfc.showOpenDialog(null);
                 // int returnValue = jfc.showSaveDialog(null);
-
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     selectedFile = jfc.getSelectedFile();
                     if (accept(selectedFile)) {
                         done.setVisible(true);
-                        fileName = new JLabel(selectedFile.toString());
-                        fileName.setBounds(300, 300, 100, 40);
-                        add(fileName);
-                    
+                        fileName.setText(selectedFile.toString());
+                        
+                        
                     }
 
                 }
