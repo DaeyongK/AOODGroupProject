@@ -148,11 +148,6 @@ public class QuestionCard extends QPanel {
         return 6;
     }
 
-    public boolean popup(String text) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
     public void buttonClicked(int buttonID) {
         // buttID 0 = back button
         // buttID 1 = answer button
@@ -169,6 +164,7 @@ public class QuestionCard extends QPanel {
             knewAnsBtn.setVisible(true);
             notKnewAnsBtn.setVisible(true);
             answerText.setVisible(true);
+            answerText.setText(" Answer: "+currentQ.getAnswer());
             profile.asked(currentQ.getID());
             askedNumTimesText.setText("   Asked: " +profile.getTimesAsked(currentQ.getID()) + "");
         } else if (buttonID == 2) {
@@ -184,19 +180,18 @@ public class QuestionCard extends QPanel {
         } else if (buttonID == 4) {
             if (currentQIndex <= (questions.size() - 2)) {
                 ansBtn.setVisible(true);
-                knewAnsBtn.setVisible(true);
+                knewAnsBtn.setVisible(false);
                 notKnewAnsBtn.setVisible(false);
                 answerText.setVisible(false);
                 nextQ();
                 questionText.setText(currentQ.getQuestion());
-                askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID()) + "");
-                correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID()) + "");
+                askedNumTimesText.setText(("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times"));
+                correctNumTimesText.setText("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
             } else if (currentQIndex == (questions.size() - 1)) {
                 if (popup("You have completed all the questions in this domain. \n" + "\n"
-                        + "Would you like to exit this domain or restart this domain?\n")) {
+                        + "Would you like to restart this domain?\n")) {
                     quizit.changeScreen(6);
-                } else if (!popup("You have completed all the questions in this domain. \n" + "\n"
-                        + "Would you like to exit this domain or restart this domain?\n")) {
+                } else {
                     quizit.changeScreen(5);
                 }
             }
@@ -204,11 +199,18 @@ public class QuestionCard extends QPanel {
         } else if (buttonID == 5) {
             quizit.changeScreen(12);
         } else if (buttonID == 6) {
+        	System.out.println("button clicked");
             if (popup("Are you sure?")) {
-                quizit.getDomain().deleteQuestion(currentQIndex);
-            } else if (!popup("Are you sure?")) {
-                //hide pop up
-            }
+            	if(!(currentQIndex==0)) {
+            		currentQIndex-=1;
+            		quizit.getDomain().deleteQuestion(currentQIndex+1);
+            	}
+                
+               
+                questionText.setText(currentQ.getQuestion());
+                askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID()) + "");
+                correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID()) + "");
+            } 
         }
 
     }
@@ -220,6 +222,11 @@ public class QuestionCard extends QPanel {
 
     public void nextQ() {
         currentQIndex++;
+        currentQ = questions.get(currentQIndex);
+    }
+    
+    public void previousQ() {
+        currentQIndex--;
         currentQ = questions.get(currentQIndex);
     }
     
@@ -235,12 +242,13 @@ public class QuestionCard extends QPanel {
     }
 
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        QuestionCard test = new QuestionCard("", new Quizit());
-        frame.setContentPane(test);
-        frame.pack();
-        frame.setSize(1280, 720);
-        frame.setVisible(true);
+    	Quizit q = new Quizit();
+//        JFrame frame = new JFrame();
+//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        QuestionCard test = new QuestionCard("", new Quizit());
+//        frame.setContentPane(test);
+//        frame.pack();
+//        frame.setSize(1280, 720);
+//        frame.setVisible(true);
     }
 }
