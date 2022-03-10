@@ -31,8 +31,15 @@ public class MainMenu extends QPanel implements ActionListener {
         containsButtons.setBackground(QPanel.TITLE_COLOR);
         containsButtons.setLayout(new BoxLayout(containsButtons,BoxLayout.Y_AXIS));
         //title name/title card
-        titleCard = new JLabel(title);
+        titleCard = new JLabel(title){
+            {
+                setSize(500,100);
+                setMaximumSize(getSize());
+                setHorizontalAlignment(CENTER);
+            }
+        };
         containsButtons.add(titleCard);
+        titleCard.setAlignmentX(CENTER_ALIGNMENT);
         //select domain
         select = new TransitionButton(this, 75, 25, Color.WHITE, "Select Domain", 5, 11){
             {
