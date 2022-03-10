@@ -55,7 +55,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             question = q.getQuestion();
             questionId = question.getID();
             profile = q.getProfile();
-            title = "
+            title = "";
             screenId = 12;
             edit = true;
             graphicDetected = question.getImage() != null;
@@ -173,7 +173,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
-        QPanel nextScreen = thisScreen;
         switch (buttonID) {
             case 0:
                 if (popup("Select File")) {
@@ -206,10 +205,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
                             profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
                             if (graphicDetected)
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), question.getGraphicPath(), thisQuizit));
+                                        question.getAnswer(), question.getGraphicPath(), quizit));
                             else
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), thisQuizit));
+                                        question.getAnswer(), quizit));
                             quizit.changeScreen(6);
                         }
                     } catch (NullPointerException | NumberFormatException ignored) {
@@ -222,10 +221,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
                             question.setAnswer(answerBox.getText());
                             if (graphicDetected)
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), question.getGraphicPath(), thisQuizit));
+                                        question.getAnswer(), question.getGraphicPath(), quizit));
                             else
                                 domain.addQuestion(new Question(question.getQuestion(),
-                                        question.getAnswer(), thisQuizit));
+                                        question.getAnswer(), quizit));
                             quizit.changeScreen(6);
                         }
                     } catch (NullPointerException ignored) {
@@ -234,7 +233,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             case 3:
                 //BackBtn
                 if (popup("Are you sure you want to leave?")) {
-                    thisQuizit.changeScreen(6);
+                    quizit.changeScreen(6);
                 }
                 break;
         }
@@ -246,11 +245,11 @@ public class QuestionScreen extends QPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         //empty for now
     }
-    public void paintComponent(Graphics g) {
-    	super.paintComponent(g);
-        g.setColor(Color.WHITE);
-        g.drawRect(121, 160, 438, 166);
-        g.setFont(new Font("Arial", Font.BOLD, 18));
-        g.drawString("No Graphic Preview", 216, 218);
-    }
+//    public void paintComponent(Graphics g) {
+//    	super.paintComponent(g);
+//        g.setColor(Color.WHITE);
+//        g.drawRect(121, 160, 438, 166);
+//        g.setFont(new Font("Arial", Font.BOLD, 18));
+//        g.drawString("No Graphic Preview", 216, 218);
+//    }
 }
