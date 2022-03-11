@@ -183,11 +183,13 @@ public class QuestionCard extends QPanel {
 				askedNumTimesText.setText(("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times"));
 				correctNumTimesText.setText("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
 			} else if (currentQIndex == (questions.size() - 1)) {
-				if (popup2("You have completed all the questions in this domain. \n" + "\n"
-						+ "Would you like to restart this domain?\n")==0) {
+				Boolean popupResult=popup2("You have completed all the questions in this domain. \n" + "\n"
+						+ "Would you like to restart this domain?\n");
+			if(popupResult==null) {
+				
+			}else if (popupResult) {
 					quizit.changeScreen(6);
-				} else if(popup2("You have completed all the questions in this domain. \n" + "\n"
-						+ "Would you like to restart this domain?\n")==1){
+				} else if(!popupResult){
 					quizit.changeScreen(5);
 				} 
 			}
@@ -197,9 +199,10 @@ public class QuestionCard extends QPanel {
 		} else if (buttonID == 6) {
 			System.out.println("button clicked");
 			if (popup("Are you sure?")) {
-				if (!(currentQIndex == 0)) {
+				if (currentQIndex >0) {
 					currentQIndex -= 1;
 					quizit.getDomain().deleteQuestion(currentQIndex + 1);
+					currentQ=questions.get(currentQIndex);
 				}
 
 				questionText.setText(currentQ.getQuestion());
@@ -236,23 +239,20 @@ public class QuestionCard extends QPanel {
 		g.drawString("Current Domain: " + currentDomain.getDomainName(), 275, 55);
 	}
 
-	public int popup2(String text) {
-		int result = JOptionPane.showConfirmDialog(quizit.getFrame(), text);
+	public Boolean popup2(String text) {
+		int result =JOptionPane.showConfirmDialog(quizit.getFrame(), text);
 		switch (result) {
 		case JOptionPane.YES_OPTION:
-			return 0;
+			return true;
 
 		case JOptionPane.NO_OPTION:
-			return 1;
+			return false;
 
-		case JOptionPane.CANCEL_OPTION:
-			System.out.println("Cancel");
-			break;
 		case JOptionPane.CLOSED_OPTION:
 			System.out.println("Closed");
 			break;
 		}
-		return 2;
+		return null;
 	}
 
 	public static void main(String[] args) {
