@@ -44,8 +44,6 @@ public class Question {
         answerString = answer;
         graphicString = null;
         tempID = (int) (Math.random() * 1000000000);
-         
-        System.out.println(quiz.getProfile().getHashMap().containsKey(tempID));
         while (quiz.getProfile().getHashMap().containsKey(tempID)) {
             tempID = (int) (Math.random() * 1000000000);
         }
