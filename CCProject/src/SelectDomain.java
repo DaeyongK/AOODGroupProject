@@ -27,7 +27,10 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
         anotherLayeredPane.setLayout(null);
         anotherLayeredPane.add(scroll,1);
         pane.setBounds(150,150,900,400);
-        
+        for(EstablisherButton button : domainButtons) {
+        	button.addMouseListener(this);
+
+        }
         add(anotherLayeredPane);
         anotherLayeredPane.setBounds(0,0,1280,720);
         scroll.getViewport().addChangeListener(this);
@@ -61,7 +64,7 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
                 if (popup("Are you sure?")) {
                     quizit.getProfile().detachDomain(domains.get(domainSelected));
                     pane.remove(domainButtons.get(domainSelected));
-
+                    
                     domainButtons.remove(domainSelected);
                     repaint();
                 }
@@ -117,7 +120,13 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 
     @Override
     public void mouseClicked(MouseEvent event) {
-        dClick = event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1;
+        dClick = (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1);
+        System.out.print(dClick);
+        if(dClick) {
+        	quizit.setDomain(domains.get(domainSelected));
+            quizit.changeScreen(6);
+
+        }
     }
 
     @Override
