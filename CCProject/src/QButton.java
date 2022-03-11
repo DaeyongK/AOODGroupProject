@@ -14,6 +14,7 @@ abstract class QButton extends JButton implements ActionListener {
     private int Width;
     private int Height;
     private String Text;
+    private boolean pressed;
     QButton(QPanel Panel, int width, int height, Color color, String text, int buttonID) {
         setText(text);
         setBackground(color);
@@ -21,17 +22,18 @@ abstract class QButton extends JButton implements ActionListener {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+            	setBackground(TITLE_COLOR);
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-
+            	pressed=true;
+            	setBackground(TITLE_COLOR);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-
+            	setBackground(TITLE_COLOR);
             }
 
             @Override
@@ -41,7 +43,8 @@ abstract class QButton extends JButton implements ActionListener {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                setBackground(color);
+                if(!pressed)
+                	setBackground(color);
             }
         });
         buttonId = buttonID;

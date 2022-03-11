@@ -166,7 +166,7 @@ public class MainMenu extends QPanel implements ActionListener {
             	System.exit(0);
                 break;
             case 21:
-                popup(quizit.getProfile().getName())
+                popup(quizit.getProfile().getName());
                 break;
             case 22:
                 //go to change profile (2)
