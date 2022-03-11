@@ -16,7 +16,8 @@ public class QuestionCard extends QPanel {
 	private Quizit quizit;
 	private EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn;
 	private TransitionButton editQuestBtn, backBtn;
-	private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, questionText2, questionText3;
+	private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText,
+	questionText2, questionText3,questionGraphic;
 	private BufferedImage questImage;
 	private LinkedHashMap<Integer, int[]> questionHash;
 	private Graphics g = this.getGraphics();
@@ -77,8 +78,6 @@ public class QuestionCard extends QPanel {
 		answerText.setOpaque(true);
 		answerText.setBounds(50, 630, 800, 40);
 		answerText.setVisible(false);
-
-		// currentQStr=" "; //<-- For testing purposes
 		questionText = new JLabel(currentQStr);
 		questionText.setFont(new Font("SanSerif", Font.PLAIN, 17));
 		questionText.setOpaque(true);
