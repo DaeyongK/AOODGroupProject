@@ -79,7 +79,8 @@ public class Domain {
                 Node question = qs.item(itr);
                 Element q = (Element) question;
                 questions.add(new Question(q.getElementsByTagName("Question" + (itr + 1)).item(0).getTextContent(),
-                        q.getElementsByTagName("Answer" + (itr + 1)).item(0).getTextContent(), quiz));
+                        q.getElementsByTagName("Answer" + (itr + 1)).item(0).getTextContent(), 
+                        q.getElementsByTagName("QuestionGraphic").item(0).getTextContent(), quiz));
             }
         } catch (Exception e) {
             e.printStackTrace();

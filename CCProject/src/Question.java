@@ -47,7 +47,6 @@ public class Question {
          
         System.out.println(quiz.getProfile().getHashMap().containsKey(tempID));
         while (quiz.getProfile().getHashMap().containsKey(tempID)) {
-        	System.out.println("this ran");
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
@@ -60,9 +59,7 @@ public class Question {
         graphicString=imagePath;
         this.setImage(imagePath);
         tempID = (int) (Math.random() * 1000000000);
-        System.out.println(quiz.getProfile().getHashMap().containsKey(tempID));
         while (quiz.getProfile().getHashMap().containsKey(tempID)) {
-        	System.out.println("this ran2");
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
@@ -80,6 +77,7 @@ public class Question {
     }
 
     public void detachImage() {
+    	graphicString=null;
         graphic = null;
     }
 

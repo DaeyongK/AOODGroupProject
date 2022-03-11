@@ -16,8 +16,8 @@ public class QuestionCard extends QPanel {
 	private Quizit quizit;
 	private EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn;
 	private TransitionButton editQuestBtn, backBtn;
-	private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText,
-	questionText2, questionText3,questionGraphic;
+	private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, questionText2, questionText3,
+			questionGraphic;
 	private BufferedImage questImage;
 	private LinkedHashMap<Integer, int[]> questionHash;
 	private Graphics g = this.getGraphics();
@@ -82,6 +82,7 @@ public class QuestionCard extends QPanel {
 		questionText.setFont(new Font("SanSerif", Font.PLAIN, 17));
 		questionText.setOpaque(true);
 		questionText.setBounds(70, 240, 760, 40);
+		//this adds a second line for question in case the question is too long.
 		if (currentQStr.length() > 85) {
 			nextLine = currentQStr.substring(75, 84).indexOf(' ') + 75;
 			questionText2 = new JLabel(" " + currentQStr.substring(nextLine));
@@ -92,7 +93,13 @@ public class QuestionCard extends QPanel {
 			questionText.setText(currentQStr.substring(0, nextLine));
 			this.add(questionText2);
 		}
-
+		System.out.println(currentQ.getGraphicPath()+" qCard tester!!");
+		questionGraphic=new JLabel(new ImageIcon(currentQ.getGraphicPath()));
+		questionGraphic.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		questionGraphic.setBounds(70, 330, 760, 270);
+		questionGraphic.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		questionGraphic.setOpaque(true);
+		
 		// make buttons
 		editQuestBtn = new TransitionButton(this, 100, 50, Color.white, "Edit Question", 12, 5);
 		editQuestBtn.setBounds(850, 25, 200, 50);
@@ -132,7 +139,7 @@ public class QuestionCard extends QPanel {
 		this.add(correctNumTimesText);
 		this.add(answerText);
 		this.add(questionText);
-
+		this.add(questionGraphic);
 		// Draw background stuff
 		this.revalidate();
 		this.repaint();
@@ -173,6 +180,12 @@ public class QuestionCard extends QPanel {
 			nextQuestBtn.setVisible(true);
 		} else if (buttonID == 4) {
 			if (currentQIndex <= (questions.size() - 2)) {
+				System.out.println(currentQ.getGraphicPath()+" qCard tester!!");
+				questionGraphic.setIcon(new ImageIcon(currentQ.getGraphicPath()));
+				questionGraphic.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+				questionGraphic.setBounds(70, 330, 760, 270); 
+				questionGraphic.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+				questionGraphic.setOpaque(true);
 				ansBtn.setVisible(true);
 				knewAnsBtn.setVisible(false);
 				notKnewAnsBtn.setVisible(false);
@@ -183,31 +196,53 @@ public class QuestionCard extends QPanel {
 				askedNumTimesText.setText(("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times"));
 				correctNumTimesText.setText("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
 			} else if (currentQIndex == (questions.size() - 1)) {
-				Boolean popupResult=popup2("You have completed all the questions in this domain. \n" + "\n"
+				Boolean popupResult = popup2("You have completed all the questions in this domain. \n" + "\n"
 						+ "Would you like to restart this domain?\n");
-			if(popupResult==null) {
-				
-			}else if (popupResult) {
+				if (popupResult == null) {
+
+				} else if (popupResult) {
 					quizit.changeScreen(6);
-				} else if(!popupResult){
+				} else if (!popupResult) {
 					quizit.changeScreen(5);
-				} 
+				}
 			}
 
 		} else if (buttonID == 5) {
 			quizit.changeScreen(12);
 		} else if (buttonID == 6) {
-			System.out.println("button clicked");
 			if (popup("Are you sure?")) {
-				if (currentQIndex >0) {
+				if(currentQIndex==0 && questions.size()>1) {
+					currentQIndex += 1;
+					quizit.getDomain().deleteQuestion(currentQIndex -1);
+					currentQ = questions.get(currentQIndex);
+					ansBtn.setVisible(true);
+					knewAnsBtn.setVisible(false);
+					notKnewAnsBtn.setVisible(false);
+					answerText.setVisible(false);
+					nextQuestBtn.setVisible(false);
+					questionText.setText(currentQ.getQuestion());
+					askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID()) + "");
+					correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID()) + "");
+				} else if (currentQIndex > 0 &&currentQIndex<questions.size()) {
 					currentQIndex -= 1;
 					quizit.getDomain().deleteQuestion(currentQIndex + 1);
-					currentQ=questions.get(currentQIndex);
+					currentQ = questions.get(currentQIndex);
+					ansBtn.setVisible(true);
+					knewAnsBtn.setVisible(false);
+					notKnewAnsBtn.setVisible(false);
+					answerText.setVisible(false);
+					nextQuestBtn.setVisible(false);
+					questionText.setText(currentQ.getQuestion());
+					askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID()) + "");
+					correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID()) + "");
+				} else if(currentQIndex==questions.size()-1&&currentQIndex==0){
+					Boolean popupResult = popup3("There are no more questions in this domain. \n" + "\n"
+							+ "Returning to Domain Select.\n");
+					if (popupResult||!popupResult) {
+						quizit.changeScreen(5);
+					}
 				}
 
-				questionText.setText(currentQ.getQuestion());
-				askedNumTimesText.setText(profile.getTimesAsked(currentQ.getID()) + "");
-				correctNumTimesText.setText(profile.getAnsweredRight(currentQ.getID()) + "");
 			}
 		}
 
@@ -240,7 +275,7 @@ public class QuestionCard extends QPanel {
 	}
 
 	public Boolean popup2(String text) {
-		int result =JOptionPane.showConfirmDialog(quizit.getFrame(), text);
+		int result = JOptionPane.showConfirmDialog(quizit.getFrame(), text);
 		switch (result) {
 		case JOptionPane.YES_OPTION:
 			return true;
@@ -249,20 +284,24 @@ public class QuestionCard extends QPanel {
 			return false;
 
 		case JOptionPane.CLOSED_OPTION:
-			System.out.println("Closed");
 			break;
 		}
 		return null;
 	}
+	
+	public Boolean popup3(String text) {
+		int result = JOptionPane.showConfirmDialog(quizit.getFrame(), text,text,1);
+		switch (result) {
+		case JOptionPane.OK_OPTION:
+			return true;
+
+		case JOptionPane.CLOSED_OPTION:
+			return true;
+		}
+		return true;
+	}
 
 	public static void main(String[] args) {
 		Quizit q = new Quizit();
-//        JFrame frame = new JFrame();
-//        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        QuestionCard test = new QuestionCard("", new Quizit());
-//        frame.setContentPane(test);
-//        frame.pack();
-//        frame.setSize(1280, 720);
-//        frame.setVisible(true);
 	}
 }
