@@ -171,29 +171,77 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
         //determining which popup to display, displaying it
         if (text.contains("leave")) {
             TransitionButton yes = new TransitionButton(thisScreen, 40, 25, Color.WHITE, "Yes", 5, 31);
-            yes.addActionListener(e -> popResult = true);
-            pop.add(yes);
-            EstablisherButton no = new EstablisherButton(thisScreen, 40, 25, Color.WHITE, "No", 32);
-            no.addActionListener(e -> {
-                thisScreen.remove(pop);
-                popResult = false;
-            });
-            pop.add(no);
-        } else {
-            EstablisherButton yes = new EstablisherButton(thisScreen, 40, 25, Color.WHITE, "Yes", 31);
             yes.addActionListener(e -> {
-                thisScreen.remove(pop);
+                theQuizit.changeScreen(5);
                 popResult = true;
             });
             pop.add(yes);
             EstablisherButton no = new EstablisherButton(thisScreen, 40, 25, Color.WHITE, "No", 32);
             no.addActionListener(e -> {
                 thisScreen.remove(pop);
+                thisScreen.revalidate();
+                thisScreen.repaint();
+                popResult = false;
+            });
+            pop.add(no);
+        } else {
+            EstablisherButton yes = new EstablisherButton(thisScreen, 40, 25, Color.WHITE, "Yes", 31);
+            yes.addActionListener(e -> {
+                currentDomain.deleteQuestion(currentQID);
+                insideScroll.remove(currentButton);
+                buttons.remove(currentButton);
+                //reworking array lists
+                for (int i = 0; i < buttons.size(); i++) {
+                    if (i <= droppedIndex) {
+                        if (i != draggedIndex) {
+                            buttonsWorkaround.add(buttons.get(i));
+                            questionsWorkaround.add(domainQuestions.get(i));
+                        }
+                    } else {
+                        if (i == droppedIndex + 1) {
+                            buttonsWorkaround.add(buttons.get(draggedIndex));
+                            buttonsWorkaround.add(buttons.get(droppedIndex + 1));
+                            questionsWorkaround.add(domainQuestions.get(draggedIndex));
+                            questionsWorkaround.add(domainQuestions.get(draggedIndex + 1));
+                        } else {
+                            buttonsWorkaround.add(buttons.get(i));
+                            questionsWorkaround.add(domainQuestions.get(i));
+                        }
+                    }
+                }
+                buttons.clear();
+                domainQuestions.clear();
+                for (int i = 0; i < buttonsWorkaround.size(); i++) {
+                    buttons.add(buttonsWorkaround.get(i));
+                    questionsWorkaround.add(questionsWorkaround.get(i));
+                }
+                buttonsWorkaround.clear();
+                questionsWorkaround.clear();
+                //end reworking array lists
+                insideScroll.removeAll();
+                for (EstablisherButton button : buttons) {
+                    insideScroll.add(button);
+                }
+                insideScroll.revalidate();
+                insideScroll.repaint();
+                thisScreen.remove(pop);
+                thisScreen.revalidate();
+                thisScreen.repaint();
+                popResult = true;
+            });
+            pop.add(yes);
+            EstablisherButton no = new EstablisherButton(thisScreen, 40, 25, Color.WHITE, "No", 32);
+            no.addActionListener(e -> {
+                thisScreen.remove(pop);
+                thisScreen.revalidate();
+                thisScreen.repaint();
                 popResult = false;
             });
             pop.add(no);
         }
         thisScreen.add(pop);
+        thisScreen.revalidate();
+        thisScreen.repaint();
         return popResult;
     }
 
@@ -215,37 +263,10 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
                 theQuizit.changeScreen(11);
                 break;
             case 13:
-                if (popup("Are you sure you want to leave?\n(Changes may not be saved)")) {
-                    theQuizit.changeScreen(5);
-                }
+                popup("Are you sure you want to leave?\n(Changes may not be saved)");
                 break;
             case 21:
-                if (popup("Delete Question\n\nAre you sure?")) {
-                    currentDomain.deleteQuestion(currentQID);
-                    insideScroll.remove(currentButton);
-                    buttons.remove(currentButton);
-                    //needs to be tested; reworking array list
-                    for (int i = 0; i <= droppedIndex; i++) {
-                        if (i != draggedIndex)
-                            buttonsWorkaround.add(buttons.get(i));
-                    }
-                    for (int i = droppedIndex + 1; i < buttons.size(); i++) {
-                        if (i == droppedIndex + 1)
-                            buttonsWorkaround.add(buttons.get(draggedIndex));
-                        else
-                            buttonsWorkaround.add(buttons.get(i));
-                    }
-                    for (int i = 0; i < buttonsWorkaround.size(); i++) {
-                        buttons.set(i, buttonsWorkaround.get(i));
-                    }
-                    //end needs to be tested; reworking array list
-                    insideScroll.removeAll();
-                    for (EstablisherButton button : buttons) {
-                        insideScroll.add(button);
-                    }
-                    insideScroll.revalidate();
-                    insideScroll.repaint();
-                }
+                popup("Delete Question\n\nAre you sure?");
                 break;
             case 22:
                 theQuizit.changeScreen(12);

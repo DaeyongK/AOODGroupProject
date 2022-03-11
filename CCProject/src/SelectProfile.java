@@ -1,10 +1,12 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class SelectProfile extends QPanel implements MouseListener {
+public class SelectProfile extends QPanel implements ActionListener {
     private JScrollPane scrollable;
     private ArrayList<Profile> profiles;
     private TransitionButton done;
@@ -41,8 +43,8 @@ public class SelectProfile extends QPanel implements MouseListener {
         scrollable.add(verticalBar);
 
         //insert code needed to add in profiles
-        this.addMouseListener(this);
-        scrollable.addMouseListener(this);
+        //???
+        //scrollable.addMouseListener(this);
         scrollable.setBounds(475, 200, 300, 300);
         this.add(scrollable);
 
@@ -89,38 +91,14 @@ public class SelectProfile extends QPanel implements MouseListener {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(this.TITLE_COLOR);
-		g.drawString("Select Profile", 580, 100);
-		g.setFont(new Font("Arial",Font.BOLD,18));
+		g.setFont(new Font("Arial",Font.BOLD,30));
+		g.drawString("Select Profile", 530, 100);
 	}
 
-    @Override
-    public void mouseClicked(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseEntered(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseExited(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mousePressed(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
-    @Override
-    public void mouseReleased(MouseEvent arg0) {
-        // TODO Auto-generated method stub
-
-    }
-
+	@Override
+	public void actionPerformed(ActionEvent arg0) {
+		// TODO Auto-generated method stub
+		
+	}
+	
 }
