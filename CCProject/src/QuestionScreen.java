@@ -205,7 +205,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
                             else
                                 domain.addQuestion(new Question(question.getQuestion(),
                                         question.getAnswer(), quizit));
-                            quizit.changeScreen(6);
+                            quizit.changeScreen(8);
                         }
                     } catch (NullPointerException | NumberFormatException ignored) {
                     }
@@ -221,7 +221,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
                             else
                                 domain.addQuestion(new Question(question.getQuestion(),
                                         question.getAnswer(), quizit));
-                            quizit.changeScreen(6);
+                            quizit.changeScreen(8);
                         }
                     } catch (NullPointerException ignored) {
                     }
@@ -229,7 +229,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
             case 3:
                 //BackBtn
                 if (popup("Are you sure you want to leave?")) {
-                    quizit.changeScreen(6);
+                    quizit.changeScreen(8);
                 }
                 break;
         }
