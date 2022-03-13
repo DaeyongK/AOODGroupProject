@@ -100,15 +100,15 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
     //FOR TESTING PURPOSES!!
     public static void main(String[] arg) {
-//        JFrame testFrame = new JFrame("QuestionScreen Test");
-//        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        testFrame.pack();
-//        testFrame.setSize(1280, 720);
-//        testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
-//        testFrame.setVisible(true);
+        JFrame testFrame = new JFrame("QuestionScreen Test");
+        testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        testFrame.pack();
+        testFrame.setSize(1280, 720);
+        testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
+        testFrame.setVisible(true);
 
-        Quizit q = new Quizit();
-        q.changeScreen(11);
+//        Quizit q = new Quizit();
+//        q.changeScreen(11);
     }
 
     public int getScreenID() {
@@ -138,6 +138,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
                             question.setImage(img.getPath());
                             graphicDetected = true;
                             imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
+                            add(imageLabel);
                         }
                     }
                 }
@@ -148,6 +149,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
                     question.detachImage();
                     graphicDetected = false;
                     imageLabel = new JLabel();
+                    add(imageLabel);
                 }
             }
         } else if (text.toLowerCase().contains("are you sure")) {
