@@ -250,12 +250,21 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
             case 11:
                 //read the screen, finalize changes, go to select domain(5)
                 currentDomain.setDomainName(nameEdit.getText());
-                //reorder the questions based on the screen
-                for (EstablisherButton establisherButton : buttons)
-                    currentDomain.deleteQuestion(establisherButton.getButtonID());
-                for (int i = 0; i < buttons.size(); i++)
-                    currentDomain.addQuestion(domainQuestions.get(i));
-                //end reordering
+                boolean create = false;
+                for(int i=0;i<theQuizit.getProfile().getDomains().size();i++){
+                    if(currentDomain.getDomainName().equals(theQuizit.getProfile().getDomains().get(i).getDomainName())
+                       create = true;
+                }
+                if(create){
+                    theQuizit.getProfile().addDomain(new Domain(nameEdit.getText(), domainQuestions);
+                } else{
+                    //reorder the questions based on the screen
+                    for (EstablisherButton establisherButton : buttons)
+                        currentDomain.deleteQuestion(establisherButton.getButtonID());
+                    for (int i = 0; i < buttons.size(); i++)
+                        currentDomain.addQuestion(domainQuestions.get(i));
+                    //end reordering
+                }
                 theQuizit.changeScreen(5);
                 break;
             case 12:
