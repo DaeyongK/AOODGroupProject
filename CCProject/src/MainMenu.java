@@ -163,6 +163,7 @@ public class MainMenu extends QPanel implements ActionListener {
                 break;
             case 16:
                 //exit the application
+            	theQuizit.getAllProfiles();
             	System.exit(0);
                 break;
             case 21:

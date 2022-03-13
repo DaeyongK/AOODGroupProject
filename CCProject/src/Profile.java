@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 
 public class Profile {
     private String profileName;
-    private int threshold, image;
+    private int threshold;
     private boolean order = false;
     private boolean allQuestions = true;
     private LinkedHashMap<Integer, int[]> questions = new LinkedHashMap<>();
@@ -19,7 +19,6 @@ public class Profile {
 
     Profile(String profileName, int imageIndex) {
         this.profileName = profileName;
-        image = imageIndex;
         ArrayList<Question> emptyQuestions = new ArrayList<>();
         emptyQuestions.add(new Question());
         domains.add(new Domain("Default Domain", emptyQuestions));
@@ -50,7 +49,6 @@ public class Profile {
             }
             profileName = doc.getElementsByTagName("profileName").item(0).getTextContent();
             threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent());
-            image = Integer.parseInt(doc.getElementsByTagName("image").item(0).getTextContent());
         } catch (Exception ignored) {
         }
     }
@@ -83,9 +81,6 @@ public class Profile {
         }
     }
 
-    public void changeImage(int imageIndex) {
-        image = imageIndex;
-    }
 
     public void answeredCorrectly(int questionID) {
         questions.get(questionID)[0] += 1;

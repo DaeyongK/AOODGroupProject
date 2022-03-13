@@ -1,4 +1,17 @@
 import javax.swing.*;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
+
+import org.w3c.dom.Attr;
+import org.w3c.dom.Document;
+import org.w3c.dom.Element;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Timer;
@@ -89,6 +102,56 @@ public class Quizit {
         return frame;
     }
 
+    public File exportProfiles() {
+    	  try {
+              DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+              DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+              Document document = documentBuilder.newDocument();
+
+              Element root = document.createElement("profiles");
+              document.appendChild(root);
+              
+              for(int i=0; i<this.getAllProfiles().size(); i++) {
+            	  
+            	  Element profiles = document.createElement("profile");
+            	  root.appendChild(profiles);
+            	  
+            	  Element profileName = document.createElement(this.getAllProfiles().get(i).getName());
+            	  profiles.appendChild(profileName);
+            	 
+            	  Element threshold = document.createElement(""+this.getAllProfiles().get(i).getThreshold());
+            	  profiles.appendChild(threshold);
+            	 
+            	  Element order = document.createElement(this.getAllProfiles().get(i).getOrder()+"");
+            	  profiles.appendChild(order);
+            	 
+            	  Element allQuestions = document.createElement(this.getAllProfiles().get(i).getPossible()+"");
+            	  profiles.appendChild(allQuestions);
+            	
+            	  Element questions = document.createElement(this.getAllProfiles().get(i).getHashMap().toString());
+            	  profiles.appendChild(questions);
+            	  
+            	  Element domains = document.createElement("");
+            	  profiles.appendChild(domains);
+            	  for(int x=0; x<this.getAllProfiles().get(i).getDomains().size();x++) {
+            		  String interimName= this.getAllProfiles().get(i).getDomains().get(x).getDomainName().replace(' ', '-');
+            		  Element domainPath = document.createElement("Domains/"+interimName+".xml");
+            		  domains.appendChild(domainPath);
+            	  }
+              }
+              
+              TransformerFactory transformerFactory = TransformerFactory.newInstance();
+              Transformer transformer = transformerFactory.newTransformer();
+              DOMSource domSource = new DOMSource(document);
+              StreamResult streamResult = new StreamResult(new File("profile1.xml"));
+              transformer.transform(domSource, streamResult);
+              System.out.println("Done creating XML File");
+              return new File("profile1.xml");
+          } catch (ParserConfigurationException | TransformerException pce) {
+              pce.printStackTrace();
+          }
+          return new File("profile1.xml");
+      }
     public void changeScreen(int screenID) {
         switch (screenID) {
             case 1:
