@@ -252,11 +252,11 @@ public class EditDomain extends DomainScreen implements MouseListener, MouseMoti
                 currentDomain.setDomainName(nameEdit.getText());
                 boolean create = false;
                 for(int i=0;i<theQuizit.getProfile().getDomains().size();i++){
-                    if(currentDomain.getDomainName().equals(theQuizit.getProfile().getDomains().get(i).getDomainName())
+                    if(currentDomain.getDomainName().equals(theQuizit.getProfile().getDomains().get(i).getDomainName()))
                        create = true;
                 }
                 if(create){
-                    theQuizit.getProfile().addDomain(new Domain(nameEdit.getText(), domainQuestions);
+                    theQuizit.getProfile().addDomain(new Domain(nameEdit.getText(), domainQuestions));
                 } else{
                     //reorder the questions based on the screen
                     for (EstablisherButton establisherButton : buttons)
