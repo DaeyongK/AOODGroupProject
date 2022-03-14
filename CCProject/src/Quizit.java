@@ -21,7 +21,6 @@ public class Quizit {
 	private Profile currentProfile;
 	private Question currentQuestion;
 	private Domain currentDomain;
-	private ArrayList<Profile> profiles = new ArrayList<>();
 	private MainMenu screen1;
 	private SelectProfile screen2;
 	private CreateProfile screen3;
@@ -37,7 +36,6 @@ public class Quizit {
 
 	Quizit() {
 		currentProfile = new Profile("Default", 1);
-		profiles.add(currentProfile);
 
 		File[] profilexmls = new File("Profiles").listFiles();
 		for (File file : profilexmls) {
@@ -135,7 +133,7 @@ public class Quizit {
 
 			for (int i = 0; i < this.getAllProfiles().size(); i++) {
 
-				Element profiles = document.createElement("profiles");
+				Element profiles = document.createElement("profile");
 				root.appendChild(profiles);
 
 				Element profileName = document.createElement("profileName");
@@ -186,14 +184,14 @@ public class Quizit {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(new File("Profiles/profile1.xml"));
+			StreamResult streamResult = new StreamResult(new File("Profiles/ProfileTester.xml"));
 			transformer.transform(domSource, streamResult);
 			System.out.println("Done creating XML File");
 			return new File("Profiles/profile1.xml");
 		} catch (ParserConfigurationException | TransformerException pce) {
 			pce.printStackTrace();
 		}
-		return new File("profile1.xml");
+		return new File("Profile/ProfileTester.xml");
 	}
 
 	public void changeScreen(int screenID) {

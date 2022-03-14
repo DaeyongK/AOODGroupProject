@@ -51,6 +51,13 @@ public class Question {
         quiz.getProfile().addQuestion(ID, new int[] {0,0});
     }
 
+    Question(String question, String answer, String imagePath, int questID, Quizit quiz) {
+        questionString = question;
+        answerString = answer;
+        graphicString = imagePath;
+        ID=questID;
+    }
+    
     Question(String question, String answer, String imagePath, Quizit quiz) {
         questionString = question;
         answerString = answer;
