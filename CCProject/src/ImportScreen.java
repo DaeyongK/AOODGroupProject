@@ -31,8 +31,8 @@ class ImportScreen extends QPanel implements ActionListener {
         titleLabel.setBounds(550, 86, 700, 32);
         
         fileName = new JLabel("");
-        fileName.setBounds(600, 300, 100, 40);
-        fileName.setBackground(BACKGROUND_COLOR);
+        fileName.setBounds(666, 500, 250, 40);
+        fileName.setForeground(Color.WHITE);
         
         chooseFile = new EstablisherButton(this, width, height, Color.WHITE, "Choose File", 2);
         done = new TransitionButton(this, width, height, Color.WHITE, "Done", 8, 1);
@@ -40,9 +40,9 @@ class ImportScreen extends QPanel implements ActionListener {
 
         titleLabel.setFont(new Font("Arial",Font.BOLD,25));
         titleLabel.setForeground(TITLE_COLOR);
-        chooseFile.setBounds(360, 500, width, height);
+        chooseFile.setBounds(440, 500, width, height);
         back.setBounds(86, 80, width, height);
-        done.setBounds(500, 580, width, height);
+        done.setBounds(550, 580, width, height);
         done.setVisible(false);
         
         add(fileName);
@@ -72,21 +72,19 @@ class ImportScreen extends QPanel implements ActionListener {
             //send to main menu and parse selectedFile into a domain
             case 2:
                 jfc = new JFileChooser();
-
                 //only show xml files by default
                 //wont stop user from just changing it to be all files so accept() is still needed
                 FileNameExtensionFilter filter = new FileNameExtensionFilter("XML files", "xml");
                 jfc.setFileFilter(filter);
-
+               
                 int returnValue = jfc.showOpenDialog(null);
                 // int returnValue = jfc.showSaveDialog(null);
                 if (returnValue == JFileChooser.APPROVE_OPTION) {
                     selectedFile = jfc.getSelectedFile();
                     if (accept(selectedFile)) {
                         done.setVisible(true);
-                        fileName.setText(selectedFile.toString());
-                        
-                        
+                        fileName.setText(selectedFile.toString().substring(selectedFile.toString().lastIndexOf("\\")+1));
+//                        fileName.setText(selectedFile.toString());
                     }
 
                 }
