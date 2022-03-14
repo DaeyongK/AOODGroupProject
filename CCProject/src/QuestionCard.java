@@ -223,7 +223,12 @@ public class QuestionCard extends QPanel {
 					questionText.setText(currentQ.getQuestion());
 					askedNumTimesText.setText(("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times"));
 					correctNumTimesText.setText("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
-					questionGraphic=new JLabel(new ImageIcon(currentQ.getGraphicPath()));
+					questionGraphic.setIcon(new ImageIcon(currentQ.getGraphicPath()));
+					questionGraphic.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+					questionGraphic.setBounds(70, 340, 760, 250);
+					questionGraphic.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+					questionGraphic.setOpaque(true);
+					repaint();
 				} else if (currentQIndex > 0 &&currentQIndex<questions.size()) {
 					currentQIndex -= 1;
 					quizit.getDomain().deleteQuestion(currentQIndex + 1);
@@ -238,7 +243,12 @@ public class QuestionCard extends QPanel {
 					questionText.setText(currentQ.getQuestion());
 					askedNumTimesText.setText(("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times"));
 					correctNumTimesText.setText("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
-					questionGraphic=new JLabel(new ImageIcon(currentQ.getGraphicPath()));
+					questionGraphic.setIcon(new ImageIcon(currentQ.getGraphicPath()));
+					questionGraphic.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+					questionGraphic.setBounds(70, 340, 760, 250);
+					questionGraphic.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+					questionGraphic.setOpaque(true);
+					repaint();
 				} else if(currentQIndex==questions.size()-1&&currentQIndex==0){
 					quizit.getDomain().deleteQuestion(currentQIndex);
 					questions.remove(currentQIndex);
