@@ -88,7 +88,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
 		titleLabel.setForeground(TITLE_COLOR);
+		
+		imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		imageLabel.setBounds(121, 160, 438, 166);
+		imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+		imageLabel.setOpaque(true);
+		
 		questionBox.setBounds(121, 399, 438, 124);
 		answerBox.setBounds(720, 399, 438, 124);
 		attachGraphic.setBounds(121, 327, 161, 44);
@@ -105,7 +110,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		add(doneBtn);
 		add(backBtn);
 	}
-
+	/*
 	//FOR TESTING PURPOSES!!
 	public static void main(String[] arg) {
 		JFrame testFrame = new JFrame("QuestionScreen Test");
@@ -118,7 +123,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		//        Quizit q = new Quizit();
 		//        q.changeScreen(11);
 	}
-
+	*/
 	public int getScreenID() {
 		return screenId;
 	}
@@ -146,6 +151,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							question.setImage(img.getPath());
 							graphicDetected = true;
 							imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
+							imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+							imageLabel.setBounds(121, 160, 438, 166);
+							imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+							imageLabel.setOpaque(true);
 							add(imageLabel);
 						}
 					}
@@ -157,6 +166,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 					question.detachImage();
 					graphicDetected = false;
 					imageLabel = new JLabel();
+					imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+					imageLabel.setBounds(121, 160, 438, 166);
+					imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+					imageLabel.setOpaque(true);
 					add(imageLabel);
 				}
 			}
@@ -227,7 +240,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 						quizit.changeScreen(8);
 //					}
 				} catch (NullPointerException | NumberFormatException ignored) {
-					System.out.print("FUCK");
+					System.out.print("Something messed up");
 				}
 			} else
 				try {
