@@ -329,19 +329,19 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 		case 11:
 			//read the screen, finalize changes, go to select domain(5)
 			currentDomain.setDomainName(nameEdit.getText());
-			boolean create = false;
-			for(int i=0;i<quizit.getProfile().getDomains().size();i++){
-				if(currentDomain.getDomainName().equals(quizit.getProfile().getDomains().get(i).getDomainName()))
-					create = true;
-			}
+//			boolean create = false;
+//			for(int i=0;i<quizit.getProfile().getDomains().size();i++){
+//				if(currentDomain.getDomainName().equals(quizit.getProfile().getDomains().get(i).getDomainName()))
+//					create = true;
+//			}
 			if(wasCreate){
 				quizit.getProfile().addDomain(new Domain(nameEdit.getText(), domainQuestions));
 			} else{
 				//reorder the questions based on the screen
-				for (EstablisherButton establisherButton : buttons)
-					currentDomain.deleteQuestion(establisherButton.getButtonID());
-				for (int i = 0; i < buttons.size(); i++)
-					currentDomain.addQuestion(domainQuestions.get(i));
+//				for (EstablisherButton establisherButton : buttons)
+//					currentDomain.deleteQuestion(establisherButton.getButtonID());
+//				for (int i = 0; i < buttons.size(); i++)
+//					currentDomain.addQuestion(domainQuestions.get(i));
 				//end reordering
 			}
 			quizit.changeScreen(5);
