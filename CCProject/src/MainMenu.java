@@ -36,9 +36,14 @@ public class MainMenu extends QPanel implements ActionListener {
                 setSize(500,100);
                 setMaximumSize(getSize());
                 setHorizontalAlignment(CENTER);
+                setFont(Font.SANS_SERIF,Font.PLAIN,35);
+                setForeground(theQuizit.TITLE_COLOR);
             }
         };
-        containsButtons.add(titleCard);
+        JPanel filler3 = new JPanel();
+        filler3.setBackground(this.BACKGROUND_COLOR);
+        this.add(filler3, BorderLayout.PAGE_START);
+        this.add(titleCard);
         titleCard.setAlignmentX(CENTER_ALIGNMENT);
         //select domain
         select = new TransitionButton(this, 75, 25, Color.WHITE, "Select Domain", 5, 11){
@@ -108,7 +113,12 @@ public class MainMenu extends QPanel implements ActionListener {
         //quizzing options (in popup)
         options = new TransitionButton(this, 75, 25, Color.WHITE, "Quizzing Options", 4, 23);
         //exit application button
-        exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16);
+        exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16){
+            {
+                setSize(300,100);
+                setMaximumSize(getSize());
+            }
+        };
         exit.addActionListener(e -> System.exit(0));
         exit.addActionListener(e -> System.out.println("balls"));
         exit.addActionListener(e ->  quizit.exportDomains());
