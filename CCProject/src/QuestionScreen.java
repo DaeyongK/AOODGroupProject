@@ -66,8 +66,16 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 			questionBox = new JTextField(question.getQuestion());
 			answerBox = new JTextField(question.getAnswer());
-			changeRight = new JTextField("Correct: " + profile.getAnsweredRight(questionId) + " times");
-			changeAsked = new JTextField("Asked: " + profile.getTimesAsked(questionId) + " times");
+			changeRight = new JTextField(profile.getAnsweredRight(questionId));
+			changeAsked = new JTextField(profile.getTimesAsked(questionId));
+			JLabel rightLabel = new JLabel("Correct:             times");
+			JLabel askedLabel = new JLabel("Asked:            times");
+			
+			add(rightLabel);
+			add(askedLabel);
+			rightLabel.setBounds(900,161,300,56);
+			askedLabel.setBounds(900,242,300,56);
+
 			changeRight.setBounds(953, 161, 283, 56);
 			changeAsked.setBounds(953, 242, 283, 56);
 			add(changeRight);
