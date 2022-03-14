@@ -1,17 +1,1 @@
-<?xml version="1.0"?>
-<profiles>
-    <profile>
-        <profileName>Default Profile</profileName>
-        <threshold>5</threshold>
-        <image>1</image>
-        <order>false</order>
-        <allQuestions>true</allQuestions>
-        <questions>
-        <id></id>
-        <numRight></numRight>
-        <numAsked></numAsked></questions>
-        <domains>
-            <domainPath>Domains/test.xml</domainPath>
-        </domains>
-    </profile>
-</profiles>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><profiles><profiles><profileName>Default</profileName><threshold>_0</threshold><order>false</order><allQuestions>true</allQuestions><questions/><domains><domainPath>Domains_Default-Domain.xml</domainPath></domains></profiles><profiles><profileName>Default</profileName><threshold>_0</threshold><order>false</order><allQuestions>true</allQuestions><questions/><domains><domainPath>Domains_Default-Domain.xml</domainPath><domainPath>Domains_Simple-Colors.xml</domainPath><domainPath>Domains_Default-Domain.xml</domainPath><domainPath>Domains_Default-Domain.xml</domainPath><domainPath>Domains_Default-Domain.xml</domainPath></domains></profiles></profiles>

@@ -121,19 +121,23 @@ public class Quizit {
 
 			for (int i = 0; i < this.getAllProfiles().size(); i++) {
 
-				Element profiles = document.createElement("profile");
+				Element profiles = document.createElement("profiles");
 				root.appendChild(profiles);
 
-				Element profileName = document.createElement(this.getAllProfiles().get(i).getName().replace(' ', '-'));
+				Element profileName = document.createElement("profileName");
+				profileName.setTextContent(this.getAllProfiles().get(i).getName().replace(' ', '-'));
 				profiles.appendChild(profileName);
 
-				Element threshold = document.createElement("_" + this.getAllProfiles().get(i).getThreshold());
+				Element threshold = document.createElement("threshold");
+				threshold.setTextContent("_" + this.getAllProfiles().get(i).getThreshold());
 				profiles.appendChild(threshold);
 
-				Element order = document.createElement(this.getAllProfiles().get(i).getOrder() + "");
+				Element order = document.createElement("order");
+				order.setTextContent(this.getAllProfiles().get(i).getOrder() + "");
 				profiles.appendChild(order);
 
-				Element allQuestions = document.createElement(this.getAllProfiles().get(i).getPossible() + "");
+				Element allQuestions = document.createElement("allQuestions");
+				allQuestions.setTextContent(this.getAllProfiles().get(i).getPossible() + "");
 				profiles.appendChild(allQuestions);
 
 				Element questions = document.createElement("questions");
@@ -141,13 +145,18 @@ public class Quizit {
 
 				for (int z = 0; z < this.getAllProfiles().get(i).getHashMap().size(); z++) {
 					if (this.getAllProfiles().get(i).getHashMap().containsKey(z)) {
-						Element id = document.createElement("_" + z);
+						Element id = document.createElement("id");
+						id.setTextContent("_"+z);
 						questions.appendChild(id);
+						
 						Element numRight = document
-								.createElement("_" + this.getAllProfiles().get(i).getHashMap().get(z)[0]);
+								.createElement("numRight");
+						numRight.setTextContent("_" + this.getAllProfiles().get(i).getHashMap().get(z)[0]);
 						questions.appendChild(numRight);
+						
 						Element numAsked = document
-								.createElement("_" + this.getAllProfiles().get(i).getHashMap().get(z)[1]);
+								.createElement("numAsked");
+						numAsked.setTextContent("_" + this.getAllProfiles().get(i).getHashMap().get(z)[1]);
 						questions.appendChild(numAsked);
 					}
 
@@ -156,7 +165,8 @@ public class Quizit {
 				profiles.appendChild(domains);
 				for (int x = 0; x < this.getAllProfiles().get(i).getDomains().size(); x++) {
 					String interimName = this.getAllProfiles().get(i).getDomains().get(x).getDomainName().replace(' ','-').replace('/', '-');
-					Element domainPath = document.createElement("Domains_"+interimName+".xml");
+					Element domainPath = document.createElement("domainPath");
+					domainPath.setTextContent("Domains_"+interimName+".xml");
 					domains.appendChild(domainPath);
 				}
 			}
@@ -164,10 +174,10 @@ public class Quizit {
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(new File("profile1.xml"));
+			StreamResult streamResult = new StreamResult(new File("Profiles/profile1.xml"));
 			transformer.transform(domSource, streamResult);
 			System.out.println("Done creating XML File");
-			return new File("profile1.xml");
+			return new File("Profiles/profile1.xml");
 		} catch (ParserConfigurationException | TransformerException pce) {
 			pce.printStackTrace();
 		}
