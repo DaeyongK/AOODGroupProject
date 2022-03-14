@@ -7,7 +7,9 @@
         <order>false</order>
         <allQuestions>true</allQuestions>
         <questions>
-        </questions>
+        <id></id>
+        <numRight></numRight>
+        <numAsked></numAsked></questions>
         <domains>
             <domainPath>Domains/test.xml</domainPath>
         </domains>

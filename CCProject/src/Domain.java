@@ -124,7 +124,7 @@ public class Domain {
             Attr dname = document.createAttribute("DomainName");
             dname.setTextContent(newDomainName);
             root.setAttributeNode(dname);
-
+            
             for (int i = 0; i < this.questions.size(); i++) {
                 Element question = document.createElement("question");
                 root.appendChild(question);

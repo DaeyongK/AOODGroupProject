@@ -124,10 +124,10 @@ public class Quizit {
 				Element profiles = document.createElement("profile");
 				root.appendChild(profiles);
 
-				Element profileName = document.createElement(this.getAllProfiles().get(i).getName());
+				Element profileName = document.createElement(this.getAllProfiles().get(i).getName().replace(' ', '-'));
 				profiles.appendChild(profileName);
 
-				Element threshold = document.createElement("" + this.getAllProfiles().get(i).getThreshold());
+				Element threshold = document.createElement("_" + this.getAllProfiles().get(i).getThreshold());
 				profiles.appendChild(threshold);
 
 				Element order = document.createElement(this.getAllProfiles().get(i).getOrder() + "");
@@ -136,15 +136,27 @@ public class Quizit {
 				Element allQuestions = document.createElement(this.getAllProfiles().get(i).getPossible() + "");
 				profiles.appendChild(allQuestions);
 
-				Element questions = document.createElement(this.getAllProfiles().get(i).getHashMap().toString());
+				Element questions = document.createElement("questions");
 				profiles.appendChild(questions);
 
-				Element domains = document.createElement("");
+				for (int z = 0; z < this.getAllProfiles().get(i).getHashMap().size(); z++) {
+					if (this.getAllProfiles().get(i).getHashMap().containsKey(z)) {
+						Element id = document.createElement("_" + z);
+						questions.appendChild(id);
+						Element numRight = document
+								.createElement("_" + this.getAllProfiles().get(i).getHashMap().get(z)[0]);
+						questions.appendChild(numRight);
+						Element numAsked = document
+								.createElement("_" + this.getAllProfiles().get(i).getHashMap().get(z)[1]);
+						questions.appendChild(numAsked);
+					}
+
+				}
+				Element domains = document.createElement("domains");
 				profiles.appendChild(domains);
 				for (int x = 0; x < this.getAllProfiles().get(i).getDomains().size(); x++) {
-					String interimName = this.getAllProfiles().get(i).getDomains().get(x).getDomainName().replace(' ',
-							'-');
-					Element domainPath = document.createElement("Domains/" + interimName + ".xml");
+					String interimName = this.getAllProfiles().get(i).getDomains().get(x).getDomainName().replace(' ','-').replace('/', '-');
+					Element domainPath = document.createElement("Domains_"+interimName+".xml");
 					domains.appendChild(domainPath);
 				}
 			}

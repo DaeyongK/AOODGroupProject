@@ -222,9 +222,11 @@ public class QuestionCard extends QPanel {
 					questionText.setText(currentQ.getQuestion());
 					askedNumTimesText.setText(("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times"));
 					correctNumTimesText.setText("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
+					questionGraphic=new JLabel(new ImageIcon(currentQ.getGraphicPath()));
 				} else if (currentQIndex > 0 &&currentQIndex<questions.size()) {
 					currentQIndex -= 1;
 					quizit.getDomain().deleteQuestion(currentQIndex + 1);
+					
 					questions.remove(currentQIndex+1);
 					currentQ = questions.get(currentQIndex);
 					ansBtn.setVisible(true);
@@ -235,6 +237,7 @@ public class QuestionCard extends QPanel {
 					questionText.setText(currentQ.getQuestion());
 					askedNumTimesText.setText(("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times"));
 					correctNumTimesText.setText("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
+					questionGraphic=new JLabel(new ImageIcon(currentQ.getGraphicPath()));
 				} else if(currentQIndex==questions.size()-1&&currentQIndex==0){
 					quizit.getDomain().deleteQuestion(currentQIndex);
 					questions.remove(currentQIndex);
