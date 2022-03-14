@@ -19,6 +19,7 @@ public abstract class DomainScreen extends QPanel {
 //		System.out.print(popup("yeah"));
         setOpaque(true);
         setLayout(null);
+        System.out.print(quizit.getProfile().getDomains().size());
 
         domains = quizit.getProfile().getDomains();
         domainButtons = new ArrayList<>();

@@ -38,10 +38,15 @@ public class Quizit {
 	Quizit() {
 		currentProfile = new Profile("Default", 1);
 		profiles.add(currentProfile);
+
 		File[] profilexmls = new File("Profiles").listFiles();
 		for (File file : profilexmls) {
 			profiles.add(new Profile(file, this));
 		}
+		System.out.print(currentProfile.getName());
+//		System.out.print(profiles.size());
+//		currentProfile= profiles.get(1);
+//		profiles.remove(0);
 		setDomain(currentProfile.getDomains().get(0));
 		setQuestion(currentDomain.getQuestion(0));
 		screen1 = new MainMenu("", this);
@@ -63,6 +68,15 @@ public class Quizit {
 		frame.pack();
 		frame.setSize(1280, 720);
 		frame.setVisible(true);
+		Runtime.getRuntime().addShutdownHook(new Thread()
+		{
+			public void run()
+			{
+				exportDomains();
+				exportProfiles();
+				System.out.print("saved on close");
+			}
+		});
 
 	}
 

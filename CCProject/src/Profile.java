@@ -47,6 +47,7 @@ public class Profile {
                 String domain = ds.item(i).getTextContent().replace('_', '/');
                 domains.add(new Domain(new File(domain), quizit));
             }
+            System.out.print(domains.size());
             profileName = doc.getElementsByTagName("profileName").item(0).getTextContent().replace('-', ' ');
             threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent().replace('_', '+'));
         } catch (Exception ignored) {
@@ -91,11 +92,19 @@ public class Profile {
     }
 
     public int getAnsweredRight(int questionID) {
+    	try {
         return questions.get(questionID)[0];
+    	}catch(NullPointerException e) {
+    		return 0;
+    	}
     }
 
     public int getTimesAsked(int questionID) {
+    	try {
         return questions.get(questionID)[1];
+    	}catch(NullPointerException e) {
+    		return 0;
+    	}
     }
 
     public void setNumCorrect(int questionID, int numberRight) {
