@@ -19,7 +19,7 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 	private int currentQID = 0;
 	private boolean first = true;
     private JLayeredPane anotherLayeredPane;
-
+    
 	
 	//for dragging and dropping.
 	private EstablisherButton beingDragged = new EstablisherButton(this, 0, 0, Color.WHITE, "", -2);
@@ -315,7 +315,7 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
             
             editQ.setBounds(825, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
             deleteQ.setBounds(950, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
-
+            currentQID = -buttonID;
 		}
 		
 		
@@ -334,7 +334,7 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 				if(currentDomain.getDomainName().equals(quizit.getProfile().getDomains().get(i).getDomainName()))
 					create = true;
 			}
-			if(create){
+			if(wasCreate){
 				quizit.getProfile().addDomain(new Domain(nameEdit.getText(), domainQuestions));
 			} else{
 				//reorder the questions based on the screen
@@ -348,6 +348,9 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 			break;
 		case 12:
 			//go to create question for a blank question(11)
+			if(wasCreate){
+				quizit.getProfile().addDomain(new Domain(nameEdit.getText(), domainQuestions));
+			}
 			quizit.changeScreen(11);
 			break;
 		case 13:
@@ -355,7 +358,15 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 				quizit.changeScreen(1);;
 				break;
 		case 21:
-			popup("Delete Question\n\nAre you sure?");
+			if(popup("Delete Question\n\nAre you sure?")) {
+                
+                repaint();
+				currentDomain.deleteQuestion(currentQID);
+				insideScroll.remove(buttons.get(currentQID));
+				buttons.remove(currentQID);
+                repaint();
+
+			}
 			break;
 		case 22:
 			quizit.changeScreen(12);
