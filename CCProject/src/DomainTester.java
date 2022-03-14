@@ -27,6 +27,7 @@ public class DomainTester {
         questions.add(q8);
         questions.add(q9);
         questions.add(q10);
+        questions.remove(q10);
         Domain n = new Domain("Simple Math", questions);
         for (int i = 0; i < n.getDomainSize(); i++) {
             System.out.println(n.getQuestion(i).getGraphicPath());

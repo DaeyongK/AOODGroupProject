@@ -110,6 +110,10 @@ public class MainMenu extends QPanel implements ActionListener {
         //exit application button
         exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16);
         exit.addActionListener(e -> System.exit(0));
+        exit.addActionListener(e -> System.out.println("balls"));
+        exit.addActionListener(e ->  quizit.exportDomains());
+        exit.addActionListener(e -> 	quizit.exportProfiles());
+    
         this.add(exit,BorderLayout.PAGE_END);
         
     }
@@ -137,6 +141,7 @@ public class MainMenu extends QPanel implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
+    	
     	switch (buttonID) {
             case 11:
                 //go to select domain (5)
@@ -163,6 +168,7 @@ public class MainMenu extends QPanel implements ActionListener {
                 break;
             case 16:
                 //exit the application
+            	
             	System.exit(0);
                 break;
             case 21:

@@ -11,7 +11,7 @@ import java.util.LinkedHashMap;
 
 public class Profile {
     private String profileName;
-    private int threshold, image;
+    private int threshold;
     private boolean order = false;
     private boolean allQuestions = true;
     private LinkedHashMap<Integer, int[]> questions = new LinkedHashMap<>();
@@ -19,7 +19,6 @@ public class Profile {
 
     Profile(String profileName, int imageIndex) {
         this.profileName = profileName;
-        image = imageIndex;
         ArrayList<Question> emptyQuestions = new ArrayList<>();
         emptyQuestions.add(new Question());
         domains.add(new Domain("Default Domain", emptyQuestions));
@@ -39,18 +38,17 @@ public class Profile {
             for (int i = 0; i < qs.getLength(); i++) {
                 Node question = qs.item(i);
                 Element q = (Element) question;
-                questions.put(Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent()),
-                        new int[]{Integer.parseInt(q.getElementsByTagName("numRight").item(0).getTextContent()),
-                                Integer.parseInt(q.getElementsByTagName("numAsked").item(0).getTextContent())});
+                questions.put(Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent().replace('_', '+')),
+                        new int[]{Integer.parseInt(q.getElementsByTagName("numRight").item(0).getTextContent().replace('_', '+')),
+                                Integer.parseInt(q.getElementsByTagName("numAsked").item(0).getTextContent().replace('_', '+'))});
             }
             NodeList ds = doc.getElementsByTagName("domainPath");
             for (int i = 0; i < ds.getLength(); i++) {
-                String domain = ds.item(i).getTextContent();
+                String domain = ds.item(i).getTextContent().replace('_', '/');
                 domains.add(new Domain(new File(domain), quizit));
             }
-            profileName = doc.getElementsByTagName("profileName").item(0).getTextContent();
-            threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent());
-            image = Integer.parseInt(doc.getElementsByTagName("image").item(0).getTextContent());
+            profileName = doc.getElementsByTagName("profileName").item(0).getTextContent().replace('-', ' ');
+            threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent().replace('_', '+'));
         } catch (Exception ignored) {
         }
     }
@@ -83,9 +81,6 @@ public class Profile {
         }
     }
 
-    public void changeImage(int imageIndex) {
-        image = imageIndex;
-    }
 
     public void answeredCorrectly(int questionID) {
         questions.get(questionID)[0] += 1;
