@@ -52,6 +52,10 @@ public class Profile {
             threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent().replace('_', '+'));
         } catch (Exception ignored) {
         }
+        for (int key : questions.keySet()) {
+        	System.out.print(key);
+        }
+        
     }
 
     public String getName() {
@@ -92,19 +96,13 @@ public class Profile {
     }
 
     public int getAnsweredRight(int questionID) {
-    	try {
         return questions.get(questionID)[0];
-    	}catch(NullPointerException e) {
-    		return 0;
-    	}
+    	
     }
 
     public int getTimesAsked(int questionID) {
-    	try {
         return questions.get(questionID)[1];
-    	}catch(NullPointerException e) {
-    		return 0;
-    	}
+    	
     }
 
     public void setNumCorrect(int questionID, int numberRight) {
