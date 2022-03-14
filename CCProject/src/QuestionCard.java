@@ -60,6 +60,7 @@ public class QuestionCard extends QPanel {
 		}
 		currentQIndex = 0;
 		currentQ = questions.get(currentQIndex);
+		quizit.setQuestion(currentQ);
 		currentQStr = currentQ.getQuestion();
 		this.setLayout(null);
 
@@ -215,6 +216,7 @@ public class QuestionCard extends QPanel {
 					quizit.getDomain().deleteQuestion(currentQIndex -1);
 					questions.remove(currentQIndex-1);
 					currentQ = questions.get(currentQIndex);
+					quizit.setQuestion(currentQ);
 					ansBtn.setVisible(true);
 					knewAnsBtn.setVisible(false);
 					notKnewAnsBtn.setVisible(false);
@@ -235,6 +237,7 @@ public class QuestionCard extends QPanel {
 					
 					questions.remove(currentQIndex+1);
 					currentQ = questions.get(currentQIndex);
+					quizit.setQuestion(currentQ);
 					ansBtn.setVisible(true);
 					knewAnsBtn.setVisible(false);
 					notKnewAnsBtn.setVisible(false);
@@ -272,11 +275,13 @@ public class QuestionCard extends QPanel {
 	public void nextQ() {
 		currentQIndex++;
 		currentQ = questions.get(currentQIndex);
+		quizit.setQuestion(currentQ);
 	}
 
 	public void previousQ() {
 		currentQIndex--;
 		currentQ = questions.get(currentQIndex);
+		quizit.setQuestion(currentQ);
 	}
 
 	public void paintComponent(Graphics g) {
