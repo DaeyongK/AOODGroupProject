@@ -30,24 +30,25 @@ public class QuestionCard extends QPanel {
 
 		// different profile settings ||||
 		// VVVV
-		if (profile.getPossible() && profile.getOrder()) {
+		System.out.println(profile.getPossible() + " " + profile.getOrder());
+		if (profile.getPossible() && !profile.getOrder()) {
 			for (int i = 0; i < currentDomain.getDomainSize(); i++) {
 				questions.add(currentDomain.getQuestions().get(i));
 			}
-		} else if (profile.getPossible() && !profile.getOrder()) {
+		} else if (profile.getPossible() && profile.getOrder()) {
 			intermediateDomain = new ArrayList<>(currentDomain.getQuestions());
 			Collections.shuffle(intermediateDomain);
 			for (int i = 0; i < currentDomain.getDomainSize(); i++) {
 				questions.add(intermediateDomain.get(i));
 			}
-		} else if (!profile.getPossible() && profile.getOrder()) {
+		} else if (!profile.getPossible() && !profile.getOrder()) {
 			questionHash = new LinkedHashMap<>(profile.getHashMap());
 			for (Question q : currentDomain.getQuestions()) {
 				if (questionHash.get(q.getID())[0] < profile.getThreshold()) {
 					questions.add(q);
 				}
 			}
-		} else if (!profile.getPossible() && !profile.getOrder()) {
+		} else if (!profile.getPossible() && profile.getOrder()) {
 			questionHash = new LinkedHashMap<>(profile.getHashMap());
 			intermediateDomain = new ArrayList<>(currentDomain.getQuestions());
 			Collections.shuffle(intermediateDomain);

@@ -112,17 +112,24 @@ public class Options extends QPanel implements ActionListener {
             case 1:
                 //allQuestions is false
                 allQuestions = false;
+                quizit.getProfile().setPossQuestions(false);
                 break;
             case 2:
                 //allQuestions is true
                 allQuestions = true;
+                quizit.getProfile().setPossQuestions(true);
+
                 break;
             case 3:
                 //shuffleQuestions is true
+                quizit.getProfile().setOrderQuestions(true);
+
                 shuffleQuestions = true;
                 break;
             case 4:
                 //shuffleQuestions is false
+                quizit.getProfile().setOrderQuestions(false);
+
                 shuffleQuestions = false;
                 break;
             case 5:
