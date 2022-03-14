@@ -54,13 +54,15 @@ public abstract class DomainScreen extends QPanel {
         scroll.setBounds(150,150,900,400);
         exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", 1, -1);
         exit.setBounds(50,50,80,50);
-       	EstablisherButton button = new EstablisherButton(this, 1280, 720, BACKGROUND_COLOR, "", -99);
-       	button.setBounds(0, 0, 1280, 720);
-       	add(button);
-       	button.setVisible(false);
+//       	EstablisherButton button = new EstablisherButton(this, 1280, 720, BACKGROUND_COLOR, "", -99);
+//       	button.setBounds(0, 0, 1280, 720);
+//       	add(button);
+//       	button.setVisible(false);
         titleLabel.setBounds(600,50,100,100);
         add(exit);
         repaint();
+        scroll.setBackground(TITLE_COLOR);
+        pane.setBackground(TITLE_COLOR);
     }
 
 

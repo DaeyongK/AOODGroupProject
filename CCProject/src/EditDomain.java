@@ -349,7 +349,9 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 		case 12:
 			//go to create question for a blank question(11)
 			if(wasCreate){
-				quizit.getProfile().addDomain(new Domain(nameEdit.getText(), domainQuestions));
+				Domain tempDomain = new Domain(nameEdit.getText(), domainQuestions);
+				quizit.getProfile().addDomain(tempDomain);
+				quizit.setDomain(tempDomain);
 			}
 			quizit.changeScreen(11);
 			break;
