@@ -189,27 +189,37 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			//Checks if all textFields are entered
 			if (edit) {
 				try {
-					if (!questionBox.getText().equals("") &&
-							!answerBox.getText().equals("") &&
-							!changeRight.getText().equals("") &&
-							!changeAsked.getText().equals("") &&
-							Integer.parseInt(changeRight.getText()) >= 0 &&
-							Integer.parseInt(changeAsked.getText()) >= 0 &&
-							Integer.parseInt(changeRight.getText()) <=
-							Integer.parseInt(changeAsked.getText())) {
+
+//					if (!questionBox.getText().equals("") &&
+//							!answerBox.getText().equals("") &&
+//							!changeRight.getText().equals("") &&
+//							!changeAsked.getText().equals("") &&
+//							Integer.parseInt(changeRight.getText()) >= 0 &&
+//							Integer.parseInt(changeAsked.getText()) >= 0 &&
+//							Integer.parseInt(changeRight.getText()) <=
+//							Integer.parseInt(changeAsked.getText())) {
+						System.out.print("OWU");
 						question.setQuestion(questionBox.getText());
+						System.out.print("UWU");
+
 						question.setAnswer(answerBox.getText());
+
 						profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
+						System.out.print("UWU");
+
 						profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
-						if (graphicDetected)
-							domain.addQuestion(new Question(question.getQuestion(),
-									question.getAnswer(), question.getGraphicPath(), quizit));
-						else
-							domain.addQuestion(new Question(question.getQuestion(),
-									question.getAnswer(), quizit));
+						System.out.print("OWU");
+
+//						if (graphicDetected)
+//							domain.addQuestion(new Question(question.getQuestion(),
+//									question.getAnswer(), question.getGraphicPath(), quizit));
+//						else
+//							domain.addQuestion(new Question(question.getQuestion(),
+//									question.getAnswer(), quizit));
 						quizit.changeScreen(8);
-					}
+//					}
 				} catch (NullPointerException | NumberFormatException ignored) {
+					System.out.print("FUCK");
 				}
 			} else
 				try {
@@ -227,9 +237,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 					}
 				} catch (NullPointerException ignored) {
 				}
-			
+
 			break;
-			
+
 		case 3:
 			//BackBtn
 			if (popup("Are you sure you want to leave?")) {
