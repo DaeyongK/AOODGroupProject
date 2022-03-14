@@ -30,8 +30,9 @@ class ImportScreen extends QPanel implements ActionListener {
         titleLabel = new JLabel(title);
         titleLabel.setBounds(550, 86, 700, 32);
         
-        fileName = new JLabel("this is some text");
-        fileName.setBounds(300, 300, 100, 40);
+        fileName = new JLabel("");
+        fileName.setBounds(600, 300, 100, 40);
+        fileName.setBackground(BACKGROUND_COLOR);
         
         chooseFile = new EstablisherButton(this, width, height, Color.WHITE, "Choose File", 2);
         done = new TransitionButton(this, width, height, Color.WHITE, "Done", 8, 1);
