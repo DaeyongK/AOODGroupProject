@@ -32,7 +32,7 @@ public abstract class DomainScreen extends QPanel {
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);  
         if (domainButtons != null) {
             for (int i =0; i<domainButtons.size(); i++) {
-//        		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
+//       		pane.setLayout(new BoxLayout(pane, BoxLayout.PAGE_AXIS));
             	if(domainButtons.size()<7) {
             		pane.setLayout(new GridLayout(7, 1));
 

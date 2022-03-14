@@ -152,6 +152,7 @@ public class MainMenu extends QPanel implements ActionListener {
                 break;
             case 12:
                 //go to create domain (8)
+            	quizit.setDomain(null);
                 quizit.changeScreen(8);
                 break;
             case 13:
