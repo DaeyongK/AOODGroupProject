@@ -29,10 +29,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private Question question;
 	private Profile profile;
 	private Domain domain;
+	private JFrame frame;
 
 	QuestionScreen(String t, Quizit q) {
 		super(t, q);
 		domain = q.getDomain();
+		frame = q.getFrame();
 		setLayout(null);
 		setBackground(BACKGROUND_COLOR);
 
@@ -114,21 +116,22 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		add(detachGraphic);
 		add(doneBtn);
 		add(backBtn);
+		revalidate();
+		repaint();
+		frame.repaint();
 	}
-	/*
 	//FOR TESTING PURPOSES!!
 	public static void main(String[] arg) {
-		JFrame testFrame = new JFrame("QuestionScreen Test");
+		/*JFrame testFrame = new JFrame("QuestionScreen Test");
 		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		testFrame.pack();
 		testFrame.setSize(1280, 720);
 		testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
-		testFrame.setVisible(true);
+		testFrame.setVisible(true);*/
 
-		//        Quizit q = new Quizit();
-		//        q.changeScreen(11);
+		Quizit q = new Quizit();
+		q.changeScreen(11);
 	}
-	*/
 	public int getScreenID() {
 		return screenId;
 	}
@@ -161,6 +164,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 							imageLabel.setOpaque(true);
 							add(imageLabel);
+							revalidate();
+							repaint();
+							frame.repaint();
 						}
 					}
 				}
@@ -176,6 +182,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 					imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 					imageLabel.setOpaque(true);
 					add(imageLabel);
+					revalidate();
+					repaint();
+					frame.repaint();
 				}
 			}
 		} else if (text.toLowerCase().contains("are you sure")) {
@@ -246,7 +255,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 						domain.addQuestion(new Question(question.getQuestion(),
 								question.getAnswer(), quizit));
 					quizit.changeScreen(8);
-					}
 				} catch (NullPointerException ignored) {
 				}
 
