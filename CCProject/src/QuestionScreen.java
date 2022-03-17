@@ -144,12 +144,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 						if (popup("Are you sure you want to attach the image?")) {
 							question.setImage(img.getPath());
 							graphicDetected = true;
-							imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
-							imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-							imageLabel.setBounds(121, 160, 438, 166);
-							imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-							imageLabel.setOpaque(true);
-							add(imageLabel);
+//							imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
+//							imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+//							imageLabel.setBounds(121, 160, 438, 166);
+//							imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
+//							imageLabel.setOpaque(true);
+							imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
+//							add(imageLabel);
 							revalidate();
 							repaint();
 						}
@@ -161,12 +162,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				if (popup("Are you sure you want to remove the image?")) {
 					question.detachImage();
 					graphicDetected = false;
-					imageLabel = new JLabel();
-					imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-					imageLabel.setBounds(121, 160, 438, 166);
-					imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-					imageLabel.setOpaque(true);
-					add(imageLabel);
+					imageLabel.setIcon(null);
 					revalidate();
 					repaint();
 				}
