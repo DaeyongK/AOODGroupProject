@@ -8,23 +8,16 @@ import java.awt.event.ActionListener;
 import java.io.File;
 
 public class QuestionScreen extends QPanel implements ActionListener {
-	private String title;
 	private int screenId;
 	private int questionId;
 	private boolean edit;
 	private boolean graphicDetected;
 
-	private JLabel titleLabel;
 	private JLabel imageLabel;
 	private JTextField questionBox;
 	private JTextField answerBox;
 	private JTextField changeRight;
 	private JTextField changeAsked;
-
-	private EstablisherButton attachGraphic;
-	private EstablisherButton detachGraphic;
-	private TransitionButton doneBtn;
-	private TransitionButton backBtn;
 
 	private Question question;
 	private Profile profile;
@@ -32,6 +25,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 	QuestionScreen(String t, Quizit q) {
 		super(t, q);
+		String title;
+		JLabel titleLabel;
 		domain = q.getDomain();
 		setLayout(null);
 		setBackground(BACKGROUND_COLOR);
@@ -46,11 +41,14 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			titleLabel = new JLabel(title);
 			titleLabel.setBounds(464, 86, 351, 32);
 			imageLabel = new JLabel();
-			questionBox = new JTextField("Enter a new question here: ");
-			answerBox = new JTextField("Enter its answer here: ");
-		} else {
+			imageLabel.setVisible(false);
+			questionBox = new JTextField("");
+			answerBox = new JTextField("");
+		}
+		else {
 			question = q.getQuestion();
-			questionId = question.getID();
+			questionId = question.getID(); //Figure out how to get QuestionId from QuestionCard and Edit Domain
+			//Try to look at currentQuestion in Quizit and then compare it to every question in domain to find it
 			profile = q.getProfile();
 			title = "Edit Question #" + questionId;
 			screenId = 12;
@@ -62,13 +60,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			if (graphicDetected) {
 				imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
 				imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
+				imageLabel.setVisible(true);
 			}
-			else
+			else {
 				imageLabel = new JLabel();
+				imageLabel.setVisible(false);
+			}
 
-			questionBox = new JTextField(question.getQuestion());
-			answerBox = new JTextField(question.getAnswer());
-			
 			changeRight = new JTextField(profile.getAnsweredRight(questionId));
 			changeAsked = new JTextField(profile.getTimesAsked(questionId));
 			changeRight.setBackground(Color.WHITE);
@@ -77,33 +75,48 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			changeAsked.setBounds(953, 242, 283, 56);
 			add(changeRight);
 			add(changeAsked);
-			
+
 			JLabel rightLabel = new JLabel("Correct:     ");
-			JLabel askedLabel = new JLabel("Asked:      ");
+			JLabel askedLabel = new JLabel("Asked:     ");
 			rightLabel.setForeground(Color.white);
 			askedLabel.setForeground(Color.white);
 
-			rightLabel.setBounds(900,161,300,56);
-			askedLabel.setBounds(900,242,300,56);
+			rightLabel.setBounds(660,161,300,56);
+			askedLabel.setBounds(660,242,300,56);
+			rightLabel.setHorizontalAlignment(JLabel.RIGHT);
+			askedLabel.setHorizontalAlignment(JLabel.RIGHT);
 			add(rightLabel);
 			add(askedLabel);
 		}
-		attachGraphic = new EstablisherButton(this, 161, 44, Color.WHITE, "Attach", 0);
-		detachGraphic = new EstablisherButton(this, 161, 44, Color.WHITE, "Detach", 1);
-		doneBtn = new TransitionButton(this, 161, 69, Color.WHITE, "Done", 8, 2);
-		backBtn = new TransitionButton(this, 175, 67, Color.WHITE, "Back", 8, 3);
+		JLabel questionLabel = new JLabel("Enter a question here:");
+		JLabel answerLabel = new JLabel("Enter an answer here:");
+		questionBox = new JTextField(question.getQuestion());
+		answerBox = new JTextField(question.getAnswer());
 
+		EstablisherButton attachGraphic = new EstablisherButton(
+				this, 161, 44, Color.WHITE, "Attach", 0);
+		EstablisherButton detachGraphic = new EstablisherButton(
+				this, 161, 44, Color.WHITE, "Detach", 1);
+		TransitionButton doneBtn = new TransitionButton(
+				this, 161, 69, Color.WHITE, "Done", 8, 2);
+		TransitionButton backBtn = new TransitionButton(
+				this, 175, 67, Color.WHITE, "Back", 8, 3);
+
+		questionLabel.setForeground(Color.WHITE);
+		answerLabel.setForeground(Color.WHITE);
+		questionLabel.setFont(new Font("Arial", Font.ITALIC, 14));
+		answerLabel.setFont(new Font("Arial", Font.ITALIC, 14));
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
 		titleLabel.setForeground(TITLE_COLOR);
-		titleLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-		
-		imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
+		titleLabel.setHorizontalAlignment(JLabel.CENTER);
+
+		imageLabel.setHorizontalAlignment(JLabel.CENTER);
 		imageLabel.setBounds(121, 160, 438, 166);
-		imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-		imageLabel.setOpaque(true);
-		
-		questionBox.setBounds(121, 399, 438, 124);
-		answerBox.setBounds(720, 399, 438, 124);
+
+		questionLabel.setBounds(121,385,200,20);
+		answerLabel.setBounds(720,385,200,20);
+		questionBox.setBounds(121, 405, 438, 124);
+		answerBox.setBounds(720, 405, 438, 124);
 		attachGraphic.setBounds(121, 327, 161, 44);
 		detachGraphic.setBounds(398, 327, 161, 44);
 		doneBtn.setBounds(559, 570, 161, 69);
@@ -111,6 +124,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 		add(titleLabel);
 		add(imageLabel);
+		add(questionLabel);
+		add(answerLabel);
 		add(questionBox);
 		add(answerBox);
 		add(attachGraphic);
@@ -134,7 +149,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 				//only show img files by default
 				//wont stop user from just changing it to be all files so accept() is still needed
-				FileNameExtensionFilter filter = new FileNameExtensionFilter("img files", "png", "jpg", "jpeg", "gif");
+				FileNameExtensionFilter filter = new FileNameExtensionFilter("img files",
+						"png", "jpg", "jpeg", "gif");
 				jfc.setFileFilter(filter);
 
 				int returnValue = jfc.showOpenDialog(null);
@@ -146,6 +162,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							question.setImage(img.getPath());
 							graphicDetected = true;
 							imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
+							imageLabel.setVisible(true);
 							revalidate();
 							repaint();
 						}
@@ -158,6 +175,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 					question.detachImage();
 					graphicDetected = false;
 					imageLabel.setIcon(null);
+					imageLabel.setVisible(false);
 					revalidate();
 					repaint();
 				}
@@ -174,7 +192,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		int index = name.lastIndexOf('.');
 		if (index > 0) {
 			String extension = name.substring(index + 1);
-			return extension.equals("png") || extension.equals("jpg") || extension.equals("jpeg") || extension.equals("gif");
+			return extension.equals("png") || extension.equals("jpg") ||
+					extension.equals("jpeg") || extension.equals("gif");
 		}
 		return false;
 	}
@@ -195,8 +214,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			//DoneBtn
 			if (edit) {
 				try {
-
-					if (Integer.parseInt(changeRight.getText()) >= 0 &&
+					if (!questionBox.getText().equals("") &&
+							!answerBox.getText().equals("") &&
+							Integer.parseInt(changeRight.getText()) >= 0 &&
 							Integer.parseInt(changeAsked.getText()) >= 0 &&
 							Integer.parseInt(changeRight.getText()) <=
 							Integer.parseInt(changeAsked.getText())) {
@@ -215,15 +235,20 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				} catch (NullPointerException | NumberFormatException ignored) {}
 			} else
 				try {
-					question.setQuestion(questionBox.getText());
-					question.setAnswer(answerBox.getText());
-					if (graphicDetected)
-						domain.addQuestion(new Question(question.getQuestion(),
-								question.getAnswer(), question.getGraphicPath(), quizit));
-					else
-						domain.addQuestion(new Question(question.getQuestion(),
-								question.getAnswer(), quizit));
-					quizit.changeScreen(8);
+					if (!questionBox.getText().equals("") &&
+							!answerBox.getText().equals("") &&
+							!questionBox.getText().equals("Enter a new question here: ") &&
+							!answerBox.getText().equals("Enter its answer here: ")) {
+						question.setQuestion(questionBox.getText());
+						question.setAnswer(answerBox.getText());
+						if (graphicDetected)
+							domain.addQuestion(new Question(question.getQuestion(),
+									question.getAnswer(), question.getGraphicPath(), quizit));
+						else
+							domain.addQuestion(new Question(question.getQuestion(),
+									question.getAnswer(), quizit));
+						quizit.changeScreen(8);
+					}
 				} catch (NullPointerException ignored) {
 				}
 
@@ -237,19 +262,22 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			break;
 		}
 	}
-	private void radioClick() {
-		//empty for now
-	}
+	/*private void changeImgSize() {
+		if (imageLabel.getHeight()) {
+
+		}
+		else if (imageLabel.getHeight()<imageLabel.getWidth()) {
+			for(int pixW=imageLabel.getWidth();pixW
+		}
+	}*/
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		//empty for now
-	}
+	public void actionPerformed(ActionEvent e) {}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.drawRect(121, 160, 438, 166);
 		g.setFont(new Font("Arial", Font.BOLD, 18));
-		g.drawString("No Graphic Preview", 216, 218);
+		g.drawString("No Graphic Preview", 250, 245);
 	}
 	//FOR TESTING PURPOSES!!
 	public static void main(String[] arg) {
