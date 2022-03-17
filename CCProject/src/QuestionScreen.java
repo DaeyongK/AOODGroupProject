@@ -29,12 +29,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private Question question;
 	private Profile profile;
 	private Domain domain;
-	private JFrame frame;
 
 	QuestionScreen(String t, Quizit q) {
 		super(t, q);
 		domain = q.getDomain();
-		frame = q.getFrame();
 		setLayout(null);
 		setBackground(BACKGROUND_COLOR);
 
@@ -61,8 +59,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 			titleLabel = new JLabel(title);
 			titleLabel.setBounds(464, 86, 360, 32);
-			if (graphicDetected)
+			if (graphicDetected) {
 				imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
+				imageLabel.setImage(new ImageIcon(question.getGraphicPath()));
+			}
 			else
 				imageLabel = new JLabel();
 
@@ -253,7 +253,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(Color.WHITE);
+		g.setColor(Color.BLACK);
 		g.drawRect(121, 160, 438, 166);
 		g.setFont(new Font("Arial", Font.BOLD, 18));
 		g.drawString("No Graphic Preview", 216, 218);
