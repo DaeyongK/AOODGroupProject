@@ -120,22 +120,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		repaint();
 		frame.repaint();
 	}
-	//FOR TESTING PURPOSES!!
-	public static void main(String[] arg) {
-		/*JFrame testFrame = new JFrame("QuestionScreen Test");
-		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		testFrame.pack();
-		testFrame.setSize(1280, 720);
-		testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
-		testFrame.setVisible(true);*/
-
-		Quizit q = new Quizit();
-		q.changeScreen(11);
-	}
 	public int getScreenID() {
 		return screenId;
 	}
-
 	public boolean popup(String text) {
 		int result;
 
@@ -194,7 +181,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 		return false;
 	}
-
 	private boolean accept(File f) {
 		String name = f.toString();
 		int index = name.lastIndexOf('.');
@@ -204,7 +190,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		}
 		return false;
 	}
-
 	public void buttonClicked(int buttonID) {
 		switch (buttonID) {
 		case 0:
@@ -268,21 +253,30 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			break;
 		}
 	}
-
 	private void radioClick() {
 		//empty for now
 	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		//empty for now
 	}
-
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.WHITE);
 		g.drawRect(121, 160, 438, 166);
 		g.setFont(new Font("Arial", Font.BOLD, 18));
 		g.drawString("No Graphic Preview", 216, 218);
+	}
+	//FOR TESTING PURPOSES!!
+	public static void main(String[] arg) {
+		/*JFrame testFrame = new JFrame("QuestionScreen Test");
+		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		testFrame.pack();
+		testFrame.setSize(1280, 720);
+		testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
+		testFrame.setVisible(true);*/
+
+		Quizit q = new Quizit();
+		q.changeScreen(11);
 	}
 }
