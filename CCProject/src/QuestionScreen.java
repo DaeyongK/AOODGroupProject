@@ -118,7 +118,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		add(backBtn);
 		revalidate();
 		repaint();
-		frame.repaint();
 	}
 	public int getScreenID() {
 		return screenId;
@@ -153,7 +152,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							add(imageLabel);
 							revalidate();
 							repaint();
-							frame.repaint();
 						}
 					}
 				}
@@ -171,7 +169,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 					add(imageLabel);
 					revalidate();
 					repaint();
-					frame.repaint();
 				}
 			}
 		} else if (text.toLowerCase().contains("are you sure")) {
@@ -226,9 +223,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 									question.getAnswer(), quizit));
 						quizit.changeScreen(8);
 					}
-				} catch (NullPointerException | NumberFormatException ignored) {
-					System.out.print("Something messed up");
-				}
+				} catch (NullPointerException | NumberFormatException ignored) {}
 			} else
 				try {
 					question.setQuestion(questionBox.getText());
