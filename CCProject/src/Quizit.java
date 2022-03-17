@@ -18,6 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Quizit {
+	private ArrayList<Profile> profiles = new ArrayList<>();
 	private Profile currentProfile;
 	private Question currentQuestion;
 	private Domain currentDomain;

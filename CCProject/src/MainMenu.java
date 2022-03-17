@@ -36,8 +36,8 @@ public class MainMenu extends QPanel implements ActionListener {
                 setSize(500,100);
                 setMaximumSize(getSize());
                 setHorizontalAlignment(CENTER);
-                setFont(Font.SANS_SERIF,Font.PLAIN,35);
-                setForeground(theQuizit.TITLE_COLOR);
+                setFont(new Font(Font.SANS_SERIF,Font.PLAIN,35));
+                setForeground(QPanel.TITLE_COLOR);
             }
         };
         JPanel filler3 = new JPanel();
