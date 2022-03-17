@@ -95,6 +95,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 25));
 		titleLabel.setForeground(TITLE_COLOR);
+		titleLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		
 		imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		imageLabel.setBounds(121, 160, 438, 166);
@@ -144,13 +145,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 						if (popup("Are you sure you want to attach the image?")) {
 							question.setImage(img.getPath());
 							graphicDetected = true;
-//							imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
-//							imageLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-//							imageLabel.setBounds(121, 160, 438, 166);
-//							imageLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
-//							imageLabel.setOpaque(true);
 							imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
-//							add(imageLabel);
 							revalidate();
 							repaint();
 						}
@@ -187,7 +182,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		switch (buttonID) {
 		case 0:
 			if (popup("Select File")) {
-				//Figure out bufferedImage stuff
 				question.setImage(question.getGraphicPath());
 			}
 			break;
@@ -199,7 +193,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			break;
 		case 2:
 			//DoneBtn
-			//Checks if all textFields are entered
 			if (edit) {
 				try {
 
