@@ -5,6 +5,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
 
 public class QuestionScreen extends QPanel implements ActionListener {
@@ -60,7 +61,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			if (graphicDetected) {
 				imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
 				imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
-				imageLabel.setVisible(true);
+
+                imageLabel.setVisible(true);
 			}
 			else {
 				imageLabel = new JLabel();
@@ -263,12 +265,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		}
 	}
 	/*private void changeImgSize() {
-		if (imageLabel.getHeight()) {
+        BufferedImage graphic = question.getImage();
+        int pixW = graphic.getWidth();
+        int pixH = graphic.getHeight();
+        if (pixH <= 166 && pixW <= 438) {
 
-		}
-		else if (imageLabel.getHeight()<imageLabel.getWidth()) {
-			for(int pixW=imageLabel.getWidth();pixW
-		}
+            new BufferedImage();
+        }
 	}*/
 	@Override
 	public void actionPerformed(ActionEvent e) {}
