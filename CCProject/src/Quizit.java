@@ -38,10 +38,10 @@ public class Quizit {
 	Quizit() {
 		currentProfile = new Profile("Default", 1);
 
-		File[] profilexmls = new File("Profiles").listFiles();
-		for (File file : profilexmls) {
-			profiles.add(new Profile(file, this));
-		}
+//		File[] profilexmls = new File("Profiles").listFiles();
+//		for (File file : profilexmls) {
+//			profiles.add(new Profile(file, this));
+//		}
 		System.out.print(currentProfile.getName());
 //		System.out.print(profiles.size());
 //		currentProfile= profiles.get(1);

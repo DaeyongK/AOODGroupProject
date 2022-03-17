@@ -36,11 +36,11 @@ public class readingXML {
                 System.out.println(name.toString() + " " + values);
             }
             NodeList domains = doc.getElementsByTagName("domainPath");
-            ArrayList<Domain> domains = new ArrayList<Domain>();
-            for(int i = 0; i < domains.getLength(); i++) {
-                String domain = domains.item(i).getTextContent();
-                domains.add(new Domain(new File(domain)));
-            }
+//            ArrayList<Domain> domains = new ArrayList<Domain>();
+//            for(int i = 0; i < domains.getLength(); i++) {
+//                String domain = domains.item(i).getTextContent();
+//                domains.add(new Domain(new File(domain)));
+//            }
         } catch (Exception e) {
             System.out.println("I'm so sorry if you see this Ms. Gerb");
         }
