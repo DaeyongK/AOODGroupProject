@@ -61,7 +61,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			titleLabel.setBounds(464, 86, 360, 32);
 			if (graphicDetected) {
 				imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
-				imageLabel.setImage(new ImageIcon(question.getGraphicPath()));
+				imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
 			}
 			else
 				imageLabel = new JLabel();
