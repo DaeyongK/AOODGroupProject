@@ -117,8 +117,8 @@ public class Quizit {
 
 	public void exportDomains() {
 
-		for (int x = 0; x < this.getAllProfiles().get(0).getDomains().size(); x++) {
-			this.getAllProfiles().get(0).getDomains().get(x).export();
+		for (int x = 0; x < currentProfile.getDomains().size(); x++) {
+			currentProfile.getDomains().get(x).export();
 		}
 
 	}

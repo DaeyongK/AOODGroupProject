@@ -30,7 +30,6 @@ public class QuestionCard extends QPanel {
 
 		// different profile settings ||||
 		// VVVV
-		System.out.println(profile.getPossible() + " " + profile.getOrder());
 		if (profile.getPossible() && !profile.getOrder()) {
 			for (int i = 0; i < currentDomain.getDomainSize(); i++) {
 				questions.add(currentDomain.getQuestions().get(i));
@@ -43,18 +42,23 @@ public class QuestionCard extends QPanel {
 			}
 		} else if (!profile.getPossible() && !profile.getOrder()) {
 			questionHash = new LinkedHashMap<>(profile.getHashMap());
-			for (Question q : currentDomain.getQuestions()) {
-				if (questionHash.get(q.getID())[0] < profile.getThreshold()) {
-					questions.add(q);
+			for (int x = 0; x < profile.getThreshold(); x++) {
+				for (int i = 0; i < currentDomain.getQuestions().size(); i++) {
+					if (questionHash.get(currentDomain.getQuestions().get(i).getID())[0] < profile.getThreshold()) {
+						questions.add(currentDomain.getQuestions().get(i));
+					}
 				}
 			}
 		} else if (!profile.getPossible() && profile.getOrder()) {
 			questionHash = new LinkedHashMap<>(profile.getHashMap());
 			intermediateDomain = new ArrayList<>(currentDomain.getQuestions());
 			Collections.shuffle(intermediateDomain);
-			for (Question q : intermediateDomain) {
-				if (questionHash.get(q.getID())[0] < profile.getThreshold()) {
-					questions.add(q);
+			questionHash = new LinkedHashMap<>(profile.getHashMap());
+			for (int x = 0; x < profile.getThreshold(); x++) {
+				for (int i = 0; i < intermediateDomain.size(); i++) {
+					if (questionHash.get(intermediateDomain.get(i).getID())[0] < profile.getThreshold()) {
+						questions.add(intermediateDomain.get(i));
+					}
 				}
 			}
 		}
@@ -84,7 +88,7 @@ public class QuestionCard extends QPanel {
 		questionText.setFont(new Font("SanSerif", Font.PLAIN, 17));
 		questionText.setOpaque(true);
 		questionText.setBounds(70, 240, 760, 40);
-		//this adds a second line for question in case the question is too long.
+		// this adds a second line for question in case the question is too long.
 		if (currentQStr.length() > 85) {
 			nextLine = currentQStr.substring(75, 84).indexOf(' ') + 75;
 			questionText2 = new JLabel(" " + currentQStr.substring(nextLine));
@@ -95,12 +99,12 @@ public class QuestionCard extends QPanel {
 			questionText.setText(currentQStr.substring(0, nextLine));
 			this.add(questionText2);
 		}
-		questionGraphic=new JLabel(new ImageIcon(currentQ.getGraphicPath()));
+		questionGraphic = new JLabel(new ImageIcon(currentQ.getGraphicPath()));
 		questionGraphic.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		questionGraphic.setBounds(70, 340, 760, 250);
 		questionGraphic.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 		questionGraphic.setOpaque(true);
-		
+
 		// make buttons
 		editQuestBtn = new TransitionButton(this, 100, 50, Color.white, "Edit Question", 12, 5);
 		editQuestBtn.setBounds(850, 25, 200, 50);
@@ -184,7 +188,7 @@ public class QuestionCard extends QPanel {
 				nextQ();
 				questionGraphic.setIcon(new ImageIcon(currentQ.getGraphicPath()));
 				questionGraphic.setAlignmentX(JLabel.CENTER_ALIGNMENT);
-				questionGraphic.setBounds(70, 330, 760, 270); 
+				questionGraphic.setBounds(70, 330, 760, 270);
 				questionGraphic.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 				questionGraphic.setOpaque(true);
 				ansBtn.setVisible(true);
@@ -211,10 +215,10 @@ public class QuestionCard extends QPanel {
 			quizit.changeScreen(12);
 		} else if (buttonID == 6) {
 			if (popup("Are you sure?")) {
-				if(currentQIndex==0 && questions.size()>1) {
+				if (currentQIndex == 0 && questions.size() > 1) {
 					currentQIndex += 1;
-					quizit.getDomain().deleteQuestion(currentQIndex -1);
-					questions.remove(currentQIndex-1);
+					quizit.getDomain().deleteQuestion(currentQIndex - 1);
+					questions.remove(currentQIndex - 1);
 					currentQ = questions.get(currentQIndex);
 					quizit.setQuestion(currentQ);
 					ansBtn.setVisible(true);
@@ -231,11 +235,11 @@ public class QuestionCard extends QPanel {
 					questionGraphic.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 					questionGraphic.setOpaque(true);
 					repaint();
-				} else if (currentQIndex > 0 &&currentQIndex<questions.size()) {
+				} else if (currentQIndex > 0 && currentQIndex < questions.size()) {
 					currentQIndex -= 1;
 					quizit.getDomain().deleteQuestion(currentQIndex + 1);
-					
-					questions.remove(currentQIndex+1);
+
+					questions.remove(currentQIndex + 1);
 					currentQ = questions.get(currentQIndex);
 					quizit.setQuestion(currentQ);
 					ansBtn.setVisible(true);
@@ -252,12 +256,12 @@ public class QuestionCard extends QPanel {
 					questionGraphic.setBorder(BorderFactory.createEmptyBorder(0, 0, 10, 0));
 					questionGraphic.setOpaque(true);
 					repaint();
-				} else if(currentQIndex==questions.size()-1&&currentQIndex==0){
+				} else if (currentQIndex == questions.size() - 1 && currentQIndex == 0) {
 					quizit.getDomain().deleteQuestion(currentQIndex);
 					questions.remove(currentQIndex);
-					Boolean popupResult = popup3("There are no more questions in this domain. \n" + "\n"
-							+ "Returning to Domain Select.\n");
-					if (popupResult||!popupResult) {
+					Boolean popupResult = popup3(
+							"There are no more questions in this domain. \n" + "\n" + "Returning to Domain Select.\n");
+					if (popupResult || !popupResult) {
 						quizit.changeScreen(5);
 					}
 				}
@@ -309,9 +313,9 @@ public class QuestionCard extends QPanel {
 		}
 		return null;
 	}
-	
+
 	public Boolean popup3(String text) {
-		int result = JOptionPane.showConfirmDialog(quizit.getFrame(), text,text,1);
+		int result = JOptionPane.showConfirmDialog(quizit.getFrame(), text, text, 1);
 		switch (result) {
 		case JOptionPane.OK_OPTION:
 			return true;
