@@ -94,7 +94,11 @@ public class Domain {
     public void addQuestion(Question question) {
         questions.add(question);
     }
-
+    
+    public void addQuestion(int index, Question question) {
+        questions.add(index, question);
+    }
+    
     public void setDomainName(String newName) {
         domainName = newName;
     }
