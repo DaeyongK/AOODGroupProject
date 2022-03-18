@@ -65,9 +65,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				imageLabel = new JLabel();
 				imageLabel.setVisible(false);
 			}
-
-			changeRight = new JTextField(profile.getAnsweredRight(questionId));
-			changeAsked = new JTextField(profile.getTimesAsked(questionId));
+			int qNum=0;
+			for(int i=0;i<domain.getDomainSize();i++) {
+				if(domain.getQuestion(i).getQuestion().equals(question.getQuestion()))
+					qNum=i;
+			}
+			changeRight = new JTextField(profile.getAnsweredRight(qNum));
+			changeAsked = new JTextField(profile.getTimesAsked(qNum));
 			changeRight.setBackground(Color.WHITE);
 			changeAsked.setBackground(Color.WHITE);
 			changeRight.setBounds(953, 161, 283, 56);
@@ -220,29 +224,15 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							Integer.parseInt(changeRight.getText()) <=
 							Integer.parseInt(changeAsked.getText())) {
 						int qNum=0;
-						question.setQuestion(questionBox.getText());
-						question.setAnswer(answerBox.getText());
 						for(int i=0;i<domain.getDomainSize();i++) {
-							if(domain.getQuestion(i) == question)
+							if(domain.getQuestion(i).getQuestion().equals(question.getQuestion()))
 								qNum=i;
 						}
+						question.setQuestion(questionBox.getText());
+						question.setAnswer(answerBox.getText());
 						profile.setNumCorrect(qNum, Integer.parseInt(changeRight.getText()));
 						profile.setNumAsked(qNum, Integer.parseInt(changeAsked.getText()));
-						
-						if (graphicDetected) {
-							Question newQ = new Question(question.getQuestion(),
-								question.getAnswer(), question.getGraphicPath(), quizit)
-							domain.deleteQuestion(qNum);
-							domain.addQuestion(newQ);
-							quizit.setQuestion(newQ);
-						}
-						else {
-							Question newQ = new Question(question.getQuestion(),
-								question.getAnswer(), quizit);
-							domain.deleteQuestion(qNum);
-							domain.addQuestion(qNum, newQ);
-							quizit.setQuestion(newQ);
-						}
+						quizit.setQuestion(question);
 						quizit.changeScreen(8);
 					}
 				} catch (NullPointerException | NumberFormatException ignored) {}
@@ -254,7 +244,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							!answerBox.getText().equals("Enter its answer here: ")) {
 						question.setQuestion(questionBox.getText());
 						question.setAnswer(answerBox.getText());
-						//Fix this like you did with previous if statement
 						if (graphicDetected) {
 							domain.addQuestion(new Question(question.getQuestion(),
 								question.getAnswer(), question.getGraphicPath(), quizit));
@@ -264,7 +253,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 						else {
 							domain.addQuestion(new Question(question.getQuestion(),
 									question.getAnswer(), quizit));
-							quizit.setQuetsion(new Question(question.getQuestion(),
+							quizit.setQuestion(new Question(question.getQuestion(),
 									question.getAnswer(), quizit));
 						}
 						quizit.changeScreen(8);
