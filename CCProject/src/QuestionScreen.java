@@ -219,28 +219,29 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							Integer.parseInt(changeAsked.getText()) >= 0 &&
 							Integer.parseInt(changeRight.getText()) <=
 							Integer.parseInt(changeAsked.getText())) {
+						int qNum=0;
 						question.setQuestion(questionBox.getText());
 						question.setAnswer(answerBox.getText());
-						profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
-						profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
+						for(int i=0;i<domain.getDomainSize();i++) {
+							if(domain.getQuestion(i) == question)
+								qNum=i;
+						}
+						profile.setNumCorrect(qNum, Integer.parseInt(changeRight.getText()));
+						profile.setNumAsked(qNum, Integer.parseInt(changeAsked.getText()));
+						
 						if (graphicDetected) {
-							domain.addQuestion(new Question(question.getQuestion(),
-								question.getAnswer(), question.getGraphicPath(), quizit));
-							quizit.setQuestion(new Question(question.getQuestion(),
-								question.getAnswer(), question.getGraphicPath(), quizit));
+							Question newQ = new Question(question.getQuestion(),
+								question.getAnswer(), question.getGraphicPath(), quizit)
+							domain.deleteQuestion(qNum);
+							domain.addQuestion(newQ);
+							quizit.setQuestion(newQ);
 						}
 						else {
-							//Need to figure out how to delete current question as well
-							int qNum=0;
-							for(int i=0;i<domain.getDomainSize();i++) {
-								if(domain.getQuestion(i) == question)
-									qNum=i;
-							}
+							Question newQ = new Question(question.getQuestion(),
+								question.getAnswer(), quizit);
 							domain.deleteQuestion(qNum);
-							domain.addQuestion(new Question(question.getQuestion(),
-								question.getAnswer(), quizit));
-							quizit.setQuestion(new Question(question.getQuestion(),
-								question.getAnswer(), quizit));
+							domain.addQuestion(qNum, newQ);
+							quizit.setQuestion(newQ);
 						}
 						quizit.changeScreen(8);
 					}
@@ -253,6 +254,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							!answerBox.getText().equals("Enter its answer here: ")) {
 						question.setQuestion(questionBox.getText());
 						question.setAnswer(answerBox.getText());
+						//Fix this like you did with previous if statement
 						if (graphicDetected) {
 							domain.addQuestion(new Question(question.getQuestion(),
 								question.getAnswer(), question.getGraphicPath(), quizit));
