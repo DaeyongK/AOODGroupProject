@@ -263,12 +263,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		}
 	}
 	private int questionIdFinder() {
-		idFound = false;
 		int index = 0;
 		int questionId = 1;
-		while (index<getQuestions.size()) {
-			if (getQuestion(index).getID == question.getID)
+		while (index<domain.getQuestions().size()) {
+			if (domain.getQuestion(index).getID() == question.getID())
 				questionId = index + 1;
+			index++;
 		}
 		return questionId;
 	}
