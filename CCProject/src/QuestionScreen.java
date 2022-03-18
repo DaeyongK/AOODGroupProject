@@ -34,7 +34,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 		if (t.toLowerCase().contains("create")) {
 			question = new Question();
-			questionId = question.getID();
+			questionId = questionIdFinder();
 			title = "Create a Question";
 			screenId = 11;
 			edit = false;
@@ -48,8 +48,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		}
 		else {
 			question = q.getQuestion();
-			questionId = question.getID(); //Figure out how to get QuestionId from QuestionCard and Edit Domain
-			//Try to look at currentQuestion in Quizit and then compare it to every question in domain to find it
+			questionId = questionIdFinder();
 			profile = q.getProfile();
 			title = "Edit Question #" + questionId;
 			screenId = 12;
@@ -61,8 +60,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			if (graphicDetected) {
 				imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
 				imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
-
-                imageLabel.setVisible(true);
+                		imageLabel.setVisible(true);
 			}
 			else {
 				imageLabel = new JLabel();
@@ -263,6 +261,16 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			}
 			break;
 		}
+	}
+	private int questionIdFinder() {
+		idFound = false;
+		int index = 0;
+		int questionId = 1;
+		while (index<getQuestions.size()) {
+			if (getQuestion(index).getID == question.getID)
+				questionId = index + 1;
+		}
+		return questionId;
 	}
 	/*private void changeImgSize() {
         BufferedImage graphic = question.getImage();
