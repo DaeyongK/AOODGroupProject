@@ -10,7 +10,6 @@ import java.io.File;
 
 public class QuestionScreen extends QPanel implements ActionListener {
 	private int screenId;
-	private int questionId;
 	private boolean edit;
 	private boolean graphicDetected;
 
@@ -20,6 +19,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private JTextField changeRight;
 	private JTextField changeAsked;
 
+	private Quizit quizit;
 	private Question question;
 	private Profile profile;
 	private Domain domain;
@@ -28,13 +28,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		super(t, q);
 		String title;
 		JLabel titleLabel;
+		quizit = q;
 		domain = q.getDomain();
 		setLayout(null);
 		setBackground(BACKGROUND_COLOR);
 
 		if (t.toLowerCase().contains("create")) {
 			question = new Question();
-			questionId = questionIdFinder();
 			title = "Create a Question";
 			screenId = 11;
 			edit = false;
@@ -48,9 +48,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		}
 		else {
 			question = q.getQuestion();
-			questionId = questionIdFinder();
 			profile = q.getProfile();
-			title = "Edit Question #" + questionId;
+			title = "Edit Question";
 			screenId = 12;
 			edit = true;
 			graphicDetected = question.getImage() != null;
@@ -224,12 +223,25 @@ public class QuestionScreen extends QPanel implements ActionListener {
 						question.setAnswer(answerBox.getText());
 						profile.setNumCorrect(questionId, Integer.parseInt(changeRight.getText()));
 						profile.setNumAsked(questionId, Integer.parseInt(changeAsked.getText()));
-						if (graphicDetected)
+						if (graphicDetected) {
 							domain.addQuestion(new Question(question.getQuestion(),
-									question.getAnswer(), question.getGraphicPath(), quizit));
-						else
+								question.getAnswer(), question.getGraphicPath(), quizit));
+							quizit.setQuestion(new Question(question.getQuestion(),
+								question.getAnswer(), question.getGraphicPath(), quizit));
+						}
+						else {
+							//Need to figure out how to delete current question as well
+							int qNum=0;
+							for(int i=0;i<domain.getDomainSize();i++) {
+								if(domain.getQuestion(i) == question)
+									qNum=i;
+							}
+							domain.deleteQuestion(qNum);
 							domain.addQuestion(new Question(question.getQuestion(),
-									question.getAnswer(), quizit));
+								question.getAnswer(), quizit));
+							quizit.setQuestion(new Question(question.getQuestion(),
+								question.getAnswer(), quizit));
+						}
 						quizit.changeScreen(8);
 					}
 				} catch (NullPointerException | NumberFormatException ignored) {}
@@ -241,12 +253,18 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							!answerBox.getText().equals("Enter its answer here: ")) {
 						question.setQuestion(questionBox.getText());
 						question.setAnswer(answerBox.getText());
-						if (graphicDetected)
+						if (graphicDetected) {
 							domain.addQuestion(new Question(question.getQuestion(),
-									question.getAnswer(), question.getGraphicPath(), quizit));
-						else
+								question.getAnswer(), question.getGraphicPath(), quizit));
+							quizit.setQuestion(new Question(question.getQuestion(),
+								question.getAnswer(), question.getGraphicPath(), quizit));
+						}
+						else {
 							domain.addQuestion(new Question(question.getQuestion(),
 									question.getAnswer(), quizit));
+							quizit.setQuetsion(new Question(question.getQuestion(),
+									question.getAnswer(), quizit));
+						}
 						quizit.changeScreen(8);
 					}
 				} catch (NullPointerException ignored) {
@@ -261,16 +279,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			}
 			break;
 		}
-	}
-	private int questionIdFinder() {
-		int index = 0;
-		int questionId = 1;
-		while (index<domain.getQuestions().size()) {
-			if (domain.getQuestion(index).getID() == question.getID())
-				questionId = index + 1;
-			index++;
-		}
-		return questionId;
 	}
 	/*private void changeImgSize() {
         BufferedImage graphic = question.getImage();
