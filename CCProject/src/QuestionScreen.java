@@ -113,7 +113,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		imageLabel.setHorizontalAlignment(JLabel.CENTER);
-		imageLabel.setBounds(121, 160, 438, 166);
+		imageLabel.setBounds(121, 157, 435, 166);
 
 		questionLabel.setBounds(121,385,200,20);
 		answerLabel.setBounds(720,385,200,20);
