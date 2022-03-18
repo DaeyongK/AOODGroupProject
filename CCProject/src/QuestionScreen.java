@@ -13,6 +13,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private boolean edit;
 	private boolean graphicDetected;
 
+	private JLabel imagePreview;
 	private JLabel imageLabel;
 	private JTextField questionBox;
 	private JTextField answerBox;
@@ -28,6 +29,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		super(t, q);
 		String title;
 		JLabel titleLabel;
+		imagePreview = new JLabel("No Graphic Preview");
 		quizit = q;
 		domain = q.getDomain();
 		setLayout(null);
@@ -40,9 +42,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			edit = false;
 			graphicDetected = false;
 			titleLabel = new JLabel(title);
-			titleLabel.setBounds(464, 86, 351, 32);
 			imageLabel = new JLabel();
 			imageLabel.setVisible(false);
+			imagePreview.setVisible(true);
 			questionBox = new JTextField("");
 			answerBox = new JTextField("");
 		}
@@ -55,23 +57,19 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			graphicDetected = question.getImage() != null;
 
 			titleLabel = new JLabel(title);
-			titleLabel.setBounds(464, 86, 360, 32);
 			if (graphicDetected) {
 				imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
 				imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
-                		imageLabel.setVisible(true);
+				imageLabel.setVisible(true);
+				imagePreview.setVisible(false);
 			}
 			else {
 				imageLabel = new JLabel();
 				imageLabel.setVisible(false);
+				imagePreview.setVisible(true);
 			}
-			int qNum=0;
-			for(int i=0;i<domain.getDomainSize();i++) {
-				if(domain.getQuestion(i).getQuestion().equals(question.getQuestion()))
-					qNum=i;
-			}
-			changeRight = new JTextField(profile.getAnsweredRight(qNum));
-			changeAsked = new JTextField(profile.getTimesAsked(qNum));
+			changeRight = new JTextField(""+profile.getAnsweredRight(question.getID()));
+			changeAsked = new JTextField(""+profile.getTimesAsked(question.getID()));
 			changeRight.setBackground(Color.WHITE);
 			changeAsked.setBackground(Color.WHITE);
 			changeRight.setBounds(953, 161, 283, 56);
@@ -105,6 +103,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		TransitionButton backBtn = new TransitionButton(
 				this, 175, 67, Color.WHITE, "Back", 8, 3);
 
+		imagePreview.setForeground(Color.WHITE);
+		imagePreview.setFont(new Font("Arial", Font.BOLD, 18));
 		questionLabel.setForeground(Color.WHITE);
 		answerLabel.setForeground(Color.WHITE);
 		questionLabel.setFont(new Font("Arial", Font.ITALIC, 14));
@@ -113,9 +113,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		titleLabel.setForeground(TITLE_COLOR);
 		titleLabel.setHorizontalAlignment(JLabel.CENTER);
 
+		imagePreview.setHorizontalAlignment(JLabel.CENTER);
+		imagePreview.setVerticalAlignment(JLabel.CENTER);
+		imagePreview.setBounds(121, 160, 438, 166);
 		imageLabel.setHorizontalAlignment(JLabel.CENTER);
-		imageLabel.setBounds(121, 157, 435, 166);
+		imageLabel.setBounds(121, 160, 437, 165);
 
+		titleLabel.setBounds(464, 86, 351, 32);
 		questionLabel.setBounds(121,385,200,20);
 		answerLabel.setBounds(720,385,200,20);
 		questionBox.setBounds(121, 405, 438, 124);
@@ -126,6 +130,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		backBtn.setBounds(49, 42, 175, 67);
 
 		add(titleLabel);
+		add(imagePreview);
 		add(imageLabel);
 		add(questionLabel);
 		add(answerLabel);
@@ -166,6 +171,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							graphicDetected = true;
 							imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
 							imageLabel.setVisible(true);
+							imagePreview.setVisible(false);
 							revalidate();
 							repaint();
 						}
@@ -179,6 +185,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 					graphicDetected = false;
 					imageLabel.setIcon(null);
 					imageLabel.setVisible(false);
+					imagePreview.setVisible(true);
 					revalidate();
 					repaint();
 				}
@@ -221,17 +228,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							!answerBox.getText().equals("") &&
 							Integer.parseInt(changeRight.getText()) >= 0 &&
 							Integer.parseInt(changeAsked.getText()) >= 0 &&
-							Integer.parseInt(changeRight.getText()) <=
-							Integer.parseInt(changeAsked.getText())) {
-						int qNum=0;
-						for(int i=0;i<domain.getDomainSize();i++) {
-							if(domain.getQuestion(i).getQuestion().equals(question.getQuestion()))
-								qNum=i;
-						}
+							(Integer.parseInt(changeRight.getText()) <=
+							Integer.parseInt(changeAsked.getText()))) {
 						question.setQuestion(questionBox.getText());
 						question.setAnswer(answerBox.getText());
-						profile.setNumCorrect(qNum, Integer.parseInt(changeRight.getText()));
-						profile.setNumAsked(qNum, Integer.parseInt(changeAsked.getText()));
+						profile.setNumCorrect(question.getID(), Integer.parseInt(changeRight.getText()));
+						profile.setNumAsked(question.getID(), Integer.parseInt(changeAsked.getText()));
 						quizit.setQuestion(question);
 						quizit.changeScreen(8);
 					}
@@ -271,23 +273,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			break;
 		}
 	}
-	/*private void changeImgSize() {
-        BufferedImage graphic = question.getImage();
-        int pixW = graphic.getWidth();
-        int pixH = graphic.getHeight();
-        if (pixH <= 166 && pixW <= 438) {
-
-            new BufferedImage();
-        }
-	}*/
 	@Override
 	public void actionPerformed(ActionEvent e) {}
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.WHITE);
 		g.drawRect(121, 160, 438, 166);
-		g.setFont(new Font("Arial", Font.BOLD, 18));
-		g.drawString("No Graphic Preview", 250, 245);
 	}
 	//FOR TESTING PURPOSES!!
 	public static void main(String[] arg) {
