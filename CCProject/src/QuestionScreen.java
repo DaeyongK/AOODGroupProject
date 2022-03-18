@@ -117,6 +117,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		imagePreview.setVerticalAlignment(JLabel.CENTER);
 		imagePreview.setBounds(121, 160, 438, 166);
 		imageLabel.setHorizontalAlignment(JLabel.CENTER);
+		imageLabel.setVerticalAlignment(JLabel.CENTER);
 		imageLabel.setBounds(121, 160, 437, 165);
 
 		titleLabel.setBounds(464, 86, 351, 32);
@@ -273,6 +274,19 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			break;
 		}
 	}
+	/*private void resizeImg() {
+		BufferedImage thisImg = question.getImage();
+		int pixW = thisImg.getWidth();
+		int pixH = thisImg.getHeight();
+
+		if(pixW<438 && pixH<166) {
+			while(pixW<438 || pixH<166) {
+				pixW++;
+				pixH++;
+			}
+		}
+		imageLabel.setIcon(new BufferedImage(pixW,pixH,thisImg.getType()));
+	}*/
 	@Override
 	public void actionPerformed(ActionEvent e) {}
 	public void paintComponent(Graphics g) {
