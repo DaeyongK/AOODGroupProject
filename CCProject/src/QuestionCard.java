@@ -21,6 +21,7 @@ public class QuestionCard extends QPanel {
 	private BufferedImage questImage;
 	private LinkedHashMap<Integer, int[]> questionHash;
 	private Graphics g = this.getGraphics();
+	private boolean useThresh;
 
 	QuestionCard(String title, Quizit quiz) {
 		super(title, quiz);
@@ -28,41 +29,58 @@ public class QuestionCard extends QPanel {
 		currentDomain = quiz.getDomain();
 		profile = quiz.getProfile();
 
+		
+		
 		// different profile settings ||||
 		// VVVV
 		if (profile.getPossible() && !profile.getOrder()) {
+			useThresh = false;
 			for (int i = 0; i < currentDomain.getDomainSize(); i++) {
 				questions.add(currentDomain.getQuestions().get(i));
 			}
 		} else if (profile.getPossible() && profile.getOrder()) {
+			useThresh = false;
 			intermediateDomain = new ArrayList<>(currentDomain.getQuestions());
 			Collections.shuffle(intermediateDomain);
 			for (int i = 0; i < currentDomain.getDomainSize(); i++) {
 				questions.add(intermediateDomain.get(i));
 			}
 		} else if (!profile.getPossible() && !profile.getOrder()) {
+			useThresh = true;
 			questionHash = new LinkedHashMap<Integer, int[]>(profile.getHashMap());
-			
 
-			for (int x = 0; x < profile.getThreshold(); x++) {
-				for (int i = 0; i < currentDomain.getQuestions().size(); i++) {
-					
-					if (questionHash.get(currentDomain.getQuestions().get(i).getID())[0] < profile.getThreshold()) {
-						questions.add(currentDomain.getQuestions().get(i));
-					}
+			for (int i = 0; i < currentDomain.getQuestions().size(); i++) {
+				if (questionHash.get(currentDomain.getQuestions().get(i).getID())[0] < profile.getThreshold()) {
+					questions.add(currentDomain.getQuestions().get(i));
 				}
+
 			}
 		} else if (!profile.getPossible() && profile.getOrder()) {
+			useThresh = true;
 			questionHash = new LinkedHashMap<>(profile.getHashMap());
 			intermediateDomain = new ArrayList<>(currentDomain.getQuestions());
 			Collections.shuffle(intermediateDomain);
 			questionHash = new LinkedHashMap<>(profile.getHashMap());
-			for (int x = 0; x < profile.getThreshold(); x++) {
-				for (int i = 0; i < intermediateDomain.size(); i++) {
-					if (questionHash.get(intermediateDomain.get(i).getID())[0] < profile.getThreshold()) {
-						questions.add(intermediateDomain.get(i));
-					}
+			for (int i = 0; i < intermediateDomain.size(); i++) {
+				if (questionHash.get(intermediateDomain.get(i).getID())[0] < profile.getThreshold()) {
+					questions.add(intermediateDomain.get(i));
 				}
+			}
+		}
+		
+		if(useThresh&&questions.size()==0) {
+			Boolean popupResult = popup2("You have completed all the questions in this domain. \n" + "\n"
+					+ "Would you like to reset the questions?\n");
+			if (popupResult == null) {
+
+			} else if (popupResult) {
+				for(Question q : quiz.getDomain().getQuestions()) {
+					quiz.getProfile().setNumAsked(q.getID(), 0);
+					quiz.getProfile().setNumCorrect(q.getID(), 0);
+				}
+				quizit.changeScreen(6);
+			} else if (!popupResult) {
+				quizit.changeScreen(5);
 			}
 		}
 		currentQIndex = 0;
@@ -187,7 +205,11 @@ public class QuestionCard extends QPanel {
 			notKnewAnsBtn.setVisible(false);
 			nextQuestBtn.setVisible(true);
 		} else if (buttonID == 4) {
-			if (currentQIndex <= (questions.size() - 2)) {
+			if(currentQIndex== (questions.size()-1) && useThresh) {
+				quizit.changeScreen(6);
+			} else if(currentQIndex== (questions.size()-1) && !useThresh) {
+				quizit.changeScreen(6);
+			} else if (currentQIndex <= (questions.size() - 2)) {
 				nextQ();
 				questionGraphic.setIcon(new ImageIcon(currentQ.getGraphicPath()));
 				questionGraphic.setAlignmentX(JLabel.CENTER_ALIGNMENT);
@@ -203,15 +225,7 @@ public class QuestionCard extends QPanel {
 				askedNumTimesText.setText(("   Asked: " + profile.getTimesAsked(currentQ.getID()) + " times"));
 				correctNumTimesText.setText("   Correct: " + profile.getAnsweredRight(currentQ.getID()) + " times");
 			} else if (currentQIndex == (questions.size() - 1)) {
-				Boolean popupResult = popup2("You have completed all the questions in this domain. \n" + "\n"
-						+ "Would you like to restart this domain?\n");
-				if (popupResult == null) {
-
-				} else if (popupResult) {
-					quizit.changeScreen(6);
-				} else if (!popupResult) {
-					quizit.changeScreen(5);
-				}
+				
 			}
 
 		} else if (buttonID == 5) {
