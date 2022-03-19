@@ -57,8 +57,7 @@ public class Question {
         answerString = answer;
         graphicString = imagePath;
         ID=questID;
-        quiz.getProfile().addQuestion(ID, new int[] {0,0});
-        quiz.getDomain().addQuestion(this);
+        
     }
     
     Question(String question, String answer, String imagePath, Quizit quiz) {
