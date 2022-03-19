@@ -40,12 +40,12 @@ public class Quizit {
 
 		File[] profilexmls = new File("Profiles").listFiles();
 		for (File file : profilexmls) {
+
 			profiles.add(new Profile(file, this));
 		}
-		System.out.println(currentProfile.getName() + "TEXT");
-		System.out.println(profiles.size());
+
 		currentProfile= profiles.get(0);
-		
+
 		setDomain(currentProfile.getDomains().get(0));
 		setQuestion(currentDomain.getQuestion(0));
 		screen1 = new MainMenu("Quizit", this);
@@ -132,67 +132,66 @@ public class Quizit {
 			Element root = document.createElement("profiles");
 			document.appendChild(root);
 
-			for (int i = 0; i < this.getAllProfiles().size(); i++) {
 
-				Element profiles = document.createElement("profile");
-				root.appendChild(profiles);
+			Element profiles = document.createElement("profile");
+			root.appendChild(profiles);
 
-				Element profileName = document.createElement("profileName");
-				profileName.setTextContent(this.getAllProfiles().get(i).getName().replace(' ', '-'));
-				profiles.appendChild(profileName);
+			Element profileName = document.createElement("profileName");
+			profileName.setTextContent(currentProfile.getName().replace(' ', '-'));
+			profiles.appendChild(profileName);
 
-				Element threshold = document.createElement("threshold");
-				threshold.setTextContent("_" + this.getAllProfiles().get(i).getThreshold());
-				profiles.appendChild(threshold);
+			Element threshold = document.createElement("threshold");
+			threshold.setTextContent("_" + currentProfile.getThreshold());
+			profiles.appendChild(threshold);
 
-				Element order = document.createElement("order");
-				order.setTextContent(this.getAllProfiles().get(i).getOrder() + "");
-				profiles.appendChild(order);
+			Element order = document.createElement("order");
+			order.setTextContent(currentProfile.getOrder() + "");
+			profiles.appendChild(order);
 
-				Element allQuestions = document.createElement("allQuestions");
-				allQuestions.setTextContent(this.getAllProfiles().get(i).getPossible() + "");
-				profiles.appendChild(allQuestions);
+			Element allQuestions = document.createElement("allQuestions");
+			allQuestions.setTextContent(currentProfile.getPossible() + "");
+			profiles.appendChild(allQuestions);
 
-				Element questions = document.createElement("questions");
-				profiles.appendChild(questions);
+			Element questions = document.createElement("questions");
+			profiles.appendChild(questions);
+			System.out.println(currentProfile.getHashMap().keySet());
+			for (int key : currentProfile.getHashMap().keySet()) {
+				Element id = document.createElement("id");
+				id.setTextContent("_" + key);
+				questions.appendChild(id);
 
-				for (int key : this.getAllProfiles().get(i).getHashMap().keySet()) {
+				Element numRight = document.createElement("numRight");
+				numRight.setTextContent("_" + currentProfile.getHashMap().get(key)[0]);
 
-					Element id = document.createElement("id");
-					id.setTextContent("_" + key);
-					questions.appendChild(id);
+				questions.appendChild(numRight);
 
-					Element numRight = document.createElement("numRight");
-					numRight.setTextContent("_" + this.getAllProfiles().get(i).getHashMap().get(key)[0]);
-					questions.appendChild(numRight);
+				Element numAsked = document.createElement("numAsked");
+				numAsked.setTextContent("_" + currentProfile.getHashMap().get(key)[1]);
+				questions.appendChild(numAsked);
 
-					Element numAsked = document.createElement("numAsked");
-					numAsked.setTextContent("_" + this.getAllProfiles().get(i).getHashMap().get(key)[1]);
-					questions.appendChild(numAsked);
-
-				}
-				Element domains = document.createElement("domains");
-				profiles.appendChild(domains);
-				for (int x = 0; x < this.getAllProfiles().get(i).getDomains().size(); x++) {
-					String interimName = this.getAllProfiles().get(i).getDomains().get(x).getDomainName()
-							.replace(' ', '-').replace('/', '-');
-					Element domainPath = document.createElement("domainPath");
-					domainPath.setTextContent("Domains_" + interimName + ".xml");
-					domains.appendChild(domainPath);
-				}
 			}
+			Element domains = document.createElement("domains");
+			profiles.appendChild(domains);
+			for (int x = 0; x < currentProfile.getDomains().size(); x++) {
+				String interimName = currentProfile.getDomains().get(x).getDomainName()
+						.replace(' ', '-').replace('/', '-');
+				Element domainPath = document.createElement("domainPath");
+				domainPath.setTextContent("Domains_" + interimName + ".xml");
+				domains.appendChild(domainPath);
+			}
+
 
 			TransformerFactory transformerFactory = TransformerFactory.newInstance();
 			Transformer transformer = transformerFactory.newTransformer();
 			DOMSource domSource = new DOMSource(document);
-			StreamResult streamResult = new StreamResult(new File("Profiles/ProfileTester.xml"));
+			StreamResult streamResult = new StreamResult(new File("Profiles/profile1.xml"));
 			transformer.transform(domSource, streamResult);
 			System.out.println("Done creating XML File");
 			return new File("Profiles/profile1.xml");
 		} catch (ParserConfigurationException | TransformerException pce) {
 			pce.printStackTrace();
 		}
-		return new File("Profile/ProfileTester.xml");
+		return new File("Profiles/profile1.xml");
 	}
 
 	public void changeScreen(int screenID) {

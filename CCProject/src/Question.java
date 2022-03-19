@@ -48,7 +48,11 @@ public class Question {
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
+        System.out.print("FUCK");
         quiz.getProfile().addQuestion(ID, new int[] {0,0});
+        quiz.getDomain().addQuestion(this);
+
+		
     }
 
     Question(String question, String answer, String imagePath, int questID, Quizit quiz) {

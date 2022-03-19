@@ -1,1 +1,1 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?><profiles/>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?><profiles><profile><profileName>Default</profileName><threshold>_0</threshold><order>false</order><allQuestions>true</allQuestions><questions><id>_1</id><numRight>_12</numRight><numAsked>_20</numAsked><id>_180079372</id><numRight>_0</numRight><numAsked>_0</numAsked></questions><domains><domainPath>Domains_Default-Domain.xml</domainPath></domains></profile></profiles>

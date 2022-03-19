@@ -14,7 +14,7 @@ public class Profile {
     private int threshold;
     private boolean order = false;
     private boolean allQuestions = true;
-    private LinkedHashMap<Integer, int[]> questions = new LinkedHashMap<>();
+    private LinkedHashMap<Integer, int[]> questions = new LinkedHashMap<Integer, int[]>();
     private ArrayList<Domain> domains = new ArrayList<>();
 
     Profile(String profileName, int imageIndex) {
@@ -34,13 +34,16 @@ public class Profile {
             doc.getDocumentElement().normalize();
             Node profile = doc.getElementsByTagName("profile").item(0);
             Element pf = (Element) profile;
-            NodeList qs = doc.getElementsByTagName("question");
+            NodeList qs = doc.getElementsByTagName("questions");
+
             for (int i = 0; i < qs.getLength(); i++) {
                 Node question = qs.item(i);
                 Element q = (Element) question;
+                
                 questions.put(Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent().replace('_', '+')),
                         new int[]{Integer.parseInt(q.getElementsByTagName("numRight").item(0).getTextContent().replace('_', '+')),
                                 Integer.parseInt(q.getElementsByTagName("numAsked").item(0).getTextContent().replace('_', '+'))});
+
             }
             NodeList ds = doc.getElementsByTagName("domainPath");
 
@@ -48,13 +51,14 @@ public class Profile {
                 String domain = ds.item(i).getTextContent().replace('_', '/');
                 domains.add(new Domain(new File(domain), quizit));
             }
-            System.out.println("size: " + domains.size());
             profileName = doc.getElementsByTagName("profileName").item(0).getTextContent().replace('-', ' ');
             threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent().replace('_', '+'));
         } catch (Exception ignored) {
+        	System.out.print("HECK");
         }
         for (int key : questions.keySet()) {
-        	System.out.println("key: "+ key);
+        	System.out.println("KEY = " + key);
+
         }
         
     }

@@ -80,7 +80,7 @@ public class Domain {
                 Element q = (Element) question;
                 questions.add(new Question(q.getElementsByTagName("Question" + (itr + 1)).item(0).getTextContent(),
                         q.getElementsByTagName("Answer" + (itr + 1)).item(0).getTextContent(), 
-                        q.getElementsByTagName("QuestionGraphic").item(0).getTextContent(), quiz));
+                        q.getElementsByTagName("QuestionGraphic").item(0).getTextContent(),Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent()), quiz));
             }
         } catch (Exception e) {
             e.printStackTrace();
