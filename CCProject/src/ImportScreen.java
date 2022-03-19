@@ -66,7 +66,11 @@ class ImportScreen extends QPanel implements ActionListener {
                 quizit.changeScreen(1);
                 break;
             case 1:
-                quizit.getProfile().addDomain(new Domain(selectedFile, quizit)); //domain not adding, premature end of file error
+            	Domain tempDomain = new Domain(selectedFile, quizit);
+                quizit.getProfile().addDomain(tempDomain); //domain not adding, premature end of file error
+                for(Question question : tempDomain.getQuestions()) {
+                	quizit.getProfile().addQuestion(question.getID(), new int[] {0,0});
+                }
                 quizit.changeScreen(1);
                 break;
             //send to main menu and parse selectedFile into a domain

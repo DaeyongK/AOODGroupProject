@@ -34,15 +34,15 @@ public class Profile {
             doc.getDocumentElement().normalize();
             Node profile = doc.getElementsByTagName("profile").item(0);
             Element pf = (Element) profile;
-            NodeList qs = doc.getElementsByTagName("questions");
-
-            for (int i = 0; i < qs.getLength(); i++) {
-                Node question = qs.item(i);
-                Element q = (Element) question;
+            Node qs = doc.getElementsByTagName("questions").item(0);
+            Element q = (Element) qs;
+            System.out.print(q.getElementsByTagName("id").getLength());
+            for (int i = 0; i < q.getElementsByTagName("id").getLength(); i++) {
                 
-                questions.put(Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent().replace('_', '+')),
-                        new int[]{Integer.parseInt(q.getElementsByTagName("numRight").item(0).getTextContent().replace('_', '+')),
-                                Integer.parseInt(q.getElementsByTagName("numAsked").item(0).getTextContent().replace('_', '+'))});
+                
+                questions.put(Integer.parseInt(q.getElementsByTagName("id").item(i).getTextContent().replace('_', '+')),
+                        new int[]{Integer.parseInt(q.getElementsByTagName("numRight").item(i).getTextContent().replace('_', '+')),
+                                Integer.parseInt(q.getElementsByTagName("numAsked").item(i).getTextContent().replace('_', '+'))});
 
             }
             NodeList ds = doc.getElementsByTagName("domainPath");
@@ -144,5 +144,6 @@ public class Profile {
 
     public void addDomain(Domain domain) {
         domains.add(domain);
+        
     }
 }

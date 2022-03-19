@@ -41,9 +41,12 @@ public class QuestionCard extends QPanel {
 				questions.add(intermediateDomain.get(i));
 			}
 		} else if (!profile.getPossible() && !profile.getOrder()) {
-			questionHash = new LinkedHashMap<>(profile.getHashMap());
+			questionHash = new LinkedHashMap<Integer, int[]>(profile.getHashMap());
+			
+
 			for (int x = 0; x < profile.getThreshold(); x++) {
 				for (int i = 0; i < currentDomain.getQuestions().size(); i++) {
+					
 					if (questionHash.get(currentDomain.getQuestions().get(i).getID())[0] < profile.getThreshold()) {
 						questions.add(currentDomain.getQuestions().get(i));
 					}
