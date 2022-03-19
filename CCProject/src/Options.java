@@ -70,13 +70,13 @@ public class Options extends QPanel implements ActionListener {
         this.add(doneButton);
     }
 
-    Options(String title, Quizit q, boolean allQuestionsTrue, boolean shuffleQuestionsTrue) {
-        super(title, q);
-        //sets value of allQuestions
-        allQuestions = allQuestionsTrue;
-        //sets value of shuffleQuestions
-        shuffleQuestions = shuffleQuestionsTrue;
-    }
+//    Options(String title, Quizit q, boolean allQuestionsTrue, boolean shuffleQuestionsTrue) {
+//        super(title, q);
+//        //sets value of allQuestions
+//        allQuestions = allQuestionsTrue;
+//        //sets value of shuffleQuestions
+//        shuffleQuestions = shuffleQuestionsTrue;
+//    }
 
     public void radioClick() {
 
@@ -113,22 +113,28 @@ public class Options extends QPanel implements ActionListener {
                 //allQuestions is false
                 allQuestions = false;
                 quizit.getProfile().setPossQuestions(false);
+                System.out.print(false);
                 break;
             case 2:
                 //allQuestions is true
                 allQuestions = true;
                 quizit.getProfile().setPossQuestions(true);
+                System.out.print(true);
 
                 break;
             case 3:
                 //shuffleQuestions is true
                 quizit.getProfile().setOrderQuestions(true);
+                System.out.print(true);
+
 
                 shuffleQuestions = true;
                 break;
             case 4:
                 //shuffleQuestions is false
                 quizit.getProfile().setOrderQuestions(false);
+                System.out.print(true);
+
 
                 shuffleQuestions = false;
                 break;
@@ -152,6 +158,7 @@ public class Options extends QPanel implements ActionListener {
         	    	numCorrectNumber = 30;
         	    	System.out.println("this work 5");
         	    }
+            	quizit.getProfile().setThreshold(numCorrectNumber);
                 quizitReference.changeScreen(1);
                 break;
         }
