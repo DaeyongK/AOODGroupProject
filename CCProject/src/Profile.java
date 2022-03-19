@@ -34,6 +34,12 @@ public class Profile {
             doc.getDocumentElement().normalize();
             Node profile = doc.getElementsByTagName("profile").item(0);
             Element pf = (Element) profile;
+            
+            order = Boolean.parseBoolean(pf.getElementsByTagName("order").item(0).getTextContent());
+            allQuestions = Boolean.parseBoolean(pf.getElementsByTagName("allQuestions").item(0).getTextContent());
+
+            Node allQuestions = doc.getElementsByTagName("allQuestions").item(0);
+            Element a = (Element) profile;
             Node qs = doc.getElementsByTagName("questions").item(0);
             Element q = (Element) qs;
             System.out.print(q.getElementsByTagName("id").getLength());
