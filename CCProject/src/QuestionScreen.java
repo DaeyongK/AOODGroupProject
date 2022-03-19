@@ -43,6 +43,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			graphicDetected = false;
 			titleLabel = new JLabel(title);
 			imageLabel = new JLabel();
+			imageLabel.setIcon(null);
 			imageLabel.setVisible(false);
 			imagePreview.setVisible(true);
 			questionBox = new JTextField("");
@@ -60,11 +61,13 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			if (graphicDetected) {
 				imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
 				imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
+				resizeImg();
 				imageLabel.setVisible(true);
 				imagePreview.setVisible(false);
 			}
 			else {
 				imageLabel = new JLabel();
+				imageLabel.setIcon(null);
 				imageLabel.setVisible(false);
 				imagePreview.setVisible(true);
 			}
@@ -115,10 +118,10 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 		imagePreview.setHorizontalAlignment(JLabel.CENTER);
 		imagePreview.setVerticalAlignment(JLabel.CENTER);
-		imagePreview.setBounds(121, 160, 438, 166);
+		imagePreview.setBounds(122, 161, 438, 166);
 		imageLabel.setHorizontalAlignment(JLabel.CENTER);
 		imageLabel.setVerticalAlignment(JLabel.CENTER);
-		imageLabel.setBounds(121, 160, 437, 165);
+		imageLabel.setBounds(122, 161, 437, 166);
 
 		titleLabel.setBounds(464, 86, 351, 32);
 		questionLabel.setBounds(121,385,200,20);
@@ -171,6 +174,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							question.setImage(img.getPath());
 							graphicDetected = true;
 							imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
+							resizeImg();
 							imageLabel.setVisible(true);
 							imagePreview.setVisible(false);
 							revalidate();
@@ -274,19 +278,40 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			break;
 		}
 	}
-	/*private void resizeImg() {
+	private void resizeImg() {
 		BufferedImage thisImg = question.getImage();
 		int pixW = thisImg.getWidth();
 		int pixH = thisImg.getHeight();
-
+		//If img too small
 		if(pixW<438 && pixH<166) {
-			while(pixW<438 || pixH<166) {
+			while(pixW<438 && pixH<166) {
 				pixW++;
 				pixH++;
 			}
 		}
-		imageLabel.setIcon(new BufferedImage(pixW,pixH,thisImg.getType()));
-	}*/
+		//If img height too big
+		else if (pixW<438 && pixH>166) {
+			while(pixW>1 && pixH>166) {
+				pixW--;
+				pixH--;
+			}
+		}
+		//If img width too big
+		else if (pixW>438 && pixH<166) {
+			while(pixH>1 && pixW>438) {
+				pixW--;
+				pixH--;
+			}
+		}
+		//If img too big
+		else {
+			while (pixW>438 && pixH>166) {
+				pixW--;
+				pixH--;
+			}
+		}
+		imageLabel.setIcon(new ImageIcon(thisImg.getScaledInstance(pixW,pixH,Image.SCALE_SMOOTH)));
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) {}
 	public void paintComponent(Graphics g) {
