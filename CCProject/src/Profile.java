@@ -43,17 +43,18 @@ public class Profile {
                                 Integer.parseInt(q.getElementsByTagName("numAsked").item(0).getTextContent().replace('_', '+'))});
             }
             NodeList ds = doc.getElementsByTagName("domainPath");
+
             for (int i = 0; i < ds.getLength(); i++) {
                 String domain = ds.item(i).getTextContent().replace('_', '/');
                 domains.add(new Domain(new File(domain), quizit));
             }
-            System.out.print(domains.size());
+            System.out.println("size: " + domains.size());
             profileName = doc.getElementsByTagName("profileName").item(0).getTextContent().replace('-', ' ');
             threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent().replace('_', '+'));
         } catch (Exception ignored) {
         }
         for (int key : questions.keySet()) {
-        	System.out.print(key);
+        	System.out.println("key: "+ key);
         }
         
     }

@@ -36,16 +36,16 @@ public class Quizit {
 	private JFrame frame;
 
 	Quizit() {
-		currentProfile = new Profile("Default", 1);
+		currentProfile = new Profile("Profile", 1);
 
-//		File[] profilexmls = new File("Profiles").listFiles();
-//		for (File file : profilexmls) {
-//			profiles.add(new Profile(file, this));
-//		}
-		System.out.print(currentProfile.getName());
-//		System.out.print(profiles.size());
-//		currentProfile= profiles.get(1);
-//		profiles.remove(0);
+		File[] profilexmls = new File("Profiles").listFiles();
+		for (File file : profilexmls) {
+			profiles.add(new Profile(file, this));
+		}
+		System.out.println(currentProfile.getName() + "TEXT");
+		System.out.println(profiles.size());
+		currentProfile= profiles.get(0);
+		
 		setDomain(currentProfile.getDomains().get(0));
 		setQuestion(currentDomain.getQuestion(0));
 		screen1 = new MainMenu("Quizit", this);
