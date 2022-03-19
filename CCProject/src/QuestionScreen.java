@@ -55,16 +55,18 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			title = "Edit Question";
 			screenId = 12;
 			edit = true;
-			System.out.print(question.getImage());
-			graphicDetected = (question.getImage() != null);
+			graphicDetected = (question.getGraphicPath() != null);
 
 			titleLabel = new JLabel(title);
 			if (graphicDetected) {
 				imageLabel = new JLabel(new ImageIcon(question.getGraphicPath()));
 				imageLabel.setIcon(new ImageIcon(question.getGraphicPath()));
-				resizeImg();
 				imageLabel.setVisible(true);
 				imagePreview.setVisible(false);
+				question.setImage(question.getGraphicPath());
+
+				resizeImg();
+
 			}
 			else {
 				imageLabel = new JLabel();
