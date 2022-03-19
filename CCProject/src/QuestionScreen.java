@@ -55,7 +55,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			title = "Edit Question";
 			screenId = 12;
 			edit = true;
-			graphicDetected = question.getImage() != null;
+			System.out.print(question.getImage());
+			graphicDetected = (question.getImage() != null);
 
 			titleLabel = new JLabel(title);
 			if (graphicDetected) {
@@ -226,7 +227,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			}
 			break;
 		case 2:
-			//DoneBtn
+			//DoneBtn 
 			if (edit) {
 				try {
 					if (!questionBox.getText().equals("") &&

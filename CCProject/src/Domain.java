@@ -74,10 +74,11 @@ public class Domain {
             String dNameHolder = dName.getTextContent();
             domainName = dNameHolder.replace('-', ' ');
             NodeList qs = doc.getElementsByTagName("question");
-
             for (int itr = 0; itr < qs.getLength(); itr++) {
                 Node question = qs.item(itr);
                 Element q = (Element) question;
+                System.out.println(Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent()) + q.getElementsByTagName("QuestionGraphic").item(0).getTextContent());
+
                 questions.add(new Question(q.getElementsByTagName("Question" + (itr + 1)).item(0).getTextContent(),
                         q.getElementsByTagName("Answer" + (itr + 1)).item(0).getTextContent(), 
                         q.getElementsByTagName("QuestionGraphic").item(0).getTextContent(),Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent()), quiz));
