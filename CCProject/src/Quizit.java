@@ -48,7 +48,7 @@ public class Quizit {
 //		profiles.remove(0);
 		setDomain(currentProfile.getDomains().get(0));
 		setQuestion(currentDomain.getQuestion(0));
-		screen1 = new MainMenu("", this);
+		screen1 = new MainMenu("Quizit", this);
 		screen2 = new SelectProfile("Select Profile", this);
 		screen3 = new CreateProfile("Create Profile", this);
 		screen4 = new Options("Quizzing Options", this);
@@ -198,7 +198,7 @@ public class Quizit {
 	public void changeScreen(int screenID) {
 		switch (screenID) {
 		case 1:
-			screen1 = new MainMenu("", this);
+			screen1 = new MainMenu("Quizit", this);
 			frame.setContentPane(screen1);
 			break;
 		case 2:

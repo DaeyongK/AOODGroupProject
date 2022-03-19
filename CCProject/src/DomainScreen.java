@@ -58,7 +58,9 @@ public abstract class DomainScreen extends QPanel {
 //       	button.setBounds(0, 0, 1280, 720);
 //       	add(button);
 //       	button.setVisible(false);
-        titleLabel.setBounds(600,50,100,100);
+        titleLabel.setBounds(400,50,400,100);
+        titleLabel.setHorizontalAlignment(JLabel.CENTER);
+        titleLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,25));
         add(exit);
         repaint();
         scroll.setBackground(TITLE_COLOR);

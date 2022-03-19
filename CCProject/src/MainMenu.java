@@ -33,18 +33,18 @@ public class MainMenu extends QPanel implements ActionListener {
         //title name/title card
         titleCard = new JLabel(title){
             {
-                setSize(500,100);
-                setMaximumSize(getSize());
-                setHorizontalAlignment(CENTER);
-                setFont(new Font(Font.SANS_SERIF,Font.PLAIN,35));
+                setBounds(454,5,358,80);
+                setHorizontalAlignment(JLabel.CENTER);
+                setFont(new Font(Font.SANS_SERIF,Font.BOLD,45));
                 setForeground(QPanel.TITLE_COLOR);
+                System.out.println("Does this work");
             }
         };
         JPanel filler3 = new JPanel();
         filler3.setBackground(this.BACKGROUND_COLOR);
         this.add(filler3, BorderLayout.PAGE_START);
         this.add(titleCard);
-        titleCard.setAlignmentX(CENTER_ALIGNMENT);
+//        titleCard.setAlignmentX(CENTER_ALIGNMENT);
         //select domain
         select = new TransitionButton(this, 75, 25, Color.WHITE, "Select Domain", 5, 11){
             {
@@ -123,9 +123,8 @@ public class MainMenu extends QPanel implements ActionListener {
         exit.addActionListener(e -> System.out.println("balls"));
         exit.addActionListener(e ->  quizit.exportDomains());
         exit.addActionListener(e -> 	quizit.exportProfiles());
-    
+
         this.add(exit,BorderLayout.PAGE_END);
-        
     }
 
     public int getScreenID() {
@@ -151,8 +150,8 @@ public class MainMenu extends QPanel implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
-    	
-    	switch (buttonID) {
+
+        switch (buttonID) {
             case 11:
                 //go to select domain (5)
                 if(theQuizit.getProfile().getDomains().size()==0)
@@ -162,7 +161,7 @@ public class MainMenu extends QPanel implements ActionListener {
                 break;
             case 12:
                 //go to create domain (8)
-            	quizit.setDomain(null);
+                quizit.setDomain(null);
                 quizit.changeScreen(8);
                 break;
             case 13:
@@ -179,8 +178,8 @@ public class MainMenu extends QPanel implements ActionListener {
                 break;
             case 16:
                 //exit the application
-            	
-            	System.exit(0);
+
+                System.exit(0);
                 break;
             case 21:
                 popup(quizit.getProfile().getName());
