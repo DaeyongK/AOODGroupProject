@@ -254,20 +254,12 @@ public class QuestionScreen extends QPanel implements ActionListener {
 							!answerBox.getText().equals("Enter its answer here: ")) {
 						question.setQuestion(questionBox.getText());
 						question.setAnswer(answerBox.getText());
-						if (graphicDetected) {
-							domain.addQuestion(new Question(question.getQuestion(),
-								question.getAnswer(), question.getGraphicPath(), quizit));
+						if (graphicDetected)
 							quizit.setQuestion(new Question(question.getQuestion(),
 								question.getAnswer(), question.getGraphicPath(), quizit));
-						}
-						else {
-							Question temp = new Question(question.getQuestion(),
-									question.getAnswer(), quizit);
-//							domain.addQuestion(tempQuestion);
-//					        profile.addQuestion(tempQuestion.getID(), new int[] {0,0});
-//
-							quizit.setQuestion(temp);
-						}
+						else
+							quizit.setQuestion(new Question(question.getQuestion(),
+									question.getAnswer(), quizit));
 						quizit.changeScreen(8);
 					}
 				} catch (NullPointerException ignored) {
@@ -334,5 +326,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		testFrame.setVisible(true);*/
 
 		Quizit q = new Quizit();
+		q.changeScreen(11);
 	}
 }

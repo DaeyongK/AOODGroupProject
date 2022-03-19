@@ -48,11 +48,8 @@ public class Question {
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
-        System.out.print("FUCK");
         quiz.getProfile().addQuestion(ID, new int[] {0,0});
         quiz.getDomain().addQuestion(this);
-
-		
     }
 
     Question(String question, String answer, String imagePath, int questID, Quizit quiz) {
@@ -60,6 +57,8 @@ public class Question {
         answerString = answer;
         graphicString = imagePath;
         ID=questID;
+        quiz.getProfile().addQuestion(ID, new int[] {0,0});
+        quiz.getDomain().addQuestion(this);
     }
     
     Question(String question, String answer, String imagePath, Quizit quiz) {
@@ -73,6 +72,7 @@ public class Question {
         }
         ID = tempID;
         quiz.getProfile().addQuestion(ID, new int[] {0,0});
+        quiz.getDomain().addQuestion(this);
     }
 
     public boolean setImage(String imagePath) {
