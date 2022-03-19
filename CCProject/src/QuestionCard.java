@@ -81,6 +81,7 @@ public class QuestionCard extends QPanel {
 				quizit.changeScreen(6);
 			} else if (!popupResult) {
 				quizit.changeScreen(5);
+				return;
 			}
 		}
 		currentQIndex = 0;
