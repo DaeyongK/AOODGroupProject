@@ -1,6 +1,8 @@
 //QuestionScreen is front-end class made by Kai C
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
-public class QuestionScreen extends QPanel implements ActionListener {
+public class QuestionScreen extends QPanel implements DocumentListener {
 	private int screenId;
 	private boolean edit;
 	private boolean graphicDetected;
@@ -19,7 +21,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 	private JTextField answerBox;
 	private JTextField changeRight;
 	private JTextField changeAsked;
-
+	private TransitionButton doneBtn;
 	private Quizit quizit;
 	private Question question;
 	private Profile profile;
@@ -34,8 +36,8 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		domain = q.getDomain();
 		setLayout(null);
 		setBackground(BACKGROUND_COLOR);
-
 		if (t.toLowerCase().contains("create")) {
+			
 			question = new Question();
 			title = "Create a Question";
 			screenId = 11;
@@ -48,6 +50,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			imagePreview.setVisible(true);
 			questionBox = new JTextField("");
 			answerBox = new JTextField("");
+			
 		}
 		else {
 			question = q.getQuestion();
@@ -94,6 +97,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 			askedLabel.setHorizontalAlignment(JLabel.RIGHT);
 			add(rightLabel);
 			add(askedLabel);
+			changeRight.getDocument().addDocumentListener(this);
+			changeAsked.getDocument().addDocumentListener(this);
+			
 		}
 		JLabel questionLabel = new JLabel("Enter a question here:");
 		JLabel answerLabel = new JLabel("Enter an answer here:");
@@ -104,7 +110,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 				this, 161, 44, Color.WHITE, "Attach", 0);
 		EstablisherButton detachGraphic = new EstablisherButton(
 				this, 161, 44, Color.WHITE, "Detach", 1);
-		TransitionButton doneBtn = new TransitionButton(
+		doneBtn = new TransitionButton(
 				this, 161, 69, Color.WHITE, "Save", 8, 2);
 		TransitionButton backBtn = new TransitionButton(
 				this, 175, 67, Color.WHITE, "Back", 8, 3);
@@ -135,7 +141,6 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		detachGraphic.setBounds(398, 327, 161, 44);
 		doneBtn.setBounds(559, 570, 161, 69);
 		backBtn.setBounds(49, 42, 175, 67);
-
 		add(titleLabel);
 		add(imagePreview);
 		add(imageLabel);
@@ -149,6 +154,9 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		add(backBtn);
 		revalidate();
 		repaint();
+		questionBox.getDocument().addDocumentListener(this);
+		answerBox.getDocument().addDocumentListener(this);
+		
 	}
 	public int getScreenID() {
 		return screenId;
@@ -256,7 +264,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 						question.setAnswer(answerBox.getText());
 						if (graphicDetected)
 							quizit.setQuestion(new Question(question.getQuestion(),
-								question.getAnswer(), question.getGraphicPath(), quizit));
+									question.getAnswer(), question.getGraphicPath(), quizit));
 						else
 							quizit.setQuestion(new Question(question.getQuestion(),
 									question.getAnswer(), quizit));
@@ -310,7 +318,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		imageLabel.setIcon(new ImageIcon(thisImg.getScaledInstance(pixW,pixH,Image.SCALE_SMOOTH)));
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) {}
+	
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(Color.WHITE);
@@ -327,5 +335,48 @@ public class QuestionScreen extends QPanel implements ActionListener {
 
 		Quizit q = new Quizit();
 		q.changeScreen(11);
+	}
+	@Override
+	public void insertUpdate(DocumentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void removeUpdate(DocumentEvent e) {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void changedUpdate(DocumentEvent e) {
+		System.out.print("HI");
+		if (edit) {
+			try {
+				if (!questionBox.getText().equals("") &&
+						!answerBox.getText().equals("") &&
+						Integer.parseInt(changeRight.getText()) >= 0 &&
+						Integer.parseInt(changeAsked.getText()) >= 0 &&
+						(Integer.parseInt(changeRight.getText()) <=
+						Integer.parseInt(changeAsked.getText()))) {
+					doneBtn.setEnabled(true);
+				}else {
+					doneBtn.setEnabled(false);
+
+				}
+			} catch (NullPointerException | NumberFormatException ignored) {}
+		} else {
+			try {
+				if (!questionBox.getText().equals("") &&
+						!answerBox.getText().equals("") &&
+						!questionBox.getText().equals("Enter a new question here: ") &&
+						!answerBox.getText().equals("Enter its answer here: ")) {
+					doneBtn.setEnabled(true);
+
+				}else {
+					doneBtn.setEnabled(false);
+
+				}
+			} catch (NullPointerException ignored) {
+			}
+		}		
 	}
 }
