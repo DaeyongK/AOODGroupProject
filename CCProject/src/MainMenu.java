@@ -107,7 +107,10 @@ public class MainMenu extends QPanel implements ActionListener {
         //open profile popup button
         profile = new EstablisherButton(this, 75, 25, Color.WHITE, q.getProfile().getName(), 21);
         profile.addActionListener(this);
-        this.add(profile, BorderLayout.PAGE_START);
+        JPanel filler4 = new JPanel();
+        filler4.setBackground(this.BACKGROUND_COLOR);
+        this.add(filler4, BorderLayout.PAGE_START);
+        filler4.add(ptofile);
         //change profile (in popup)
         changeProfile = new TransitionButton(this, 75, 25, Color.WHITE, "Change Profile", 2, 22);
         //quizzing options (in popup)
@@ -123,8 +126,8 @@ public class MainMenu extends QPanel implements ActionListener {
         exit.addActionListener(e -> System.out.println("balls"));
         exit.addActionListener(e ->  quizit.exportDomains());
         exit.addActionListener(e -> 	quizit.exportProfiles());
-
-        this.add(exit,BorderLayout.PAGE_END);
+        containsButtons.add(exit);
+        exit.setAlignmentX(CENTER_ALIGNMENT);
     }
 
     public int getScreenID() {
