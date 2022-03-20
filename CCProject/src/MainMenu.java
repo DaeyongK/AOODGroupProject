@@ -110,7 +110,7 @@ public class MainMenu extends QPanel implements ActionListener {
         JPanel filler4 = new JPanel();
         filler4.setBackground(this.BACKGROUND_COLOR);
         this.add(filler4, BorderLayout.PAGE_START);
-        filler4.add(ptofile);
+        filler4.add(profile);
         //change profile (in popup)
         changeProfile = new TransitionButton(this, 75, 25, Color.WHITE, "Change Profile", 2, 22);
         //quizzing options (in popup)
