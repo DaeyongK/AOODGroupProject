@@ -14,6 +14,8 @@ import org.w3c.dom.Element;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -221,8 +223,91 @@ public class Quizit {
 			break;
 
 		case 6:
-			screen6 = new QuestionCard("", this);
-			frame.setContentPane(screen6);
+			Profile profile;
+			Question currentQ;
+			String currentQStr;
+			int currentQIndex;
+			int nextLine;
+			Domain currentDomain;
+			ArrayList<Question> questions = new ArrayList<>(), intermediateDomain;
+			LinkedHashMap<Integer, int[]> questionHash;
+			boolean useThresh;
+			currentDomain = getDomain();
+			profile = getProfile();
+			// different profile settings ||||
+			// VVVV
+			if (profile.getPossible() && !profile.getOrder()) {
+				useThresh = false;
+				for (int i = 0; i < currentDomain.getDomainSize(); i++) {
+					questions.add(currentDomain.getQuestions().get(i));
+				}
+			} else if (profile.getPossible() && profile.getOrder()) {
+				useThresh = false;
+				intermediateDomain = new ArrayList<>(currentDomain.getQuestions());
+				Collections.shuffle(intermediateDomain);
+				for (int i = 0; i < currentDomain.getDomainSize(); i++) {
+					questions.add(intermediateDomain.get(i));
+				}
+			} else if (!profile.getPossible() && !profile.getOrder()) {
+				useThresh = true;
+				questionHash = new LinkedHashMap<Integer, int[]>(profile.getHashMap());
+	
+				for (int i = 0; i < currentDomain.getQuestions().size(); i++) {
+					if (questionHash.get(currentDomain.getQuestions().get(i).getID())[0] < profile.getThreshold()) {
+						questions.add(currentDomain.getQuestions().get(i));
+					}
+	
+				}
+			} else if (!profile.getPossible() && profile.getOrder()) {
+				useThresh = true;
+				questionHash = new LinkedHashMap<>(profile.getHashMap());
+				intermediateDomain = new ArrayList<>(currentDomain.getQuestions());
+				Collections.shuffle(intermediateDomain);
+				questionHash = new LinkedHashMap<>(profile.getHashMap());
+				for (int i = 0; i < intermediateDomain.size(); i++) {
+					if (questionHash.get(intermediateDomain.get(i).getID())[0] < profile.getThreshold()) {
+						questions.add(intermediateDomain.get(i));
+					}
+				}
+			}
+			if(!getProfile().getPossible()&&questions.size()==0) {
+				System.out.print("HI");
+				Boolean popupResult; 
+				int result = JOptionPane.showConfirmDialog(getFrame(), ("You have completed all the questions in this domain. \n" + "\n"
+						+ "Would you like to reset the questions?\n"));
+				switch (result) {
+				case JOptionPane.YES_OPTION:
+					popupResult = true;
+					break;
+				case JOptionPane.NO_OPTION:
+					popupResult = false;
+					break;
+				case JOptionPane.CLOSED_OPTION:
+					popupResult = null;;
+	
+					break;
+				default:
+					popupResult = null;;
+	
+					break;
+				}
+				if (popupResult == null) {
+	
+				} else if (popupResult) {
+					for(Question q : getDomain().getQuestions()) {
+						getProfile().setNumAsked(q.getID(), 0);
+						getProfile().setNumCorrect(q.getID(), 0);
+					}
+					screen6 = new QuestionCard("", this);
+					frame.setContentPane(screen6);
+				} else if (!popupResult) {
+					changeScreen(5);
+				}
+			}else {
+				screen6 = new QuestionCard("", this);
+				frame.setContentPane(screen6);
+			}
+			
 			break;
 
 		case 7:

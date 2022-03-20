@@ -105,7 +105,7 @@ public class QuestionScreen extends QPanel implements ActionListener {
 		EstablisherButton detachGraphic = new EstablisherButton(
 				this, 161, 44, Color.WHITE, "Detach", 1);
 		TransitionButton doneBtn = new TransitionButton(
-				this, 161, 69, Color.WHITE, "Done", 8, 2);
+				this, 161, 69, Color.WHITE, "Save", 8, 2);
 		TransitionButton backBtn = new TransitionButton(
 				this, 175, 67, Color.WHITE, "Back", 8, 3);
 

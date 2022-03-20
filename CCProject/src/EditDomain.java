@@ -1,9 +1,12 @@
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class EditDomain extends QPanel implements MouseListener, MouseMotionListener, ActionListener {
+public class EditDomain extends QPanel implements MouseListener, MouseMotionListener, ActionListener, ChangeListener {
 	private JTextField nameEdit;
 	private JScrollPane questions;
 	private TransitionButton save;
@@ -214,6 +217,8 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
         anotherLayeredPane.add(questions,1);
         anotherLayeredPane.setBounds(0,0,1280,720);
         add(anotherLayeredPane);
+        questions.getViewport().addChangeListener(this);
+
 
 	}
 
@@ -357,7 +362,7 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 			break;
 		case 13:
 			if(popup("Are you sure you want to leave?\n(Changes may not be saved)"))
-				quizit.changeScreen(1);;
+				quizit.changeScreen(1);
 				break;
 		case 21:
 			if(popup("Delete Question\n\nAre you sure?")) {
@@ -367,6 +372,7 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 				insideScroll.remove(buttons.get(currentQID));
 				buttons.remove(currentQID);
                 repaint();
+                quizit.changeScreen(8);
 
 			}
 			break;
@@ -413,5 +419,18 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 
 	public void actionPerformed(ActionEvent e) {
 		//empty??
+	}
+
+	@Override
+	public void stateChanged(ChangeEvent e) {
+		// TODO Auto-generated method stub
+		try {
+		int y = buttons.get(currentQID).getY()+152;
+
+        editQ.setBounds(825, y-((int) questions.getViewport().getViewPosition().getY())+2, 100, 50);
+        deleteQ.setBounds(950, y-((int) questions.getViewport().getViewPosition().getY()+2), 100, 50);
+		}catch(Exception error) {
+			
+		}
 	}
 }
