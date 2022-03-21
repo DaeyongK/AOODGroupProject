@@ -155,8 +155,35 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 		repaint();
 		questionBox.getDocument().addDocumentListener(this);
 		answerBox.getDocument().addDocumentListener(this);
-		doneBtn.setEnabled(false);
+		if (edit) {
+			try {
+				if (!questionBox.getText().equals("") &&
+						!answerBox.getText().equals("") &&
+						Integer.parseInt(changeRight.getText()) >= 0 &&
+						Integer.parseInt(changeAsked.getText()) >= 0 &&
+						(Integer.parseInt(changeRight.getText()) <=
+						Integer.parseInt(changeAsked.getText()))) {
+					doneBtn.setEnabled(true);
+				}else {
+					doneBtn.setEnabled(false);
 
+				}
+			} catch (NullPointerException | NumberFormatException ignored) {}
+		} else {
+			try {
+				if (!questionBox.getText().equals("") &&
+						!answerBox.getText().equals("") &&
+						!questionBox.getText().equals("Enter a new question here: ") &&
+						!answerBox.getText().equals("Enter its answer here: ")) {
+					doneBtn.setEnabled(true);
+
+				}else {
+					doneBtn.setEnabled(false);
+
+				}
+			} catch (NullPointerException ignored) {
+			}
+		}
 		
 	}
 	public int getScreenID() {
@@ -374,7 +401,6 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		// TODO Auto-generated method stub
-		System.out.print("HI");
 		if (edit) {
 			try {
 				if (!questionBox.getText().equals("") &&
@@ -407,7 +433,6 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 	}
 	@Override
 	public void changedUpdate(DocumentEvent e) {
-		System.out.print("HI");
 		if (edit) {
 			try {
 				if (!questionBox.getText().equals("") &&

@@ -79,9 +79,10 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 				domainQuestions.add(currentDomain.getQuestion(i));
 				EstablisherButton tempButton = new EstablisherButton(this, 800, 50, Color.white, currentDomain.getQuestions().get(i).getQuestion(), -i);
 				buttons.add(tempButton);
+				buttonsWorkaround.add(tempButton);
 				tempButton.addActionListener(this);
 				tempButton.addMouseListener(this);
-//				insideScroll.add(buttons.get(i),1);
+				//				insideScroll.add(buttons.get(i),1);
 
 			}
 		//			for (int i = 0; i < currentDomain.getDomainSize(); i++) {
@@ -242,8 +243,8 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 		};
 		anotherLayeredPane.add(bot,30,0);
 		bot.setBounds(700,550,400,500);
-//		insideScroll.addMouseListener(this);
-//		questions.addMouseListener(this);
+		//		insideScroll.addMouseListener(this);
+		//		questions.addMouseListener(this);
 	}
 
 	public int getScreenID() {
@@ -340,10 +341,7 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 		}
 		if(buttonID<=0) {
 			quizit.setQuestion(domainQuestions.get(-buttonID));
-			int y = buttons.get(-buttonID).getY()+152;
 
-			editQ.setBounds(810, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
-			deleteQ.setBounds(920, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
 			currentQID = -buttonID;
 		}
 
@@ -373,15 +371,43 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 				//					currentDomain.addQuestion(domainQuestions.get(i));
 				//end reordering
 			}
+			System.out.println(buttons.size());
+			System.out.println(currentDomain.getQuestions().size());
+
+			for(int i = 0; i<buttons.size(); i++) {
+				currentDomain.deleteQuestion(0);
+			}
+			System.out.println(currentDomain.getQuestions().size());
+
+			for(int i = 0; i<buttons.size(); i++) {
+				currentDomain.addQuestion(domainQuestions.get(-buttons.get(i).getButtonID()));
+			}
+			System.out.println(currentDomain.getQuestions().size());
+
 			quizit.changeScreen(5);
 			break;
 		case 12:
+			currentDomain.setDomainName(nameEdit.getText());
+
 			//go to create question for a blank question(11)
 			if(wasCreate){
 				Domain tempDomain = new Domain(nameEdit.getText(), domainQuestions);
 				quizit.getProfile().addDomain(tempDomain);
 				quizit.setDomain(tempDomain);
 			}
+			System.out.println(buttons.size());
+			System.out.println(currentDomain.getQuestions().size());
+
+			for(int i = 0; i<buttons.size(); i++) {
+				currentDomain.deleteQuestion(0);
+			}
+			System.out.println(currentDomain.getQuestions().size());
+
+			for(int i = 0; i<buttons.size(); i++) {
+				currentDomain.addQuestion(domainQuestions.get(-buttons.get(i).getButtonID()));
+			}
+			System.out.println(currentDomain.getQuestions().size());
+
 			quizit.changeScreen(11);
 			break;
 		case 13:
@@ -432,9 +458,12 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 		EstablisherButton clicked =(EstablisherButton) e.getComponent();
 		currentQID = -clicked.getButtonID();
 		draggable = true;
-		EstablisherButton draggedButton = buttons.get(currentQID);
-		buttons.remove(currentQID);
-		
+		EstablisherButton draggedButton = buttonsWorkaround.get(currentQID);
+		for(int i = 0; i<buttons.size(); i++) {
+			if(draggedButton.getButtonID() == buttons.get(i).getButtonID())
+				buttons.remove(i);
+		}
+
 		insideScroll.remove(draggedButton);
 		repaint();
 		System.out.print(currentQID);
@@ -445,11 +474,11 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 			public void run() {
 				if(draggable) {
 					repaint();
-					
-					draggedButton.setBounds(0, (int)MouseInfo.getPointerInfo().getLocation().getY()-220, 900, 50);
+
+					draggedButton.setBounds(0, (int)MouseInfo.getPointerInfo().getLocation().getY()-220+((int) questions.getViewport().getViewPosition().getY()), 900, 50);
 					System.out.print(e.getY());
 				}else {
-					int buttonAbove= 0;
+					int buttonAbove= -1;
 					for(int i = 0; i<buttons.size(); i++) {
 						EstablisherButton button = buttons.get(i);
 						System.out.println(draggedButton.getY() + " "+button.getY());
@@ -479,10 +508,19 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 							//            	pane.add(button);
 						}
 					}
-//					insideScroll.add(draggedButton,1, 0);
-					
+					//					insideScroll.add(draggedButton,1, 0);
+
 					editQ.setVisible(true);
 					deleteQ.setVisible(true);
+					int y = 0;
+					for(int i = 0; i<buttons.size(); i++) {
+						if(draggedButton.getButtonID() == buttons.get(i).getButtonID())
+							y = (int)draggedButton.getY()+152;
+
+					}
+
+					editQ.setBounds(810, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
+					deleteQ.setBounds(920, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
 					cancel();
 				}
 
