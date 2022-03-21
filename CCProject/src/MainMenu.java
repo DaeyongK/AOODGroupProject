@@ -33,9 +33,9 @@ public class MainMenu extends QPanel implements ActionListener {
         //title name/title card
         titleCard = new JLabel(title){
             {
-                setBounds(454,5,358,80);
+                setBounds(454,30,358,80);
                 setHorizontalAlignment(JLabel.CENTER);
-                setFont(new Font(Font.SANS_SERIF,Font.BOLD,45));
+                setFont(new Font(Font.SANS_SERIF,Font.BOLD,90));
                 setForeground(QPanel.TITLE_COLOR);
             }
         };
