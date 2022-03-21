@@ -63,8 +63,8 @@ public abstract class DomainScreen extends QPanel {
         titleLabel.setFont(new Font(Font.SANS_SERIF,Font.BOLD,25));
         add(exit);
         repaint();
-//        scroll.setBackground(TITLE_COLOR);
-//        pane.setBackground(TITLE_COLOR);
+//        
+
     }
 
 
