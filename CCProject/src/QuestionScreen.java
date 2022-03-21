@@ -131,7 +131,6 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 		imageLabel.setHorizontalAlignment(JLabel.CENTER);
 		imageLabel.setVerticalAlignment(JLabel.CENTER);
 		imageLabel.setBounds(122, 161, 437, 166);
-
 		titleLabel.setBounds(464, 86, 351, 32);
 		questionLabel.setBounds(121,385,200,20);
 		answerLabel.setBounds(720,385,200,20);
@@ -156,6 +155,8 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 		repaint();
 		questionBox.getDocument().addDocumentListener(this);
 		answerBox.getDocument().addDocumentListener(this);
+		doneBtn.setEnabled(false);
+
 		
 	}
 	public int getScreenID() {
@@ -339,12 +340,70 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.print("HI");
+		if (edit) {
+			try {
+				if (!questionBox.getText().equals("") &&
+						!answerBox.getText().equals("") &&
+						Integer.parseInt(changeRight.getText()) >= 0 &&
+						Integer.parseInt(changeAsked.getText()) >= 0 &&
+						(Integer.parseInt(changeRight.getText()) <=
+						Integer.parseInt(changeAsked.getText()))) {
+					doneBtn.setEnabled(true);
+				}else {
+					doneBtn.setEnabled(false);
+
+				}
+			} catch (NullPointerException | NumberFormatException ignored) {}
+		} else {
+			try {
+				if (!questionBox.getText().equals("") &&
+						!answerBox.getText().equals("") &&
+						!questionBox.getText().equals("Enter a new question here: ") &&
+						!answerBox.getText().equals("Enter its answer here: ")) {
+					doneBtn.setEnabled(true);
+
+				}else {
+					doneBtn.setEnabled(false);
+
+				}
+			} catch (NullPointerException ignored) {
+			}
+		}
 	}
 	@Override
 	public void removeUpdate(DocumentEvent e) {
 		// TODO Auto-generated method stub
-		
+		System.out.print("HI");
+		if (edit) {
+			try {
+				if (!questionBox.getText().equals("") &&
+						!answerBox.getText().equals("") &&
+						Integer.parseInt(changeRight.getText()) >= 0 &&
+						Integer.parseInt(changeAsked.getText()) >= 0 &&
+						(Integer.parseInt(changeRight.getText()) <=
+						Integer.parseInt(changeAsked.getText()))) {
+					doneBtn.setEnabled(true);
+				}else {
+					doneBtn.setEnabled(false);
+
+				}
+			} catch (NullPointerException | NumberFormatException ignored) {}
+		} else {
+			try {
+				if (!questionBox.getText().equals("") &&
+						!answerBox.getText().equals("") &&
+						!questionBox.getText().equals("Enter a new question here: ") &&
+						!answerBox.getText().equals("Enter its answer here: ")) {
+					doneBtn.setEnabled(true);
+
+				}else {
+					doneBtn.setEnabled(false);
+
+				}
+			} catch (NullPointerException ignored) {
+			}
+		}
 	}
 	@Override
 	public void changedUpdate(DocumentEvent e) {

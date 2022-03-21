@@ -28,7 +28,7 @@ public class MainMenu extends QPanel implements ActionListener {
         theQuizit = q;
         //the jpanel for the center of the screen
         containsButtons = new JPanel();
-        containsButtons.setBackground(QPanel.TITLE_COLOR);
+        containsButtons.setBackground(BACKGROUND_COLOR);
         containsButtons.setLayout(new BoxLayout(containsButtons,BoxLayout.Y_AXIS));
         //title name/title card
         titleCard = new JLabel(title){
@@ -37,7 +37,6 @@ public class MainMenu extends QPanel implements ActionListener {
                 setHorizontalAlignment(JLabel.CENTER);
                 setFont(new Font(Font.SANS_SERIF,Font.BOLD,45));
                 setForeground(QPanel.TITLE_COLOR);
-                System.out.println("Does this work");
             }
         };
         JPanel filler3 = new JPanel();
@@ -105,12 +104,15 @@ public class MainMenu extends QPanel implements ActionListener {
         this.add(containsButtons, BorderLayout.CENTER);
 
         //open profile popup button
-        profile = new EstablisherButton(this, 75, 25, Color.WHITE, q.getProfile().getName(), 21);
+        profile = new EstablisherButton(this, 75, 25, Color.WHITE, "Quizzing Options", 23);
         profile.addActionListener(this);
         JPanel filler4 = new JPanel();
         filler4.setBackground(this.BACKGROUND_COLOR);
-        this.add(filler4, BorderLayout.PAGE_START);
+        this.add(filler4);
         filler4.add(profile);
+        setLayout(null);
+        filler4.setBounds(1120,20,130,30);
+        containsButtons.setBounds(340,150,600,500);
         //change profile (in popup)
         changeProfile = new TransitionButton(this, 75, 25, Color.WHITE, "Change Profile", 2, 22);
         //quizzing options (in popup)
@@ -118,12 +120,11 @@ public class MainMenu extends QPanel implements ActionListener {
         //exit application button
         exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16){
             {
-                setSize(300,100);
+                setSize(300,50);
                 setMaximumSize(getSize());
             }
         };
         exit.addActionListener(e -> System.exit(0));
-        exit.addActionListener(e -> System.out.println("balls"));
         exit.addActionListener(e ->  quizit.exportDomains());
         exit.addActionListener(e -> 	quizit.exportProfiles());
         containsButtons.add(exit);

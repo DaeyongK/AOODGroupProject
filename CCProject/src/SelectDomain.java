@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 
+
 public class SelectDomain extends DomainScreen implements MouseListener, ChangeListener {
 	private boolean dClick = false;
 	private EstablisherButton launch;
@@ -38,7 +39,26 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 		add(anotherLayeredPane);
 		anotherLayeredPane.setBounds(0,0,1280,720);
 		scroll.getViewport().addChangeListener(this);
+	    
+		JPanel top = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.setColor(BACKGROUND_COLOR);
 
+				g.fillRect(0, 0, 400, 151);
+			}
+		};
+		
+		anotherLayeredPane.add(top,30,0);
+		top.setBounds(700,0,400,155);
+		JPanel bot = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.setColor(BACKGROUND_COLOR);
+
+				g.fillRect(0, 0, 400, 151);
+			}
+		};
+		anotherLayeredPane.add(bot,30,0);
+		bot.setBounds(700,550,400,500);
 	}
 
 	@Override
@@ -102,8 +122,8 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 
 
 			launch.setBounds(700, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
-			edit.setBounds(825, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
-			delete.setBounds(950, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+			edit.setBounds(810, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+			delete.setBounds(920, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
 
 		}
 		repaint();
@@ -266,9 +286,9 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 		// TODO Auto-generated method stub
 		int y = domainButtons.get(domainSelected).getY()+152;
 
-		launch.setBounds(700, y-((int) scroll.getViewport().getViewPosition().getY())+2, 100, 50);
-		edit.setBounds(825, y-((int) scroll.getViewport().getViewPosition().getY())+2, 100, 50);
-		delete.setBounds(950, y-((int) scroll.getViewport().getViewPosition().getY()+2), 100, 50);
+		launch.setBounds(700, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+		edit.setBounds(810, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+		delete.setBounds(920, y-((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
 	}
 
 }

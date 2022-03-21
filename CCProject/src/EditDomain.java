@@ -219,7 +219,25 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
         add(anotherLayeredPane);
         questions.getViewport().addChangeListener(this);
 
+        JPanel top = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.setColor(BACKGROUND_COLOR);
 
+				g.fillRect(0, 0, 400, 151);
+			}
+		};
+		
+		anotherLayeredPane.add(top,30,0);
+		top.setBounds(700,0,400,155);
+		JPanel bot = new JPanel() {
+			public void paintComponent(Graphics g) {
+				g.setColor(BACKGROUND_COLOR);
+
+				g.fillRect(0, 0, 400, 151);
+			}
+		};
+		anotherLayeredPane.add(bot,30,0);
+		bot.setBounds(700,550,400,500);
 	}
 
 	public int getScreenID() {
@@ -318,8 +336,8 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 			quizit.setQuestion(domainQuestions.get(-buttonID));
 			int y = buttons.get(-buttonID).getY()+152;
             
-            editQ.setBounds(825, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
-            deleteQ.setBounds(950, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
+            editQ.setBounds(810, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
+            deleteQ.setBounds(920, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
             currentQID = -buttonID;
 		}
 		
@@ -427,8 +445,8 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 		try {
 		int y = buttons.get(currentQID).getY()+152;
 
-        editQ.setBounds(825, y-((int) questions.getViewport().getViewPosition().getY())+2, 100, 50);
-        deleteQ.setBounds(950, y-((int) questions.getViewport().getViewPosition().getY()+2), 100, 50);
+		editQ.setBounds(810, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
+		deleteQ.setBounds(920, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
 		}catch(Exception error) {
 			
 		}

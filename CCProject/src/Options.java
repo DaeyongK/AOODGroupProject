@@ -38,7 +38,7 @@ public class Options extends QPanel implements ActionListener {
         dropdown = new JComboBox<>(names);
         dropdown.setAlignmentX(JComboBox.LEFT_ALIGNMENT);
         dropdown.setSelectedIndex(0);
-        dropdown.setBounds(500, 200, 50, 25);
+        dropdown.setBounds(500, 200, 70, 25);
         dropdown.addActionListener(this);
         this.add(dropdown);
 
