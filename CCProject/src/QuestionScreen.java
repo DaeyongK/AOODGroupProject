@@ -311,33 +311,14 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 		int pixW = thisImg.getWidth();
 		int pixH = thisImg.getHeight();
 		//If img too small
-		if(pixW<438 && pixH<166) {
-			while(pixW<438 && pixH<166) {
-				pixW++;
-				pixH++;
-			}
-		}
-		//If img height too big
-		else if (pixW<438 && pixH>166) {
-			while(pixW>1 && pixH>166) {
-				pixW--;
-				pixH--;
-			}
-		}
-		//If img width too big
-		else if (pixW>438 && pixH<166) {
-			while(pixH>1 && pixW>438) {
-				pixW--;
-				pixH--;
-			}
-		}
-		//If img too big
-		else {
-			while (pixW>438 && pixH>166) {
-				pixW--;
-				pixH--;
-			}
-		}
+		while(pixW<438)
+			pixW++;
+		while(pixW>438)
+			pixW--;
+		while(pixH<166)
+			pixH++;
+		while(pixH>166)
+			pixH--;
 		imageLabel.setIcon(new ImageIcon(thisImg.getScaledInstance(pixW,pixH,Image.SCALE_SMOOTH)));
 	}
 	@Override
