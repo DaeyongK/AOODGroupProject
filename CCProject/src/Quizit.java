@@ -47,21 +47,27 @@ public class Quizit {
 		}
 
 		currentProfile= profiles.get(0);
+		try {
+			setDomain(currentProfile.getDomains().get(0));
+			setQuestion(currentDomain.getQuestion(0));
 
-		setDomain(currentProfile.getDomains().get(0));
-		setQuestion(currentDomain.getQuestion(0));
+		}catch(Exception e) {
+			setDomain(new Domain("Insert Name",new ArrayList<Question>()));
+			setQuestion(new Question());
+		}
 		screen1 = new MainMenu("Quizit", this);
-//		screen2 = new SelectProfile("Select Profile", this);
-//		screen3 = new CreateProfile("Create Profile", this);
-//		screen4 = new Options("Quizzing Options", this);
-//		screen5 = new SelectDomain("Select Domain", this);
-//		screen6 = new QuestionCard("", this);
-//		screen7 = new ImportScreen("Import Domain", this);
-//		screen8 = new EditDomain("Edit Domain", this);
-//		screen9 = new ExportDomain("Export Domain", this);
-//		screen10 = new DetachDomain("Detach Domain", this);
-//		screen11 = new QuestionScreen("Create Question", this);
-//		screen12 = new QuestionScreen("Edit Question", this);
+
+		//		screen2 = new SelectProfile("Select Profile", this);
+		//		screen3 = new CreateProfile("Create Profile", this);
+		//		screen4 = new Options("Quizzing Options", this);
+		//		screen5 = new SelectDomain("Select Domain", this);
+		//		screen6 = new QuestionCard("", this);
+		//		screen7 = new ImportScreen("Import Domain", this);
+		//		screen8 = new EditDomain("Edit Domain", this);
+		//		screen9 = new ExportDomain("Export Domain", this);
+		//		screen10 = new DetachDomain("Detach Domain", this);
+		//		screen11 = new QuestionScreen("Create Question", this);
+		//		screen12 = new QuestionScreen("Edit Question", this);
 		JFrame.setDefaultLookAndFeelDecorated(true);
 		frame = new JFrame("Quizit");
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -248,12 +254,12 @@ public class Quizit {
 			} else if (!profile.getPossible() && !profile.getOrder()) {
 				useThresh = true;
 				questionHash = new LinkedHashMap<Integer, int[]>(profile.getHashMap());
-	
+
 				for (int i = 0; i < currentDomain.getQuestions().size(); i++) {
 					if (questionHash.get(currentDomain.getQuestions().get(i).getID())[0] < profile.getThreshold()) {
 						questions.add(currentDomain.getQuestions().get(i));
 					}
-	
+
 				}
 			} else if (!profile.getPossible() && profile.getOrder()) {
 				useThresh = true;
@@ -280,15 +286,15 @@ public class Quizit {
 					break;
 				case JOptionPane.CLOSED_OPTION:
 					popupResult = null;;
-	
+
 					break;
 				default:
 					popupResult = null;;
-	
+
 					break;
 				}
 				if (popupResult == null) {
-	
+
 				} else if (popupResult) {
 					for(Question q : getDomain().getQuestions()) {
 						getProfile().setNumAsked(q.getID(), 0);
@@ -303,7 +309,7 @@ public class Quizit {
 				screen6 = new QuestionCard("", this);
 				frame.setContentPane(screen6);
 			}
-			
+
 			break;
 
 		case 7:
