@@ -55,6 +55,7 @@ public class Quizit {
 			setDomain(new Domain("Insert Name",new ArrayList<Question>()));
 			setQuestion(new Question());
 		}
+		
 		screen1 = new MainMenu("Quizit", this);
 
 		//		screen2 = new SelectProfile("Select Profile", this);
