@@ -80,67 +80,6 @@ public abstract class DomainScreen extends QPanel {
 
     public static void main(String[] args) {
         Quizit t = new Quizit();
-
     }
 }
 
-class Testit extends Quizit {
-    Testit() {
-        ArrayList<Question> thing = new ArrayList<>();
-        setProfile(new Profile(null, this));
-        addProfile(getProfile());
-        getProfile().addDomain(new Domain("yes", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-        getProfile().addDomain(new Domain("no", thing));
-
-
-    }
-}
-
-class DomainScreenTester extends DomainScreen {
-
-    DomainScreenTester(String input, Quizit quizit) {
-        super(input, quizit);
-    }
-
-
-    @Override
-    public void buttonClicked(int buttonID) {
-        // TODO Auto-generated method stub
-    }
-
-    @Override
-    public int getScreenID() {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public boolean popup(String text) {
-        // TODO Auto-generated method stub
-        return false;
-    }
-
-}
