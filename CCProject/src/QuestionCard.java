@@ -222,9 +222,17 @@ public class QuestionCard extends QPanel {
 			quizit.changeScreen(12);
 		} else if (buttonID == 6) {
 			if (popup("Are you sure?")) {
+				int trueIndex = -1;
+				for(int i = 0; i< quizit.getDomain().getQuestions().size(); i++) {
+					Question q = quizit.getDomain().getQuestion(i);
+					if(q.getID()== questions.get(currentQIndex).getID()) {
+						trueIndex = i;
+						System.out.print(i);
+					}
+				}
 				if (currentQIndex == 0 && questions.size() > 1) {
 					currentQIndex += 1;
-					quizit.getDomain().deleteQuestion(currentQIndex - 1);
+					quizit.getDomain().deleteQuestion(trueIndex);
 					questions.remove(currentQIndex - 1);
 					currentQ = questions.get(currentQIndex);
 					quizit.setQuestion(currentQ);
@@ -244,7 +252,7 @@ public class QuestionCard extends QPanel {
 					repaint();
 				} else if (currentQIndex > 0 && currentQIndex < questions.size()) {
 					currentQIndex -= 1;
-					quizit.getDomain().deleteQuestion(currentQIndex + 1);
+					quizit.getDomain().deleteQuestion(trueIndex);
 
 					questions.remove(currentQIndex + 1);
 					currentQ = questions.get(currentQIndex);
@@ -264,7 +272,7 @@ public class QuestionCard extends QPanel {
 					questionGraphic.setOpaque(true);
 					repaint();
 				} else if (currentQIndex == questions.size() - 1 && currentQIndex == 0) {
-					quizit.getDomain().deleteQuestion(currentQIndex);
+					quizit.getDomain().deleteQuestion(trueIndex);
 					questions.remove(currentQIndex);
 					Boolean popupResult = popup3(
 							"There are no more questions in this domain. \n" + "\n" + "Returning to Domain Select.\n");

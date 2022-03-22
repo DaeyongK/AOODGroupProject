@@ -163,4 +163,55 @@ public class Domain {
         }
         return new File(xmlFilePath2);
     }
+    private String xmlFilePath3="";
+
+    public File userExport() {
+        try {
+            DocumentBuilderFactory documentFactory = DocumentBuilderFactory.newInstance();
+            DocumentBuilder documentBuilder = documentFactory.newDocumentBuilder();
+            Document document = documentBuilder.newDocument();
+
+            Element root = document.createElement("domain");
+            document.appendChild(root);
+
+            String newDomainName = getDomainName().replace(' ', '-');
+            xmlFilePath3="Exported Files/"+newDomainName+".xml";
+            
+            Attr dname = document.createAttribute("DomainName");
+            dname.setTextContent(newDomainName);
+            root.setAttributeNode(dname);
+            
+            for (int i = 0; i < this.questions.size(); i++) {
+                Element question = document.createElement("question");
+                root.appendChild(question);
+
+                Element id = document.createElement("id");
+                id.setTextContent(this.questions.get(i).getID() + "");
+                question.appendChild(id);
+
+                Element ques = document.createElement("Question" + (i + 1));
+                ques.setTextContent(questions.get(i).getQuestion());
+                question.appendChild(ques);
+
+                Element ans = document.createElement("Answer" + (i + 1));
+                ans.setTextContent(questions.get(i).getAnswer());
+                question.appendChild(ans);
+
+                Element image = document.createElement("QuestionGraphic");
+                image.setTextContent(questions.get(i).getGraphicPath());
+                question.appendChild(image);
+            }
+
+            TransformerFactory transformerFactory = TransformerFactory.newInstance();
+            Transformer transformer = transformerFactory.newTransformer();
+            DOMSource domSource = new DOMSource(document);
+            StreamResult streamResult = new StreamResult(new File(xmlFilePath3));
+            transformer.transform(domSource, streamResult);
+            System.out.println("Done creating XML File");
+            return new File(xmlFilePath3);
+        } catch (ParserConfigurationException | TransformerException pce) {
+            pce.printStackTrace();
+        }
+        return new File(xmlFilePath3);
+    }
 }

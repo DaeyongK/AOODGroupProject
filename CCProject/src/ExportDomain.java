@@ -44,7 +44,7 @@ public class ExportDomain extends DomainScreen implements ActionListener {
 
     public void buttonClicked(int buttonID) {
         if(buttonID != -1) {
-	    	File exported = quizit.getProfile().getDomains().get(buttonID).export();       
+	    	File exported = quizit.getProfile().getDomains().get(buttonID).userExport();       
         }
         quizit.changeScreen(1);
     }
