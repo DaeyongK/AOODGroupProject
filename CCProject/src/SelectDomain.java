@@ -174,11 +174,15 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 
     @Override
     public void stateChanged(ChangeEvent e) {
+    	try {
         int y = domainButtons.get(domainSelected).getY() + 152;
 
         launch.setBounds(700, y - ((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
         edit.setBounds(810, y - ((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
         delete.setBounds(920, y - ((int) scroll.getViewport().getViewPosition().getY()), 100, 50);
+    	}catch(Exception auodh) {
+    		
+    	}
     }
 
 }
