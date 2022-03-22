@@ -157,8 +157,11 @@ public class MainMenu extends QPanel implements ActionListener {
         switch (buttonID) {
             case 11:
                 //go to select domain (5)
-                if (theQuizit.getProfile().getDomains().size() == 0)
+                if (theQuizit.getProfile().getDomains().size() == 0) {
+                    quizit.setDomain(null);
+
                     quizit.changeScreen(8);
+                }
                 else
                     quizit.changeScreen(5);
                 break;
