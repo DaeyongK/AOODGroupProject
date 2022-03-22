@@ -4,14 +4,13 @@ import java.awt.*;
 public abstract class QPanel extends JPanel {
     public final Color BACKGROUND_COLOR = new Color(32, 18, 77);
     public static final Color TITLE_COLOR = new Color(240, 193, 67);
-    public final Font font = new Font(Font.SANS_SERIF, Font.PLAIN, 20);
     protected String title;
     protected int id = 0;
     protected Quizit quizit;
     protected JLabel titleLabel;
 
     QPanel(String t, Quizit quizit) {
-    	title = t;
+        title = t;
         titleLabel = new JLabel(title);
         titleLabel.setLocation(600, 30);
         titleLabel.setForeground(TITLE_COLOR);

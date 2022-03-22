@@ -1,4 +1,3 @@
-import java.io.File;
 import java.util.ArrayList;
 
 
@@ -21,13 +20,6 @@ public class DomainTester {
             System.out.println(n.getQuestion(i).getAnswer() + "\n");
         }
         System.out.println(n.export().toString());
-//        Domain n1 = new Domain(new File("Domains/test.xml"), quiz);
-//        System.out.println(n1.getDomainName());
-//        System.out.println(n1.getDomainSize());
-//        for (int i = 0; i < n1.getDomainSize(); i++) {
-//            System.out.println(n1.getQuestion(i).getQuestion());
-//            System.out.println(n1.getQuestion(i).getAnswer());
-//            System.out.println(n1.getQuestion(i).getGraphicPath());
-//        }
+
     }
 }

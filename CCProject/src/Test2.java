@@ -1,8 +1,8 @@
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class Test2 {
 
-	public static void main(String[] args) {
+    public static void main(String[] args) {
 //		// TODO Auto-generated method stub
 //		Quizit qRef = new Quizit();
 //		CreateProfile test = new CreateProfile("Test Create Profile", qRef);
@@ -14,6 +14,6 @@ public class Test2 {
         frame.pack();
         frame.setSize(1280, 720);
         frame.setVisible(true);
-	}
+    }
 
 }

@@ -1,14 +1,12 @@
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.event.MouseInputAdapter;
-
-import org.w3c.dom.events.MouseEvent;
-
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
+
 public class CircularButton extends EstablisherButton {
-	private BufferedImage bim;
+    private BufferedImage bim;
+
     CircularButton(QPanel Panel, int width, int height, Color color, String text, int buttonID, BufferedImage img) {
         super(Panel, width, height, color, text, buttonID);
         setButtonImage(img);
@@ -16,10 +14,11 @@ public class CircularButton extends EstablisherButton {
         Graphics2D g2 = img.createGraphics();
         g2.setClip(new Ellipse2D.Float(20, 400, width, width));
         g2.drawImage(img, 20, 400, width, width, null);
-        Image newimg = img.getScaledInstance( width, height,  java.awt.Image.SCALE_SMOOTH );
+        Image newimg = img.getScaledInstance(width, height, java.awt.Image.SCALE_SMOOTH);
         setContentAreaFilled(false);
         setIcon(new ImageIcon(newimg));
     }
+
     protected void paintComponent(Graphics g) {
         g.setClip(new Ellipse2D.Double(0, 0, getWidth(), getHeight()));  // set the area that shall be painted
         g.drawImage(bim, 0, 0, getWidth(), getHeight(), null);    // draw the image, if available
@@ -29,10 +28,12 @@ public class CircularButton extends EstablisherButton {
         }
         super.paintComponent(g);
     }
+
     public void setButtonImage(BufferedImage pbim) {
         bim = pbim;
         repaint();
     }
+
     private static class RoundedBorder implements Border {
         private int radius;
 
@@ -52,5 +53,5 @@ public class CircularButton extends EstablisherButton {
             g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
     }
-    
+
 }

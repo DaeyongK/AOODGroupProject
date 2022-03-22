@@ -28,38 +28,6 @@ public class Domain {
         return questions;
     }
 
-    // FOR TESTING PURPOSES ONLY ||||||
-    // VVVVVV
-    // Domain(File file) {
-    // try {
-    // DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
-    // DocumentBuilder db = dbf.newDocumentBuilder();
-    // Document doc = db.parse(file);
-    // doc.getDocumentElement().normalize();
-    // NodeList dN1 = doc.getElementsByTagName("domain");
-    // Node domain= dN1.item(0);
-    // Element dom = (Element) domain;
-    // NamedNodeMap nnm = dom.getAttributes();
-    // Node dName = nnm.item(0);
-    // String dNameHolder = dName.getTextContent();
-    // domainName = dNameHolder.replace('-', ' ');
-    // NodeList qs = doc.getElementsByTagName("question");
-    //
-    // for (int itr = 0; itr < qs.getLength(); itr++) {
-    // //Node question = qs.item(itr);
-    // Element q = (Element) question;
-    // questions.add(new
-    // Question(q.getElementsByTagName("Question"+(itr+1)).item(0).getTextContent()
-    // ,q.getElementsByTagName("Answer"+(itr+1)).item(0).getTextContent(),q.getElementsByTagName("QuestionGraphic").item(0).getTextContent()));
-    // }
-    // } catch (Exception e) {
-    // e.printStackTrace();
-    // }
-    // }
-
-    // FOR TESTING PURPOSES ONLY ^^^^^^
-    // ||||||
-
     Domain(File file, Quizit quiz) {
         try {
             DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
@@ -79,8 +47,8 @@ public class Domain {
                 Element q = (Element) question;
 
                 questions.add(new Question(q.getElementsByTagName("Question" + (itr + 1)).item(0).getTextContent(),
-                        q.getElementsByTagName("Answer" + (itr + 1)).item(0).getTextContent(), 
-                        q.getElementsByTagName("QuestionGraphic").item(0).getTextContent(),Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent()), quiz));
+                        q.getElementsByTagName("Answer" + (itr + 1)).item(0).getTextContent(),
+                        q.getElementsByTagName("QuestionGraphic").item(0).getTextContent(), Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent()), quiz));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -94,11 +62,11 @@ public class Domain {
     public void addQuestion(Question question) {
         questions.add(question);
     }
-    
+
     public void addQuestion(int index, Question question) {
         questions.add(index, question);
     }
-    
+
     public void setDomainName(String newName) {
         domainName = newName;
     }
@@ -111,7 +79,7 @@ public class Domain {
         return domainName;
     }
 
-    private String xmlFilePath2="";
+    private String xmlFilePath2 = "";
 
     public File export() {
         try {
@@ -123,12 +91,12 @@ public class Domain {
             document.appendChild(root);
 
             String newDomainName = getDomainName().replace(' ', '-');
-            xmlFilePath2="Domains/"+newDomainName+".xml";
-            
+            xmlFilePath2 = "Domains/" + newDomainName + ".xml";
+
             Attr dname = document.createAttribute("DomainName");
             dname.setTextContent(newDomainName);
             root.setAttributeNode(dname);
-            
+
             for (int i = 0; i < this.questions.size(); i++) {
                 Element question = document.createElement("question");
                 root.appendChild(question);
@@ -161,7 +129,8 @@ public class Domain {
         }
         return new File(xmlFilePath2);
     }
-    private String xmlFilePath3="";
+
+    private String xmlFilePath3 = "";
 
     public File userExport() {
         try {
@@ -173,12 +142,12 @@ public class Domain {
             document.appendChild(root);
 
             String newDomainName = getDomainName().replace(' ', '-');
-            xmlFilePath3="Exported Files/"+newDomainName+".xml";
-            
+            xmlFilePath3 = "Exported Files/" + newDomainName + ".xml";
+
             Attr dname = document.createAttribute("DomainName");
             dname.setTextContent(newDomainName);
             root.setAttributeNode(dname);
-            
+
             for (int i = 0; i < this.questions.size(); i++) {
                 Element question = document.createElement("question");
                 root.appendChild(question);

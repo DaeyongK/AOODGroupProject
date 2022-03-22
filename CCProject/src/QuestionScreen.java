@@ -5,8 +5,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
@@ -25,7 +23,6 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 	private Quizit quizit;
 	private Question question;
 	private Profile profile;
-	private Domain domain;
 
 	QuestionScreen(String t, Quizit q) {
 		super(t, q);
@@ -33,7 +30,6 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 		JLabel titleLabel;
 		imagePreview = new JLabel("No Graphic Preview");
 		quizit = q;
-		domain = q.getDomain();
 		setLayout(null);
 		setBackground(BACKGROUND_COLOR);
 		if (t.toLowerCase().contains("create")) {
@@ -176,7 +172,6 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 						!questionBox.getText().equals("Enter a new question here: ") &&
 						!answerBox.getText().equals("Enter its answer here: ")) {
 					doneBtn.setEnabled(true);
-
 				}else {
 					doneBtn.setEnabled(false);
 
@@ -352,18 +347,12 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 		g.setColor(Color.WHITE);
 		g.drawRect(121, 160, 438, 166);
 	}
-	//FOR TESTING PURPOSES!!
-	public static void main(String[] arg) {
-		/*JFrame testFrame = new JFrame("QuestionScreen Test");
-		testFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		testFrame.pack();
-		testFrame.setSize(1280, 720);
-		testFrame.add(new QuestionScreen("Create a Question", new Quizit()));
-		testFrame.setVisible(true);*/
 
+	public static void main(String[] arg) {
 		Quizit q = new Quizit();
 		q.changeScreen(11);
 	}
+
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		// TODO Auto-generated method stub

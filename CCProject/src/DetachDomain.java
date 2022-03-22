@@ -6,12 +6,10 @@ public class DetachDomain extends DomainScreen {
     DetachDomain(String t, Quizit quizit) {
         super(t, quizit);
         exit = new TransitionButton(this, 100, 50, TITLE_COLOR, "Exit", -1, 1);
-        // TODO Auto-generated constructor stub
     }
 
     @Override
     public int getScreenID() {
-        // TODO Auto-generated method stub
         return 10;
     }
 
@@ -24,10 +22,6 @@ public class DetachDomain extends DomainScreen {
 
             case JOptionPane.NO_OPTION:
                 return false;
-
-            case JOptionPane.CANCEL_OPTION:
-            case JOptionPane.CLOSED_OPTION:
-                break;
         }
         return false;
     }
@@ -39,7 +33,7 @@ public class DetachDomain extends DomainScreen {
                 ArrayList<Domain> domains = quizit.getProfile().getDomains();
                 pane.remove(domainButtons.get(buttonID));
                 quizit.getProfile().detachDomain(domains.get(buttonID));
-                
+
                 quizit.changeScreen(1);
 
             }

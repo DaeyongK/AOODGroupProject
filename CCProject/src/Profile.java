@@ -34,17 +34,15 @@ public class Profile {
             doc.getDocumentElement().normalize();
             Node profile = doc.getElementsByTagName("profile").item(0);
             Element pf = (Element) profile;
-            
+
             order = Boolean.parseBoolean(pf.getElementsByTagName("order").item(0).getTextContent());
             allQuestions = Boolean.parseBoolean(pf.getElementsByTagName("allQuestions").item(0).getTextContent());
 
-            Node allQuestions = doc.getElementsByTagName("allQuestions").item(0);
-            Element a = (Element) profile;
             Node qs = doc.getElementsByTagName("questions").item(0);
             Element q = (Element) qs;
             for (int i = 0; i < q.getElementsByTagName("id").getLength(); i++) {
-                
-                
+
+
                 questions.put(Integer.parseInt(q.getElementsByTagName("id").item(i).getTextContent().replace('_', '+')),
                         new int[]{Integer.parseInt(q.getElementsByTagName("numRight").item(i).getTextContent().replace('_', '+')),
                                 Integer.parseInt(q.getElementsByTagName("numAsked").item(i).getTextContent().replace('_', '+'))});
@@ -60,10 +58,6 @@ public class Profile {
             threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent().replace('_', '+'));
         } catch (Exception ignored) {
         }
-        for (int key : questions.keySet()) {
-
-        }
-        
     }
 
     public String getName() {
@@ -77,9 +71,9 @@ public class Profile {
     public LinkedHashMap<Integer, int[]> getHashMap() {
         return questions;
     }
-    
-    public void addQuestion(int ID, int[]info) {
-    	questions.put(ID, info);
+
+    public void addQuestion(int ID, int[] info) {
+        questions.put(ID, info);
     }
 
     public void detachDomain(Domain domain) {
@@ -105,12 +99,12 @@ public class Profile {
 
     public int getAnsweredRight(int questionID) {
         return questions.get(questionID)[0];
-    	
+
     }
 
     public int getTimesAsked(int questionID) {
         return questions.get(questionID)[1];
-    	
+
     }
 
     public void setNumCorrect(int questionID, int numberRight) {
@@ -147,6 +141,6 @@ public class Profile {
 
     public void addDomain(Domain domain) {
         domains.add(domain);
-        
+
     }
 }
