@@ -22,18 +22,18 @@ abstract class QButton extends JButton implements ActionListener {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	setBackground(TITLE_COLOR);
+//            	setBackground(TITLE_COLOR);
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-            	pressed=true;
-            	setBackground(TITLE_COLOR);
+//            	pressed=true;
+//            	setBackground(TITLE_COLOR);
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-            	setBackground(TITLE_COLOR);
+//            	setBackground(TITLE_COLOR);
             }
 
             @Override
@@ -43,7 +43,7 @@ abstract class QButton extends JButton implements ActionListener {
 
             @Override
             public void mouseExited(MouseEvent e) {
-                if(!pressed)
+            
                 	setBackground(color);
             }
         });
