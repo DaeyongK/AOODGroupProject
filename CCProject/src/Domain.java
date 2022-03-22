@@ -77,7 +77,6 @@ public class Domain {
             for (int itr = 0; itr < qs.getLength(); itr++) {
                 Node question = qs.item(itr);
                 Element q = (Element) question;
-                System.out.println(Integer.parseInt(q.getElementsByTagName("id").item(0).getTextContent()) + q.getElementsByTagName("QuestionGraphic").item(0).getTextContent());
 
                 questions.add(new Question(q.getElementsByTagName("Question" + (itr + 1)).item(0).getTextContent(),
                         q.getElementsByTagName("Answer" + (itr + 1)).item(0).getTextContent(), 
@@ -156,7 +155,6 @@ public class Domain {
             DOMSource domSource = new DOMSource(document);
             StreamResult streamResult = new StreamResult(new File(xmlFilePath2));
             transformer.transform(domSource, streamResult);
-            System.out.println("Done creating XML File");
             return new File(xmlFilePath2);
         } catch (ParserConfigurationException | TransformerException pce) {
             pce.printStackTrace();
@@ -207,7 +205,6 @@ public class Domain {
             DOMSource domSource = new DOMSource(document);
             StreamResult streamResult = new StreamResult(new File(xmlFilePath3));
             transformer.transform(domSource, streamResult);
-            System.out.println("Done creating XML File");
             return new File(xmlFilePath3);
         } catch (ParserConfigurationException | TransformerException pce) {
             pce.printStackTrace();

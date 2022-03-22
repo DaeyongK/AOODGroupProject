@@ -31,12 +31,6 @@ public abstract class QPanel extends JPanel {
             case JOptionPane.NO_OPTION:
                 return false;
 
-            case JOptionPane.CANCEL_OPTION:
-                System.out.println("Cancel");
-                break;
-            case JOptionPane.CLOSED_OPTION:
-                System.out.println("Closed");
-                break;
         }
         return false;
     }

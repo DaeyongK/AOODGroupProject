@@ -16,10 +16,9 @@ public abstract class DomainScreen extends QPanel {
 		 */
         super(input, quizit);
         
-//		System.out.print(popup("yeah"));
+//
         setOpaque(true);
         setLayout(null);
-        System.out.print(quizit.getProfile().getDomains().size());
 
         domains = quizit.getProfile().getDomains();
         domainButtons = new ArrayList<>();
@@ -145,7 +144,6 @@ class DomainScreenTester extends DomainScreen {
     @Override
     public void buttonClicked(int buttonID) {
         // TODO Auto-generated method stub
-        System.out.println(buttonID);
     }
 
     @Override

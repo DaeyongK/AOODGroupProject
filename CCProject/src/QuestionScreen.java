@@ -367,7 +367,6 @@ public class QuestionScreen extends QPanel implements DocumentListener {
 	@Override
 	public void insertUpdate(DocumentEvent e) {
 		// TODO Auto-generated method stub
-		System.out.print("HI");
 		if (edit) {
 			try {
 				if (!questionBox.getText().equals("") &&

@@ -75,7 +75,6 @@ public class Quizit {
 			{
 				exportDomains();
 				exportProfiles();
-				System.out.print("saved on close");
 			}
 		});
 
@@ -156,7 +155,6 @@ public class Quizit {
 
 			Element questions = document.createElement("questions");
 			profiles.appendChild(questions);
-			System.out.println(currentProfile.getHashMap().keySet());
 			for (int key : currentProfile.getHashMap().keySet()) {
 				Element id = document.createElement("id");
 				id.setTextContent("_" + key);
@@ -188,7 +186,6 @@ public class Quizit {
 			DOMSource domSource = new DOMSource(document);
 			StreamResult streamResult = new StreamResult(new File("Profiles/profile1.xml"));
 			transformer.transform(domSource, streamResult);
-			System.out.println("Done creating XML File");
 			return new File("Profiles/profile1.xml");
 		} catch (ParserConfigurationException | TransformerException pce) {
 			pce.printStackTrace();
@@ -271,8 +268,7 @@ public class Quizit {
 				}
 			}
 			if(!getProfile().getPossible()&&questions.size()==0) {
-				System.out.print("HI");
-				Boolean popupResult; 
+				Boolean popupResult;
 				int result = JOptionPane.showConfirmDialog(getFrame(), ("You have completed all the questions in this domain. \n" + "\n"
 						+ "Would you like to reset the questions?\n"));
 				switch (result) {

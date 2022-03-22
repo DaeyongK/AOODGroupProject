@@ -26,10 +26,7 @@ public class DetachDomain extends DomainScreen {
                 return false;
 
             case JOptionPane.CANCEL_OPTION:
-                System.out.println("Cancel");
-                break;
             case JOptionPane.CLOSED_OPTION:
-                System.out.println("Closed");
                 break;
         }
         return false;
@@ -37,7 +34,6 @@ public class DetachDomain extends DomainScreen {
 
     @Override
     public void buttonClicked(int buttonID) {
-    	System.out.print(buttonID);
         if (buttonID != -1) {
             if (popup("Are you sure?")) {
                 ArrayList<Domain> domains = quizit.getProfile().getDomains();

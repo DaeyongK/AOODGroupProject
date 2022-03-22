@@ -42,7 +42,6 @@ public class Profile {
             Element a = (Element) profile;
             Node qs = doc.getElementsByTagName("questions").item(0);
             Element q = (Element) qs;
-            System.out.print(q.getElementsByTagName("id").getLength());
             for (int i = 0; i < q.getElementsByTagName("id").getLength(); i++) {
                 
                 
@@ -60,10 +59,8 @@ public class Profile {
             profileName = doc.getElementsByTagName("profileName").item(0).getTextContent().replace('-', ' ');
             threshold = Integer.parseInt(doc.getElementsByTagName("threshold").item(0).getTextContent().replace('_', '+'));
         } catch (Exception ignored) {
-        	System.out.print("HECK");
         }
         for (int key : questions.keySet()) {
-        	System.out.println("KEY = " + key);
 
         }
         

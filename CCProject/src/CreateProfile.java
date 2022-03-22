@@ -112,7 +112,6 @@ public class CreateProfile extends QPanel implements ActionListener {
             	profileName = textField.getText();
                 Profile createdProfile = new Profile(profileName, imageIndex);
                 quizit.addProfile(createdProfile);
-                System.out.println("this is profile name: " + profileName);
                 quizit.changeScreen(4);
                 break;
             case 2:
@@ -130,22 +129,20 @@ public class CreateProfile extends QPanel implements ActionListener {
             case 5:
                 //exit button
                 quizit.changeScreen(1);
-                System.out.println("exit");
                 break;
         }
     }
     
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(this.TITLE_COLOR);
+		g.setColor(TITLE_COLOR);
 		//font bigger???
 		g.setFont(new Font("Arial",Font.BOLD,30));
 		g.drawString("Create Profile", 530, 100);
 	}
 
+    @Override
     public void actionPerformed(ActionEvent e) {
-//        profileName = textField.getText();
-        //somehow add "if the text field is empty"
-    }
 
+    }
 }

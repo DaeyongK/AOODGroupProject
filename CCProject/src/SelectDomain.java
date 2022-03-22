@@ -145,12 +145,6 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 		case JOptionPane.NO_OPTION:
 			return false;
 
-		case JOptionPane.CANCEL_OPTION:
-			System.out.println("Cancel");
-			break;
-		case JOptionPane.CLOSED_OPTION:
-			System.out.println("Closed");
-			break;
 		}
 		return false;
 	}
@@ -158,7 +152,6 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 	@Override
 	public void mouseClicked(MouseEvent event) {
 		dClick = (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1);
-		System.out.print(dClick);
 		if(dClick) {
 			if(quizit.getProfile().getDomains().get(domainSelected).getQuestions().size()==0) {
 
@@ -223,8 +216,7 @@ public class SelectDomain extends DomainScreen implements MouseListener, ChangeL
 //			}
 //		}
 //		if(!quizit.getProfile().getPossible()&&questions.size()==0) {
-//			System.out.print("HI");
-//			Boolean popupResult; 
+//			Boolean popupResult;
 //			int result = JOptionPane.showConfirmDialog(quizit.getFrame(), ("You have completed all the questions in this domain. \n" + "\n"
 //					+ "Would you like to reset the questions?\n"));
 //			switch (result) {

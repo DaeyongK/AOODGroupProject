@@ -29,7 +29,6 @@ public class ExportDomain extends DomainScreen implements ActionListener {
             insideScroll.add(buttons.get(i));
             buttons.get(i).setActionCommand(i + "");
             buttons.get(i).addActionListener(this);
-            System.out.println("working");
         }
     }
 
