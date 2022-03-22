@@ -77,7 +77,11 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 		if(currentDomain!= null)
 			for (int i = 0; i < currentDomain.getQuestions().size(); i++) {
 				domainQuestions.add(currentDomain.getQuestion(i));
-				EstablisherButton tempButton = new EstablisherButton(this, 800, 50, Color.white, currentDomain.getQuestions().get(i).getQuestion(), -i);
+				String name = currentDomain.getQuestions().get(i).getQuestion();
+				if(currentDomain.getQuestions().get(i).getQuestion().length()>50){
+					name = name.substring(0, 50)+"...";
+				}
+				EstablisherButton tempButton = new EstablisherButton(this, 800, 50, Color.white, name, -i);
 				buttons.add(tempButton);
 				buttonsWorkaround.add(tempButton);
 				tempButton.addActionListener(this);

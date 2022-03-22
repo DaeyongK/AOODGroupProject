@@ -24,7 +24,12 @@ public abstract class DomainScreen extends QPanel {
         domains = quizit.getProfile().getDomains();
         domainButtons = new ArrayList<>();
         for (int i = 0; i < domains.size(); i++) {
-            domainButtons.add(new EstablisherButton(this, 800, 50, Color.white, domains.get(i).getDomainName(), i));
+        	String name = domains.get(i).getDomainName();
+			if(domains.get(i).getDomainName().length()>30){
+				name = name.substring(0, 30)+"...";
+			}
+			EstablisherButton tempButton = new EstablisherButton(this, 800, 50, Color.white, name, -i);
+            domainButtons.add(new EstablisherButton(this, 800, 50, Color.white, name, i));
         }
         pane = new JLayeredPane();
         scroll = new JScrollPane(pane);
