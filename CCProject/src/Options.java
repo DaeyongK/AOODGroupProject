@@ -113,16 +113,19 @@ public class Options extends QPanel implements ActionListener {
                 //allQuestions is false
                 allQuestions = false;
                 quizit.getProfile().setPossQuestions(false);
+                System.out.print(false);
                 break;
             case 2:
                 //allQuestions is true
                 allQuestions = true;
                 quizit.getProfile().setPossQuestions(true);
+                System.out.print(true);
 
                 break;
             case 3:
                 //shuffleQuestions is true
                 quizit.getProfile().setOrderQuestions(true);
+                System.out.print(true);
 
 
                 shuffleQuestions = true;
@@ -130,6 +133,7 @@ public class Options extends QPanel implements ActionListener {
             case 4:
                 //shuffleQuestions is false
                 quizit.getProfile().setOrderQuestions(false);
+                System.out.print(true);
 
 
                 shuffleQuestions = false;
@@ -140,14 +144,19 @@ public class Options extends QPanel implements ActionListener {
             	String holder = (String) dropdown.getSelectedItem();
             	if (holder.contentEquals("<5")) {
         	    	numCorrectNumber = 5;
+        	    	System.out.println("this work 1");
         	    } else if (holder.contentEquals("<10")) {
         	    	numCorrectNumber = 10;
+        	    	System.out.println("this work 2");
         	    } else if (holder.contentEquals("<15")) {
         	    	numCorrectNumber = 15;
+        	    	System.out.println("this work 3");
         	    } else if (holder.contentEquals("<20")) {
         	    	numCorrectNumber = 20;
+        	    	System.out.println("this work 4");
         	    } else if (holder.contentEquals("<30")) {
         	    	numCorrectNumber = 30;
+        	    	System.out.println("this work 5");
         	    }
             	quizit.getProfile().setThreshold(numCorrectNumber);
                 quizitReference.changeScreen(1);
