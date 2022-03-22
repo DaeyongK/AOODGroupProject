@@ -23,7 +23,7 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 	private boolean first = true;
 	private JLayeredPane anotherLayeredPane;
 	private boolean draggable = false;
-
+	private int previousIndex;
 	private ArrayList<Question> domainQuestions = new ArrayList<>();
 	private boolean wasCreate = false;
 	public EditDomain(String t, Quizit q) {
@@ -250,50 +250,46 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 
 	public void mousePressed(MouseEvent e) {
 		//empty
-		int y = buttons.get(currentQID).getY()+152;
+		EstablisherButton clicked =(EstablisherButton) e.getComponent();
+		currentQID = -clicked.getButtonID();
 		draggable = true;
-
-		editQ.setBounds(810, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
-		deleteQ.setBounds(920, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
+		previousIndex = 0;
+		EstablisherButton draggedButton = buttonsWorkaround.get(currentQID);
+		for(int i = 0; i<buttons.size(); i++) {
+			if(draggedButton.getButtonID() == buttons.get(i).getButtonID()) {
+				buttons.remove(i);
+				previousIndex = i;
+			}
+		}
+		
+		insideScroll.remove(draggedButton);
+		repaint();
+		insideScroll.add(draggedButton,5, 0);
+		editQ.setVisible(false);
+		deleteQ.setVisible(false);
 		TimerTask move = new TimerTask() {
-			private int counter =0;
-			boolean first = true;
-			EstablisherButton draggedButton;
+			int counter = 0;
 			public void run() {
-				counter ++;
-				if(counter <10) {
-					return;
-				}
-				draggedButton = buttonsWorkaround.get(currentQID);
-
-				if(draggable&&first) {
-				EstablisherButton clicked =(EstablisherButton) e.getComponent();
-				currentQID = -clicked.getButtonID();
-				for(int i = 0; i<buttons.size(); i++) {
-					if(draggedButton.getButtonID() == buttons.get(i).getButtonID())
-						buttons.remove(i);
-				}
-
-				insideScroll.remove(draggedButton);
-				repaint();
-				insideScroll.add(draggedButton,5, 0);
-				editQ.setVisible(false);
-				deleteQ.setVisible(false);
-				first = false;
-				}
 				if(draggable) {
 					repaint();
+					counter ++;
 
-					draggedButton.setBounds(0, (int)MouseInfo.getPointerInfo().getLocation().getY()-220+((int) questions.getViewport().getViewPosition().getY()), 900, 50);
+					draggedButton.setBounds(0, (int)MouseInfo.getPointerInfo().getLocation().getY()-230+((int) questions.getViewport().getViewPosition().getY()), 900, 50);
 				}else {
+					if(counter >10) {
 					int buttonAbove= -1;
 					for(int i = 0; i<buttons.size(); i++) {
 						EstablisherButton button = buttons.get(i);
+						System.out.println(draggedButton.getY() + " "+button.getY());
 						if(	draggedButton.getY()>button.getY()) {
 							buttonAbove = i;
 						}
 					}
 					buttons.add(buttonAbove+1, draggedButton);
+					}else {
+						buttons.add(previousIndex, draggedButton);
+
+					}
 					insideScroll.removeAll();
 					if (buttons != null) {
 						for (int i =buttons.size()-1; i>-1; i--) {
@@ -316,19 +312,18 @@ public class EditDomain extends QPanel implements MouseListener, MouseMotionList
 						}
 					}
 					//					insideScroll.add(draggedButton,1, 0);
-					repaint();
-					int y = 0;
 
-					for (EstablisherButton button : buttons) {
-						if (draggedButton.getButtonID() == button.getButtonID())
-							y = draggedButton.getY() + 152;
-
-					}
-					editQ.setBounds(810, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
-					deleteQ.setBounds(920, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
 					editQ.setVisible(true);
 					deleteQ.setVisible(true);
+					int y = 0;
+					for(int i = 0; i<buttons.size(); i++) {
+						if(draggedButton.getButtonID() == buttons.get(i).getButtonID())
+							y = (int)draggedButton.getY()+152;
 
+					}
+
+					editQ.setBounds(810, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
+					deleteQ.setBounds(920, y-((int) questions.getViewport().getViewPosition().getY()), 100, 50);
 					cancel();
 				}
 
