@@ -40,7 +40,7 @@ public class Options extends QPanel implements ActionListener {
         this.add(dropdown);
 
         //all questions button
-        allQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "All Questions", 2);
+        allQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "All Questions ✓", 2);
         allQuestionsButton.setBounds(800, 170, 320, 90);
         allQuestionsButton.setFont(new Font("Arial", Font.BOLD, 20));
         allQuestionsButton.addActionListener(this);
@@ -54,7 +54,7 @@ public class Options extends QPanel implements ActionListener {
         this.add(shuffleQuestionsButton);
 
         //first last button
-        firstLastButton = new EstablisherButton(this, 100, 40, Color.WHITE, "First to Last", 4);
+        firstLastButton = new EstablisherButton(this, 100, 40, Color.WHITE, "First to Last ✓", 4);
         firstLastButton.setBounds(800, 425, 320, 90);
         firstLastButton.setFont(new Font("Arial", Font.BOLD, 20));
         firstLastButton.addActionListener(this);
@@ -97,17 +97,23 @@ public class Options extends QPanel implements ActionListener {
             case 1:
                 //allQuestions is false
                 allQuestions = false;
+                allQuestionsButton.setText("All Questions");
+                numCorrectButton.setText("Questions with number of correct answers ✓");
                 quizit.getProfile().setPossQuestions(false);
                 break;
             case 2:
                 //allQuestions is true
                 allQuestions = true;
+                allQuestionsButton.setText("All Questions ✓");
+                numCorrectButton.setText("Questions with number of correct answers");
                 quizit.getProfile().setPossQuestions(true);
 
                 break;
             case 3:
                 //shuffleQuestions is true
                 quizit.getProfile().setOrderQuestions(true);
+                shuffleQuestionsButton.setText("Shuffle Questions ✓");
+                firstLastButton.setText("First to Last");
 
 
                 shuffleQuestions = true;
@@ -115,7 +121,8 @@ public class Options extends QPanel implements ActionListener {
             case 4:
                 //shuffleQuestions is false
                 quizit.getProfile().setOrderQuestions(false);
-
+                shuffleQuestionsButton.setText("Shuffle Questions");
+                firstLastButton.setText("First to Last ✓");
 
                 shuffleQuestions = false;
                 break;
