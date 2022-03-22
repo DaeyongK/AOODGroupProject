@@ -1,20 +1,11 @@
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
 public class CreateProfile extends QPanel implements ActionListener {
     private TransitionButton create;
     private TransitionButton exit;
-    private CircularButton shrek;
-    private CircularButton fiona;
-    private CircularButton donkey;
     private JTextField textField;
     private int imageIndex;
     private String profileName;
@@ -39,58 +30,11 @@ public class CreateProfile extends QPanel implements ActionListener {
         textField.addActionListener(this);
         this.add(textField);
 
-//        //shrek pfp
-//        File shrekFile = new File("ProfilePictures/shrek.png");
-//        BufferedImage shrekImage = null;
-//        try {
-//            shrekImage = ImageIO.read(shrekFile);
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        BufferedImage shrekPFP = shrekImage;
-//        shrek = new CircularButton(this, 50, 50, Color.WHITE, title, 2, shrekPFP);
-//        
-//        this.add(shrek);
-//
-//        //fiona pfp
-//        File fionaFile = new File("ProfilePictures/fiona.jpeg");
-//        BufferedImage fionaImage = null;
-//        try {
-//            fionaImage = ImageIO.read(fionaFile);
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        BufferedImage fionaPFP = fionaImage;
-//        fiona = new CircularButton(this, 50, 50, Color.WHITE, title, 3, fionaPFP);
-//        
-//        this.add(fiona);
-//
-//        //donkey pfp
-//        File donkeyFile = new File("ProfilePictures/donkey.jpeg");
-//        BufferedImage donkeyImage = null;
-//        try {
-//            donkeyImage = ImageIO.read(donkeyFile);
-//        } catch (IOException e) {
-//            // TODO Auto-generated catch block
-//            e.printStackTrace();
-//        }
-//        
-//        BufferedImage donkeyPFP = donkeyImage;
-//        donkey = new CircularButton(this, 50, 50, Color.WHITE, title, 4, donkeyPFP);
-//        
-//        this.add(donkey);
-
         //create button
         create = new TransitionButton(this, 50, 25, Color.WHITE, "Create", 4, 1);
         create.setBounds(560, 600, 100, 30);
         create.addActionListener(this);
         this.add(create);
-    }
-
-    public void radioClick() {
-
     }
 
     public int getScreenID() {
@@ -109,7 +53,7 @@ public class CreateProfile extends QPanel implements ActionListener {
         switch (buttonID) {
             case 1:
                 //move to options
-            	profileName = textField.getText();
+                profileName = textField.getText();
                 Profile createdProfile = new Profile(profileName, imageIndex);
                 quizit.addProfile(createdProfile);
                 quizit.changeScreen(4);
@@ -132,14 +76,14 @@ public class CreateProfile extends QPanel implements ActionListener {
                 break;
         }
     }
-    
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(TITLE_COLOR);
-		//font bigger???
-		g.setFont(new Font("Arial",Font.BOLD,30));
-		g.drawString("Create Profile", 530, 100);
-	}
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(TITLE_COLOR);
+        //font bigger???
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Create Profile", 530, 100);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {

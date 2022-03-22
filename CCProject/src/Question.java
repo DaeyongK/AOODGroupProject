@@ -8,29 +8,7 @@ public class Question {
     private String answerString;
     private String graphicString;
     private BufferedImage graphic;
-    private int ID,tempID ;
-
-    // FOR TESTING PURPOSES ONLY |||||
-    // VVVVV
-    //
-    // Question(String question, String answer) {
-    // questionString = question;
-    // // answerString = answer;
-    // graphicString=null;
-    // int tempID = (int) (Math.random() * 1000000000);
-    // ID= tempID;
-    // }
-
-    // Question(String question, String answer, String imagePath) {
-    // questionString = question;
-    // answerString = answer;
-    // this.setImage(imagePath);
-    // int tempID = (int) (Math.random() * 1000000000);
-    // ID= tempID;
-    // }
-
-    // ^^^^^^
-    // FOR TESTING PURPOSES ONLY ||||||
+    private int ID, tempID;
 
     Question() {
         questionString = "";
@@ -48,7 +26,7 @@ public class Question {
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
-        quiz.getProfile().addQuestion(ID, new int[] {0,0});
+        quiz.getProfile().addQuestion(ID, new int[]{0, 0});
         quiz.getDomain().addQuestion(this);
     }
 
@@ -56,21 +34,21 @@ public class Question {
         questionString = question;
         answerString = answer;
         graphicString = imagePath;
-        ID=questID;
-        
+        ID = questID;
+
     }
-    
+
     Question(String question, String answer, String imagePath, Quizit quiz) {
         questionString = question;
         answerString = answer;
-        graphicString=imagePath;
+        graphicString = imagePath;
         this.setImage(imagePath);
         tempID = (int) (Math.random() * 1000000000);
         while (quiz.getProfile().getHashMap().containsKey(tempID)) {
             tempID = (int) (Math.random() * 1000000000);
         }
         ID = tempID;
-        quiz.getProfile().addQuestion(ID, new int[] {0,0});
+        quiz.getProfile().addQuestion(ID, new int[]{0, 0});
         quiz.getDomain().addQuestion(this);
     }
 
@@ -85,7 +63,7 @@ public class Question {
     }
 
     public void detachImage() {
-    	graphicString=null;
+        graphicString = null;
         graphic = null;
     }
 

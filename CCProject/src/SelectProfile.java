@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 public class SelectProfile extends QPanel implements ActionListener {
@@ -88,17 +86,17 @@ public class SelectProfile extends QPanel implements ActionListener {
         }
     }
 
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(this.TITLE_COLOR);
-		g.setFont(new Font("Arial",Font.BOLD,30));
-		g.drawString("Select Profile", 530, 100);
-	}
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(TITLE_COLOR);
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Select Profile", 530, 100);
+    }
 
-	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
-	}
-	
+    @Override
+    public void actionPerformed(ActionEvent arg0) {
+        // TODO Auto-generated method stub
+
+    }
+
 }

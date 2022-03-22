@@ -3,11 +3,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileWriter;
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class ExportDomain extends DomainScreen implements ActionListener {
@@ -42,8 +37,8 @@ public class ExportDomain extends DomainScreen implements ActionListener {
     }
 
     public void buttonClicked(int buttonID) {
-        if(buttonID != -1) {
-	    	File exported = quizit.getProfile().getDomains().get(buttonID).userExport();       
+        if (buttonID != -1) {
+            File exported = quizit.getProfile().getDomains().get(buttonID).userExport();
         }
         quizit.changeScreen(1);
     }

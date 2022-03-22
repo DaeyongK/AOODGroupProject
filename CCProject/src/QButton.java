@@ -7,14 +7,13 @@ import java.awt.event.MouseListener;
 
 //Abner Ben
 abstract class QButton extends JButton implements ActionListener {
-    final Color BACKGROUND_COLOR = new Color(32, 18, 77);//purple
     final Color TITLE_COLOR = new Color(240, 193, 67);//yellow
     private int buttonId;
     private QPanel panel;
     private int Width;
     private int Height;
     private String Text;
-    private boolean pressed;
+
     QButton(QPanel Panel, int width, int height, Color color, String text, int buttonID) {
         setText(text);
         setBackground(color);
@@ -22,18 +21,15 @@ abstract class QButton extends JButton implements ActionListener {
         addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
-//            	setBackground(TITLE_COLOR);
             }
 
             @Override
             public void mousePressed(MouseEvent e) {
-//            	pressed=true;
-//            	setBackground(TITLE_COLOR);
+
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
-//            	setBackground(TITLE_COLOR);
             }
 
             @Override
@@ -43,8 +39,8 @@ abstract class QButton extends JButton implements ActionListener {
 
             @Override
             public void mouseExited(MouseEvent e) {
-            
-                	setBackground(color);
+
+                setBackground(color);
             }
         });
         buttonId = buttonID;

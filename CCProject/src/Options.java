@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 public class Options extends QPanel implements ActionListener {
     private boolean allQuestions;
@@ -15,7 +13,7 @@ public class Options extends QPanel implements ActionListener {
     private EstablisherButton firstLastButton;
     private Quizit quizitReference;
     private int numCorrectNumber;
-    
+
     Options(String title, Quizit q) {
         super(title, q);
         this.setLayout(null);
@@ -44,21 +42,21 @@ public class Options extends QPanel implements ActionListener {
         //all questions button
         allQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "All Questions", 2);
         allQuestionsButton.setBounds(800, 170, 320, 90);
-        allQuestionsButton.setFont(new Font("Arial",Font.BOLD,20));
+        allQuestionsButton.setFont(new Font("Arial", Font.BOLD, 20));
         allQuestionsButton.addActionListener(this);
         this.add(allQuestionsButton);
 
         //shuffle questions button
         shuffleQuestionsButton = new EstablisherButton(this, 100, 40, Color.WHITE, "Shuffle Questions", 3);
         shuffleQuestionsButton.setBounds(150, 425, 320, 90);
-        shuffleQuestionsButton.setFont(new Font("Arial",Font.BOLD,20));
+        shuffleQuestionsButton.setFont(new Font("Arial", Font.BOLD, 20));
         shuffleQuestionsButton.addActionListener(this);
         this.add(shuffleQuestionsButton);
 
         //first last button
         firstLastButton = new EstablisherButton(this, 100, 40, Color.WHITE, "First to Last", 4);
         firstLastButton.setBounds(800, 425, 320, 90);
-        firstLastButton.setFont(new Font("Arial",Font.BOLD,20));
+        firstLastButton.setFont(new Font("Arial", Font.BOLD, 20));
         firstLastButton.addActionListener(this);
         this.add(firstLastButton);
 
@@ -69,18 +67,6 @@ public class Options extends QPanel implements ActionListener {
         this.add(doneButton);
     }
 
-//    Options(String title, Quizit q, boolean allQuestionsTrue, boolean shuffleQuestionsTrue) {
-//        super(title, q);
-//        //sets value of allQuestions
-//        allQuestions = allQuestionsTrue;
-//        //sets value of shuffleQuestions
-//        shuffleQuestions = shuffleQuestionsTrue;
-//    }
-
-    public void radioClick() {
-
-    }
-
     public boolean getShuffled() {
         return shuffleQuestions;
     }
@@ -88,10 +74,10 @@ public class Options extends QPanel implements ActionListener {
     public boolean getAllQuestions() {
         return allQuestions;
     }
-    
+
     //if user selects number correct option, this is the accessor for the actual number of questions correct
     public int getNumCorrectNumber() {
-    	return numCorrectNumber;
+        return numCorrectNumber;
     }
 
     public int getScreenID() {
@@ -136,34 +122,34 @@ public class Options extends QPanel implements ActionListener {
             case 5:
                 //go to main menu
                 //QPanel nextScreen = new MainMenu("", quizitReference);
-            	String holder = (String) dropdown.getSelectedItem();
-            	if (holder.contentEquals("<5")) {
-        	    	numCorrectNumber = 5;
-        	    } else if (holder.contentEquals("<10")) {
-        	    	numCorrectNumber = 10;
-        	    } else if (holder.contentEquals("<15")) {
-        	    	numCorrectNumber = 15;
-        	    } else if (holder.contentEquals("<20")) {
-        	    	numCorrectNumber = 20;
-        	    } else if (holder.contentEquals("<30")) {
-        	    	numCorrectNumber = 30;
-        	    }
-            	quizit.getProfile().setThreshold(numCorrectNumber);
+                String holder = (String) dropdown.getSelectedItem();
+                if (holder.contentEquals("<5")) {
+                    numCorrectNumber = 5;
+                } else if (holder.contentEquals("<10")) {
+                    numCorrectNumber = 10;
+                } else if (holder.contentEquals("<15")) {
+                    numCorrectNumber = 15;
+                } else if (holder.contentEquals("<20")) {
+                    numCorrectNumber = 20;
+                } else if (holder.contentEquals("<30")) {
+                    numCorrectNumber = 30;
+                }
+                quizit.getProfile().setThreshold(numCorrectNumber);
                 quizitReference.changeScreen(1);
                 break;
         }
     }
-    
-	public void paintComponent(Graphics g) {
-		super.paintComponent(g);
-		g.setColor(this.TITLE_COLOR);
-		//font bigger???
-		g.setFont(new Font("Arial",Font.BOLD,30));
-		g.drawString("Quizzing Options", 530, 100);
-	}
+
+    public void paintComponent(Graphics g) {
+        super.paintComponent(g);
+        g.setColor(TITLE_COLOR);
+        //font bigger???
+        g.setFont(new Font("Arial", Font.BOLD, 30));
+        g.drawString("Quizzing Options", 530, 100);
+    }
 
     public void actionPerformed(ActionEvent e) {
-    	
+
     }
 
 }

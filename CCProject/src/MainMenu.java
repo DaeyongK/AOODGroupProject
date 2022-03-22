@@ -16,26 +16,25 @@ public class MainMenu extends QPanel implements ActionListener {
     private JLabel titleCard;
     private JPanel containsButtons;
     private QPanel menu;
-    private int currentQID = 0;
     private boolean popupBool;
     private Quizit theQuizit;
 
     public MainMenu(String title, Quizit q) {
         super(title, q);
-        this.setLayout(new BorderLayout(60,40));
+        this.setLayout(new BorderLayout(60, 40));
         //for use outside the constructor
         menu = this;
         theQuizit = q;
         //the jpanel for the center of the screen
         containsButtons = new JPanel();
         containsButtons.setBackground(BACKGROUND_COLOR);
-        containsButtons.setLayout(new BoxLayout(containsButtons,BoxLayout.Y_AXIS));
+        containsButtons.setLayout(new BoxLayout(containsButtons, BoxLayout.Y_AXIS));
         //title name/title card
-        titleCard = new JLabel(title){
+        titleCard = new JLabel(title) {
             {
-                setBounds(454,30,358,80);
+                setBounds(454, 30, 358, 80);
                 setHorizontalAlignment(JLabel.CENTER);
-                setFont(new Font(Font.SANS_SERIF,Font.BOLD,90));
+                setFont(new Font(Font.SANS_SERIF, Font.BOLD, 90));
                 setForeground(QPanel.TITLE_COLOR);
             }
         };
@@ -45,9 +44,9 @@ public class MainMenu extends QPanel implements ActionListener {
         this.add(titleCard);
 //        titleCard.setAlignmentX(CENTER_ALIGNMENT);
         //select domain
-        select = new TransitionButton(this, 75, 25, Color.WHITE, "Select Domain", 5, 11){
+        select = new TransitionButton(this, 75, 25, Color.WHITE, "Select Domain", 5, 11) {
             {
-                setSize(500,100);
+                setSize(500, 100);
                 setMaximumSize(getSize());
             }
         };
@@ -55,9 +54,9 @@ public class MainMenu extends QPanel implements ActionListener {
         containsButtons.add(select);
         select.setAlignmentX(CENTER_ALIGNMENT);
         //create domain
-        create = new TransitionButton(this, 75, 25, Color.WHITE, "Create Domain", 8, 12){
+        create = new TransitionButton(this, 75, 25, Color.WHITE, "Create Domain", 8, 12) {
             {
-                setSize(500,100);
+                setSize(500, 100);
                 setMaximumSize(getSize());
             }
         };
@@ -65,9 +64,9 @@ public class MainMenu extends QPanel implements ActionListener {
         containsButtons.add(create);
         create.setAlignmentX(CENTER_ALIGNMENT);
         //import domain
-        importBtn = new TransitionButton(this, 75, 25, Color.WHITE, "Import Domain", 7, 13){
+        importBtn = new TransitionButton(this, 75, 25, Color.WHITE, "Import Domain", 7, 13) {
             {
-                setSize(500,100);
+                setSize(500, 100);
                 setMaximumSize(getSize());
             }
         };
@@ -75,9 +74,9 @@ public class MainMenu extends QPanel implements ActionListener {
         containsButtons.add(importBtn);
         importBtn.setAlignmentX(CENTER_ALIGNMENT);
         //export domain
-        export = new TransitionButton(this, 75, 25, Color.WHITE, "Export Domain", 9, 14){
+        export = new TransitionButton(this, 75, 25, Color.WHITE, "Export Domain", 9, 14) {
             {
-                setSize(500,100);
+                setSize(500, 100);
                 setMaximumSize(getSize());
             }
         };
@@ -85,9 +84,9 @@ public class MainMenu extends QPanel implements ActionListener {
         containsButtons.add(export);
         export.setAlignmentX(CENTER_ALIGNMENT);
         //detach domain
-        detach = new TransitionButton(this, 75, 25, Color.WHITE, "Detach Domain", 10, 15){
+        detach = new TransitionButton(this, 75, 25, Color.WHITE, "Detach Domain", 10, 15) {
             {
-                setSize(500,100);
+                setSize(500, 100);
                 setMaximumSize(getSize());
             }
         };
@@ -111,22 +110,22 @@ public class MainMenu extends QPanel implements ActionListener {
         this.add(filler4);
         filler4.add(profile);
         setLayout(null);
-        filler4.setBounds(1120,20,130,30);
-        containsButtons.setBounds(340,150,600,500);
+        filler4.setBounds(1120, 20, 130, 30);
+        containsButtons.setBounds(340, 150, 600, 500);
         //change profile (in popup)
         changeProfile = new TransitionButton(this, 75, 25, Color.WHITE, "Change Profile", 2, 22);
         //quizzing options (in popup)
         options = new TransitionButton(this, 75, 25, Color.WHITE, "Quizzing Options", 4, 23);
         //exit application button
-        exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16){
+        exit = new TransitionButton(this, 50, 25, Color.WHITE, "Exit", 1, 16) {
             {
-                setSize(300,50);
+                setSize(300, 50);
                 setMaximumSize(getSize());
             }
         };
         exit.addActionListener(e -> System.exit(0));
-        exit.addActionListener(e ->  quizit.exportDomains());
-        exit.addActionListener(e -> 	quizit.exportProfiles());
+        exit.addActionListener(e -> quizit.exportDomains());
+        exit.addActionListener(e -> quizit.exportProfiles());
         containsButtons.add(exit);
         exit.setAlignmentX(CENTER_ALIGNMENT);
     }
@@ -158,7 +157,7 @@ public class MainMenu extends QPanel implements ActionListener {
         switch (buttonID) {
             case 11:
                 //go to select domain (5)
-                if(theQuizit.getProfile().getDomains().size()==0)
+                if (theQuizit.getProfile().getDomains().size() == 0)
                     quizit.changeScreen(8);
                 else
                     quizit.changeScreen(5);
