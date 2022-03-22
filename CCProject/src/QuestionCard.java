@@ -225,7 +225,6 @@ public class QuestionCard extends QPanel {
 					Question q = quizit.getDomain().getQuestion(i);
 					if(q.getID()== questions.get(currentQIndex).getID()) {
 						trueIndex = i;
-						System.out.print(i);
 					}
 				}
 				if (currentQIndex == 0 && questions.size() > 1) {
