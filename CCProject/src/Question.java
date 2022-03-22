@@ -42,7 +42,7 @@ public class Question {
     Question(String question, String answer, Quizit quiz) {
         questionString = question;
         answerString = answer;
-        graphicString = null;
+        graphicString = "";
         tempID = (int) (Math.random() * 1000000000);
         while (quiz.getProfile().getHashMap().containsKey(tempID)) {
             tempID = (int) (Math.random() * 1000000000);

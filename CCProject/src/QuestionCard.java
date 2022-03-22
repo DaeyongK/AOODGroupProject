@@ -10,7 +10,6 @@ public class QuestionCard extends QPanel {
 	private Question currentQ;
 	private String currentQStr;
 	private int currentQIndex;
-	private int nextLine;
 	private Domain currentDomain;
 	private ArrayList<Question> questions = new ArrayList<>(), intermediateDomain;
 	private Quizit quizit;
@@ -111,16 +110,6 @@ public class QuestionCard extends QPanel {
 		questionText.setOpaque(true);
 		questionText.setBounds(70, 240, 760, 40);
 		// this adds a second line for question in case the question is too long.
-		if (currentQStr.length() > 85) {
-			nextLine = currentQStr.substring(75, 84).indexOf(' ') + 75;
-			questionText2 = new JLabel(" " + currentQStr.substring(nextLine));
-			questionText2.setFont(new Font("SanSerif", Font.PLAIN, 17));
-			questionText2.getText().length();
-			questionText2.setOpaque(true);
-			questionText2.setBounds(70, 279, 760, 40);
-			questionText.setText(currentQStr.substring(0, nextLine));
-			this.add(questionText2);
-		}
 		questionGraphic = new JLabel(new ImageIcon(currentQ.getGraphicPath()));
 		questionGraphic.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 		questionGraphic.setBounds(70, 340, 760, 250);
