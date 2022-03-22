@@ -20,6 +20,11 @@ public class Options extends QPanel implements ActionListener {
         quizitReference = q;
         //panel setup
         this.setBackground(this.BACKGROUND_COLOR);
+
+        allQuestions = q.getProfile().getPossible();
+        shuffleQuestions = q.getProfile().getOrder();
+        numCorrectNumber = q.getProfile().getThreshold();
+
 //        this.addMouseListener(this);
 
         //create buttons and ui aspects. adds action listeners. then adds to qpanel
@@ -37,6 +42,19 @@ public class Options extends QPanel implements ActionListener {
         dropdown.setSelectedIndex(0);
         dropdown.setBounds(500, 200, 100, 25);
         dropdown.addActionListener(this);
+
+        if(numCorrectNumber == 5) {
+            dropdown.setSelectedIndex(0);
+        } else if(numCorrectNumber == 10) {
+            dropdown.setSelectedIndex(1);
+        } else if(numCorrectNumber == 15) {
+            dropdown.setSelectedIndex(2);
+        } else if(numCorrectNumber == 20) {
+            dropdown.setSelectedIndex(3);
+        } else if(numCorrectNumber == 30) {
+            dropdown.setSelectedIndex(4);
+        }
+
         this.add(dropdown);
 
         //all questions button
@@ -65,6 +83,22 @@ public class Options extends QPanel implements ActionListener {
         doneButton.setBounds(560, 550, 150, 50);
         doneButton.addActionListener(this);
         this.add(doneButton);
+
+        if(allQuestions) {
+            allQuestionsButton.setText("All Questions <-");
+            numCorrectButton.setText("Questions with number of correct answers");
+        } else {
+            allQuestionsButton.setText("All Questions");
+            numCorrectButton.setText("Questions with number of correct answers <-");
+        }
+
+        if(shuffleQuestions) {
+            shuffleQuestionsButton.setText("Shuffle Questions <-");
+            firstLastButton.setText("First to Last");
+        } else {
+            shuffleQuestionsButton.setText("Shuffle Questions");
+            firstLastButton.setText("First to Last <-");
+        }
     }
 
     public boolean getShuffled() {
@@ -98,24 +132,29 @@ public class Options extends QPanel implements ActionListener {
                 //allQuestions is false
                 allQuestions = false;
                 quizit.getProfile().setPossQuestions(false);
+                allQuestionsButton.setText("All Questions");
+                numCorrectButton.setText("Questions with number of correct answers <-");
                 break;
             case 2:
                 //allQuestions is true
                 allQuestions = true;
                 quizit.getProfile().setPossQuestions(true);
-
+                allQuestionsButton.setText("All Questions <-");
+                numCorrectButton.setText("Questions with number of correct answers");
                 break;
             case 3:
                 //shuffleQuestions is true
                 quizit.getProfile().setOrderQuestions(true);
-
+                shuffleQuestionsButton.setText("Shuffle Questions <-");
+                firstLastButton.setText("First to Last");
 
                 shuffleQuestions = true;
                 break;
             case 4:
                 //shuffleQuestions is false
                 quizit.getProfile().setOrderQuestions(false);
-
+                shuffleQuestionsButton.setText("Shuffle Questions");
+                firstLastButton.setText("First to Last <-");
 
                 shuffleQuestions = false;
                 break;
