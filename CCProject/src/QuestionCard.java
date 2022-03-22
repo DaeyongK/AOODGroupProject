@@ -15,9 +15,7 @@ public class QuestionCard extends QPanel {
 	private Quizit quizit;
 	private EstablisherButton ansBtn, knewAnsBtn, notKnewAnsBtn, nextQuestBtn, delQuestBtn;
 	private TransitionButton editQuestBtn, backBtn;
-	private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, questionText2, questionText3,
-			questionGraphic;
-	private BufferedImage questImage;
+	private JLabel askedNumTimesText, correctNumTimesText, answerText, questionText, questionGraphic;
 	private LinkedHashMap<Integer, int[]> questionHash;
 	private Graphics g = this.getGraphics();
 	private boolean useThresh;

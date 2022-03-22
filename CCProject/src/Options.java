@@ -13,7 +13,6 @@ public class Options extends QPanel implements ActionListener {
     private EstablisherButton allQuestionsButton;
     private EstablisherButton shuffleQuestionsButton;
     private EstablisherButton firstLastButton;
-    private TransitionButton doneButton;
     private Quizit quizitReference;
     private int numCorrectNumber;
     
