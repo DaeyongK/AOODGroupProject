@@ -4,4 +4,4 @@ Welcome to AOOD Group Project! This group project was created with the collabora
 
 The team utilized the Java Swing library and XML files to create a study-assist graphical user interface.
 
-The project was intended to practice group methodologies such as the the Waterfall model (see [this](https://www.geeksforgeeks.org/waterfall-model/)) and imitate roles such as the Lead Engineer.
+The project was intended to practice group methodologies such as the Waterfall model (see [this](https://www.geeksforgeeks.org/waterfall-model/)) and imitate roles such as the Lead Engineer.
